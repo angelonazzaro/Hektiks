@@ -202,12 +202,77 @@ INSERT INTO Giochi VALUES
 	50, 
 	8
 ),
-("uUfaYA", "Mortal Kombat XL", "a", "", "", "", "", 50, 4);
-/*
-("1tW4aB", "Sniper Elite 5", "", "", "", "", "", 50, 4),
-("zo2ft8", "Street Fighter V", "", "", "", "", "", 50, 4),
-("OkIufY", "Battlefield 2042", "", "", "", "", "", 50, 4),
-("FNx9td", "Dying Light 2 Stay Human", "", "", "", "", "", 50, 4),
+(
+	"uUfaYA", 
+    "Mortal Kombat XL", 
+    "Avanti il prossimo! Assapora la nuova generazione della saga di combattimento numero 1.
+	Mortal Kombat X combina animazioni cinematografiche uniche a un nuovo stile di gioco. Per la prima volta, potrai scegliere tra diverse varianti di ogni personaggio, che influenzeranno strategie e stili di combattimento.
+	Il leggendario Goro viene offerto come bonus per i preordini.", 
+    "https://www.youtube.com/watch?v=jSi2LDkyKmI", 
+    "2015-04-14", 
+    "https://s3.gaming-cdn.com/images/products/2420/616x353/mortal-kombat-xl-xl-pc-gioco-steam-cover.jpg", 
+    3.90, 
+    70, 
+    1
+),
+(
+	"1tW4aB", 
+    "Sniper Elite 5", 
+    "Il nuovo capitolo della pluripremiata serie, Sniper Elite 5, offre cecchinaggio senza precedenti, combattimenti tattici in terza persona e una telecamera uccisione migliorata. Fatti strada su mappe più coinvolgenti che mai, con molti luoghi del mondo reale catturati con dettagli sorprendenti e un sistema di attraversamento migliorato, che consente di esplorare ancora di più.
+	Francia, 1944 – Chiamato a svolgere un'operazione segreta dei Ranger statunitensi per indebolire le fortificazioni del Vallo Atlantico lungo la costa della Bretagna, il tiratore scelto Karl Fairburne entra in contatto con la Resistenza francese. Ben presto si viene a conoscenza di un progetto nazista segreto che minaccia di porre fine alla guerra prima che gli Alleati possano invadere l'Europa: l'operazione Kraken.", 
+    "https://www.youtube.com/watch?v=h5HLwAo5gnw", 
+    "2022-05-26", 
+    "https://s3.gaming-cdn.com/images/products/9578/616x353/sniper-elite-5-pc-gioco-steam-europe-cover.jpg", 
+    37.98, 
+    0, 
+    0
+),
+(
+	"zo2ft8", 
+    "Street Fighter V",
+    "Vivi l'emozione di un combattimento testa a testa in Street Fighter V! Scegli tra 16 personaggi iconici, ciascuno con la propria storia personale e sfide di allenamento uniche, poi lotta contro gli amici online e offline grazie a un'ampia varietà di opzioni di combattimento.
+	Guadagna Fight Money nei match classifica, gioca per puro svago in quelli casuali oppure invita gli amici in una sala dei combattimenti per stabilire chi è il miglior lottatore! Grazie alla compatibilità cross-play, i giocatori su PlayStation 4 possono gareggiare contro quelli su Steam!
+	Questa versione di Street Fighter V è detta “Arcade Edition” e include l'Arcade Mode, la Team Battle Mode e l'Extra Battle Mode, giocabile anche online, in cui è possibile guadagnare ricompense, punti esperienza e Fight Money da usare per acquistare personaggi aggiuntivi, costumi, livelli e molto altro!
+	Scarica oggi stesso e GRATUITAMENTE il contenuto animato dal titolo “A Shadow Falls""! Il folle M. Bison riesce a mettere in orbita sette lune nere ottenendo un potere inimmaginabile e piombando la Terra nell'oscurità.
+	Street Fighter V: Champion Edition è il pacchetto per eccellenza e include tutti i contenuti (tranne i costumi Fighting Chance, quelli delle collaborazioni speciali e i DLC di Capcom Pro Tour) sia della versione originale che di Street Fighter V: Arcade Edition. Inoltre, contiene tutti i personaggi, scenari e costumi rilasciati dopo l'Arcade Edition ossia 40 personaggi, 34 livelli e oltre 200 costumi!", 
+    "https://www.youtube.com/watch?v=0nFd7Iylj5A", 
+    "2016-02-16", 
+    "https://s3.gaming-cdn.com/images/products/671/616x353/street-fighter-v-pc-gioco-steam-cover.jpg", 
+    4.54, 
+    150, 
+    12
+),
+(
+	"OkIufY", 
+    "Battlefield 2042", 
+    "Battlefield 2042 per PC è un videogioco sparatutto in prima persona con un forte focus multiplayer. Il gioco, il dodicesimo della serie (e che vanta anche oltre quaranta pacchetti di espansione in tutto il franchise), è ambientato in un futuro abbastanza prossimo (come evidenziato dal nome), il che significa che ci sono un sacco di armi e gadget high-tech e futuristici – come droni schierabili, torrette e cani robot pronti ad aspettarti!
+	Informazioni sul gioco
+	Come accennato in precedenza, il clima del mondo è scivolato in condizioni estreme, costringendo un gran numero di persone a fuggire dalle loro case ormai insostenibili. Questi rifugiati climatici sono chiamati No-Pats, nel senso che sono apolidi e non hanno \"paese\". La crisi climatica è drammaticamente peggiorata, causando il collasso dell'UE e aumentando le tensioni tra Stati Uniti e Russia fino alla guerra.
+	Gli eventi sulla Terra arrivano al culmine quando si verifica un evento della Sindrome di Kessler* nel 2040, che mette fuori gioco il settanta percento dei satelliti per le comunicazioni internazionali. Già tesi, Stati Uniti e Russia sono sull'orlo della guerra.
+	Secondo la scienza, la sindrome di Kessler si verichiferà con la presenza di una reazione a catena di collisioni all'interno della spessa cintura di spazzatura spaziale che sfreccia intorno al pianeta (detriti provenienti da missioni spaziali, persi o gettati via per qualsiasi motivo), influenzando quelle cose in orbita su cui facciamo affidamento lavoro quotidiano come i satelliti accuratamente posizionati che gestiscono i sistemi telefonici, le connessioni Internet, le comunicazioni radiofoniche e televisive.
+	La guerra, infine, scoppia nel 2042, giusto in tempo perché salvare la situazione.
+	Cosa c'è di nuovo e cosa rimane lo stesso?
+	Il sistema Plus è nuovo e migliorato: i giocatori possono ora aggiornare le proprie armi al volo, mentre il sistema di classe è sostanzialmente lo stesso ma con una revisione massiccia tanto quanta necessaria. Le classi ora sono chiamate \"specializzazioni\" e puoi esplorare qualsiasi albero delle abilità, invece di essere limitato alla tua classe come prima. I nomi rimangono gli stessi, Assalto, Ingegnere, Medico, Ricognitore ecc, quindi se hai un preferito, puoi trovare rapidamente quello che stai cercando.
+	Gli effetti meteorologici estremi hanno fatto il salto dal gioco precedente della serie e, dato che c'è un'emergenza climatica, non sarai sorpreso di apprendere che i tornado possono risucchiarti e farti passare dei momenti difficili prima di sputarti di nuovo - si spera! – mentre le tempeste di sabbia riducono notevolmente la tua visibilità. E questo può essere un problema nel bel mezzo del campo di battaglia.
+	Invece della modalità giocatore singolo, ci sono tre modalità di gioco principali: All-out Warfare – che comprende: Breakthrough (in cui cerchi di eliminare i punti di controllo dell'altra squadra) e Conquest (in cui due squadre combattono per un singolo controllo punto). Hazard Zone è la zona cooperativa multiplayer e il posto dove stare! C'è il supporto per un massimo di 128 giocatori in due squadre di 64.
+	Infine, nella colonna \"Cosa c'è di nuovo\", ci sono veicoli autonomi che i giocatori possono requisire quando e dove ne hanno bisogno. Se non ci sono auto a portata di mano, i giocatori possono anche richiedere che un veicolo venga paracadutato da loro: perché non pensare fuori dalla scatola e far cadere un carro armato su un cecchino nemico e rendere la vita un po' più facile per te stesso?
+	Dov'è ambientato il gioco?
+	Il gioco copre in modo abbastanza completo il mondo, con 7 mappe disponibili fin dall'inizio:
+	Orbital – in cima al Sud America, ambientato nel Centro Spaziale della Guiana vicino a Kourou
+	Hourglass – trovata nel vicino oriente: Doha, Qatar, sulla costa del Golfo Persico
+	Kaleidoscope – Nel nord del Giappone si trova il distretto commerciale internazionale di Songdo in Corea del Sud
+	Manifest: a metà strada tra l'India e l'Australia si trova l'isola di Pulau Brani, al largo della costa meridionale di Singapore
+	Discarded – Alang, in alto sulla costa occidentale dell'India, le cui spiagge ospitano un immensità di navi abbandonate
+	Breakaway – Ti porta nella Queen Maud Land nel Circolo Polare Artico, un territorio della Norvegia
+	Revival – Forse visitato dai faraoni in passato, il Deserto Orientale, la parte più orientale del Sahara, dove confina con il Nilo, è un buon posto da consultare.", 
+    "https://www.youtube.com/watch?v=ASzOzrB-a9E", 
+    "2021-11-19", 
+    "https://s1.gaming-cdn.com/images/products/6690/616x353/battlefield-2042-pc-gioco-origin-cover.jpg", 
+    21.39, 
+    25, 
+    6
+);
+/*("FNx9td", "Dying Light 2 Stay Human", "", "", "", "", "", 50, 4),
 ("6PiPPb", "Hitman 3", "", "", "", "", "", 50, 4),
 ("ACi702", "Elden Ring", "", "", "", "", "", 50, 4),
 ("oTwPW4", "God of War", "", "", "", "", "", 50, 4),
