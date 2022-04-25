@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,13 +45,49 @@ public class SQLUtenteDAO extends SQLDAO implements UtenteDAO<SQLException> {
     @Override
     public Optional<Utente> fetchUtente(String email) throws SQLException {
 
+        Utente utente = null;
+        try(Connection conn = source.getConnection()){
 
-        return Optional.empty();
+            String query = QueryBuilder.SELECT("*").FROM("Utenti").WHERE("Utenti.email = ?").toString();
+
+            try(PreparedStatement ps = conn.prepareStatement(query)){
+
+                ps.setString(1, email);
+                ResultSet set = ps.executeQuery();
+
+                if (set.next()){
+
+                    utente = new UtenteExtractor().extract(set);
+                }
+            }
+        }
+
+        return Optional.ofNullable(utente);
     }
 
     @Override
     public boolean createUtente(Utente utente) throws SQLException {
-        return false;
+
+        int rows = 0;
+        try(Connection conn = source.getConnection()){
+
+            String query = QueryBuilder.INSERT_INTO("Utenti", new HashMap<>(){{
+
+                put("email", utente.getEmail());
+                put("username", utente.getUsername());
+                put("password", utente.getPassword_utente());
+                put("data_registrazione", utente.getData_registrazione());
+                put("ruolo", utente.isRuolo());
+                put("saldo", utente.getSaldo());
+                put("biografia", utente.getBiografia());
+            }}).toString();
+
+            try (PreparedStatement ps = conn.prepareStatement(query)){
+
+                rows = ps.executeUpdate();
+            }
+        }
+        return rows == 1;
     }
 
     @Override

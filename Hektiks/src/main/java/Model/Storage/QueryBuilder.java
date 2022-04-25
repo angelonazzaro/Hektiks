@@ -85,7 +85,7 @@ public class QueryBuilder {
      * @return The {@link QueryBuilder} instance.
      */
 
-    public QueryBuilder LEFTJOIN(String table) {
+    public QueryBuilder LEFT_JOIN(String table) {
 
         if (table == null) {
 
@@ -105,7 +105,7 @@ public class QueryBuilder {
      * @return The {@link QueryBuilder} instance.
      */
 
-    public QueryBuilder RIGHTJOIN(String table) {
+    public QueryBuilder RIGHT_JOIN(String table) {
 
         if (table == null) {
 
@@ -256,7 +256,7 @@ public class QueryBuilder {
      * @return The new {@link QueryBuilder} instance.
      */
 
-    public static QueryBuilder insertInto(String table, Map<String, ?> values) {
+    public static QueryBuilder INSERT_INTO(String table, Map<String, ?> values) {
 
         if (table == null) {
 
@@ -322,7 +322,7 @@ public class QueryBuilder {
      * @return The new {@link QueryBuilder} instance.
      */
 
-    public static QueryBuilder update(String table) {
+    public static QueryBuilder UPDATE(String table) {
 
         if (table == null) {
 
@@ -344,7 +344,7 @@ public class QueryBuilder {
      * @return The {@link QueryBuilder} instance.
      */
 
-    public QueryBuilder set(Map<String, ?> values) {
+    public QueryBuilder SET(Map<String, ?> values) {
 
         if (values == null) {
 
@@ -390,7 +390,7 @@ public class QueryBuilder {
      * @return The new {@link QueryBuilder} instance.
      */
 
-    public static QueryBuilder deleteFrom(String table) {
+    public static QueryBuilder DELETE_FROM(String table) {
 
         if (table == null) {
 
