@@ -1,6 +1,8 @@
 DROP DATABASE IF EXISTS Hektiks;
 CREATE DATABASE Hektiks;
 USE Hektiks;
+SET sql_mode = "";
+SET GLOBAL sql_mode = "";
 
 CREATE TABLE Utenti (
 
@@ -200,8 +202,8 @@ INSERT INTO Giochi VALUES
 	50, 
 	8
 ),
-
-("uUfaYA", "Mortal Kombat XL", "", "", "", "", "", 50, 4),
+("uUfaYA", "Mortal Kombat XL", "a", "", "", "", "", 50, 4);
+/*
 ("1tW4aB", "Sniper Elite 5", "", "", "", "", "", 50, 4),
 ("zo2ft8", "Street Fighter V", "", "", "", "", "", 50, 4),
 ("OkIufY", "Battlefield 2042", "", "", "", "", "", 50, 4),
@@ -225,4 +227,4 @@ INSERT INTO Giochi VALUES
 ("6jGIUW", "Motorcycle Mechanic Simulator 2021", "", "", "", "", "", 50, 4),
 ("Q6HnRX", "Wanderer", "", "", "", "", "", 50, 4),
 ("oSzZp3", "Minecraft Java Edition", "", "", "", "", "", 50, 4),
-("aKFt3e", "Resident Evil 7 Biohazard", "", "", "", "", "", 50, 4);
+("aKFt3e", "Resident Evil 7 Biohazard", "", "", "", "", "", 50, 4);*/
