@@ -26,11 +26,9 @@ public class SQLUtenteDAO extends SQLDAO implements UtenteDAO<SQLException> {
 
         try(Connection conn = source.getConnection()){
 
-            String query = QueryBuilder.SELECT("*").FROM("Utenti").toString();
-            try(PreparedStatement ps = conn.prepareStatement(query)){
+            String query = QueryBuilder.SELECT("*").FROM("Utenti").LIMIT(start, end).toString();
 
-                ps.setInt(1, start);
-                ps.setInt(2, end);
+            try(PreparedStatement ps = conn.prepareStatement(query)){
                 ResultSet set = ps.executeQuery();
                 UtenteExtractor utenteExtractor = new UtenteExtractor();
 
@@ -45,6 +43,8 @@ public class SQLUtenteDAO extends SQLDAO implements UtenteDAO<SQLException> {
 
     @Override
     public Optional<Utente> fetchUtente(String email) throws SQLException {
+
+
         return Optional.empty();
     }
 

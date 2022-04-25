@@ -199,6 +199,28 @@ public class QueryBuilder {
     }
 
     /**
+     * Appends a "limit" clause to a query.
+     *
+     * @param start Starting offset
+     * @param end Ending offset
+     * @return The {@link QueryBuilder} instance.
+     */
+    public QueryBuilder LIMIT(int start, int end) {
+
+        if (start < 0 || end < 0) {
+
+            throw new IllegalArgumentException();
+        }
+
+        sqlBuilder.append(" limit ");
+        sqlBuilder.append(start);
+        sqlBuilder.append(", ");
+        sqlBuilder.append(end);
+
+        return this;
+    }
+
+    /**
      * Appends a "for update" clause to a query.
      *
      * @return The {@link QueryBuilder} instance.
