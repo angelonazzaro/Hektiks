@@ -1,3 +1,6 @@
+SET sql_mode = '';
+SET GLOBAL sql_mode = '';
+
 DROP DATABASE IF EXISTS Hektiks;
 CREATE DATABASE Hektiks;
 USE Hektiks;
@@ -26,7 +29,7 @@ CREATE TABLE Giochi (
 	titolo VARCHAR(35) NOT NULL,
     descrizione TEXT NOT NULL,
     trailer VARCHAR(2048) NOT NULL,
-    data_uscita DATE,
+    data_uscita DATE NOT NULL,
     copertina VARCHAR(2048) NOT NULL,
     prezzo DECIMAL (5, 2) NOT NULL CHECK (prezzo > 0), 
 	quantita_disponibile INT UNSIGNED NOT NULL,
@@ -186,20 +189,20 @@ INSERT INTO Generi VALUES
 ("Roguelike");
 
 INSERT INTO Giochi VALUES
--- (
--- 	"Z38JDu",
--- 	"Tekken 7", 
--- 	"Scopri l'epica conclusione della lunga faida della famiglia Mishima e le ragioni che si celano dietro ogni episodio della loro storia. Sfruttando l'Unreal Engine 4, il leggendario gioco di combattimenti torna con stupefacenti battaglie cinematiche narrative e intensi duelli da vivere con amici e rivali.
--- 	Amore, vendetta, orgoglio. Ognuno ha una ragione per combattere. I valori sono ciò che ci danno una ragione di vivere e ci rendono umani, indipendentemente dalle nostre debolezze o punti di forza. Non ci sono motivazioni sbagliate, solo la strada che decidiamo di percorrere.
--- 	Amplia le tue possibilità di combattente acquistando il Season Pass di TEKKEN 7 separatamente e ottieni l'accesso a incredibili contenuti aggiuntivi.",
--- 	"https://www.youtube.com/watch?v=kKLCwDg2JLA", 
--- 	, 
---     "https://s1.gaming-cdn.com/images/products/1515/616x353/tekken-7-pc-gioco-steam-cover.jpg", 
--- 	"5.49", 
--- 	50, 
--- 	8
--- ),
-("uUfaYA", "Mortal Kombat XL", "BROTHER", "AAAA", "2022-10-01", "AAA", 50.5, 50, 4),
+(
+	"Z38JDu",
+	"Tekken 7", 
+	"Scopri l'epica conclusione della lunga faida della famiglia Mishima e le ragioni che si celano dietro ogni episodio della loro storia. Sfruttando l'Unreal Engine 4, il leggendario gioco di combattimenti torna con stupefacenti battaglie cinematiche narrative e intensi duelli da vivere con amici e rivali.
+	Amore, vendetta, orgoglio. Ognuno ha una ragione per combattere. I valori sono ciò che ci danno una ragione di vivere e ci rendono umani, indipendentemente dalle nostre debolezze o punti di forza. Non ci sono motivazioni sbagliate, solo la strada che decidiamo di percorrere.
+	Amplia le tue possibilità di combattente acquistando il Season Pass di TEKKEN 7 separatamente e ottieni l'accesso a incredibili contenuti aggiuntivi.",
+	"https://www.youtube.com/watch?v=kKLCwDg2JLA", 
+	"2017-06-01", 
+    "https://s1.gaming-cdn.com/images/products/1515/616x353/tekken-7-pc-gioco-steam-cover.jpg", 
+	5.49, 
+	50, 
+	8
+),
+("uUfaYA", "Mortal Kombat XL", "", "", "", "", "", 50, 4),
 ("1tW4aB", "Sniper Elite 5", "", "", "", "", "", 50, 4),
 ("zo2ft8", "Street Fighter V", "", "", "", "", "", 50, 4),
 ("OkIufY", "Battlefield 2042", "", "", "", "", "", 50, 4),
