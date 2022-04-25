@@ -1,31 +1,129 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hektiks</title>
-    <link rel="stylesheet" href="./assets/css/style.css">
-</head>
-<body>
-    <header>
-        <nav>
-            <h1 id="logo">Hektiks</h1>
-            <div class="search-bar-container">
-                <input name="q" class="search-bar" autocomplete="off" autocapitalize="off" placeholder="Search...">
-                <div class="clear-icon"></div>
-            </div>
-            <div class="burger">
-                <span class="line1"></span>
-                <span class="line2"></span>
-                <span class="line3"></span>
-             </div>
-        </nav>
-    </header>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
+		<link rel="icon" href="./assets/images/icons/gamepad-solid.svg" />
+		<link rel="stylesheet" href="./assets/css/style.css" />
 
+		<title>Hektiks</title>
+	</head>
+	<body>
+		<!-- header start -->
+		<header>
+			<nav>
+				<div id="burger">
+					<span class="line"></span>
+					<span class="line"></span>
+					<span class="line"></span>
+				</div>
+			</nav>
+		</header>
+		<div id="login-reg-container">
+			<div id="login-reg">
+				<div id="form-container">
+					<form id="reg-form" method="POST">
+						<div class="header">
+							<h1>Registrazione</h1>
+						</div>
+						<div class="form-group">
+							<input
+								type="text"
+								class="form-control"
+								name="nome"
+								placeholder="Nome:"
+								required
+							/>
+							<input
+								type="text"
+								class="form-control"
+								name="cognome"
+								placeholder="Cognome:"
+								required
+							/>
+						</div>
+						<div class="form-group">
+							<input
+								type="email"
+								class="form-control"
+								name="email"
+								placeholder="Email:"
+								required
+							/>
+						</div>
+						<div class="form-group">
+							<div class="input-group-append">
+								<input
+									type="password"
+									class="form-control"
+									name="password"
+									placeholder="Password:"
+									required
+								/>
+                                <i class="far fa-eye"></i>
+							</div>
+                            <div class="input-group-append">
+									<input
+								type="password"
+								class="form-control"
+								name="confirm-password"
+								placeholder="Conferma Password:"
+								required
+							/>
+                                <i class="far fa-eye"></i>
+							</div>
+						
+						</div>
+						<div class="form-group">
+							<button class="submit-btn" type="submit">
+								Invia
+							</button>
+						</div>
+					</form>
+					<hr />
+					<form id="login-form" method="POST">
+						<div class="header">
+							<h1>Log in</h1>
+						</div>
+						<div class="form-group">
+							<input
+								type="email"
+								class="form-control"
+								name="email"
+								placeholder="Email:"
+								required
+							/>
+						</div>
+						<div class="form-group">
+							<div class="input-group-append">
+								<input
+									type="password"
+									class="form-control"
+									name="password"
+									placeholder="Password:"
+									required
+								/>
+                                <i class="far fa-eye"></i>
+							</div>
+						</div>
+						<div class="form-group">
+							<button class="submit-btn" type="submit">
+								Invia
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div id="login-reg-wallpaper"></div>
+		</div>
+		<!-- header end -->
 
-    <script src="./assets/js/app.js"></script>
-    <script src="https://kit.fontawesome.com/bedafbbe2b.js" crossorigin="anonymous"></script>
-</body>
+		<script src="./assets/js/app.js"></script>
+        	<script
+			src="https://kit.fontawesome.com/bedafbbe2b.js"
+			crossorigin="anonymous"
+		></script>
+	</body>
 </html>
