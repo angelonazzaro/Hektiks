@@ -1,0 +1,147 @@
+/* FONTS: Roboto, Lato, Poppins, Source Sans Pro*/
+@import url("https://fonts.googleapis.com/css2?family=Lato&family=Poppins&family=Roboto&family=Source+Sans+Pro&display=swap");
+
+:root {
+	--orange: #ff5400;
+	--yellow: #ffa700;
+	--light-grey: #b7b7b7;
+	--grey: #909090;
+	--dark-grey: #6d6d6d6d;
+	--section-bg: #3d3d3d;
+	--header-bg: #323232;
+	--light-blue: #2d3a4c;
+	--footer-bg: #1d1d1d;
+	--dark-blue: #1b2838;
+}
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	scroll-behavior: smooth;
+}
+
+body {
+	font-family: "Roboto", sans-serif;
+	background-color: var(--section-bg);
+}
+
+/* HEADER */
+header {
+	width: 100%;
+	background-color: var(--header-bg);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: fixed;
+	top: 0;
+}
+
+nav {
+	width: 95%;
+	min-height: 10vh;
+	margin: auto;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+#logo {
+	font-size: 1.8rem;
+	color: var(--orange);
+	letter-spacing: 0.2rem;
+	user-select: none;
+}
+
+.search-bar-container {
+	flex-basis: 30%;
+	position: relative;
+}
+
+.clear-icon {
+	text-align: center;
+	cursor: pointer;
+	width: 21px;
+	height: 21px;
+	z-index: 11;
+	font-size: 2.4rem;
+	color: white;
+	position: absolute;
+	top: 20%;
+	left: 0.5rem;
+	transform: translateY(-20%);
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 200ms ease;
+}
+
+.clear-icon::before {
+	content: "+";
+	align-self: center;
+	display: inline-block;
+	transform: rotateZ(45deg);
+	visibility: visible;
+}
+
+.search-bar {
+	background-image: url("../imgs/icons/magnifying-glass-solid.svg");
+	background-repeat: no-repeat;
+	background-size: 5%;
+	background-position: 96%;
+	background-color: var(--orange);
+	border-radius: 80px;
+	font-size: 1.2rem;
+	border: none;
+	height: 66px;
+	width: 100%;
+	outline: none;
+	position: relative;
+	left: 100%;
+	transform: translateX(-100%);
+	padding: 0 2.5rem;
+	color: white;
+}
+
+/* Chrome, Firefox, Opera, Safari 10.1+ */
+.search-bar::placeholder {
+	color: white;
+	opacity: 1; /* Firefox */
+}
+
+.search-bar:-ms-input-placeholder {
+	/* Internet Explorer 10-11 */
+	color: white;
+}
+
+.search-bar::-ms-input-placeholder {
+	/* Microsoft Edge */
+	color: white;
+}
+
+.burger {
+	display: block;
+	position: relative;
+	cursor: pointer;
+}
+
+.burger span {
+	padding: 0.1rem 1rem;
+	background-color: white;
+	margin: 0.5rem 0;
+	display: block;
+	transition: all 500ms ease;
+}
+
+.menu-active .line1 {
+	transform: rotateZ(45deg) translate(9px, 6px);
+	background: white;
+}
+
+.menu-active .line2 {
+	opacity: 0;
+}
+
+.menu-active .line3 {
+	transform: rotateZ(-45deg) translate(9px, -6px);
+	background: white;
+}
