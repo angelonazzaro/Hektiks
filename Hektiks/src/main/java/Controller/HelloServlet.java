@@ -1,4 +1,4 @@
-package com.example.hektiks;
+package Controller;
 
 import java.io.*;
 
