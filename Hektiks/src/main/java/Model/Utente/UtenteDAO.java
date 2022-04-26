@@ -9,10 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class UtenteDAO extends SQLDAO implements DAO<Utente> {
 
@@ -26,15 +23,15 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
 
         final List<Utente> utenti = new ArrayList<>();
 
-        try(Connection conn = source.getConnection()){
+        try (Connection conn = source.getConnection()) {
 
             String query = QueryBuilder.SELECT("*").FROM("Utenti").LIMIT(start, end).toString();
 
-            try(PreparedStatement ps = conn.prepareStatement(query)){
+            try (PreparedStatement ps = conn.prepareStatement(query)) {
                 ResultSet set = ps.executeQuery();
                 UtenteExtractor utenteExtractor = new UtenteExtractor();
 
-                while (set.next()){
+                while (set.next()) {
 
                     utenti.add(utenteExtractor.extract(set));
                 }
@@ -47,16 +44,16 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
     public Optional<Utente> doRetrieve(Utente key) throws SQLException {
 
         Utente utente = null;
-        try(Connection conn = source.getConnection()){
+        try (Connection conn = source.getConnection()) {
 
             String query = QueryBuilder.SELECT("*").FROM("Utenti").WHERE("Utenti.email = ?").toString();
 
-            try(PreparedStatement ps = conn.prepareStatement(query)){
+            try (PreparedStatement ps = conn.prepareStatement(query)) {
 
                 ps.setString(1, key.getEmail());
                 ResultSet set = ps.executeQuery();
 
-                if (set.next()){
+                if (set.next()) {
 
                     utente = new UtenteExtractor().extract(set);
                 }
@@ -69,10 +66,10 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
     @Override
     public boolean doSave(Utente obj) throws SQLException {
 
-        int rows = 0;
-        try(Connection conn = source.getConnection()){
+        int rows;
+        try (Connection conn = source.getConnection()) {
 
-            String query = QueryBuilder.INSERT_INTO("Utenti", new HashMap<>(){{
+            String query = QueryBuilder.INSERT_INTO("Utenti", new HashMap<>() {{
 
                 put("email", obj.getEmail());
                 put("username", obj.getUsername());
@@ -83,7 +80,7 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
                 put("biografia", obj.getBiografia());
             }}).toString();
 
-            try (PreparedStatement ps = conn.prepareStatement(query)){
+            try (PreparedStatement ps = conn.prepareStatement(query)) {
 
                 rows = ps.executeUpdate();
             }
@@ -92,15 +89,36 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
     }
 
     @Override
-    public boolean doUpdate(Utente obj) throws SQLException {
-        return false;
+    public boolean doUpdate(Map<String, ?> values, String condition) throws SQLException {
+
+        int rows;
+        try (Connection conn = source.getConnection()) {
+
+            String query = QueryBuilder.UPDATE("Utenti").SET(values).WHERE(condition).toString();
+
+            try (PreparedStatement ps = conn.prepareStatement(query)) {
+
+                rows = ps.executeUpdate();
+            }
+        }
+        return rows > 0;
     }
 
     @Override
-    public boolean doDelete(Utente key) throws SQLException {
-        return false;
+    public boolean doDelete(String condition) throws SQLException {
+
+        int rows;
+        try (Connection conn = source.getConnection()) {
+
+            String query = QueryBuilder.DELETE_FROM("Utenti").WHERE(condition).toString();
+
+            try (PreparedStatement ps = conn.prepareStatement(query)) {
+
+                rows = ps.executeUpdate();
+            }
+        }
+        return rows > 0;
     }
 
 
-    
 }
