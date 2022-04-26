@@ -1,21 +1,23 @@
 package Model.Utente;
 
 import Model.Storage.ResultSetExtractor;
+import static Model.Storage.Entities.UTENTI;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 
 public class UtenteExtractor implements ResultSetExtractor<Utente> {
 
     @Override
     public Utente extract(ResultSet resultSet) throws SQLException {
 
-        return new Utente(resultSet.getString("Utenti.email"),
-                resultSet.getString("Utenti.username"),
-                resultSet.getString("Utenti.password"),
-                resultSet.getDate("Utenti.data_registrazione"),
-                resultSet.getBoolean("Utenti.ruolo"),
-                resultSet.getDouble("Utenti.saldo"),
-                resultSet.getString("Utenti.biografia"));
+        return new Utente(resultSet.getString(UTENTI + ".email"),
+                resultSet.getString(UTENTI + ".username"),
+                resultSet.getString(UTENTI + ".password"),
+                resultSet.getDate(UTENTI + ".data_registrazione"),
+                resultSet.getBoolean(UTENTI + ".ruolo"),
+                resultSet.getDouble(UTENTI + ".saldo"),
+                resultSet.getString(UTENTI + ".biografia"));
     }
 }

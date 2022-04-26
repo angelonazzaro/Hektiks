@@ -9,6 +9,8 @@ public interface DAO<T> {
 
     List<T> doRetrieveAll(int start, int end) throws SQLException;
 
+//    List<T> doRetrieveAll() throws SQLException;
+
     Optional<T> doRetrieve(T obj) throws SQLException;
 
     boolean doSave(T obj) throws SQLException;

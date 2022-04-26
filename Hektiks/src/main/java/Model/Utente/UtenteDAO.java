@@ -42,6 +42,27 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
         return utenti;
     }
 
+//    @Override
+//    public List<Utente> doRetrieveAll() throws SQLException {
+//
+//        final List<Utente> utenti = new ArrayList<>();
+//
+//        try (Connection conn = source.getConnection()) {
+//
+//            String query = QueryBuilder.SELECT("*").FROM(UTENTI).toString();
+//
+//            try (PreparedStatement ps = conn.prepareStatement(query)) {
+//                ResultSet set = ps.executeQuery();
+//                UtenteExtractor utenteExtractor = new UtenteExtractor();
+//
+//                while (set.next()) {
+//                    utenti.add(utenteExtractor.extract(set));
+//                }
+//            }
+//        }
+//        return utenti;
+//    }
+
     @Override
     public Optional<Utente> doRetrieve(Utente key) throws SQLException {
 
@@ -72,7 +93,6 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
         try (Connection conn = source.getConnection()) {
 
             String query = QueryBuilder.INSERT_INTO(UTENTI, new HashMap<>() {{
-
                 put("email", obj.getEmail());
                 put("username", obj.getUsername());
                 put("password", obj.getPassword_utente());
