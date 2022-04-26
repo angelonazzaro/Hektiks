@@ -47,7 +47,7 @@ CREATE TABLE Carrelli (
     PRIMARY KEY (email_utente, data_creazione)
 );
 
-CREATE TABLE Appartenere (
+CREATE TABLE Giochi_Genere (
 	
     codice_gioco CHAR(6),
     nome_genere VARCHAR(35),
@@ -125,7 +125,7 @@ CREATE TABLE Pagamenti (
     PRIMARY KEY (email_utente, codice_ordine, data_ora_pagamento)
 );
 
-CREATE TABLE ProdottiOrdini (
+CREATE TABLE Prodotti_Ordini (
 
 	email_utente VARCHAR(320), 
 	codice_ordine CHAR(6),

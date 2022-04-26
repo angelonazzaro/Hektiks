@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
+import static Model.Storage.Entities.UTENTI;
+
 public class UtenteDAO extends SQLDAO implements DAO<Utente> {
 
 
@@ -25,7 +27,7 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
 
         try (Connection conn = source.getConnection()) {
 
-            String query = QueryBuilder.SELECT("*").FROM("Utenti").LIMIT(start, end).toString();
+            String query = QueryBuilder.SELECT("*").FROM(UTENTI).LIMIT(start, end).toString();
 
             try (PreparedStatement ps = conn.prepareStatement(query)) {
                 ResultSet set = ps.executeQuery();
@@ -46,7 +48,7 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
         Utente utente = null;
         try (Connection conn = source.getConnection()) {
 
-            String query = QueryBuilder.SELECT("*").FROM("Utenti").WHERE("Utenti.email = ?").toString();
+            String query = QueryBuilder.SELECT("*").FROM(UTENTI).WHERE(UTENTI + ".email = ?").toString();
 
             try (PreparedStatement ps = conn.prepareStatement(query)) {
 
@@ -69,7 +71,7 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
         int rows;
         try (Connection conn = source.getConnection()) {
 
-            String query = QueryBuilder.INSERT_INTO("Utenti", new HashMap<>() {{
+            String query = QueryBuilder.INSERT_INTO(UTENTI, new HashMap<>() {{
 
                 put("email", obj.getEmail());
                 put("username", obj.getUsername());
@@ -94,7 +96,7 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
         int rows;
         try (Connection conn = source.getConnection()) {
 
-            String query = QueryBuilder.UPDATE("Utenti").SET(values).WHERE(condition).toString();
+            String query = QueryBuilder.UPDATE(UTENTI).SET(values).WHERE(condition).toString();
 
             try (PreparedStatement ps = conn.prepareStatement(query)) {
 
@@ -110,7 +112,7 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
         int rows;
         try (Connection conn = source.getConnection()) {
 
-            String query = QueryBuilder.DELETE_FROM("Utenti").WHERE(condition).toString();
+            String query = QueryBuilder.DELETE_FROM(UTENTI).WHERE(condition).toString();
 
             try (PreparedStatement ps = conn.prepareStatement(query)) {
 
