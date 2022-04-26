@@ -1,22 +1,24 @@
-const burger = document.querySelector(".burger");
-const searchBar = document.querySelector(".search-bar");
-const clearIcon = document.querySelector(".clear-icon");
+const eyeIcons = document.querySelectorAll("i.far.fa-eye");
 
-burger.addEventListener("click", function () {
-	burger.classList.toggle("menu-active");
-});
+eyeIcons.forEach((eyeIcon) => {
+	eyeIcon.addEventListener("click", () => {
 
-clearIcon.addEventListener("click", function () {
-    searchBar.value = "";
-    searchBar.dispatchEvent(new Event("input"));
-})
+		let addType = "text", removeType = "password";
+		let addIconClass = "fa-eye-slash", removeIconClass = "fa-eye";
+		let tmpClass, tmpType;
 
-searchBar.addEventListener("input", function () {
-	if (searchBar.value.length === 0) {
-		clearIcon.style.opacity = 0;
-		clearIcon.style.pointerEvents = "none";
-	} else {
-		clearIcon.style.opacity = 1;
-		clearIcon.style.pointerEvents = "all";
-	}
+		if (!eyeIcon.classList.contains("fa-eye")) {
+			tmpType = addType;
+			addType = removeType;
+			removeType = tmpType;
+
+			tmpClass = addIconClass;
+			addIconClass = removeIconClass;
+			removeIconClass = tmpClass;
+		}
+
+		eyeIcon.classList.remove(removeIconClass);
+		eyeIcon.classList.add(addIconClass);
+		eyeIcon.parentElement.querySelector(`input[type=${removeType}]`).setAttribute("type", addType);
+	})
 });
