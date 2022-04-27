@@ -24,7 +24,7 @@ public class Utente {
         this.biografia = biografia;
     }
 
-    public Utente(){
+    public Utente() {
 
         this("", "", "", new Date(), false, 0, "");
     }
