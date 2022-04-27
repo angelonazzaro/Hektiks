@@ -1,0 +1,42 @@
+header {
+    width: 100%;
+    min-height: 8vh;
+    background-color: var(--header-bg);
+}
+
+nav {
+    width: 90%;
+    margin: auto;
+    min-height: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#logo {
+    color: var(--orange);
+    font-size: 3rem;
+    font-family: "Water Brush", sans-serif;
+    letter-spacing: 0.5rem;
+}
+
+#burger {
+    width: 25px;
+    height: 20px;
+    cursor: pointer;
+}
+
+#burger .line {
+    display: block;
+    padding: 0.1em 1em;
+    background-color: white;
+    transition: all 200ms ease;
+}
+
+#burger .line:nth-child(even) {
+    margin: 0.5em 0;
+}
+
+#burger:hover .line {
+    background-color: var(--orange);
+}

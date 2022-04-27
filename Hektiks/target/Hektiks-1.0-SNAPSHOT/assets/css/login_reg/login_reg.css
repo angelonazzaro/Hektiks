@@ -1,0 +1,76 @@
+#login-register-container {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--section-bg);
+    z-index: 1;
+    transition: all 400ms ease;
+    clip-path: circle(50px at 100% -10%);
+}
+
+#login-register-container.active {
+    clip-path: circle(200% at 100% -10%);
+}
+
+#login-register-container > div {
+    flex: 1 1 50%;
+}
+
+#login-register__form-container {
+    margin: auto;
+    height: 80%;
+}
+
+#login-register__form-container form {
+    width: 80%;
+    height: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+#login-register__form-container form > h2 {
+    color: white;
+    font-weight: 700;
+    font-size: 2.5rem;
+    letter-spacing: 0.18em;
+}
+
+#login-register__form-container form > div{
+    margin-bottom: 1.8em;
+}
+
+#login-register__wallpaper {
+    background-image: url("../../images/wallpaper.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+}
+
+@media only screen and (max-width: 800px) {
+    #login-register__wallpaper {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 770px) {
+    #login-register__form-container form {
+        height: 100%;
+    }
+
+    #login-register__form-container form > div{
+        margin-bottom: 0;
+    }
+
+    #login-register__form-container form > .form-group input{
+        margin-bottom: 0.55em;
+    }
+}
