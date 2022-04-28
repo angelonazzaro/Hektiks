@@ -9,6 +9,7 @@
     justify-content: center;
     transition: all 500ms ease;
     clip-path: circle(50px at 100% -10%);
+    z-index: 9;
 }
 
 #login-registration.active {
@@ -34,16 +35,16 @@
     left: 50%;
     transform: translate(-50%, -100%);
     color: white;
-    transition: opacity 250ms ease;
+    transition: opacity 1500ms ease;
 }
 
 .login-registration-form.show {
-    animation: show 250ms ease forwards;
+    animation: show 1500ms ease forwards;
 }
 
 .login-registration-form.hide {
     display: none;
-    animation: hide 250ms ease forwards;
+    animation: hide 1500ms ease forwards;
 }
 
 .login-registration-form h2 {

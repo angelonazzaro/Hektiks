@@ -44,8 +44,12 @@ body {
     margin-bottom: 2rem;
 }
 
+.wrapper {
+    width: 100%;
+    min-height: 100vh;
+}
 
-/* INTESTAZIONI */
+/* INTESTAZIONI E TESTO */
 .hs-1 {
     font-size: calc(2.5em + 1vmin);
 }
