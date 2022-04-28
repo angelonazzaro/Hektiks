@@ -13,12 +13,16 @@ public class UtenteExtractor implements ResultSetExtractor<Utente> {
     @Override
     public Utente extract(ResultSet resultSet) throws SQLException {
 
-        return new Utente(resultSet.getString(UTENTI + ".email"),
-                resultSet.getString(UTENTI + ".username"),
-                resultSet.getString(UTENTI + ".password"),
-                resultSet.getDate(UTENTI + ".data_registrazione"),
-                resultSet.getBoolean(UTENTI + ".ruolo"),
-                resultSet.getDouble(UTENTI + ".saldo"),
-                resultSet.getString(UTENTI + ".biografia"));
+        Utente ute = new Utente();
+
+        ute.setEmail(resultSet.getString(UTENTI + ".email"));
+        ute.setPassword_utente(resultSet.getString(UTENTI + ".username"));
+        ute.setPassword_utente(resultSet.getString(UTENTI + ".password"));
+        ute.setData_registrazione(resultSet.getDate(UTENTI + ".data_registrazione"));
+        ute.setRuolo(resultSet.getBoolean(UTENTI + ".ruolo"));
+        ute.setSaldo(resultSet.getDouble(UTENTI + ".saldo"));
+        ute.setBiografia(resultSet.getString(UTENTI + ".biografia"));
+
+        return ute;
     }
 }

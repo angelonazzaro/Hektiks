@@ -17,21 +17,8 @@ public class Utente implements Serializable {
     private double saldo;
     private String biografia;
 
-    public Utente(String email, String username, String password_utente, Date data_registrazione,
-                  boolean ruolo, double saldo, String biografia) {
-
-        this.email = email;
-        this.username = username;
-        this.password_utente = password_utente;
-        this.data_registrazione = data_registrazione;
-        this.ruolo = ruolo;
-        this.saldo = saldo;
-        this.biografia = biografia;
-    }
-
     public Utente() {
 
-        this("", "", "", new Date(), false, 0, "");
     }
 
     @Override

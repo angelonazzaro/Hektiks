@@ -10,14 +10,8 @@ public class Genere implements Serializable {
 
     private String nome_genere;
 
-    public Genere(String nome_genere) {
-
-        this.nome_genere = nome_genere;
-    }
-
     public Genere() {
 
-        this("");
     }
 
     @Override

@@ -19,37 +19,8 @@ public class Gioco implements Serializable {
     private int quantita_disponibile;
     private int numero_vendite;
 
-    public Gioco(String codice_gioco, String titolo, String descrizione, String trailer,
-                 Date data_uscita, String copertina, double prezzo, int quantita_disponibile, int numero_vendite) {
-
-        this.codice_gioco = codice_gioco;
-        this.titolo = titolo;
-        this.descrizione = descrizione;
-        this.trailer = trailer;
-        this.data_uscita = data_uscita;
-        this.copertina = copertina;
-        this.prezzo = prezzo;
-        this.quantita_disponibile = quantita_disponibile;
-        this.numero_vendite = numero_vendite;
-    }
-
-    public Gioco(String codice_gioco, String titolo, String descrizione, String trailer,
-                 Date data_uscita, String copertina, double prezzo, int quantita_disponibile) {
-
-        this.codice_gioco = codice_gioco;
-        this.titolo = titolo;
-        this.descrizione = descrizione;
-        this.trailer = trailer;
-        this.data_uscita = data_uscita;
-        this.copertina = copertina;
-        this.prezzo = prezzo;
-        this.quantita_disponibile = quantita_disponibile;
-        this.numero_vendite = 0;
-    }
-
     public Gioco(){
 
-        this("", "", "", "", new Date(), "", 0, 0);
     }
 
     @Override

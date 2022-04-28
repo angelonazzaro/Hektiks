@@ -12,6 +12,9 @@ public class GenereExtractor implements ResultSetExtractor<Genere> {
     @Override
     public Genere extract(ResultSet resultSet) throws SQLException {
 
-        return new Genere(resultSet.getString(GENERI + ".nome_genere"));
+        Genere gen = new Genere();
+        gen.setNome_genere(resultSet.getString(GENERI + ".nome_genere"));
+
+        return gen;
     }
 }
