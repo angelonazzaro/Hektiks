@@ -1,0 +1,49 @@
+header {
+    width: 100%;
+    min-height: 10vh;
+    background-color: var(--header-bg);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    width: 90%;
+    min-height: inherit;
+}
+
+/* BURGER MENU */
+#burger {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    z-index: 10;
+}
+
+#burger .line {
+    display: block;
+    padding: 0.2rem 2rem;
+    background-color: white;
+    /*transition: all 200ms ease;*/
+}
+
+#burger .line:nth-child(2) {
+    margin: 0.5rem 0;
+}
+
+#burger:hover .line {
+    background-color: var(--orange);
+}
+
+#burger.active .line:nth-child(1) {
+    transform: rotate(45deg) translateY(300%);
+}
+
+#burger.active .line:nth-child(2) {
+    opacity: 0;
+}
+
+#burger.active .line:nth-child(3) {
+    transform: rotate(-45deg) translateY(-300%);
+}

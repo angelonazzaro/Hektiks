@@ -3,7 +3,10 @@ const login_reg_section = document.getElementById("login-registration");
 
 burger.addEventListener("click", () => {
     burger.classList.toggle("active")
-    if (login_reg_section) login_reg_section.classList.toggle("active");
+    if (login_reg_section) {
+        login_reg_section.classList.toggle("active");
+        document.body.classList.toggle("stop-scrolling");
+    }
 });
 
 const go_to_login = document.querySelector(".login-registration-form__btn[data-form=login]");

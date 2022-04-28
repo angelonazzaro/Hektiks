@@ -1,3 +1,12 @@
+<%@ page import="Model.Utente.Utente" %><%--
+  Created by IntelliJ IDEA.
+  User: Panin
+  Date: 26/04/2022
+  Time: 22:54
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% Utente utente = (Utente) session.getAttribute("utente"); %>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -5,10 +14,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
 
-    <link rel="icon" href="./assets/images/icons/gamepad-solid.svg"/>
-    <link rel="stylesheet" href="./assets/css/style.css"/>
+    <link rel="icon" href="<%= request.getContextPath() %>/assets/images/icons/gamepad-solid.svg"/>
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/css/style.css"/>
 
-    <title>Hektiks</title>
+    <title><%= request.getAttribute("title") %>
+    </title>
 </head>
 <body>
 <!-- header start -->
@@ -22,6 +32,7 @@
     </nav>
 </header>
 
+<% if (utente == null) { %>
 <section id="login-registration">
     <div id="login-registration__form-container">
         <form action="#" method="POST" id="registration-form" class="login-registration-form show">
@@ -65,9 +76,4 @@
     </div>
     <div id="login-registration__wallpaper"></div>
 </section>
-
-<!-- header end -->
-
-<script src="./assets/js/app.js"></script>
-</body>
-</html>
+<% } %>

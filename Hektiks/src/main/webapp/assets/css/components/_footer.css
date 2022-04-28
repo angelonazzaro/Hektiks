@@ -1,0 +1,22 @@
+footer {
+    position: relative;
+    bottom: 0;
+    background: var(--footer-bg);
+    width: 100%;
+    min-height: 10vh;
+    color: white;
+}
+
+.footer__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    width: 90%;
+    min-height: inherit;
+}
+
+.footer__content p {
+    text-align: center;
+    padding: 0 2rem;
+}
