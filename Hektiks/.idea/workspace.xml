@@ -10,6 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="57ff0071-2e9c-4713-8e61-b03411814c2c" name="Changes" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/HelloServlet.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/css/_general.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/_general.css" afterDir="false" />
@@ -30,6 +31,21 @@
       <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/templates/footer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/templates/footer.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/templates/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/templates/header.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Controller/HelloServlet.class" beforeDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/src/main/java/Model/Carrello/Carrello.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Model/Carrello/CarrelloDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Model/Carrello/CarrelloExtractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Genere/Genere.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Genere/Genere.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Genere/GenereExtractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Genere/GenereExtractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Gioco/Gioco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Gioco/Gioco.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Gioco/GiocoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Gioco/GiocoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Gioco/GiocoExtracotor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Gioco/GiocoExtracotor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Storage/QueryBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utils/QueryBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Utente/Utente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Utente/Utente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Utente/UtenteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Utente/UtenteDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Utente/UtenteExtractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Utente/UtenteExtractor.java" afterDir="false" />
+>>>>>>> 38fdc9194be7ea944cdd53e0c263247452ba7fac
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,12 +107,16 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+<<<<<<< HEAD
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Panin\Desktop\Universita\2_anno\Secondo_semestre\TSW\Progetto\Hektiks\src\main\webapp\WEB-INF" />
     </key>
+=======
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+>>>>>>> 38fdc9194be7ea944cdd53e0c263247452ba7fac
   </component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
@@ -218,7 +238,8 @@
       <workItem from="1651136303655" duration="102000" />
       <workItem from="1651136430202" duration="517000" />
       <workItem from="1651156006034" duration="2511000" />
-      <workItem from="1651159750800" duration="436000" />
+      <workItem from="1651159750800" duration="1471000" />
+      <workItem from="1651161259405" duration="1752000" />
     </task>
     <servers />
   </component>

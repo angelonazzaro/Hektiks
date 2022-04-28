@@ -1,4 +1,4 @@
-package Model.Gioco;
+package Model.Gioco_Genere;
 
 import Model.Storage.DAO;
 import Model.Storage.SQLDAO;
@@ -9,29 +9,29 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class GiocoDAO extends SQLDAO implements DAO<Gioco> {
+public class Gioco_GenereDAO extends SQLDAO implements DAO<Gioco_Genere> {
 
-    public GiocoDAO(DataSource source) {
+    public Gioco_GenereDAO(DataSource source) {
         super(source);
     }
 
     @Override
-    public List<Gioco> doRetrieveByCondition(String condition) throws SQLException {
+    public List<Gioco_Genere> doRetrieveByCondition(String condition) throws SQLException {
         return null;
     }
 
     @Override
-    public List<Gioco> doRetrieveAll() throws SQLException {
+    public List<Gioco_Genere> doRetrieveAll() throws SQLException {
         return null;
     }
 
     @Override
-    public Optional<Gioco> doRetrieveByKey(Gioco obj) throws SQLException {
+    public Optional<Gioco_Genere> doRetrieveByKey(Gioco_Genere obj) throws SQLException {
         return Optional.empty();
     }
 
     @Override
-    public boolean doSave(Gioco obj) throws SQLException {
+    public boolean doSave(Gioco_Genere obj) throws SQLException {
         return false;
     }
 

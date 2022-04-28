@@ -1,7 +1,7 @@
 package Model.Utente;
 
 import Model.Storage.DAO;
-import Model.Storage.QueryBuilder;
+import Utils.QueryBuilder;
 import Model.Storage.SQLDAO;
 
 import javax.sql.DataSource;
