@@ -1,0 +1,9 @@
+*.pdf
+*.png
+*.zip
+/.idea
+/.vscode
+/.idea/*
+/target/
+/build/
+/.idea/

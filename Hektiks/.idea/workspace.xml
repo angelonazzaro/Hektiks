@@ -10,6 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="57ff0071-2e9c-4713-8e61-b03411814c2c" name="Changes" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/css/components/_loginregistration.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/components/_loginregistration.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/META-INF/MANIFEST.MF" afterDir="false" />
@@ -17,13 +18,78 @@
       <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/WEB-INF/classes/Model/Utente/UtenteDAO$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/WEB-INF/classes/Model/Utente/UtenteDAO$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/WEB-INF/classes/Model/Utente/UtenteDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/WEB-INF/classes/Model/Utente/UtenteDAO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/WEB-INF/classes/Model/Utente/UtenteExtractor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/WEB-INF/classes/Model/Utente/UtenteExtractor.class" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/_general.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/components/_loginregistration.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/templates/footer.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/templates/header.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hektiks.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Hektiks.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/css/components/_header.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/components/_header.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/css/global/global.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/css/login_reg/login_reg.css" beforeDir="false" />
+>>>>>>> dc9d5112599a82690fcefe87369a57bc0c4eeaad
       <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/css/bootstrap-grid.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/css/bootstrap-grid.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/css/bootstrap-grid.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/css/bootstrap-grid.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/css/bootstrap-grid.rtl.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/css/bootstrap-grid.rtl.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/css/bootstrap-grid.rtl.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/css/bootstrap-grid.rtl.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/css/bootstrap-reboot.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/css/bootstrap-reboot.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/css/bootstrap-reboot.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/css/bootstrap-reboot.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/css/bootstrap-reboot.rtl.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/css/bootstrap-reboot.rtl.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/css/bootstrap-reboot.rtl.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/css/bootstrap-reboot.rtl.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/css/bootstrap-utilities.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/css/bootstrap-utilities.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/css/bootstrap-utilities.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/css/bootstrap-utilities.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/css/bootstrap-utilities.rtl.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/css/bootstrap-utilities.rtl.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/css/bootstrap-utilities.rtl.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/css/bootstrap-utilities.rtl.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/css/bootstrap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/css/bootstrap.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/css/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/css/bootstrap.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/css/bootstrap.rtl.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/css/bootstrap.rtl.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/css/bootstrap.rtl.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/css/bootstrap.rtl.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/js/bootstrap.bundle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/js/bootstrap.bundle.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/js/bootstrap.esm.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/js/bootstrap.esm.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/js/bootstrap.esm.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/js/bootstrap.esm.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/js/bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/js/bootstrap.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/js/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/libs/bootstrap-5.0.2-dist/js/bootstrap.min.js.map" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/index.html" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/target/classes/Model/Storage/DAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Storage/DAO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Model/Utente/UtenteDAO$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Utente/UtenteDAO$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Model/Utente/UtenteDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Utente/UtenteDAO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Model/Utente/UtenteExtractor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Utente/UtenteExtractor.class" afterDir="false" />
+=======
+>>>>>>> dc9d5112599a82690fcefe87369a57bc0c4eeaad
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -206,7 +272,8 @@
       <workItem from="1651095256534" duration="131000" />
       <workItem from="1651136303655" duration="102000" />
       <workItem from="1651136430202" duration="517000" />
-      <workItem from="1651156006034" duration="844000" />
+      <workItem from="1651156006034" duration="2511000" />
+      <workItem from="1651159750800" duration="436000" />
     </task>
     <servers />
   </component>
