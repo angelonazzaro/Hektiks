@@ -9,21 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="57ff0071-2e9c-4713-8e61-b03411814c2c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Storage/DAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Storage/DAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Storage/SQLDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Storage/SQLDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Utente/Utente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Utente/Utente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Utente/UtenteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Utente/UtenteDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Utente/UtenteExtractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Utente/UtenteExtractor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/css/global/global.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/global/global.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/css/login_reg/login_reg.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/login_reg/login_reg.css" afterDir="false" />
-    </list>
+    <list default="true" id="57ff0071-2e9c-4713-8e61-b03411814c2c" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -188,6 +174,7 @@
       <workItem from="1650989642817" duration="2007000" />
       <workItem from="1651062906606" duration="8000" />
       <workItem from="1651065667080" duration="110000" />
+      <workItem from="1651095256534" duration="131000" />
     </task>
     <servers />
   </component>
