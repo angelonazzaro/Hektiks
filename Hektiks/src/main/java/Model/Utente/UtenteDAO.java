@@ -20,7 +20,27 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
         super(source);
     }
 
-    @Override
+    public List<Utente> doRetrieveByCondition(String condition) throws SQLException {
+
+        final List<Utente> utenti = new ArrayList<>();
+
+        try (Connection conn = source.getConnection()) {
+
+            String query = QueryBuilder.SELECT("*").FROM(UTENTI).WHERE(condition).toString();
+
+            try (PreparedStatement ps = conn.prepareStatement(query)) {
+                ResultSet set = ps.executeQuery();
+                UtenteExtractor utenteExtractor = new UtenteExtractor();
+
+                while (set.next()) {
+                    utenti.add(utenteExtractor.extract(set));
+                }
+            }
+        }
+        return utenti;
+    }
+
+/*    @Override
     public List<Utente> doRetrieveAll(int start, int end) throws SQLException {
 
         final List<Utente> utenti = new ArrayList<>();
@@ -40,31 +60,16 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
             }
         }
         return utenti;
-    }
-
-//    @Override
-//    public List<Utente> doRetrieveAll() throws SQLException {
-//
-//        final List<Utente> utenti = new ArrayList<>();
-//
-//        try (Connection conn = source.getConnection()) {
-//
-//            String query = QueryBuilder.SELECT("*").FROM(UTENTI).toString();
-//
-//            try (PreparedStatement ps = conn.prepareStatement(query)) {
-//                ResultSet set = ps.executeQuery();
-//                UtenteExtractor utenteExtractor = new UtenteExtractor();
-//
-//                while (set.next()) {
-//                    utenti.add(utenteExtractor.extract(set));
-//                }
-//            }
-//        }
-//        return utenti;
-//    }
+    }*/
 
     @Override
-    public Optional<Utente> doRetrieve(Utente key) throws SQLException {
+    public List<Utente> doRetrieveAll() throws SQLException {
+
+        return doRetrieveByCondition("TRUE");
+    }
+
+    @Override
+    public Optional<Utente> doRetrieveByKey(Utente key) throws SQLException {
 
         Utente utente = null;
         try (Connection conn = source.getConnection()) {
@@ -85,6 +90,7 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
 
         return Optional.ofNullable(utente);
     }
+
 
     @Override
     public boolean doSave(Utente obj) throws SQLException {

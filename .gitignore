@@ -5,3 +5,5 @@
 /.vscode
 /.idea/*
 /target/
+/build/
+/.idea/
