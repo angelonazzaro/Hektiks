@@ -17,20 +17,23 @@ public class MainContext implements ServletContextListener {
 
         ServletContext sc = sce.getServletContext();
         DataSource ds = null;
-
         Context initCtx;
+
         try {
+
             initCtx = new InitialContext();
             Context envCtx = (Context) initCtx.lookup("java:comp/env");
             ds = (DataSource) envCtx.lookup("jdbc/ggwp");
-
             sc.setAttribute("DataSource", ds);
+
         } catch (NamingException e) {
+
             System.err.println(e.getMessage());
         }
     }
 
     public void contextDestroyed(ServletContextEvent sce) {
+
         ServletContext cont = sce.getServletContext();
         cont.removeAttribute("DataSource");
     }
