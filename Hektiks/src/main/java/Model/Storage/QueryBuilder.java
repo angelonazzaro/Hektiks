@@ -202,7 +202,7 @@ public class QueryBuilder {
      * Appends a "limit" clause to a query.
      *
      * @param start Starting offset
-     * @param end Ending offset
+     * @param end   Ending offset
      * @return The {@link QueryBuilder} instance.
      */
     public QueryBuilder LIMIT(int start, int end) {

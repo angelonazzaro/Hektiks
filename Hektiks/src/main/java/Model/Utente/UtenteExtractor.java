@@ -1,6 +1,7 @@
 package Model.Utente;
 
 import Model.Storage.ResultSetExtractor;
+
 import static Model.Storage.Entities.UTENTI;
 
 import java.sql.ResultSet;

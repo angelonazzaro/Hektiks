@@ -1,4 +1,11 @@
-const eyeIcons = document.querySelectorAll("i.far.fa-eye");
+const eyeIcons = document.querySelectorAll("i.fas.fa-eye");
+const burger = document.getElementById("burger");
+const loginRegisterContainer = document.getElementById("login-register-container");
+
+burger.addEventListener("click", () => {
+	burger.classList.toggle("active");
+	loginRegisterContainer.classList.toggle("active");
+})
 
 eyeIcons.forEach((eyeIcon) => {
 	eyeIcon.addEventListener("click", () => {
