@@ -40,7 +40,7 @@ a, a:hover {
 
 .form-control-nb {
     width: 100%;
-    padding: 1em 1em;
+    padding: 0.7em 1em;
     font-size: 1.8rem;
     border-radius: 0.6em;
     border: 2px solid var(--grey);
@@ -88,6 +88,14 @@ a, a:hover {
 }
 
 @media only screen and (max-width: 770px) {
+    .form-control-nb {
+        padding: 0.5em 1em;
+    }
+
+    .submit-btn {
+        padding: 0.8em 0;
+    }
+
     .input-group-nb > .icon {
         top: 42%;
         right: 0;

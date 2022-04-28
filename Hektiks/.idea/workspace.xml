@@ -10,9 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="57ff0071-2e9c-4713-8e61-b03411814c2c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Model/Genere/Genere.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Model/Genere/GenereDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Model/Genere/GenereExtractor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Model/Gioco/Gioco.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Model/Gioco/GiocoDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Model/Gioco/GiocoExtracotor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Storage/DAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Storage/DAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Model/Utente/UtenteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Utente/UtenteDAO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -193,7 +197,7 @@
       <workItem from="1651095256534" duration="131000" />
       <workItem from="1651136303655" duration="102000" />
       <workItem from="1651136430202" duration="517000" />
-      <workItem from="1651156006034" duration="844000" />
+      <workItem from="1651156006034" duration="2511000" />
     </task>
     <servers />
   </component>
