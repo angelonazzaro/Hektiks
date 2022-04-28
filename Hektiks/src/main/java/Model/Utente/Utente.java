@@ -1,8 +1,13 @@
 package Model.Utente;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Date;
 
-public class Utente {
+public class Utente implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 6645001885280633923L;
 
     private String email;
     private String username;

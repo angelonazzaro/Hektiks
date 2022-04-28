@@ -43,7 +43,7 @@
     letter-spacing: 0.18em;
 }
 
-#login-register__form-container form > div{
+#login-register__form-container form > div {
     margin-bottom: 1.8em;
 }
 
@@ -66,11 +66,11 @@
         height: 100%;
     }
 
-    #login-register__form-container form > div{
+    #login-register__form-container form > div {
         margin-bottom: 0;
     }
 
-    #login-register__form-container form > .form-group input{
+    #login-register__form-container form > .form-group input {
         margin-bottom: 0.55em;
     }
 }
