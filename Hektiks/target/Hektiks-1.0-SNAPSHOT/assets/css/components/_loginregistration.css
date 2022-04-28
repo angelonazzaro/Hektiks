@@ -34,16 +34,16 @@
     left: 50%;
     transform: translate(-50%, -100%);
     color: white;
-    transition: opacity 1500ms ease;
+    transition: opacity 250ms ease;
 }
 
 .login-registration-form.show {
-    animation: show 1500ms ease forwards;
+    animation: show 250ms ease forwards;
 }
 
 .login-registration-form.hide {
     display: none;
-    animation: hide 1500ms ease forwards;
+    animation: hide 250ms ease forwards;
 }
 
 .login-registration-form h2 {
