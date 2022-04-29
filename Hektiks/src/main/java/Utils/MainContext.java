@@ -23,7 +23,7 @@ public class MainContext implements ServletContextListener {
 
             initCtx = new InitialContext();
             Context envCtx = (Context) initCtx.lookup("java:comp/env");
-            ds = (DataSource) envCtx.lookup("jdbc/ggwp");
+            ds = (DataSource) envCtx.lookup("jdbc/hektiks");
             sc.setAttribute("DataSource", ds);
 
         } catch (NamingException e) {

@@ -166,6 +166,28 @@ INSERT INTO Giochi VALUES
 	50, 
 	4
 );
+-- ALTRI GIOCHI
+/*("FNx9td", "Dying Light 2 Stay Human", "", "", "", "", "", 50, 4),
+("6PiPPb", "Hitman 3", "", "", "", "", "", 50, 4),
+("ACi702", "Elden Ring", "", "", "", "", "", 50, 4),
+("oTwPW4", "God of War", "", "", "", "", "", 50, 4),
+("fBqTqo", "Postal 4: No Regerts", "", "", "", "", "", 50, 4),
+("nOWiwe", "Forgive me Father", "", "", "", "", "", 50, 4),
+("hUnUBt", "Call of Duty: Vanguard Ultimate Edition", "", "", "", "", "", 50, 4),
+("5ywyXE", "Cyberpunk 2077", "", "", "", "", "", 50, 4),
+("Hg1Ssx", "MotoGP 22", "", "", "", "", "", 50, 4),
+("KKzHol", "Football Manager 2022", "", "", "", "", "", 50, 4),
+("81mzZG", "Terraformers", "", "", "", "", "", 50, 4),
+("bgvLci", "WWE 2K22", "", "", "", "", "", 50, 4),
+("umPIPT", "WWE 2K22 Deluxe Edition", "", "", "", "", "", 50, 4),
+("3cssyj", "For Honor", "", "", "", "", "", 50, 4),
+("yHrgCW", "Batman: Arkham Origins", "", "", "", "", "", 50, 4),
+("oYxZfy", "Elex II", "", "", "", "", "", 50, 4),
+("GrOoDB", "Age of Empires IV", "", "", "", "", "", 50, 4),
+("6jGIUW", "Motorcycle Mechanic Simulator 2021", "", "", "", "", "", 50, 4),
+("Q6HnRX", "Wanderer", "", "", "", "", "", 50, 4),
+("oSzZp3", "Minecraft Java Edition", "", "", "", "", "", 50, 4),
+("aKFt3e", "Resident Evil 7 Biohazard", "", "", "", "", "", 50, 4);*/
 
 INSERT INTO Giochi_Genere VALUES 
 ("oSzZp3", "Multiplayer"),
