@@ -16,7 +16,7 @@
     clip-path: circle(200% at 100% -10%);
 }
 
-#login-registration div {
+#login-registration__form-container, #login-registration__wallpaper {
     flex: 1 1 50%;
 }
 

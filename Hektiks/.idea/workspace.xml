@@ -10,42 +10,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="57ff0071-2e9c-4713-8e61-b03411814c2c" name="Changes" comment="">
-<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/HelloServlet.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/css/_general.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/_general.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/css/components/_header.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/components/_header.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/css/components/_loginregistration.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/components/_loginregistration.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/footer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/footer.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/header.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/WEB-INF/classes/Controller/HelloServlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/WEB-INF/classes/Model/Genere/Genere.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/WEB-INF/classes/Model/Genere/Genere.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/WEB-INF/classes/Model/Genere/GenereExtractor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/WEB-INF/classes/Model/Genere/GenereExtractor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/WEB-INF/classes/Model/Gioco/Gioco.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/WEB-INF/classes/Model/Gioco/Gioco.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/WEB-INF/classes/Model/Gioco/GiocoDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/WEB-INF/classes/Model/Gioco/GiocoDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/WEB-INF/classes/Model/Gioco/GiocoExtracotor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/WEB-INF/classes/Model/Gioco/GiocoExtracotor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/WEB-INF/classes/Model/Storage/QueryBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/WEB-INF/classes/Model/Utente/Utente.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/WEB-INF/classes/Model/Utente/Utente.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/WEB-INF/classes/Model/Utente/UtenteDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/WEB-INF/classes/Model/Utente/UtenteDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/WEB-INF/classes/Model/Utente/UtenteExtractor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/WEB-INF/classes/Model/Utente/UtenteExtractor.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/css/_general.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/css/_general.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/css/components/_loginregistration.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/css/components/_loginregistration.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/index.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/templates/footer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/templates/footer.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/css/components/_header.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/css/components/_header.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/templates/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/templates/header.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Controller/HelloServlet.class" beforeDir="false" />
-=======
-      <change afterPath="$PROJECT_DIR$/src/main/java/Model/Carrello/Carrello.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Model/Carrello/CarrelloDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Model/Carrello/CarrelloExtractor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Genere/Genere.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Genere/Genere.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Genere/GenereExtractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Genere/GenereExtractor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Gioco/Gioco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Gioco/Gioco.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Gioco/GiocoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Gioco/GiocoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Gioco/GiocoExtracotor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Gioco/GiocoExtracotor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Storage/QueryBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utils/QueryBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Utente/Utente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Utente/Utente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Utente/UtenteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Utente/UtenteDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Utente/UtenteExtractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Utente/UtenteExtractor.java" afterDir="false" />
->>>>>>> 38fdc9194be7ea944cdd53e0c263247452ba7fac
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Genere/Genere.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Genere/Genere.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Genere/GenereExtractor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Genere/GenereExtractor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Gioco/Gioco.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Gioco/Gioco.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Gioco/GiocoDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Gioco/GiocoDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Gioco/GiocoExtracotor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Gioco/GiocoExtracotor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Storage/QueryBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Utente/Utente.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Utente/Utente.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Utente/UtenteDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Utente/UtenteDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Utente/UtenteExtractor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Utente/UtenteExtractor.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +47,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -99,6 +91,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -107,16 +100,12 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-<<<<<<< HEAD
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Panin\Desktop\Universita\2_anno\Secondo_semestre\TSW\Progetto\Hektiks\src\main\webapp\WEB-INF" />
     </key>
-=======
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
->>>>>>> 38fdc9194be7ea944cdd53e0c263247452ba7fac
   </component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
@@ -240,6 +229,8 @@
       <workItem from="1651156006034" duration="2511000" />
       <workItem from="1651159750800" duration="1471000" />
       <workItem from="1651161259405" duration="1752000" />
+      <workItem from="1651172646812" duration="368000" />
+      <workItem from="1651215976256" duration="4213000" />
     </task>
     <servers />
   </component>

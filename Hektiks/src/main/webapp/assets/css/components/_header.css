@@ -47,3 +47,19 @@ nav {
 #burger.active .line:nth-child(3) {
     transform: rotate(-45deg) translateY(-300%);
 }
+
+/* CARRELLO */
+#cart {
+    font-size: calc(1.4em + 1vmin);
+    color: white;
+    cursor: pointer;
+    margin-right: 2rem;
+}
+
+#cart a {
+    transition: color 200ms ease;
+}
+
+#cart:hover {
+    color: var(--orange);
+}

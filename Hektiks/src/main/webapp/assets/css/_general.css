@@ -29,6 +29,11 @@ body {
     font-family: "Source Code Pro", sans-serif;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 
 /* CLASSI GENERALI */
 .stop-scrolling {
@@ -47,6 +52,14 @@ body {
 .wrapper {
     width: 100%;
     min-height: 100vh;
+}
+
+.half {
+    flex: 1 1 40%;
+}
+
+.flex {
+    display: flex;
 }
 
 /* INTESTAZIONI E TESTO */
@@ -100,6 +113,24 @@ input.form-control:hover, input.form-control:focus {
     border-color: var(--orange);
 }
 
+.input-group-append {
+    position: relative;
+    width: 100%;
+}
+
+.input-group-append input {
+    width: 100%;
+}
+
+.input-group-append span {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(-50%, -50%);
+    font-size: calc(1em + 1vmin);
+    cursor: pointer;
+}
+
 .btn {
     padding: 1.8rem;
     font-weight: 700;
@@ -119,4 +150,10 @@ input.form-control:hover, input.form-control:focus {
 
 .btn-submit:hover {
     background-color: var(--yellow);
+}
+
+@media only screen and (max-width: 1185px) {
+    .half {
+        flex-basis: 100%;
+    }
 }

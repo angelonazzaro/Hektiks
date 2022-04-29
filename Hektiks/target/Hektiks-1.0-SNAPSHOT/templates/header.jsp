@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% Utente utente = (Utente) session.getAttribute("utente"); %>
+<% Utente user = (Utente) session.getAttribute("user"); %>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -32,7 +32,7 @@
     </nav>
 </header>
 
-<% if (utente == null) { %>
+<% if (user == null) { %>
 <section id="login-registration">
     <div id="login-registration__form-container">
         <form action="#" method="POST" id="registration-form" class="login-registration-form show">
@@ -50,8 +50,14 @@
             </div>
             <div class="row">
                 <div class="form-group">
-                    <input type="password" name="password" placeholder="Password:" class="form-control">
-                    <input type="password" name="cnf-pwd" placeholder="Conferma Password:" class="form-control">
+                    <div class="input-group-append">
+                        <input type="password" name="password" placeholder="Password:" class="form-control">
+                        <span><i class="fas fa-eye"></i></span>
+                    </div>
+                    <div class="input-group-append">
+                        <input type="password" name="cnf-pwd" placeholder="Conferma Password:" class="form-control">
+                        <span><i class="fas fa-eye"></i></span>
+                    </div>
                 </div>
             </div>
             <button type="submit" class="btn btn-submit">Invia</button>
