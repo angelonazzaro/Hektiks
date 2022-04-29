@@ -11,6 +11,14 @@
   <component name="ChangeListManager">
     <list default="true" id="57ff0071-2e9c-4713-8e61-b03411814c2c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
+=======
+      <change beforePath="$PROJECT_DIR$/src/main/java/Utils/MainContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utils/MainContext.java" afterDir="false" />
+=======
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/HelloServlet.java" beforeDir="false" />
+>>>>>>> c4da9deb7069cb069031a423345def6b5bbfe6f2
       <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/css/_general.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/_general.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/css/components/_header.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/components/_header.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/css/components/_loginregistration.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/components/_loginregistration.css" afterDir="false" />
@@ -28,6 +36,7 @@
       <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/css/_general.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/css/_general.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/css/components/_header.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/assets/css/components/_header.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/templates/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/Hektiks-1.0-SNAPSHOT/templates/header.jsp" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/target/classes/Model/Genere/Genere.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Genere/Genere.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Model/Genere/GenereExtractor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Genere/GenereExtractor.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Model/Gioco/Gioco.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Gioco/Gioco.class" afterDir="false" />
@@ -37,6 +46,25 @@
       <change beforePath="$PROJECT_DIR$/target/classes/Model/Utente/Utente.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Utente/Utente.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Model/Utente/UtenteDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Utente/UtenteDAO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Model/Utente/UtenteExtractor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Utente/UtenteExtractor.class" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/target/classes/Controller/HelloServlet.class" beforeDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/src/main/java/Model/Carrello/Carrello.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Model/Carrello/CarrelloDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Model/Carrello/CarrelloExtractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Genere/Genere.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Genere/Genere.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Genere/GenereExtractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Genere/GenereExtractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Gioco/Gioco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Gioco/Gioco.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Gioco/GiocoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Gioco/GiocoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Gioco/GiocoExtracotor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Gioco/GiocoExtracotor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Storage/QueryBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utils/QueryBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Utente/Utente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Utente/Utente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Utente/UtenteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Utente/UtenteDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Utente/UtenteExtractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Utente/UtenteExtractor.java" afterDir="false" />
+>>>>>>> 38fdc9194be7ea944cdd53e0c263247452ba7fac
+>>>>>>> 3e6330b8cf438e6090b4af455b0757010d6b7748
+>>>>>>> c4da9deb7069cb069031a423345def6b5bbfe6f2
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -228,9 +256,13 @@
       <workItem from="1651136430202" duration="517000" />
       <workItem from="1651156006034" duration="2511000" />
       <workItem from="1651159750800" duration="1471000" />
+<<<<<<< HEAD
       <workItem from="1651161259405" duration="1752000" />
       <workItem from="1651172646812" duration="368000" />
       <workItem from="1651215976256" duration="4213000" />
+=======
+      <workItem from="1651161259405" duration="2048000" />
+>>>>>>> c4da9deb7069cb069031a423345def6b5bbfe6f2
     </task>
     <servers />
   </component>
