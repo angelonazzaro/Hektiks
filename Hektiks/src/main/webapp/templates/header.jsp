@@ -26,7 +26,7 @@
     <nav>
         <div class="flex">
             <div id="cart">
-                <a href="ErrorHandlerServlet"><i class="fas fa-shopping-cart"></i></a>
+                <a href="#"><i class="fas fa-shopping-cart"></i></a>
             </div>
             <div id="burger">
                 <span class="line"></span>
@@ -69,6 +69,7 @@
                     </div>
                 </div>
             </div>
+            <input type="hidden" name="action" value="register">
             <button type="submit" class="btn btn-submit">Invia</button>
             <div class="login-registration-form__btn" data-form="login">Hai già un account? Accedi.</div>
         </form>
@@ -88,6 +89,7 @@
                     </div>
                 </div>
             </div>
+            <input type="hidden" name="action" value="login">
             <button type="submit" class="btn btn-submit">Invia</button>
             <div class="login-registration-form__btn" data-form="registration">Non hai un account? Registrati.</div>
         </form>

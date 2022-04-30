@@ -1,12 +1,9 @@
 package Controller;
 
 import java.io.*;
-import java.util.Objects;
 
-import Model.Utente.Utente;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
-import netscape.javascript.JSObject;
 
 public class HomeServlet extends HttpServlet {
 
