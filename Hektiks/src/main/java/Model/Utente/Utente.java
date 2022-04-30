@@ -10,6 +10,8 @@ public class Utente implements Serializable {
     private static final long serialVersionUID = 6645001885280633923L;
 
     private String email;
+    private String nome;
+    private String cognome;
     private String username;
     private String password_utente;
     private Date data_registrazione;
@@ -25,6 +27,8 @@ public class Utente implements Serializable {
     public String toString() {
         return "Utente{" +
                 "email='" + email + '\'' +
+                ", nome='" + nome + '\'' +
+                ", cognome='" + cognome + '\'' +
                 ", username='" + username + '\'' +
                 ", password_utente='" + password_utente + '\'' +
                 ", data_registrazione=" + data_registrazione +
@@ -40,6 +44,22 @@ public class Utente implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCognome() {
+        return cognome;
+    }
+
+    public void setCognome(String cognome) {
+        this.cognome = cognome;
     }
 
     public String getUsername() {

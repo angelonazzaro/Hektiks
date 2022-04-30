@@ -100,6 +100,8 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
 
             String query = QueryBuilder.INSERT_INTO(UTENTI, new HashMap<>() {{
                 put("email", obj.getEmail());
+                put("nome", obj.getNome());
+                put("cognome", obj.getCognome());
                 put("username", obj.getUsername());
                 put("password", obj.getPassword_utente());
                 put("data_registrazione", obj.getData_registrazione());

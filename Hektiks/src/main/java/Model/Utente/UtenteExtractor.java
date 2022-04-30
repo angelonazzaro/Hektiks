@@ -16,6 +16,8 @@ public class UtenteExtractor implements ResultSetExtractor<Utente> {
         Utente ute = new Utente();
 
         ute.setEmail(resultSet.getString(UTENTI + ".email"));
+        ute.setNome(resultSet.getString(UTENTI + ".nome"));
+        ute.setCognome(resultSet.getString(UTENTI + ".cognome"));
         ute.setPassword_utente(resultSet.getString(UTENTI + ".username"));
         ute.setPassword_utente(resultSet.getString(UTENTI + ".password"));
         ute.setData_registrazione(resultSet.getDate(UTENTI + ".data_registrazione"));
