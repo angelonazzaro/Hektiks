@@ -13,18 +13,18 @@ public class UtenteExtractor implements ResultSetExtractor<Utente> {
     @Override
     public Utente extract(ResultSet resultSet) throws SQLException {
 
-        Utente ute = new Utente();
+        Utente utente = new Utente();
 
-        ute.setEmail(resultSet.getString(UTENTI + ".email"));
-        ute.setNome(resultSet.getString(UTENTI + ".nome"));
-        ute.setCognome(resultSet.getString(UTENTI + ".cognome"));
-        ute.setPassword_utente(resultSet.getString(UTENTI + ".username"));
-        ute.setPassword_utente(resultSet.getString(UTENTI + ".password"));
-        ute.setData_registrazione(resultSet.getDate(UTENTI + ".data_registrazione"));
-        ute.setRuolo(resultSet.getBoolean(UTENTI + ".ruolo"));
-        ute.setSaldo(resultSet.getDouble(UTENTI + ".saldo"));
-        ute.setBiografia(resultSet.getString(UTENTI + ".biografia"));
+        utente.setEmail(resultSet.getString(UTENTI + ".email"));
+        utente.setNome(resultSet.getString(UTENTI + ".nome"));
+        utente.setCognome(resultSet.getString(UTENTI + ".cognome"));
+        utente.setPassword_utente(resultSet.getString(UTENTI + ".username"));
+        utente.setPassword_utente(resultSet.getString(UTENTI + ".password"));
+        utente.setData_registrazione(resultSet.getDate(UTENTI + ".data_registrazione"));
+        utente.setRuolo(resultSet.getBoolean(UTENTI + ".ruolo"));
+        utente.setSaldo(resultSet.getDouble(UTENTI + ".saldo"));
+        utente.setBiografia(resultSet.getString(UTENTI + ".biografia"));
 
-        return ute;
+        return utente;
     }
 }

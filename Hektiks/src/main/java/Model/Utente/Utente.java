@@ -2,7 +2,7 @@ package Model.Utente;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 public class Utente implements Serializable {
 

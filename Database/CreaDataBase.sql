@@ -100,8 +100,8 @@ CREATE TABLE GiftCards (
 	codice_giftCard CHAR(6) PRIMARY KEY,
 	email_utente VARCHAR(320), 
     importo DECIMAL (10, 2) NOT NULL CHECK (importo  > 0), 
-    data_creazione DATETIME NOT NULL,
-	data_utilizzo DATETIME,
+    data_ora_creazione DATETIME NOT NULL,
+	data_ora_utilizzo DATETIME,
     
     FOREIGN KEY (email_utente) REFERENCES Utenti (email) ON UPDATE CASCADE ON DELETE NO ACTION
 );

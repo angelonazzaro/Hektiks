@@ -12,12 +12,12 @@ public class ProdottoExtractor implements ResultSetExtractor<Prodotto> {
     @Override
     public Prodotto extract(ResultSet resultSet) throws SQLException {
 
-        Prodotto pro = new Prodotto();
+        Prodotto prodotto = new Prodotto();
 
-        pro.setEmail_utente(resultSet.getString(PRODOTTI + ".email_utente"));
-        pro.setCodice_gioco(resultSet.getString(PRODOTTI + ".codice_gioco"));
-        pro.setQuantita_disponibile(resultSet.getInt(PRODOTTI + ".quantita_disponibile"));
+        prodotto.setEmail_utente(resultSet.getString(PRODOTTI + ".email_utente"));
+        prodotto.setCodice_gioco(resultSet.getString(PRODOTTI + ".codice_gioco"));
+        prodotto.setQuantita_disponibile(resultSet.getInt(PRODOTTI + ".quantita_disponibile"));
 
-        return pro;
+        return prodotto;
     }
 }

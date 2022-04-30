@@ -12,11 +12,11 @@ public class Gioco_GenereExtractor implements ResultSetExtractor<Gioco_Genere> {
     @Override
     public Gioco_Genere extract(ResultSet resultSet) throws SQLException {
 
-        Gioco_Genere gio_ge = new Gioco_Genere();
+        Gioco_Genere gioco_genere = new Gioco_Genere();
 
-        gio_ge.setCodice_gioco(resultSet.getString(GIOCHI_GENERE + ".codice_gioco"));
-        gio_ge.setNome_genere(resultSet.getString(GIOCHI_GENERE + ".nome_genere"));
+        gioco_genere.setCodice_gioco(resultSet.getString(GIOCHI_GENERE + ".codice_gioco"));
+        gioco_genere.setNome_genere(resultSet.getString(GIOCHI_GENERE + ".nome_genere"));
 
-        return gio_ge;
+        return gioco_genere;
     }
 }

@@ -12,12 +12,12 @@ public class CarrelloExtractor implements ResultSetExtractor<Carrello> {
     @Override
     public Carrello extract(ResultSet resultSet) throws SQLException {
 
-        Carrello car = new Carrello();
+        Carrello carrello = new Carrello();
 
-        car.setEmail_utente(resultSet.getString(CARRELLI + ".email_utente"));
-        car.setData_creazione(resultSet.getDate(CARRELLI + ".data_creazione"));
-        car.setData_modifica(resultSet.getDate(CARRELLI + ".data_modifica"));
+        carrello.setEmail_utente(resultSet.getString(CARRELLI + ".email_utente"));
+        carrello.setData_creazione(resultSet.getDate(CARRELLI + ".data_creazione"));
+        carrello.setData_modifica(resultSet.getDate(CARRELLI + ".data_modifica"));
 
-        return car;
+        return carrello;
     }
 }

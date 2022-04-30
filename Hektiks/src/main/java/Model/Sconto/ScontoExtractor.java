@@ -11,14 +11,14 @@ public class ScontoExtractor implements ResultSetExtractor<Sconto> {
     @Override
     public Sconto extract(ResultSet resultSet) throws SQLException {
 
-        Sconto sco = new Sconto();
+        Sconto sconto = new Sconto();
 
-        sco.setCodice_gioco(resultSet.getString(SCONTI + ".codice_gioco"));
-        sco.setCodice_sconto(resultSet.getString(SCONTI + ".codice_sconto"));
-        sco.setData_creazione(resultSet.getDate(SCONTI + ".data_creazione"));
-        sco.setPrecentuale(resultSet.getByte(SCONTI + ".precentuale"));
-        sco.setData_fine(resultSet.getDate(SCONTI + ".data_fine"));
+        sconto.setCodice_gioco(resultSet.getString(SCONTI + ".codice_gioco"));
+        sconto.setCodice_sconto(resultSet.getString(SCONTI + ".codice_sconto"));
+        sconto.setData_creazione(resultSet.getDate(SCONTI + ".data_creazione"));
+        sconto.setPrecentuale(resultSet.getByte(SCONTI + ".precentuale"));
+        sconto.setData_fine(resultSet.getDate(SCONTI + ".data_fine"));
 
-        return sco;
+        return sconto;
     }
 }

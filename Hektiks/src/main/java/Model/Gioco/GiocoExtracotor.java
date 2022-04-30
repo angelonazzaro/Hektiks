@@ -12,18 +12,18 @@ public class GiocoExtracotor implements ResultSetExtractor<Gioco> {
     @Override
     public Gioco extract(ResultSet resultSet) throws SQLException {
 
-        Gioco gio = new Gioco();
+        Gioco gioco = new Gioco();
 
-        gio.setCodice_gioco(resultSet.getString(GIOCHI + ".codice_gioco"));
-        gio.setTitolo(resultSet.getString(GIOCHI + ".titolo"));
-        gio.setDescrizione(resultSet.getString(GIOCHI + ".descrizione"));
-        gio.setTrailer(resultSet.getString(GIOCHI + ".trailer"));
-        gio.setData_uscita(resultSet.getDate(GIOCHI + ".data_uscita"));
-        gio.setCopertina(resultSet.getString(GIOCHI + ".copertina"));
-        gio.setPrezzo(resultSet.getDouble(GIOCHI + ".prezzo"));
-        gio.setQuantita_disponibile(resultSet.getInt(GIOCHI + ".quantita_disponibile"));
-        gio.setNumero_vendite(resultSet.getInt(GIOCHI + ".numero_vendite"));
+        gioco.setCodice_gioco(resultSet.getString(GIOCHI + ".codice_gioco"));
+        gioco.setTitolo(resultSet.getString(GIOCHI + ".titolo"));
+        gioco.setDescrizione(resultSet.getString(GIOCHI + ".descrizione"));
+        gioco.setTrailer(resultSet.getString(GIOCHI + ".trailer"));
+        gioco.setData_uscita(resultSet.getDate(GIOCHI + ".data_uscita"));
+        gioco.setCopertina(resultSet.getString(GIOCHI + ".copertina"));
+        gioco.setPrezzo(resultSet.getDouble(GIOCHI + ".prezzo"));
+        gioco.setQuantita_disponibile(resultSet.getInt(GIOCHI + ".quantita_disponibile"));
+        gioco.setNumero_vendite(resultSet.getInt(GIOCHI + ".numero_vendite"));
 
-        return gio;
+        return gioco;
     }
 }
