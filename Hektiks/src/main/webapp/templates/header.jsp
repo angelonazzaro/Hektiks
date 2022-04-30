@@ -26,7 +26,7 @@
     <nav>
         <div class="flex">
             <div id="cart">
-                <a href="#"><i class="fas fa-shopping-cart"></i></a>
+                <a href="ErrorHandlerServlet"><i class="fas fa-shopping-cart"></i></a>
             </div>
             <div id="burger">
                 <span class="line"></span>
@@ -40,7 +40,7 @@
 <% if (user == null) { %>
 <section id="login-registration">
     <div id="login-registration__form-container">
-        <form action="#" method="POST" id="registration-form" class="login-registration-form show">
+        <form action="" method="POST" id="registration-form" class="login-registration-form show">
             <h2 class="hs-1">Registrazione</h2>
             <div class="row">
                 <div class="form-group">
@@ -73,7 +73,7 @@
             <div class="login-registration-form__btn" data-form="login">Hai già un account? Accedi.</div>
         </form>
 
-        <form action="#" method="POST" id="login-form" class="login-registration-form hide">
+        <form action="" method="POST" id="login-form" class="login-registration-form hide">
             <h2 class="hs-1">Log in</h2>
             <div class="row">
                 <div class="form-group">

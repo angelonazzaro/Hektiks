@@ -12,6 +12,49 @@
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>ErrorHandlerServlet</servlet-name>
+        <servlet-class>Controller.ErrorHandlerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ErrorHandlerServlet</servlet-name>
+        <url-pattern>/ErrorHandlerServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- Errori -->
+   <error-page>
+       <exception-type>java.lang.Exception</exception-type>
+       <location>/ErrorHandlerServlet</location>
+   </error-page>
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/ErrorHandlerServlet</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.RuntimeException</exception-type>
+        <location>/ErrorHandlerServlet</location>
+    </error-page>
+    <error-page>
+        <error-code>401</error-code>
+        <location>/ErrorHandlerServlet</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/ErrorHandlerServlet</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/ErrorHandlerServlet</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/ErrorHandlerServlet</location>
+    </error-page>
+    <error-page>
+        <error-code>501</error-code>
+        <location>/ErrorHandlerServlet</location>
+    </error-page>
+
 
     <!-- File statici: css, js, immagini -->
     <servlet-mapping>
