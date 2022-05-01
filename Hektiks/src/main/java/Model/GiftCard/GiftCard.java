@@ -15,10 +15,6 @@ public class GiftCard implements Serializable  {
     private Timestamp data_ora_creazione;
     private Timestamp data_ora_utilizzo;
 
-    public GiftCard() {
-
-    }
-
     @Override
     public String toString() {
         return "GiftCard{" +

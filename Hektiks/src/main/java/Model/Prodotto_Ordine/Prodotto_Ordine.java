@@ -15,10 +15,6 @@ public class Prodotto_Ordine implements Serializable  {
     private Timestamp data_ora_creazione;
     private int quantita;
 
-    public Prodotto_Ordine() {
-
-    }
-
     @Override
     public String toString() {
         return "Prodotto_Ordine{" +

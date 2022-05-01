@@ -1,20 +1,20 @@
 USE Hektiks;
 
 INSERT INTO Utenti VALUES 
-("francescog@gmail.com", "Francesco", "Granozio", "Explosion", "francescobello", "2022-04-26", TRUE, 420.69, "bla... bla... bla..."),
-("angelon@gmail.com", "Angelo", "Nazzaro",  "NGLX", "bald", "2022-04-26", TRUE, 69.42, "bla... bla... bla..."),
-("somaxd@gmail.com", "Carmine", "Nardo", "somarello", "wZ?Yg<7f;5B3>Ff{", CURDATE(), FALSE, 0, "bla... bla... bla..."),
-("boxxerello@gmail.com", "Francesco", "Bosso", "Boxxo", "~r~c*<\D8q$K5FWu", CURDATE(), FALSE, 92.40, "bla... bla... bla..."),
-("mickymouse@gmail.com", "Giuseppe", "La Voglia", "pippo", "zZpippZz", CURDATE(), FALSE, 7.90, "bla... bla... bla..."),
-("giampix@gmail.com", "Giampaolo", "Joestar", "giampix", "password123", CURDATE(), FALSE, 0.90, "bla... bla... bla..."),
-("andreachad@outlook.it", "Andrea Chad", "Vitolo", "Zindre", "ML8uD+A)'d(y9]*", "2022-04-30", FALSE, 90, "bla... bla... bla..."),
-("pepperimborsototale@hotmail.it", "Giuseppe", "D'ambrosio", "Peppe", "T?vb'[E=5/GYk)n(", "2022-05-04", FALSE, 18, "bla... bla... bla..."),
-("hicigog536@topyte.com", "Ichigo", "Kurosaki", "Hici", "ML8uD+A)'d(y9]*", "2022-05-05", FALSE, 90, "bla... bla... bla..."),
-("trttjrbxcmq@candassociates.com", "Trixy", "Pan", "Trttj", ":_~&/3#ZC[{vRgVL", "2022-05-13", FALSE, 90, "bla... bla... bla..."),
-("a67b166dc6@catdogmail.live", "Quentin", "Tarantino", "Lay", "`eG7j;CA2c}!pHd/", "2022-05-30", FALSE, 90, "bla... bla... bla..."),
-("petakim355@funboxcn.com", "Gerardo", "Della Sala", "PetaKim", "eQAb\r}by85;3TfP", "2022-06-01", FALSE, 90, "bla... bla... bla..."),
-("041fcf40b2@catdogmail.live", "John", "Travolta", "____DKHJFDOI____", "ev5qL.v+k9dCwp[", "2022-09-12", FALSE, 90, "bla... bla... bla..."),
-("7e097189dc@catdogmail.live", "Marco", "Antonio", "__BOT__", "QY~9G/XLRp{~Y6B{", CURDATE(), FALSE, 90, "bla... bla... bla...");
+("francescog@gmail.com", "Francesco", "Granozio", "Explosion", MD5("francescobello"), "2022-04-26", TRUE, 420.69, "bla... bla... bla..."),
+("angelon@gmail.com", "Angelo", "Nazzaro",  "NGLX", MD5("bald"), "2022-04-26", TRUE, 69.42, "bla... bla... bla..."),
+("somaxd@gmail.com", "Carmine", "Nardo", "somarello", MD5("wZ?Yg<7f;5B3>Ff{"), CURDATE(), FALSE, 0, "bla... bla... bla..."),
+("boxxerello@gmail.com", "Francesco", "Bosso", "Boxxo", MD5("~r~c*<\D8q$K5FWu"), CURDATE(), FALSE, 92.40, "bla... bla... bla..."),
+("mickymouse@gmail.com", "Giuseppe", "La Voglia", "pippo", MD5("zZpippZz"), CURDATE(), FALSE, 7.90, "bla... bla... bla..."),
+("giampix@gmail.com", "Giampaolo", "Joestar", "giampix", MD5("password123"), CURDATE(), FALSE, 0.90, "bla... bla... bla..."),
+("andreachad@outlook.it", "Andrea Chad", "Vitolo", "Zindre", MD5("ML8uD+A)'d(y9]*"), "2022-04-30", FALSE, 90, "bla... bla... bla..."),
+("pepperimborsototale@hotmail.it", "Giuseppe", "D'ambrosio", "Peppe", MD5("T?vb'[E=5/GYk)n("), "2022-05-04", FALSE, 18, "bla... bla... bla..."),
+("hicigog536@topyte.com", "Ichigo", "Kurosaki", "Hici", MD5("ML8uD+A)'d(y9]*"), "2022-05-05", FALSE, 90, "bla... bla... bla..."),
+("trttjrbxcmq@candassociates.com", "Trixy", "Pan", "Trttj", MD5(":_~&/3#ZC[{vRgVL"), "2022-05-13", FALSE, 90, "bla... bla... bla..."),
+("a67b166dc6@catdogmail.live", "Quentin", "Tarantino", "Lay", MD5("`eG7j;CA2c}!pHd/"), "2022-05-30", FALSE, 90, "bla... bla... bla..."),
+("petakim355@funboxcn.com", "Gerardo", "Della Sala", "PetaKim", MD5("eQAb\r}by85;3TfP"), "2022-06-01", FALSE, 90, "bla... bla... bla..."),
+("041fcf40b2@catdogmail.live", "John", "Travolta", "____DKHJFDOI____", MD5("ev5qL.v+k9dCwp["), "2022-09-12", FALSE, 90, "bla... bla... bla..."),
+("7e097189dc@catdogmail.live", "Marco", "Antonio", "__BOT__", MD5("QY~9G/XLRp{~Y6B{"), CURDATE(), FALSE, 90, "bla... bla... bla...");
 
 INSERT INTO Generi VALUES
 ("Arcade"),

@@ -15,10 +15,6 @@ public class Sconto implements Serializable  {
     private byte precentuale;
     private Date data_fine;
 
-    public Sconto() {
-
-    }
-
     @Override
     public String toString() {
         return "Sconto{" +

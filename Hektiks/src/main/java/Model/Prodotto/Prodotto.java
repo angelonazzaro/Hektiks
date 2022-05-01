@@ -12,10 +12,6 @@ public class Prodotto implements Serializable  {
     private String codice_gioco;
     private int quantita_disponibile;
 
-    public Prodotto() {
-
-    }
-
     @Override
     public String toString() {
         return "Prodotto{" +

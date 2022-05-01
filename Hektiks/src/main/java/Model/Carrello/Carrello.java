@@ -13,10 +13,6 @@ public class Carrello implements Serializable {
     private Date data_creazione;
     private Date data_modifica;
 
-    public Carrello(){
-
-    }
-
     @Override
     public String toString() {
         return "Carrello{" +

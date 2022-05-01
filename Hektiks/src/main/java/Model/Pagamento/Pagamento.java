@@ -14,10 +14,6 @@ public class Pagamento implements Serializable {
     private Timestamp data_ora_pagamento;
     private double importo;
 
-    public Pagamento() {
-
-    }
-
     @Override
     public String toString() {
         return "Pagamento{" +

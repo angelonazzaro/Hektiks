@@ -70,7 +70,7 @@
                 </div>
             </div>
             <input type="hidden" name="action" value="register">
-            <button type="submit" class="btn btn-submit">Invia</button>
+            <button type="submit" class="btn btn-submit flex align-center justify-center"><span>Invia</span></button>
             <div class="login-registration-form__btn" data-form="login">Hai già un account? Accedi.</div>
         </form>
 
@@ -90,8 +90,8 @@
                 </div>
             </div>
             <input type="hidden" name="action" value="login">
-            <button type="submit" class="btn btn-submit">Invia</button>
-            <div class="login-registration-form__btn" data-form="registration">Non hai un account? Registrati.</div>
+            <button type="submit" class="btn btn-submit flex align-center justify-center"><span>Invia</span></button>
+            <div class="login-registration-form__btn" data-form="registration">spanNon hai un account? Registrati.</div>
         </form>
     </div>
     <div id="login-registration__wallpaper"></div>

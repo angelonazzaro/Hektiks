@@ -19,7 +19,7 @@ public class UtenteExtractor implements ResultSetExtractor<Utente> {
         utente.setNome(resultSet.getString(UTENTI + ".nome"));
         utente.setCognome(resultSet.getString(UTENTI + ".cognome"));
         utente.setPassword_utente(resultSet.getString(UTENTI + ".username"));
-        utente.setPassword_utente(resultSet.getString(UTENTI + ".password"));
+        utente.setPassword_utente(resultSet.getString(UTENTI + ".password_utente"));
         utente.setData_registrazione(resultSet.getDate(UTENTI + ".data_registrazione"));
         utente.setRuolo(resultSet.getBoolean(UTENTI + ".ruolo"));
         utente.setSaldo(resultSet.getDouble(UTENTI + ".saldo"));

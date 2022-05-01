@@ -53,30 +53,58 @@ if (go_to_login && go_to_reg) {
     const confirm_password = reg_form.querySelector("input[name=cnf-pwd]");
 
     function matchPassword(pwd, cnf) {
+        let match = false;
         if (pwd.value !== cnf.value) cnf.setCustomValidity("Le due password non corrispondono");
-        else cnf.setCustomValidity("");
+        else {
+            cnf.setCustomValidity("");
+            match = true;
+        }
 
         cnf.reportValidity();
+        return match;
+    }
+
+    function addLoader(form) {
+        const submitBtn = form.querySelector("button[type='submit']");
+        submitBtn.style.pointerEvents = "none";
+        const span = submitBtn.querySelector("span");
+        span.textContent = "";
+        span.classList.add("loader");
+    }
+
+    function removeLoader(form, text = "Invia") {
+        const submitBtn = form.querySelector("button[type='submit']");
+        const span = submitBtn.querySelector("span");
+        span.classList.remove("loader");
+        span.textContent = text;
+        submitBtn.style.pointerEvents = "all";
     }
 
     confirm_password.addEventListener("input", () => matchPassword(reg_password, confirm_password));
 
     reg_form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        matchPassword(reg_password, confirm_password);
+            e.preventDefault();
+            if (!matchPassword(reg_password, confirm_password)) return;
 
-        const fd = new FormData(reg_form);
-        const data = {};
+            addLoader(reg_form);
 
-        for (const pair of fd.entries())
-            data[pair[0]] = pair[1];
+            const fd = new FormData(reg_form);
+            const data = {};
 
-        $.ajax({
-            type: "POST",
-            data: data,
-            url: this.getAttribute("action")
-        }).done((response) => {
-            console.log(response);
-        })
-    })
+            for (const pair of fd.entries())
+                data[pair[0]] = pair[1];
+
+
+            $.ajax({
+                type: "POST",
+                data: data,
+                url: this.getAttribute("action")
+            }).done((response) => {
+                console.log(response);
+            }).always(() => {
+                removeLoader(reg_form);
+            })
+
+        }
+    )
 }

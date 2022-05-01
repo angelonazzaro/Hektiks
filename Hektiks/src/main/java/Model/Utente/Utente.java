@@ -2,6 +2,10 @@ package Model.Utente;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 
 public class Utente implements Serializable {
@@ -15,13 +19,9 @@ public class Utente implements Serializable {
     private String username;
     private String password_utente;
     private Date data_registrazione;
-    private boolean ruolo;
-    private double saldo;
-    private String biografia;
-
-    public Utente() {
-
-    }
+    private boolean ruolo = false;
+    private double saldo = 0;
+    private String biografia = "";
 
     @Override
     public String toString() {
@@ -75,7 +75,16 @@ public class Utente implements Serializable {
     }
 
     public void setPassword_utente(String password_utente) {
-        this.password_utente = password_utente;
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-1");
+            digest.reset();
+            digest.update(password_utente.getBytes(StandardCharsets.UTF_8));
+            this.password_utente = password_utente;
+            this.password_utente = String.format("%040x", new
+                    BigInteger(1, digest.digest()));
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public Date getData_registrazione() {
