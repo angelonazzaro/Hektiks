@@ -15,7 +15,6 @@ import static Model.Storage.Entities.UTENTI;
 
 public class UtenteDAO extends SQLDAO implements DAO<Utente> {
 
-
     public UtenteDAO(DataSource source) {
         super(source);
     }
@@ -27,6 +26,7 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
         try (Connection conn = source.getConnection()) {
 
             String query = QueryBuilder.SELECT("*").FROM(UTENTI).WHERE(condition).toString();
+            System.out.println(query);
 
             try (PreparedStatement ps = conn.prepareStatement(query)) {
                 ResultSet set = ps.executeQuery();
@@ -46,28 +46,28 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
         return doRetrieveByCondition("TRUE");
     }
 
-    /*@Override
-    public <K> Optional<Utente> doRetrieveByKey(K key) throws SQLException {
-
-        Utente utente = null;
-        try (Connection conn = source.getConnection()) {
-
-            String query = QueryBuilder.SELECT("*").FROM(UTENTI).WHERE(UTENTI + ".email = ?").toString();
-
-            try (PreparedStatement ps = conn.prepareStatement(query)) {
-
-                ps.setString(1, (String) key);
-                ResultSet set = ps.executeQuery();
-
-                if (set.next()) {
-
-                    utente = new UtenteExtractor().extract(set);
-                }
-            }
-        }
-
-        return Optional.ofNullable(utente);
-    }*/
+//    @Override
+//    public <K> Optional<Utente> doRetrieveByKey(K key) throws SQLException {
+//
+//        Utente utente = null;
+//        try (Connection conn = source.getConnection()) {
+//
+//            String query = QueryBuilder.SELECT("*").FROM(UTENTI).WHERE(UTENTI + ".email = ?").toString();
+//
+//            try (PreparedStatement ps = conn.prepareStatement(query)) {
+//
+//                ps.setString(1, (String) key);
+//                ResultSet set = ps.executeQuery();
+//
+//                if (set.next()) {
+//
+//                    utente = new UtenteExtractor().extract(set);
+//                }
+//            }
+//        }
+//
+//        return Optional.ofNullable(utente);
+//    }
 
 
     @Override

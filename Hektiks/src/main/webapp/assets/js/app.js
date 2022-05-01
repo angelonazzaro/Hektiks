@@ -52,7 +52,23 @@ if (go_to_login && go_to_reg) {
     const reg_password = reg_form.querySelector("input[name=password]");
     const confirm_password = reg_form.querySelector("input[name=cnf-pwd]");
 
+    function passwordRegex(elem) {
+        if (elem.value.length === 0) return;
+
+        const pattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
+
+        if (!pattern.test(elem.value))
+            elem.setCustomValidity("La password deve essere lunga almeno 8 caratteri e massimo 16. " +
+                "\nDeve contenere almeno: \n- 1 numero\n- 1 lettera maiuscola\n- 1 lettera minuscola\n- 1 carattere speciale");
+        else
+            elem.setCustomValidity("");
+
+        elem.reportValidity();
+    }
+
     function matchPassword(pwd, cnf) {
+        if (pwd.value.length === 0) return;
+
         let match = false;
         if (pwd.value !== cnf.value) cnf.setCustomValidity("Le due password non corrispondono");
         else {
@@ -62,6 +78,21 @@ if (go_to_login && go_to_reg) {
 
         cnf.reportValidity();
         return match;
+    }
+
+    const passwordRegexDebounce = debounce((elem) => passwordRegex(elem));
+    const matchPasswordDebounce = debounce((pwd, cnf) => matchPassword(pwd, cnf));
+
+    // https://www.freecodecamp.org/news/javascript-debounce-example/
+    function debounce(cb, delay = 1000) {
+        let timeout;
+
+        return (...args) => {
+            clearTimeout(timeout)
+            timeout = setTimeout(() => {
+                cb(...args);
+            }, delay);
+        };
     }
 
     function addLoader(form) {
@@ -80,7 +111,15 @@ if (go_to_login && go_to_reg) {
         submitBtn.style.pointerEvents = "all";
     }
 
-    confirm_password.addEventListener("input", () => matchPassword(reg_password, confirm_password));
+    confirm_password.addEventListener("input", (e) => {
+        passwordRegexDebounce(e.target)
+        matchPasswordDebounce(reg_password, confirm_password);
+    });
+
+    reg_password.addEventListener("input", (e) => {
+        passwordRegexDebounce(e.target);
+        matchPasswordDebounce(reg_password, confirm_password);
+    });
 
     reg_form.addEventListener("submit", function (e) {
             e.preventDefault();
@@ -93,7 +132,6 @@ if (go_to_login && go_to_reg) {
 
             for (const pair of fd.entries())
                 data[pair[0]] = pair[1];
-
 
             $.ajax({
                 type: "POST",

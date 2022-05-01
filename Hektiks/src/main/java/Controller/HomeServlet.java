@@ -75,23 +75,35 @@ public class HomeServlet extends HttpServlet {
                     response.setContentType("application/json");
                     response.setCharacterEncoding("UTF-8");
 
-                   out.write(gsonObj.toJson(new JSONResponse<String>("danger", "Email già registrata")));
-                   out.flush();
-                   return;
+                    out.write(gsonObj.toJson(new JSONResponse<String>("danger", "Email già registrata")));
+                    out.flush();
+                    return;
                 }
 
                 String nome = (String) request.getParameter("nome"), cognome = (String) request.getParameter("cognome");
                 String username;
+
+                //se non è vuota allora lo username non è disponibile
                 int offset = 1;
+                username = nome.toLowerCase() + "" + cognome.toLowerCase();
+                utenti = utenteDAO.doRetrieveByCondition("username LIKE '" + username + "%'");
 
-                //se non è vuota allora lo username è disponibile
-                do {
+                System.out.println(utenti);
+                if (!utenti.isEmpty()) {
+                    String lastUsername = utenti.get(utenti.size() - 1).getUsername();
 
-                    username = nome.toLowerCase() + "" + cognome.toLowerCase() + offset;
-                    utenti = utenteDAO.doRetrieveByCondition("username LIKE '" + username + "%'");
+                    // In questa maniera so quante cifre ci sono nell'ultimo username disponibile e faccio il substring per
+                    // prendermi il numero
+                    int digits = 0;
+                    for (int i = 0; i < lastUsername.length(); i++)
+                        if (Character.isDigit(lastUsername.charAt(i))) digits++;
 
-                } while (!utenti.isEmpty());
+                    if (digits > 0) {
+                        offset = Integer.parseInt(lastUsername.substring(lastUsername.length() - digits)) + 1;
+                    }
 
+                    username = nome.toLowerCase() + "" + cognome.toLowerCase() + "" + offset;
+                }
 
                 Utente utente = new Utente();
                 utente.setEmail(email);
@@ -101,13 +113,10 @@ public class HomeServlet extends HttpServlet {
                 utente.setPassword_utente(password);
                 utente.setData_registrazione(new Date(System.currentTimeMillis()));
 
-                if (utenteDAO.doSave(utente)){
-
+                if (utenteDAO.doSave(utente))
                     out.write(gsonObj.toJson(new JSONResponse<String>("success", "Registrazione avvenuta con successo!")));
-                }
                 else
                     out.write(gsonObj.toJson(new JSONResponse<String>("danger", "Qualcosa è andato storto :(")));
-
 
                 out.flush();
 
