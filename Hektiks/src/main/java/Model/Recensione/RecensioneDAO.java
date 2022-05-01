@@ -25,10 +25,10 @@ public class RecensioneDAO extends SQLDAO implements DAO<Recensione> {
         return null;
     }
 
-    @Override
+    /*@Override
     public Optional<Recensione> doRetrieveByKey(Recensione obj) throws SQLException {
         return Optional.empty();
-    }
+    }*/
 
     @Override
     public boolean doSave(Recensione obj) throws SQLException {

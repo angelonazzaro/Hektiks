@@ -25,10 +25,10 @@ public class PagamentoDAO extends SQLDAO implements DAO<Pagamento> {
         return null;
     }
 
-    @Override
+    /*@Override
     public Optional<Pagamento> doRetrieveByKey(Pagamento obj) throws SQLException {
         return Optional.empty();
-    }
+    }*/
 
     @Override
     public boolean doSave(Pagamento obj) throws SQLException {

@@ -46,8 +46,8 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
         return doRetrieveByCondition("TRUE");
     }
 
-    @Override
-    public Optional<Utente> doRetrieveByKey(Utente key) throws SQLException {
+    /*@Override
+    public <K> Optional<Utente> doRetrieveByKey(K key) throws SQLException {
 
         Utente utente = null;
         try (Connection conn = source.getConnection()) {
@@ -56,7 +56,7 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
 
             try (PreparedStatement ps = conn.prepareStatement(query)) {
 
-                ps.setString(1, key.getEmail());
+                ps.setString(1, (String) key);
                 ResultSet set = ps.executeQuery();
 
                 if (set.next()) {
@@ -67,7 +67,7 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
         }
 
         return Optional.ofNullable(utente);
-    }
+    }*/
 
 
     @Override
@@ -129,6 +129,4 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
         }
         return rows > 0;
     }
-
-
 }

@@ -25,10 +25,10 @@ public class CarrelloDAO extends SQLDAO implements DAO<Carrello> {
         return null;
     }
 
-    @Override
+    /*@Override
     public Optional<Carrello> doRetrieveByKey(Carrello obj) throws SQLException {
         return Optional.empty();
-    }
+    }*/
 
     @Override
     public boolean doSave(Carrello obj) throws SQLException {

@@ -10,7 +10,7 @@ CREATE TABLE Utenti (
     nome VARCHAR(35) NOT NULL,
     cognome VARCHAR(35) NOT NULL,
     username VARCHAR(25) NOT NULL,
-    password_utente VARCHAR(32) NOT NULL,
+    password_utente VARCHAR(320) NOT NULL,
     data_registrazione DATE NOT NULL,
     ruolo BOOL NOT NULL DEFAULT FALSE, -- TRUE per Admin, FALSE per User
     saldo DECIMAL (10, 2) NOT NULL CHECK (saldo >= 0) DEFAULT 0, 

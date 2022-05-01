@@ -25,10 +25,10 @@ public class OrdineDAO extends SQLDAO implements DAO<Ordine> {
         return null;
     }
 
-    @Override
+    /*@Override
     public Optional<Ordine> doRetrieveByKey(Ordine obj) throws SQLException {
         return Optional.empty();
-    }
+    }*/
 
     @Override
     public boolean doSave(Ordine obj) throws SQLException {

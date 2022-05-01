@@ -25,10 +25,10 @@ public class GenereDAO extends SQLDAO implements DAO<GenereDAO> {
         return null;
     }
 
-    @Override
+    /*@Override
     public Optional<GenereDAO> doRetrieveByKey(GenereDAO obj) throws SQLException {
         return Optional.empty();
-    }
+    }*/
 
     @Override
     public boolean doSave(GenereDAO obj) throws SQLException {

@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 import Model.Utente.Utente;
 import Model.Utente.UtenteDAO;
@@ -67,6 +68,7 @@ public class HomeServlet extends HttpServlet {
             }
         } else {
             try {
+
                 List<Utente> utenti = utenteDAO.doRetrieveByCondition("email='" + email + "'");
 
                 if (!utenti.isEmpty()) {
@@ -79,25 +81,35 @@ public class HomeServlet extends HttpServlet {
                 }
 
                 String nome = (String) request.getParameter("nome"), cognome = (String) request.getParameter("cognome");
-                String username = nome.toLowerCase(Locale.ROOT) + "" + cognome.toLowerCase(Locale.ROOT);
+                String username;
+                int offset = 1;
 
-                utenti = utenteDAO.doRetrieveByCondition("username LIKE '" + username + "%'");
-                if (utenti.isEmpty()) {
-                    Utente utente = new Utente();
-                    utente.setEmail(email);
-                    utente.setUsername(username);
-                    utente.setNome(nome);
-                    utente.setCognome(cognome);
-                    utente.setPassword_utente(password);
-                    utente.setData_registrazione(new Date(System.currentTimeMillis()));
+                //se non è vuota allora lo username è disponibile
+                do {
 
-                    if (utenteDAO.doSave(utente))
-                        out.write(gsonObj.toJson(new JSONResponse<String>("success", "Registrazione avvenuta con successo!")));
-                    else
-                        out.write(gsonObj.toJson(new JSONResponse<String>("danger", "Qualcosa è andato storto :(")));
+                    username = nome.toLowerCase() + "" + cognome.toLowerCase() + offset;
+                    utenti = utenteDAO.doRetrieveByCondition("username LIKE '" + username + "%'");
 
-                    out.flush();
+                } while (!utenti.isEmpty());
+
+
+                Utente utente = new Utente();
+                utente.setEmail(email);
+                utente.setUsername(username);
+                utente.setNome(nome);
+                utente.setCognome(cognome);
+                utente.setPassword_utente(password);
+                utente.setData_registrazione(new Date(System.currentTimeMillis()));
+
+                if (utenteDAO.doSave(utente)){
+
+                    out.write(gsonObj.toJson(new JSONResponse<String>("success", "Registrazione avvenuta con successo!")));
                 }
+                else
+                    out.write(gsonObj.toJson(new JSONResponse<String>("danger", "Qualcosa è andato storto :(")));
+
+
+                out.flush();
 
             } catch (SQLException e) {
                 e.printStackTrace();

@@ -13,7 +13,7 @@ public interface DAO<T> {
 
     List<T> doRetrieveAll() throws SQLException;
 
-    Optional<T> doRetrieveByKey(T obj) throws SQLException;
+    //<K> Optional<T> doRetrieveByKey(K key) throws SQLException;
 
     boolean doSave(T obj) throws SQLException;
 

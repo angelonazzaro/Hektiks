@@ -25,10 +25,10 @@ public class ScontoDAO extends SQLDAO implements DAO<Sconto> {
         return null;
     }
 
-    @Override
+    /*@Override
     public Optional<Sconto> doRetrieveByKey(Sconto obj) throws SQLException {
         return Optional.empty();
-    }
+    }*/
 
     @Override
     public boolean doSave(Sconto obj) throws SQLException {

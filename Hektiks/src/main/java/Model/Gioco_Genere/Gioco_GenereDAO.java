@@ -25,10 +25,10 @@ public class Gioco_GenereDAO extends SQLDAO implements DAO<Gioco_Genere> {
         return null;
     }
 
-    @Override
+    /*@Override
     public Optional<Gioco_Genere> doRetrieveByKey(Gioco_Genere obj) throws SQLException {
         return Optional.empty();
-    }
+    }*/
 
     @Override
     public boolean doSave(Gioco_Genere obj) throws SQLException {

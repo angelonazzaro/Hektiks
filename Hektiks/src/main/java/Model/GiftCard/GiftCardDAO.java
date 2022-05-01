@@ -25,10 +25,10 @@ public class GiftCardDAO extends SQLDAO implements DAO<GiftCard> {
         return null;
     }
 
-    @Override
+    /*@Override
     public Optional<GiftCard> doRetrieveByKey(GiftCard obj) throws SQLException {
         return Optional.empty();
-    }
+    }*/
 
     @Override
     public boolean doSave(GiftCard obj) throws SQLException {

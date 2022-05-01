@@ -25,10 +25,10 @@ public class ProdottoDAO extends SQLDAO implements DAO<Prodotto> {
         return null;
     }
 
-    @Override
+    /*@Override
     public Optional<Prodotto> doRetrieveByKey(Prodotto obj) throws SQLException {
         return Optional.empty();
-    }
+    }*/
 
     @Override
     public boolean doSave(Prodotto obj) throws SQLException {
