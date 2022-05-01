@@ -1,3 +1,35 @@
+const notifier = new AWN({position: "top-right"});
+
+// https://www.freecodecamp.org/news/javascript-debounce-example/
+function debounce(cb, delay = 1000) {
+    let timeout;
+
+    return (...args) => {
+        clearTimeout(timeout)
+        timeout = setTimeout(() => {
+            cb(...args);
+        }, delay);
+    };
+}
+
+function addLoader(form) {
+    const submitBtn = form.querySelector("button[type='submit']");
+    // disattivo gli eventi del puntatore sul bottone così che l'utente non possa inviare
+    // più di una richiesta di registrazione per volta
+    submitBtn.style.pointerEvents = "none";
+    const span = submitBtn.querySelector("span");
+    span.textContent = "";
+    span.classList.add("loader");
+}
+
+function removeLoader(form, text = "Invia") {
+    const submitBtn = form.querySelector("button[type='submit']");
+    const span = submitBtn.querySelector("span");
+    span.classList.remove("loader");
+    span.textContent = text;
+    submitBtn.style.pointerEvents = "all";
+}
+
 const burger = document.getElementById("burger");
 const login_reg_section = document.getElementById("login-registration");
 
@@ -25,6 +57,7 @@ eye_icons.forEach(eye => {
     })
 })
 
+// -- REGISTRAZIONE E LOGIN INIZIO --
 const go_to_login = document.querySelector(".login-registration-form__btn[data-form=login]");
 const go_to_reg = document.querySelector(".login-registration-form__btn[data-form=registration]");
 
@@ -49,6 +82,7 @@ if (go_to_login && go_to_reg) {
         reg_form.classList.add("show");
     });
 
+    // -- REGISTRAZIONE INIZIO --
     const reg_password = reg_form.querySelector("input[name=password]");
     const confirm_password = reg_form.querySelector("input[name=cnf-pwd]");
 
@@ -83,34 +117,6 @@ if (go_to_login && go_to_reg) {
     const passwordRegexDebounce = debounce((elem) => passwordRegex(elem));
     const matchPasswordDebounce = debounce((pwd, cnf) => matchPassword(pwd, cnf));
 
-    // https://www.freecodecamp.org/news/javascript-debounce-example/
-    function debounce(cb, delay = 1000) {
-        let timeout;
-
-        return (...args) => {
-            clearTimeout(timeout)
-            timeout = setTimeout(() => {
-                cb(...args);
-            }, delay);
-        };
-    }
-
-    function addLoader(form) {
-        const submitBtn = form.querySelector("button[type='submit']");
-        submitBtn.style.pointerEvents = "none";
-        const span = submitBtn.querySelector("span");
-        span.textContent = "";
-        span.classList.add("loader");
-    }
-
-    function removeLoader(form, text = "Invia") {
-        const submitBtn = form.querySelector("button[type='submit']");
-        const span = submitBtn.querySelector("span");
-        span.classList.remove("loader");
-        span.textContent = text;
-        submitBtn.style.pointerEvents = "all";
-    }
-
     confirm_password.addEventListener("input", (e) => {
         passwordRegexDebounce(e.target)
         matchPasswordDebounce(reg_password, confirm_password);
@@ -122,27 +128,65 @@ if (go_to_login && go_to_reg) {
     });
 
     reg_form.addEventListener("submit", function (e) {
-            e.preventDefault();
-            if (!matchPassword(reg_password, confirm_password)) return;
+        e.preventDefault();
+        if (!matchPassword(reg_password, confirm_password)) return;
 
-            addLoader(reg_form);
+        addLoader(this);
 
-            const fd = new FormData(reg_form);
-            const data = {};
+        const fd = new FormData(this);
+        const data = {};
 
-            for (const pair of fd.entries())
-                data[pair[0]] = pair[1];
+        for (const pair of fd.entries())
+            data[pair[0]] = pair[1];
 
-            $.ajax({
-                type: "POST",
-                data: data,
-                url: this.getAttribute("action")
-            }).done((response) => {
-                console.log(response);
-            }).always(() => {
-                removeLoader(reg_form);
-            })
+        $.ajax({
+            type: "POST",
+            data: data,
+            url: this.getAttribute("action")
+        }).done((response) => {
+            response = JSON.parse(response);
 
-        }
-    )
+            if (response.type === "success") {
+                const formInputs = this.querySelectorAll("input");
+                // Pulisco i campi del form di registrazione in caso di successo
+                formInputs.forEach(input => input.value = "");
+
+                notifier.success(response.message);
+            } else
+                notifier.alert(response.message);
+
+        }).always(() => {
+            removeLoader(this);
+        })
+    })
+    // -- REGISTRAZIONE FINE --
+
+    // -- LOGIN INIZIO --
+    login_form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        addLoader(this);
+
+        const fd = new FormData(this);
+        const data = {};
+
+        for (const pair of fd.entries())
+            data[pair[0]] = pair[1];
+
+        $.ajax({
+            type: "POST",
+            data: data,
+            url: this.getAttribute("action")
+        }).done((response) => {
+            if (response.type === "success") {
+                window.location.reload();
+            } else
+                notifier.alert(response.message);
+        }).always(() => {
+            removeLoader(this);
+        })
+
+    })
+    // -- LOGIN FINE --
 }
+// --- Registrazione e login FINE ---

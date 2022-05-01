@@ -4,8 +4,6 @@ import java.io.*;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
 
 import Model.Utente.Utente;
 import Model.Utente.UtenteDAO;
@@ -46,21 +44,20 @@ public class HomeServlet extends HttpServlet {
 
         if (action.equals("login")) {
             try {
-                List<Utente> utenti = utenteDAO.doRetrieveByCondition("email='" + email + "' AND password=SHA1('" + password + "')");
+                List<Utente> utenti = utenteDAO.doRetrieveByCondition("email='" + email + "' AND password_utente=SHA1('" + password + "')");
 
                 if (utenti.isEmpty()) {
                     response.setContentType("application/json");
                     response.setCharacterEncoding("UTF-8");
 
                     out.write(gsonObj.toJson(new JSONResponse<String>("danger", "Credenziali errate")));
-                    out.flush();
-                    return;
+                } else {
+                    session = request.getSession();
+                    session.setAttribute("user", utenti.get(0));
+
+                    out.write(gsonObj.toJson(new JSONResponse<String>("success")));
                 }
 
-                session = request.getSession();
-                session.setAttribute("user", utenti.get(0));
-
-                out.write(gsonObj.toJson(new JSONResponse<String>("success")));
                 out.flush();
 
             } catch (SQLException e) {

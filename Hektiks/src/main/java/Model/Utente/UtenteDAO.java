@@ -26,7 +26,6 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
         try (Connection conn = source.getConnection()) {
 
             String query = QueryBuilder.SELECT("*").FROM(UTENTI).WHERE(condition).toString();
-            System.out.println(query);
 
             try (PreparedStatement ps = conn.prepareStatement(query)) {
                 ResultSet set = ps.executeQuery();

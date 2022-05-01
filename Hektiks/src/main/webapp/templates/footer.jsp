@@ -13,6 +13,7 @@
     </div>
 </footer>
 <script src="<%= request.getContextPath() %>/assets/libs/jquery/jquery.min.js"></script>
+<script src="<%= request.getContextPath() %>/assets/libs/awesomeNotifications/index.var.js"></script>
 <script src="https://kit.fontawesome.com/bedafbbe2b.js"></script>
 <script src="<%= request.getContextPath() %>/assets/js/app.js"></script>
 <!-- footer end -->

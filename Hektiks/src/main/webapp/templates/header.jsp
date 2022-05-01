@@ -16,6 +16,7 @@
 
     <link rel="icon" href="<%= request.getContextPath() %>/assets/images/icons/gamepad-solid.svg"/>
     <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/css/style.css"/>
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/libs/awesomeNotifications/style.css"/>
 
     <title><%= request.getAttribute("title") %>
     </title>
