@@ -15,10 +15,6 @@ public class Recensione implements Serializable {
     private byte percentuale;
     private String descrizione;
 
-    public Recensione() {
-
-    }
-
     @Override
     public String toString() {
         return "Recensione{" +

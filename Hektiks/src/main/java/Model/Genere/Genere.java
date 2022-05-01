@@ -10,10 +10,6 @@ public class Genere implements Serializable {
 
     private String nome_genere;
 
-    public Genere() {
-
-    }
-
     @Override
     public String toString() {
         return "Generi{" +

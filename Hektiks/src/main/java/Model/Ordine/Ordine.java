@@ -14,10 +14,6 @@ public class Ordine implements Serializable {
     private Timestamp data_ora_ordinazione;
     private double prezzo_totale;
 
-    public Ordine() {
-
-    }
-
     @Override
     public String toString() {
         return "Ordine{" +

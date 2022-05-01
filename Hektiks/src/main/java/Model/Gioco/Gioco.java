@@ -19,10 +19,6 @@ public class Gioco implements Serializable {
     private int quantita_disponibile;
     private int numero_vendite;
 
-    public Gioco(){
-
-    }
-
     @Override
     public String toString() {
         return "Gioco{" +

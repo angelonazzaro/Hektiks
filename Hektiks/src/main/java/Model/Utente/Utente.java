@@ -19,10 +19,6 @@ public class Utente implements Serializable {
     private double saldo;
     private String biografia;
 
-    public Utente() {
-
-    }
-
     @Override
     public String toString() {
         return "Utente{" +

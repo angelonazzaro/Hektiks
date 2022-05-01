@@ -11,11 +11,6 @@ public class Gioco_Genere implements Serializable {
     private String codice_gioco;
     private String nome_genere;
 
-    public Gioco_Genere() {
-
-    }
-
-
     @Override
     public String toString() {
         return "Gioco_Genere{" +
