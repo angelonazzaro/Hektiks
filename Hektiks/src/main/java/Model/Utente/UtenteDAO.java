@@ -40,28 +40,6 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
         return utenti;
     }
 
-//    @Override
-//    public List<Utente> doRetrieveAll(int start, int end) throws SQLException {
-//
-//        final List<Utente> utenti = new ArrayList<>();
-//
-//        try (Connection conn = source.getConnection()) {
-//
-//            String query = QueryBuilder.SELECT("*").FROM(UTENTI).LIMIT(start, end).toString();
-//
-//            try (PreparedStatement ps = conn.prepareStatement(query)) {
-//                ResultSet set = ps.executeQuery();
-//                UtenteExtractor utenteExtractor = new UtenteExtractor();
-//
-//                while (set.next()) {
-//
-//                    utenti.add(utenteExtractor.extract(set));
-//                }
-//            }
-//        }
-//        return utenti;
-//    }
-
     @Override
     public List<Utente> doRetrieveAll() throws SQLException {
 
@@ -103,12 +81,14 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
                 put("nome", obj.getNome());
                 put("cognome", obj.getCognome());
                 put("username", obj.getUsername());
-                put("password", obj.getPassword_utente());
-                put("data_registrazione", obj.getData_registrazione());
+                put("password_utente", obj.getPassword_utente());
+                put("data_registrazione", obj.getData_registrazione().toString());
                 put("ruolo", obj.isRuolo());
                 put("saldo", obj.getSaldo());
                 put("biografia", obj.getBiografia());
             }}).toString();
+
+            System.out.println(query);
 
             try (PreparedStatement ps = conn.prepareStatement(query)) {
 
