@@ -56,6 +56,6 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
     @Override
     public boolean doDelete(String condition) throws SQLException {
 
-        return genericDoDelete(condition, UTENTI, this.source);
+        return genericDoDelete(UTENTI, condition, this.source);
     }
 }

@@ -5,9 +5,11 @@ import Model.Storage.SQLDAO;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
+
+import static Model.Storage.Entities.SCONTI;
 
 public class ScontoDAO extends SQLDAO implements DAO<Sconto> {
 
@@ -17,31 +19,38 @@ public class ScontoDAO extends SQLDAO implements DAO<Sconto> {
 
     @Override
     public List<Sconto> doRetrieveByCondition(String condition) throws SQLException {
-        return null;
+
+        return genericDoRetrieveByCondition(SCONTI, condition, new ScontoExtractor(), this.source);
     }
 
     @Override
     public List<Sconto> doRetrieveAll() throws SQLException {
-        return null;
-    }
 
-    /*@Override
-    public Optional<Sconto> doRetrieveByKey(Sconto obj) throws SQLException {
-        return Optional.empty();
-    }*/
+        return doRetrieveByCondition("TRUE");
+    }
 
     @Override
     public boolean doSave(Sconto obj) throws SQLException {
-        return false;
+
+        return genericDoSave(SCONTI, new HashMap<>() {{
+                    put("codice_gioco", obj.getCodice_gioco());
+                    put("codice_sconto", obj.getCodice_sconto());
+                    put("data_creazione", obj.getData_creazione());
+                    put("precentuale", obj.getPrecentuale());
+                    put("data_fine", obj.getData_fine().toString());
+                }},
+                this.source);
     }
 
     @Override
     public boolean doUpdate(Map<String, ?> values, String condition) throws SQLException {
-        return false;
+
+        return genericDoUpdate(SCONTI, condition, values, this.source);
     }
 
     @Override
     public boolean doDelete(String condition) throws SQLException {
-        return false;
+
+        return genericDoDelete(SCONTI, condition, this.source);
     }
 }

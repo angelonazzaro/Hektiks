@@ -2,19 +2,12 @@ package Model.Carrello;
 
 import Model.Storage.DAO;
 import Model.Storage.SQLDAO;
-import Model.Utente.Utente;
-import Model.Utente.UtenteExtractor;
-import Utils.QueryBuilder;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
 import static Model.Storage.Entities.CARRELLI;
-import static Model.Storage.Entities.UTENTI;
 
 public class CarrelloDAO extends SQLDAO implements DAO<Carrello> {
 
@@ -38,7 +31,7 @@ public class CarrelloDAO extends SQLDAO implements DAO<Carrello> {
     @Override
     public boolean doSave(Carrello obj) throws SQLException {
 
-        return genericDoSave(UTENTI, new HashMap<>() {{
+        return genericDoSave(CARRELLI, new HashMap<>() {{
             put("email_utente", obj.getEmail_utente());
             put("data_creazione", obj.getData_creazione().toString());
             put("data_modifica", obj.getData_modifica().toString());

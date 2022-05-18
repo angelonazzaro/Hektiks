@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import static Model.Storage.Entities.GIFTCARDS;
 
@@ -53,6 +52,6 @@ public class GiftCardDAO extends SQLDAO implements DAO<GiftCard> {
     @Override
     public boolean doDelete(String condition) throws SQLException {
 
-        return genericDoDelete(condition, GIFTCARDS, this.source);
+        return genericDoDelete(GIFTCARDS, condition, this.source);
     }
 }

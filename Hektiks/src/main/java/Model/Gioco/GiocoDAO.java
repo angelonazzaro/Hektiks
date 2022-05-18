@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import static Model.Storage.Entities.GIOCHI;
 
@@ -56,6 +55,6 @@ public class GiocoDAO extends SQLDAO implements DAO<Gioco> {
     @Override
     public boolean doDelete(String condition) throws SQLException {
 
-        return genericDoDelete(condition, GIOCHI, this.source);
+        return genericDoDelete(GIOCHI, condition, this.source);
     }
 }

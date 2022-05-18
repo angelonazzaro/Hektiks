@@ -13,9 +13,7 @@ import static Model.Storage.Entities.GENERI;
 
 public class GenereDAO extends SQLDAO implements DAO<Genere> {
 
-    public GenereDAO(DataSource source) {
-        super(source);
-    }
+    public GenereDAO(DataSource source) { super(source); }
 
     @Override
     public List<Genere> doRetrieveByCondition(String condition) throws SQLException {
@@ -48,6 +46,6 @@ public class GenereDAO extends SQLDAO implements DAO<Genere> {
     @Override
     public boolean doDelete(String condition) throws SQLException {
 
-        return genericDoDelete(condition, GENERI, this.source);
+        return genericDoDelete(GENERI, condition, this.source);
     }
 }
