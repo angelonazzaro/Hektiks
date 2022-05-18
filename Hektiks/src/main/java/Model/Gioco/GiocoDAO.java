@@ -5,9 +5,12 @@ import Model.Storage.SQLDAO;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import static Model.Storage.Entities.GIOCHI;
 
 public class GiocoDAO extends SQLDAO implements DAO<Gioco> {
 
@@ -17,31 +20,42 @@ public class GiocoDAO extends SQLDAO implements DAO<Gioco> {
 
     @Override
     public List<Gioco> doRetrieveByCondition(String condition) throws SQLException {
-        return null;
+
+        return genericDoRetrieveByCondition(GIOCHI, condition, new GiocoExtracotor(), this.source);
     }
 
     @Override
     public List<Gioco> doRetrieveAll() throws SQLException {
-        return null;
-    }
 
-    /*@Override
-    public Optional<Gioco> doRetrieveByKey(Gioco obj) throws SQLException {
-        return Optional.empty();
-    }*/
+        return doRetrieveByCondition("TRUE");
+    }
 
     @Override
     public boolean doSave(Gioco obj) throws SQLException {
-        return false;
+
+        return genericDoSave(GIOCHI, new HashMap<>() {{
+                    put("codice_gioco", obj.getCodice_gioco());
+                    put("titolo", obj.getTitolo());
+                    put("descrizione", obj.getDescrizione());
+                    put("trailer", obj.getTrailer());
+                    put("data_uscita", obj.getData_uscita().toString());
+                    put("copertina", obj.getCopertina());
+                    put("prezzo", obj.getPrezzo());
+                    put("quantita_disponibile", obj.getQuantita_disponibile());
+                    put("numero_vendite", obj.getNumero_vendite());
+                }},
+                this.source);
     }
 
     @Override
     public boolean doUpdate(Map<String, ?> values, String condition) throws SQLException {
-        return false;
+
+        return genericDoUpdate(GIOCHI, condition, values, this.source);
     }
 
     @Override
     public boolean doDelete(String condition) throws SQLException {
-        return false;
+
+        return genericDoDelete(condition, GIOCHI, this.source);
     }
 }

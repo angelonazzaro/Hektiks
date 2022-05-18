@@ -1,9 +1,14 @@
 package Model.Storage;
 
+import Utils.QueryBuilder;
+
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+
 
 public interface DAO<T> {
 
@@ -13,11 +18,73 @@ public interface DAO<T> {
 
     List<T> doRetrieveAll() throws SQLException;
 
-//    <K> Optional<T> doRetrieveByKey(K key) throws SQLException;
-
     boolean doSave(T obj) throws SQLException;
 
     boolean doUpdate(Map<String, ?> values, String condition) throws SQLException;
 
     boolean doDelete(String condition) throws SQLException;
+
+    default <E extends ResultSetExtractor<T>> List<T> genericDoRetrieveByCondition(String table, String condition, E extractor, DataSource source) throws SQLException {
+
+        final List<T> entity = new ArrayList<T>();
+
+        try (Connection conn = source.getConnection()) {
+
+            String query = QueryBuilder.SELECT("*").FROM(table).WHERE(condition).toString();
+
+            try (PreparedStatement ps = conn.prepareStatement(query)) {
+                ResultSet set = ps.executeQuery();
+
+                while (set.next()) {
+                    entity.add(extractor.extract(set));
+                }
+            }
+        }
+        return entity;
+    }
+
+    default boolean genericDoSave(String table, HashMap<String, ?> map, DataSource source) throws SQLException {
+
+        int rows;
+        try (Connection conn = source.getConnection()) {
+
+            String query = QueryBuilder.INSERT_INTO(table, map).toString();
+
+            try (PreparedStatement ps = conn.prepareStatement(query)) {
+
+                rows = ps.executeUpdate();
+            }
+        }
+        return rows == 1;
+    }
+
+    default boolean genericDoUpdate(String table, String condition, Map<String, ?> values, DataSource source) throws SQLException {
+
+        int rows;
+        try (Connection conn = source.getConnection()) {
+
+            String query = QueryBuilder.UPDATE(table).SET(values).WHERE(condition).toString();
+
+            try (PreparedStatement ps = conn.prepareStatement(query)) {
+
+                rows = ps.executeUpdate();
+            }
+        }
+        return rows > 0;
+    }
+
+    default boolean genericDoDelete(String table, String condition, DataSource source) throws SQLException {
+
+        int rows;
+        try (Connection conn = source.getConnection()) {
+
+            String query = QueryBuilder.DELETE_FROM(table).WHERE(condition).toString();
+
+            try (PreparedStatement ps = conn.prepareStatement(query)) {
+
+                rows = ps.executeUpdate();
+            }
+        }
+        return rows > 0;
+    }
 }
