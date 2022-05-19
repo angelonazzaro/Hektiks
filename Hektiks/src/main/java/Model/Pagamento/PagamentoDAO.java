@@ -5,9 +5,11 @@ import Model.Storage.SQLDAO;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
+
+import static Model.Storage.Entities.PAGAMENTI;
 
 public class PagamentoDAO extends SQLDAO implements DAO<Pagamento> {
 
@@ -17,31 +19,38 @@ public class PagamentoDAO extends SQLDAO implements DAO<Pagamento> {
 
     @Override
     public List<Pagamento> doRetrieveByCondition(String condition) throws SQLException {
-        return null;
+
+        return genericDoRetrieveByCondition(PAGAMENTI, condition, new PagamentoExtractor(), this.source);
     }
 
     @Override
     public List<Pagamento> doRetrieveAll() throws SQLException {
-        return null;
-    }
 
-    /*@Override
-    public Optional<Pagamento> doRetrieveByKey(Pagamento obj) throws SQLException {
-        return Optional.empty();
-    }*/
+        return doRetrieveByCondition("TRUE");
+    }
 
     @Override
     public boolean doSave(Pagamento obj) throws SQLException {
-        return false;
+
+        return genericDoSave(PAGAMENTI, new HashMap<>() {{
+                    put("email_utente", obj.getEmail_utente());
+                    put("codice_ordine", obj.getCodice_ordine());
+                    put("data_ora_pagamento", obj.getData_ora_pagamento().toString());
+                    put("importo", obj.getImporto());
+
+                }},
+                this.source);
     }
 
     @Override
     public boolean doUpdate(Map<String, ?> values, String condition) throws SQLException {
-        return false;
+
+        return genericDoUpdate(PAGAMENTI, condition, values, this.source);
     }
 
     @Override
     public boolean doDelete(String condition) throws SQLException {
-        return false;
+
+        return genericDoDelete(PAGAMENTI, condition, this.source);
     }
 }

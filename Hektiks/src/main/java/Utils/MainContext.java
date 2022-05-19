@@ -16,7 +16,7 @@ public class MainContext implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
 
         ServletContext sc = sce.getServletContext();
-        DataSource ds = null;
+        DataSource ds;
         Context initCtx;
 
         try {

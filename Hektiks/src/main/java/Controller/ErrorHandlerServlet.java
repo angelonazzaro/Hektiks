@@ -2,7 +2,6 @@ package Controller;
 
 import java.io.*;
 
-import Model.Utente.Utente;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 

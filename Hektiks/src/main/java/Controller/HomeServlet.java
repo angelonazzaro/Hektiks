@@ -28,9 +28,9 @@ public class HomeServlet extends HttpServlet {
     public synchronized void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession(false);
 
-        if (session != null && (Utente) session.getAttribute("user") != null) this.doGet(request, response);
+        if (session != null && session.getAttribute("user") != null) this.doGet(request, response);
 
-        String action = (String) request.getParameter("action");
+        String action = request.getParameter("action");
 
         if (!action.equals("register") && !action.equals("login")) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -77,7 +77,7 @@ public class HomeServlet extends HttpServlet {
                     return;
                 }
 
-                String nome = (String) request.getParameter("nome"), cognome = (String) request.getParameter("cognome");
+                String nome = request.getParameter("nome"), cognome = request.getParameter("cognome");
                 String username;
 
                 //se non è vuota allora lo username non è disponibile

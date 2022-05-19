@@ -5,43 +5,47 @@ import Model.Storage.SQLDAO;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
-public class GenereDAO extends SQLDAO implements DAO<GenereDAO> {
+import static Model.Storage.Entities.GENERI;
 
-    public GenereDAO(DataSource source) {
-        super(source);
+public class GenereDAO extends SQLDAO implements DAO<Genere> {
+
+    public GenereDAO(DataSource source) { super(source); }
+
+    @Override
+    public List<Genere> doRetrieveByCondition(String condition) throws SQLException {
+
+        return genericDoRetrieveByCondition(GENERI, condition, new GenereExtractor(), this.source);
     }
 
     @Override
-    public List<GenereDAO> doRetrieveByCondition(String condition) throws SQLException {
-        return null;
+    public List<Genere> doRetrieveAll() throws SQLException {
+
+        return doRetrieveByCondition("TRUE");
     }
 
     @Override
-    public List<GenereDAO> doRetrieveAll() throws SQLException {
-        return null;
-    }
+    public boolean doSave(Genere obj) throws SQLException {
 
-    /*@Override
-    public Optional<GenereDAO> doRetrieveByKey(GenereDAO obj) throws SQLException {
-        return Optional.empty();
-    }*/
+        return genericDoSave(GENERI, new HashMap<>() {{
 
-    @Override
-    public boolean doSave(GenereDAO obj) throws SQLException {
-        return false;
+            put("nome_genere", obj.getNome_genere());
+
+        }}, this.source);
     }
 
     @Override
     public boolean doUpdate(Map<String, ?> values, String condition) throws SQLException {
-        return false;
+
+        return genericDoUpdate(GENERI, condition, values, this.source);
     }
 
     @Override
     public boolean doDelete(String condition) throws SQLException {
-        return false;
+
+        return genericDoDelete(GENERI, condition, this.source);
     }
 }

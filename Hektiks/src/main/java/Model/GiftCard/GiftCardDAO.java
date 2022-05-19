@@ -5,9 +5,11 @@ import Model.Storage.SQLDAO;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
+
+import static Model.Storage.Entities.GIFTCARDS;
 
 public class GiftCardDAO extends SQLDAO implements DAO<GiftCard> {
 
@@ -17,31 +19,39 @@ public class GiftCardDAO extends SQLDAO implements DAO<GiftCard> {
 
     @Override
     public List<GiftCard> doRetrieveByCondition(String condition) throws SQLException {
-        return null;
+
+        return genericDoRetrieveByCondition(GIFTCARDS, condition, new GiftCardExtractor(), this.source);
     }
 
     @Override
     public List<GiftCard> doRetrieveAll() throws SQLException {
-        return null;
-    }
 
-    /*@Override
-    public Optional<GiftCard> doRetrieveByKey(GiftCard obj) throws SQLException {
-        return Optional.empty();
-    }*/
+        return doRetrieveByCondition("TRUE");
+    }
 
     @Override
     public boolean doSave(GiftCard obj) throws SQLException {
-        return false;
+
+        return genericDoSave(GIFTCARDS, new HashMap<>() {{
+
+            put("codice_giftcard", obj.getCodice_giftCard());
+            put("email_utente", obj.getEmail_utente());
+            put("importo", obj.getImporto());
+            put("data_ora_creazione", obj.getData_ora_creazione().toString());
+            put("data_ora_utilizzo", obj.getData_ora_utilizzo().toString());
+
+        }}, this.source);
     }
 
     @Override
     public boolean doUpdate(Map<String, ?> values, String condition) throws SQLException {
-        return false;
+
+        return genericDoUpdate(GIFTCARDS, condition, values, this.source);
     }
 
     @Override
     public boolean doDelete(String condition) throws SQLException {
-        return false;
+
+        return genericDoDelete(GIFTCARDS, condition, this.source);
     }
 }
