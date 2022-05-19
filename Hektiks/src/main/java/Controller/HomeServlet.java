@@ -110,6 +110,9 @@ public class HomeServlet extends HttpServlet {
                 utente.setPassword_utente(password);
                 utente.setData_registrazione(new Date(System.currentTimeMillis()));
 
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+
                 if (utenteDAO.doSave(utente))
                     out.write(gsonObj.toJson(new JSONResponse<String>("success", "Registrazione avvenuta con successo!")));
                 else
