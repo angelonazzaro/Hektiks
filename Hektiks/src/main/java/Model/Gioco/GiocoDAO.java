@@ -24,8 +24,10 @@ public class GiocoDAO extends SQLDAO implements DAO<Gioco> {
     }
 
     @Override
-    public <K> Gioco doRetrieveByKey(K key) throws SQLException {
-        return null;
+    public Gioco doRetrieveByKey(Object... key) throws SQLException {
+
+        List<Gioco> gioco = doRetrieveByCondition(GIOCHI + ".codice_gioco = " + "'" + key.toString() + "'");
+        return gioco.isEmpty() ? null : gioco.get(0);
     }
 
     @Override
@@ -59,7 +61,23 @@ public class GiocoDAO extends SQLDAO implements DAO<Gioco> {
 
     @Override
     public boolean doSaveOrUpdate(Gioco obj) throws SQLException {
-        return false;
+
+        if (doRetrieveByKey(obj.getCodice_gioco()) == null)
+            return doSave(obj);
+
+        return doUpdate(new HashMap<>() {{
+
+            put("codice_gioco", obj.getCodice_gioco());
+            put("titolo", obj.getTitolo());
+            put("descrizione", obj.getDescrizione());
+            put("trailer", obj.getTrailer());
+            put("data_uscita", obj.getData_uscita().toString());
+            put("copertina", obj.getCopertina());
+            put("prezzo", obj.getPrezzo());
+            put("quantita_disponibile", obj.getQuantita_disponibile());
+            put("numero_vendite", obj.getNumero_vendite());
+
+        }}, GIOCHI + ".codice_gioco = " + "'" + obj.getCodice_gioco() + "'");
     }
 
     @Override

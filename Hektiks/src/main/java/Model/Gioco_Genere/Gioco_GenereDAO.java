@@ -24,8 +24,10 @@ public class Gioco_GenereDAO extends SQLDAO implements DAO<Gioco_Genere> {
     }
 
     @Override
-    public <K> Gioco_Genere doRetrieveByKey(K key) throws SQLException {
-        return null;
+    public Gioco_Genere doRetrieveByKey(Object... key) throws SQLException {
+
+        List<Gioco_Genere> gioco_Genere = doRetrieveByCondition(GIOCHI_GENERE + ".codice_gioco = " + "'" + key.toString() + "'");
+        return gioco_Genere.isEmpty() ? null : gioco_Genere.get(0);
     }
 
     @Override
@@ -53,7 +55,15 @@ public class Gioco_GenereDAO extends SQLDAO implements DAO<Gioco_Genere> {
 
     @Override
     public boolean doSaveOrUpdate(Gioco_Genere obj) throws SQLException {
-        return false;
+
+        if (doRetrieveByKey(obj.getCodice_gioco()) == null)
+            return doSave(obj);
+
+        return doUpdate(new HashMap<>() {{
+            put("codice_gioco", obj.getCodice_gioco());
+            put("nome_genere", obj.getNome_genere());
+
+        }}, GIOCHI_GENERE + ".codice_gioco = " + "'" + obj.getCodice_gioco() + "'");
     }
 
     @Override

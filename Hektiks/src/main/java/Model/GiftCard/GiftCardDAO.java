@@ -24,8 +24,10 @@ public class GiftCardDAO extends SQLDAO implements DAO<GiftCard> {
     }
 
     @Override
-    public <K> GiftCard doRetrieveByKey(K key) throws SQLException {
-        return null;
+    public GiftCard doRetrieveByKey(Object... key) throws SQLException {
+
+        List<GiftCard> giftCard = doRetrieveByCondition(GIFTCARDS + ".codice_giftCard = " + "'" + key.toString() + "'");
+        return giftCard.isEmpty() ? null : giftCard.get(0);
     }
 
     @Override
@@ -56,7 +58,18 @@ public class GiftCardDAO extends SQLDAO implements DAO<GiftCard> {
 
     @Override
     public boolean doSaveOrUpdate(GiftCard obj) throws SQLException {
-        return false;
+
+        if (doRetrieveByKey(obj.getCodice_giftCard()) == null)
+            return doSave(obj);
+
+        return doUpdate(new HashMap<>() {{
+            put("codice_giftcard", obj.getCodice_giftCard());
+            put("email_utente", obj.getEmail_utente());
+            put("importo", obj.getImporto());
+            put("data_ora_creazione", obj.getData_ora_creazione().toString());
+            put("data_ora_utilizzo", obj.getData_ora_utilizzo().toString());
+
+        }}, GIFTCARDS + ".codice_giftCard = " + "'" + obj.getCodice_giftCard() + "'");
     }
 
     @Override

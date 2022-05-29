@@ -13,7 +13,9 @@ import static Model.Storage.Entities.GENERI;
 
 public class GenereDAO extends SQLDAO implements DAO<Genere> {
 
-    public GenereDAO(DataSource source) { super(source); }
+    public GenereDAO(DataSource source) {
+        super(source);
+    }
 
     @Override
     public List<Genere> doRetrieveByCondition(String condition) throws SQLException {
@@ -22,8 +24,10 @@ public class GenereDAO extends SQLDAO implements DAO<Genere> {
     }
 
     @Override
-    public <K> Genere doRetrieveByKey(K key) throws SQLException {
-        return null;
+    public Genere doRetrieveByKey(Object... key) throws SQLException {
+
+        List<Genere> genere = doRetrieveByCondition(GENERI + ".nome_genere = " + "'" + key.toString() + "'");
+        return genere.isEmpty() ? null : genere.get(0);
     }
 
     @Override
@@ -50,7 +54,14 @@ public class GenereDAO extends SQLDAO implements DAO<Genere> {
 
     @Override
     public boolean doSaveOrUpdate(Genere obj) throws SQLException {
-        return false;
+
+        if (doRetrieveByKey(obj.getNome_genere()) == null)
+            return doSave(obj);
+
+        return doUpdate(new HashMap<>() {{
+            put("nome_genere", obj.getNome_genere());
+
+        }}, GENERI + ".nome_genere = " + "'" + obj.getNome_genere() + "'");
     }
 
     @Override

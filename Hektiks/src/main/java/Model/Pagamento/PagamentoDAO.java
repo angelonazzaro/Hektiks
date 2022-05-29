@@ -24,8 +24,10 @@ public class PagamentoDAO extends SQLDAO implements DAO<Pagamento> {
     }
 
     @Override
-    public <K> Pagamento doRetrieveByKey(K key) throws SQLException {
-        return null;
+    public Pagamento doRetrieveByKey(Object... key) throws SQLException {
+
+        List<Pagamento> pagamento = doRetrieveByCondition(PAGAMENTI + ".email_utente = " + "'" + key.toString() + "'");
+        return pagamento.isEmpty() ? null : pagamento.get(0);
     }
 
     @Override

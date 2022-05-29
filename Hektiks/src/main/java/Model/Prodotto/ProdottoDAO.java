@@ -24,7 +24,7 @@ public class ProdottoDAO extends SQLDAO implements DAO<Prodotto> {
     }
 
     @Override
-    public <K> Prodotto doRetrieveByKey(K key) throws SQLException {
+    public Prodotto doRetrieveByKey(Object... key) throws SQLException {
         return null;
     }
 

@@ -1,13 +1,9 @@
 package Model.Utente;
 
 import Model.Storage.DAO;
-import Utils.QueryBuilder;
 import Model.Storage.SQLDAO;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -25,7 +21,7 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
     }
 
     @Override
-    public <K> Utente doRetrieveByKey(K key) throws SQLException {
+    public Utente doRetrieveByKey(Object... key) throws SQLException {
 
         List<Utente> utente = doRetrieveByCondition(UTENTI + ".email = " + "'" + key.toString() + "'");
         return utente.isEmpty() ? null : utente.get(0);

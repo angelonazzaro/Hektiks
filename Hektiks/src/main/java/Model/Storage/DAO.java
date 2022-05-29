@@ -1,5 +1,6 @@
 package Model.Storage;
 
+import Utils.InvalidPrimaryKeyException;
 import Utils.QueryBuilder;
 
 import javax.sql.DataSource;
@@ -14,7 +15,7 @@ public interface DAO<T> {
 
     List<T> doRetrieveByCondition(String condition) throws SQLException;
 
-    <K> T doRetrieveByKey(K key) throws SQLException;
+    T doRetrieveByKey(Object... key) throws SQLException, InvalidPrimaryKeyException;
 
     List<T> doRetrieveAll() throws SQLException;
 

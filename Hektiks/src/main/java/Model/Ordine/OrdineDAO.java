@@ -24,8 +24,10 @@ public class OrdineDAO extends SQLDAO implements DAO<Ordine> {
     }
 
     @Override
-    public <K> Ordine doRetrieveByKey(K key) throws SQLException {
-        return null;
+    public Ordine doRetrieveByKey(Object... key) throws SQLException {
+
+        List<Ordine> ordine = doRetrieveByCondition(ORDINI + ".email_utente = " + "'" + key.toString() + "'");
+        return ordine.isEmpty() ? null : ordine.get(0);
     }
 
     @Override
@@ -54,7 +56,17 @@ public class OrdineDAO extends SQLDAO implements DAO<Ordine> {
 
     @Override
     public boolean doSaveOrUpdate(Ordine obj) throws SQLException {
-        return false;
+
+        if (doRetrieveByKey(obj.getEmail_utente()) == null)
+            return doSave(obj);
+
+        return doUpdate(new HashMap<>() {{
+            put("email_utente", obj.getEmail_utente());
+            put("codice_ordine", obj.getCodice_ordine());
+            put("data_ora_ordinazione", obj.getData_ora_ordinazione().toString());
+            put("prezzo_totale", obj.getPrezzo_totale());
+
+        }}, ORDINI + ".email_utente = " + "'" + obj.getEmail_utente() + "'");
     }
 
     @Override

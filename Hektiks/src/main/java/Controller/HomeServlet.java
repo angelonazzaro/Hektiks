@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
+import Model.Carrello.CarrelloDAO;
 import Model.Utente.Utente;
 import Model.Utente.UtenteDAO;
 import Utils.JSONResponse;
@@ -44,6 +45,13 @@ public class HomeServlet extends HttpServlet {
 
 
         if (action.equals("login")) {
+
+            CarrelloDAO c = new CarrelloDAO((DataSource) getServletContext().getAttribute("DataSource"));
+            try {
+                c.doRetrieveByKey("ciccio@a.com", "2022-12-03");
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
 
             try {
                 List<Utente> utenti = utenteDAO.doRetrieveByCondition("email='" + email + "' AND password_utente=SHA1('" + password + "')");

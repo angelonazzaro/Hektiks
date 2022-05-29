@@ -2,6 +2,7 @@ package Model.Carrello;
 
 import Model.Storage.DAO;
 import Model.Storage.SQLDAO;
+import Utils.InvalidPrimaryKeyException;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
@@ -22,8 +23,14 @@ public class CarrelloDAO extends SQLDAO implements DAO<Carrello> {
     }
 
     @Override
-    public <K> Carrello doRetrieveByKey(K key) throws SQLException {
-        return null;
+    public Carrello doRetrieveByKey(Object... key) throws SQLException, InvalidPrimaryKeyException {
+
+        if(key.length != 2)
+            throw new InvalidPrimaryKeyException();
+
+        List<Carrello> carrello = doRetrieveByCondition(
+                String.format("%s.email_utente = '%s' AND %s.data_creazione = '%s'", CARRELLI, key[0], CARRELLI, key[1]));
+        return carrello.isEmpty() ? null : carrello.get(0);
     }
 
     @Override
@@ -52,7 +59,16 @@ public class CarrelloDAO extends SQLDAO implements DAO<Carrello> {
 
     @Override
     public boolean doSaveOrUpdate(Carrello obj) throws SQLException {
-        return false;
+
+        if (doRetrieveByKey(obj.getEmail_utente(), obj.getData_creazione().toString()) == null)
+            return doSave(obj);
+
+        return doUpdate(new HashMap<>() {{
+            put("email_utente", obj.getEmail_utente());
+            put("data_creazione", obj.getData_creazione().toString());
+            put("data_modifica", obj.getData_modifica().toString());
+
+        }}, CARRELLI + ".email_utente = " + "'" + obj.getEmail_utente() + "'");
     }
 
     @Override
