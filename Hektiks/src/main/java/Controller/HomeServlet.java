@@ -42,7 +42,9 @@ public class HomeServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         Gson gsonObj = new Gson();
 
+
         if (action.equals("login")) {
+
             try {
                 List<Utente> utenti = utenteDAO.doRetrieveByCondition("email='" + email + "' AND password_utente=SHA1('" + password + "')");
 

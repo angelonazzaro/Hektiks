@@ -14,13 +14,15 @@ public interface DAO<T> {
 
     List<T> doRetrieveByCondition(String condition) throws SQLException;
 
-    //List<T> doRetrieveAll(int start, int end) throws SQLException;
+    <K> T doRetrieveByKey(K key) throws SQLException;
 
     List<T> doRetrieveAll() throws SQLException;
 
     boolean doSave(T obj) throws SQLException;
 
     boolean doUpdate(Map<String, ?> values, String condition) throws SQLException;
+
+    boolean doSaveOrUpdate(T obj) throws SQLException;
 
     boolean doDelete(String condition) throws SQLException;
 
@@ -31,6 +33,9 @@ public interface DAO<T> {
         try (Connection conn = source.getConnection()) {
 
             String query = QueryBuilder.SELECT("*").FROM(table).WHERE(condition).toString();
+
+            System.out.print("[GENERIC-DO-RETRIEVE-BY-CONDITION] ");
+            System.out.println(query);
 
             try (PreparedStatement ps = conn.prepareStatement(query)) {
                 ResultSet set = ps.executeQuery();
@@ -50,6 +55,8 @@ public interface DAO<T> {
 
             String query = QueryBuilder.INSERT_INTO(table, map).toString();
 
+            System.out.print("[GENERIC-DO-SAVE] ");
+            System.out.println(query);
             try (PreparedStatement ps = conn.prepareStatement(query)) {
 
                 rows = ps.executeUpdate();
@@ -65,6 +72,9 @@ public interface DAO<T> {
 
             String query = QueryBuilder.UPDATE(table).SET(values).WHERE(condition).toString();
 
+            System.out.print("[GENERIC-DO-UPDATE] ");
+            System.out.println(query);
+
             try (PreparedStatement ps = conn.prepareStatement(query)) {
 
                 rows = ps.executeUpdate();
@@ -79,6 +89,9 @@ public interface DAO<T> {
         try (Connection conn = source.getConnection()) {
 
             String query = QueryBuilder.DELETE_FROM(table).WHERE(condition).toString();
+
+            System.out.print("[GENERIC-DO-DELETE] ");
+            System.out.println(query);
 
             try (PreparedStatement ps = conn.prepareStatement(query)) {
 

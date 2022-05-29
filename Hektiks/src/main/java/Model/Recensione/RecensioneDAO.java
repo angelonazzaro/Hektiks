@@ -24,6 +24,11 @@ public class RecensioneDAO extends SQLDAO implements DAO<Recensione> {
     }
 
     @Override
+    public <K> Recensione doRetrieveByKey(K key) throws SQLException {
+        return null;
+    }
+
+    @Override
     public List<Recensione> doRetrieveAll() throws SQLException {
 
         return doRetrieveByCondition("TRUE");
@@ -46,6 +51,11 @@ public class RecensioneDAO extends SQLDAO implements DAO<Recensione> {
     public boolean doUpdate(Map<String, ?> values, String condition) throws SQLException {
 
         return genericDoUpdate(RECENSIONI, condition, values, this.source);
+    }
+
+    @Override
+    public boolean doSaveOrUpdate(Recensione obj) throws SQLException {
+        return false;
     }
 
     @Override

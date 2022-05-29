@@ -24,6 +24,11 @@ public class ScontoDAO extends SQLDAO implements DAO<Sconto> {
     }
 
     @Override
+    public <K> Sconto doRetrieveByKey(K key) throws SQLException {
+        return null;
+    }
+
+    @Override
     public List<Sconto> doRetrieveAll() throws SQLException {
 
         return doRetrieveByCondition("TRUE");
@@ -46,6 +51,11 @@ public class ScontoDAO extends SQLDAO implements DAO<Sconto> {
     public boolean doUpdate(Map<String, ?> values, String condition) throws SQLException {
 
         return genericDoUpdate(SCONTI, condition, values, this.source);
+    }
+
+    @Override
+    public boolean doSaveOrUpdate(Sconto obj) throws SQLException {
+        return false;
     }
 
     @Override

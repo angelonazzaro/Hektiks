@@ -24,6 +24,11 @@ public class PagamentoDAO extends SQLDAO implements DAO<Pagamento> {
     }
 
     @Override
+    public <K> Pagamento doRetrieveByKey(K key) throws SQLException {
+        return null;
+    }
+
+    @Override
     public List<Pagamento> doRetrieveAll() throws SQLException {
 
         return doRetrieveByCondition("TRUE");
@@ -46,6 +51,11 @@ public class PagamentoDAO extends SQLDAO implements DAO<Pagamento> {
     public boolean doUpdate(Map<String, ?> values, String condition) throws SQLException {
 
         return genericDoUpdate(PAGAMENTI, condition, values, this.source);
+    }
+
+    @Override
+    public boolean doSaveOrUpdate(Pagamento obj) throws SQLException {
+        return false;
     }
 
     @Override

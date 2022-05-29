@@ -24,6 +24,11 @@ public class OrdineDAO extends SQLDAO implements DAO<Ordine> {
     }
 
     @Override
+    public <K> Ordine doRetrieveByKey(K key) throws SQLException {
+        return null;
+    }
+
+    @Override
     public List<Ordine> doRetrieveAll() throws SQLException {
 
         return doRetrieveByCondition("TRUE");
@@ -45,6 +50,11 @@ public class OrdineDAO extends SQLDAO implements DAO<Ordine> {
     public boolean doUpdate(Map<String, ?> values, String condition) throws SQLException {
 
         return genericDoUpdate(ORDINI, condition, values, this.source);
+    }
+
+    @Override
+    public boolean doSaveOrUpdate(Ordine obj) throws SQLException {
+        return false;
     }
 
     @Override

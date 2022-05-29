@@ -24,6 +24,11 @@ public class GiocoDAO extends SQLDAO implements DAO<Gioco> {
     }
 
     @Override
+    public <K> Gioco doRetrieveByKey(K key) throws SQLException {
+        return null;
+    }
+
+    @Override
     public List<Gioco> doRetrieveAll() throws SQLException {
 
         return doRetrieveByCondition("TRUE");
@@ -50,6 +55,11 @@ public class GiocoDAO extends SQLDAO implements DAO<Gioco> {
     public boolean doUpdate(Map<String, ?> values, String condition) throws SQLException {
 
         return genericDoUpdate(GIOCHI, condition, values, this.source);
+    }
+
+    @Override
+    public boolean doSaveOrUpdate(Gioco obj) throws SQLException {
+        return false;
     }
 
     @Override

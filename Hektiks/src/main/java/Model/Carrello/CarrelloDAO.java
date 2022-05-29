@@ -22,6 +22,11 @@ public class CarrelloDAO extends SQLDAO implements DAO<Carrello> {
     }
 
     @Override
+    public <K> Carrello doRetrieveByKey(K key) throws SQLException {
+        return null;
+    }
+
+    @Override
     public List<Carrello> doRetrieveAll() throws SQLException {
 
         return doRetrieveByCondition("TRUE");
@@ -43,6 +48,11 @@ public class CarrelloDAO extends SQLDAO implements DAO<Carrello> {
     public boolean doUpdate(Map<String, ?> values, String condition) throws SQLException {
 
         return genericDoUpdate(CARRELLI, condition, values, this.source);
+    }
+
+    @Override
+    public boolean doSaveOrUpdate(Carrello obj) throws SQLException {
+        return false;
     }
 
     @Override

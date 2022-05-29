@@ -24,6 +24,11 @@ public class ProdottoDAO extends SQLDAO implements DAO<Prodotto> {
     }
 
     @Override
+    public <K> Prodotto doRetrieveByKey(K key) throws SQLException {
+        return null;
+    }
+
+    @Override
     public List<Prodotto> doRetrieveAll() throws SQLException {
 
         return doRetrieveByCondition("TRUE");
@@ -44,6 +49,11 @@ public class ProdottoDAO extends SQLDAO implements DAO<Prodotto> {
     public boolean doUpdate(Map<String, ?> values, String condition) throws SQLException {
 
         return genericDoUpdate(PRODOTTI, condition, values, this.source);
+    }
+
+    @Override
+    public boolean doSaveOrUpdate(Prodotto obj) throws SQLException {
+        return false;
     }
 
     @Override

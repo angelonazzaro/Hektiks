@@ -24,6 +24,11 @@ public class GiftCardDAO extends SQLDAO implements DAO<GiftCard> {
     }
 
     @Override
+    public <K> GiftCard doRetrieveByKey(K key) throws SQLException {
+        return null;
+    }
+
+    @Override
     public List<GiftCard> doRetrieveAll() throws SQLException {
 
         return doRetrieveByCondition("TRUE");
@@ -47,6 +52,11 @@ public class GiftCardDAO extends SQLDAO implements DAO<GiftCard> {
     public boolean doUpdate(Map<String, ?> values, String condition) throws SQLException {
 
         return genericDoUpdate(GIFTCARDS, condition, values, this.source);
+    }
+
+    @Override
+    public boolean doSaveOrUpdate(GiftCard obj) throws SQLException {
+        return false;
     }
 
     @Override

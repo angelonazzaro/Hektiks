@@ -22,6 +22,11 @@ public class GenereDAO extends SQLDAO implements DAO<Genere> {
     }
 
     @Override
+    public <K> Genere doRetrieveByKey(K key) throws SQLException {
+        return null;
+    }
+
+    @Override
     public List<Genere> doRetrieveAll() throws SQLException {
 
         return doRetrieveByCondition("TRUE");
@@ -41,6 +46,11 @@ public class GenereDAO extends SQLDAO implements DAO<Genere> {
     public boolean doUpdate(Map<String, ?> values, String condition) throws SQLException {
 
         return genericDoUpdate(GENERI, condition, values, this.source);
+    }
+
+    @Override
+    public boolean doSaveOrUpdate(Genere obj) throws SQLException {
+        return false;
     }
 
     @Override
