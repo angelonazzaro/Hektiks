@@ -1,10 +1,13 @@
 package Model.Recensione;
 
+import Model.Storage.IEntity;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.HashMap;
 
-public class Recensione implements Serializable {
+public class Recensione implements Serializable, IEntity {
 
     @Serial
     private static final long serialVersionUID = -6606424426975407660L;
@@ -24,6 +27,20 @@ public class Recensione implements Serializable {
                 ", percentuale=" + percentuale +
                 ", descrizione='" + descrizione + '\'' +
                 '}';
+    }
+
+    @Override
+    public HashMap<String, ?> toHashMap() {
+
+        return new HashMap<>() {
+            {
+                put("email_utente", email_utente);
+                put("codice_gioco", codice_gioco);
+                put("data_ora_pubblicazione", data_ora_pubblicazione.toString());
+                put("percentuale", percentuale);
+                put("descrizione", descrizione);
+            }
+        };
     }
 
     public String getEmail_utente() {

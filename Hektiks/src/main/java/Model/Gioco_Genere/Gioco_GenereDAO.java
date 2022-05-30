@@ -2,10 +2,10 @@ package Model.Gioco_Genere;
 
 import Model.Storage.DAO;
 import Model.Storage.SQLDAO;
+import Utils.InvalidPrimaryKeyException;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +26,12 @@ public class Gioco_GenereDAO extends SQLDAO implements DAO<Gioco_Genere> {
     @Override
     public Gioco_Genere doRetrieveByKey(Object... key) throws SQLException {
 
-        List<Gioco_Genere> gioco_Genere = doRetrieveByCondition(GIOCHI_GENERE + ".codice_gioco = " + "'" + key.toString() + "'");
+        if (key == null || key.length != 2)
+            throw new InvalidPrimaryKeyException();
+
+        List<Gioco_Genere> gioco_Genere = doRetrieveByCondition(
+                String.format("%s.codice_gioco = '%s' AND %s.nome_genere = '%s'", GIOCHI_GENERE, key[0], GIOCHI_GENERE,
+                    key[1]));
         return gioco_Genere.isEmpty() ? null : gioco_Genere.get(0);
     }
 
@@ -39,12 +44,7 @@ public class Gioco_GenereDAO extends SQLDAO implements DAO<Gioco_Genere> {
     @Override
     public boolean doSave(Gioco_Genere obj) throws SQLException {
 
-        return genericDoSave(GIOCHI_GENERE, new HashMap<>() {{
-                    put("codice_gioco", obj.getCodice_gioco());
-                    put("nome_genere", obj.getNome_genere());
-
-                }},
-                this.source);
+        return genericDoSave(GIOCHI_GENERE, obj.toHashMap(), this.source);
     }
 
     @Override
@@ -56,14 +56,12 @@ public class Gioco_GenereDAO extends SQLDAO implements DAO<Gioco_Genere> {
     @Override
     public boolean doSaveOrUpdate(Gioco_Genere obj) throws SQLException {
 
-        if (doRetrieveByKey(obj.getCodice_gioco()) == null)
+        if (doRetrieveByKey(obj.getCodice_gioco(), obj.getNome_genere()) == null)
             return doSave(obj);
 
-        return doUpdate(new HashMap<>() {{
-            put("codice_gioco", obj.getCodice_gioco());
-            put("nome_genere", obj.getNome_genere());
-
-        }}, GIOCHI_GENERE + ".codice_gioco = " + "'" + obj.getCodice_gioco() + "'");
+        return doUpdate(obj.toHashMap(),
+                String.format("%s.codice_gioco = '%s' AND %s.nome_genere = '%s'",
+                        GIOCHI_GENERE, obj.getCodice_gioco(), GIOCHI_GENERE, obj.getNome_genere()));
     }
 
     @Override

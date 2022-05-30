@@ -1,10 +1,13 @@
 package Model.Gioco;
 
+import Model.Storage.IEntity;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.HashMap;
 
-public class Gioco implements Serializable {
+public class Gioco implements Serializable, IEntity {
 
     @Serial
     private static final long serialVersionUID = 4089603497457100111L;
@@ -32,6 +35,24 @@ public class Gioco implements Serializable {
                 ", quantita_disponibile=" + quantita_disponibile +
                 ", numero_vendite=" + numero_vendite +
                 '}';
+    }
+
+    @Override
+    public HashMap<String, ?> toHashMap() {
+
+        return new HashMap<>() {
+            {
+                put("codice_gioco", codice_gioco);
+                put("titolo", titolo);
+                put("descrizione", descrizione);
+                put("trailer", trailer);
+                put("data_uscita", data_uscita.toString());
+                put("copertina", copertina);
+                put("prezzo", prezzo);
+                put("quantita_disponibile", quantita_disponibile);
+                put("numero_vendite", numero_vendite);
+            }
+        };
     }
 
     public String getCodice_gioco() {
@@ -105,4 +126,5 @@ public class Gioco implements Serializable {
     public void setNumero_vendite(int numero_vendite) {
         this.numero_vendite = numero_vendite;
     }
+
 }

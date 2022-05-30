@@ -2,10 +2,10 @@ package Model.Gioco;
 
 import Model.Storage.DAO;
 import Model.Storage.SQLDAO;
+import Utils.InvalidPrimaryKeyException;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,13 +20,17 @@ public class GiocoDAO extends SQLDAO implements DAO<Gioco> {
     @Override
     public List<Gioco> doRetrieveByCondition(String condition) throws SQLException {
 
-        return genericDoRetrieveByCondition(GIOCHI, condition, new GiocoExtracotor(), this.source);
+        return genericDoRetrieveByCondition(GIOCHI, condition, new GiocoExtractor(), this.source);
     }
 
     @Override
     public Gioco doRetrieveByKey(Object... key) throws SQLException {
 
-        List<Gioco> gioco = doRetrieveByCondition(GIOCHI + ".codice_gioco = " + "'" + key.toString() + "'");
+        if(key == null || key.length != 1)
+            throw new InvalidPrimaryKeyException();
+
+        List<Gioco> gioco = doRetrieveByCondition(
+                String.format("%s.codice_gioco = '%s'", GIOCHI, key[0]));
         return gioco.isEmpty() ? null : gioco.get(0);
     }
 
@@ -39,18 +43,7 @@ public class GiocoDAO extends SQLDAO implements DAO<Gioco> {
     @Override
     public boolean doSave(Gioco obj) throws SQLException {
 
-        return genericDoSave(GIOCHI, new HashMap<>() {{
-                    put("codice_gioco", obj.getCodice_gioco());
-                    put("titolo", obj.getTitolo());
-                    put("descrizione", obj.getDescrizione());
-                    put("trailer", obj.getTrailer());
-                    put("data_uscita", obj.getData_uscita().toString());
-                    put("copertina", obj.getCopertina());
-                    put("prezzo", obj.getPrezzo());
-                    put("quantita_disponibile", obj.getQuantita_disponibile());
-                    put("numero_vendite", obj.getNumero_vendite());
-                }},
-                this.source);
+        return genericDoSave(GIOCHI, obj.toHashMap(), this.source);
     }
 
     @Override
@@ -65,19 +58,8 @@ public class GiocoDAO extends SQLDAO implements DAO<Gioco> {
         if (doRetrieveByKey(obj.getCodice_gioco()) == null)
             return doSave(obj);
 
-        return doUpdate(new HashMap<>() {{
-
-            put("codice_gioco", obj.getCodice_gioco());
-            put("titolo", obj.getTitolo());
-            put("descrizione", obj.getDescrizione());
-            put("trailer", obj.getTrailer());
-            put("data_uscita", obj.getData_uscita().toString());
-            put("copertina", obj.getCopertina());
-            put("prezzo", obj.getPrezzo());
-            put("quantita_disponibile", obj.getQuantita_disponibile());
-            put("numero_vendite", obj.getNumero_vendite());
-
-        }}, GIOCHI + ".codice_gioco = " + "'" + obj.getCodice_gioco() + "'");
+        return doUpdate(obj.toHashMap(),
+                String.format("%s.codice_gioco = '%s'", GIOCHI, obj.getCodice_gioco()));
     }
 
     @Override

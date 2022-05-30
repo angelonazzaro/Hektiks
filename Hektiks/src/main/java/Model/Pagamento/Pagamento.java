@@ -1,10 +1,13 @@
 package Model.Pagamento;
 
+import Model.Storage.IEntity;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.HashMap;
 
-public class Pagamento implements Serializable {
+public class Pagamento implements Serializable, IEntity {
 
     @Serial
     private static final long serialVersionUID = -8787575923741811571L;
@@ -22,6 +25,19 @@ public class Pagamento implements Serializable {
                 ", data_ora_pagamento=" + data_ora_pagamento +
                 ", importo=" + importo +
                 '}';
+    }
+
+    @Override
+    public HashMap<String, ?> toHashMap() {
+
+        return new HashMap<>() {
+            {
+                put("email_utente", email_utente);
+                put("codice_ordine", codice_ordine);
+                put("data_ora_pagamento", data_ora_pagamento.toString());
+                put("importo", importo);
+            }
+        };
     }
 
     public String getEmail_utente() {
@@ -55,4 +71,5 @@ public class Pagamento implements Serializable {
     public void setImporto(double importo) {
         this.importo = importo;
     }
+
 }

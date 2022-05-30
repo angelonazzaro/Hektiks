@@ -1,10 +1,13 @@
 package Model.Ordine;
 
+import Model.Storage.IEntity;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.HashMap;
 
-public class Ordine implements Serializable {
+public class Ordine implements Serializable, IEntity {
 
     @Serial
     private static final long serialVersionUID = -6625776650308554938L;
@@ -22,6 +25,19 @@ public class Ordine implements Serializable {
                 ", data_ora_ordinazione=" + data_ora_ordinazione +
                 ", prezzo_totale=" + prezzo_totale +
                 '}';
+    }
+
+    @Override
+    public HashMap<String, ?> toHashMap() {
+
+        return new HashMap<>() {
+            {
+                put("email_utente", email_utente);
+                put("codice_ordine", codice_ordine);
+                put("data_ora_ordinazione", data_ora_ordinazione.toString());
+                put("prezzo_totale", prezzo_totale);
+            }
+        };
     }
 
     public String getEmail_utente() {
@@ -55,4 +71,5 @@ public class Ordine implements Serializable {
     public void setPrezzo_totale(double prezzo_totale) {
         this.prezzo_totale = prezzo_totale;
     }
+
 }

@@ -1,10 +1,13 @@
 package Model.GiftCard;
 
+import Model.Storage.IEntity;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.HashMap;
 
-public class GiftCard implements Serializable  {
+public class GiftCard implements Serializable, IEntity {
 
     @Serial
     private static final long serialVersionUID = -733297996749609206L;
@@ -24,6 +27,20 @@ public class GiftCard implements Serializable  {
                 ", data_ora_creazione=" + data_ora_creazione +
                 ", data_utilizzo=" + data_ora_utilizzo +
                 '}';
+    }
+
+    @Override
+    public HashMap<String, ?> toHashMap() {
+
+        return new HashMap<>() {
+            {
+                put("codice_giftcard", codice_giftCard);
+                put("email_utente", email_utente);
+                put("importo", importo);
+                put("data_ora_creazione", data_ora_creazione.toString());
+                put("data_ora_utilizzo", data_ora_utilizzo.toString());
+            }
+        };
     }
 
     public String getCodice_giftCard() {

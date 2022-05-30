@@ -1,9 +1,12 @@
 package Model.Prodotto;
 
+import Model.Storage.IEntity;
+
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.HashMap;
 
-public class Prodotto implements Serializable  {
+public class Prodotto implements Serializable, IEntity {
 
     @Serial
     private static final long serialVersionUID = -3011038005386033858L;
@@ -19,6 +22,18 @@ public class Prodotto implements Serializable  {
                 ", codice_gioco='" + codice_gioco + '\'' +
                 ", quantita_disponibile=" + quantita_disponibile +
                 '}';
+    }
+
+    @Override
+    public HashMap<String, ?> toHashMap() {
+
+        return new HashMap<>() {
+            {
+                put("email_utente", email_utente);
+                put("codice_gioco", codice_gioco);
+                put("quantita_disponibile", quantita_disponibile);
+            }
+        };
     }
 
     public String getEmail_utente() {

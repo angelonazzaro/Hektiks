@@ -2,10 +2,10 @@ package Model.Ordine;
 
 import Model.Storage.DAO;
 import Model.Storage.SQLDAO;
+import Utils.InvalidPrimaryKeyException;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +26,12 @@ public class OrdineDAO extends SQLDAO implements DAO<Ordine> {
     @Override
     public Ordine doRetrieveByKey(Object... key) throws SQLException {
 
-        List<Ordine> ordine = doRetrieveByCondition(ORDINI + ".email_utente = " + "'" + key.toString() + "'");
+        if (key == null || key.length != 2)
+            throw new InvalidPrimaryKeyException();
+
+        List<Ordine> ordine = doRetrieveByCondition(
+                String.format("%s.email_utente = '%s' AND %s.codice_ordine = '%s'",
+                        ORDINI, key[0], ORDINI, key[1]));
         return ordine.isEmpty() ? null : ordine.get(0);
     }
 
@@ -39,13 +44,7 @@ public class OrdineDAO extends SQLDAO implements DAO<Ordine> {
     @Override
     public boolean doSave(Ordine obj) throws SQLException {
 
-        return genericDoSave(ORDINI, new HashMap<>() {{
-                    put("email_utente", obj.getEmail_utente());
-                    put("codice_ordine", obj.getCodice_ordine());
-                    put("data_ora_ordinazione", obj.getData_ora_ordinazione().toString());
-                    put("prezzo_totale", obj.getPrezzo_totale());
-                }},
-                this.source);
+        return genericDoSave(ORDINI, obj.toHashMap(), this.source);
     }
 
     @Override
@@ -57,16 +56,12 @@ public class OrdineDAO extends SQLDAO implements DAO<Ordine> {
     @Override
     public boolean doSaveOrUpdate(Ordine obj) throws SQLException {
 
-        if (doRetrieveByKey(obj.getEmail_utente()) == null)
+        if (doRetrieveByKey(obj.getEmail_utente(), obj.getCodice_ordine()) == null)
             return doSave(obj);
 
-        return doUpdate(new HashMap<>() {{
-            put("email_utente", obj.getEmail_utente());
-            put("codice_ordine", obj.getCodice_ordine());
-            put("data_ora_ordinazione", obj.getData_ora_ordinazione().toString());
-            put("prezzo_totale", obj.getPrezzo_totale());
-
-        }}, ORDINI + ".email_utente = " + "'" + obj.getEmail_utente() + "'");
+        return doUpdate(obj.toHashMap(),
+                String.format("%s.email_utente = '%s' AND %s.codice_ordine = '%s'",
+                    ORDINI, obj.getEmail_utente(), ORDINI, obj.getCodice_ordine()));
     }
 
     @Override

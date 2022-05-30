@@ -2,10 +2,10 @@ package Model.Genere;
 
 import Model.Storage.DAO;
 import Model.Storage.SQLDAO;
+import Utils.InvalidPrimaryKeyException;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +26,11 @@ public class GenereDAO extends SQLDAO implements DAO<Genere> {
     @Override
     public Genere doRetrieveByKey(Object... key) throws SQLException {
 
-        List<Genere> genere = doRetrieveByCondition(GENERI + ".nome_genere = " + "'" + key.toString() + "'");
+        if (key == null || key.length != 1)
+            throw new InvalidPrimaryKeyException();
+
+        List<Genere> genere = doRetrieveByCondition(
+                String.format("%s.nome_genere = '%s'", GENERI, key[0]));
         return genere.isEmpty() ? null : genere.get(0);
     }
 
@@ -39,11 +43,7 @@ public class GenereDAO extends SQLDAO implements DAO<Genere> {
     @Override
     public boolean doSave(Genere obj) throws SQLException {
 
-        return genericDoSave(GENERI, new HashMap<>() {{
-
-            put("nome_genere", obj.getNome_genere());
-
-        }}, this.source);
+        return genericDoSave(GENERI, obj.toHashMap(), this.source);
     }
 
     @Override
@@ -58,10 +58,8 @@ public class GenereDAO extends SQLDAO implements DAO<Genere> {
         if (doRetrieveByKey(obj.getNome_genere()) == null)
             return doSave(obj);
 
-        return doUpdate(new HashMap<>() {{
-            put("nome_genere", obj.getNome_genere());
-
-        }}, GENERI + ".nome_genere = " + "'" + obj.getNome_genere() + "'");
+        return doUpdate(obj.toHashMap(),
+                String.format("%s.nome_genere = '%s'", GENERI, obj.getNome_genere()));
     }
 
     @Override

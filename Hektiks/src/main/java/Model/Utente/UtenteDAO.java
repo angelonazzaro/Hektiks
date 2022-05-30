@@ -2,10 +2,12 @@ package Model.Utente;
 
 import Model.Storage.DAO;
 import Model.Storage.SQLDAO;
+import Utils.InvalidPrimaryKeyException;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 import static Model.Storage.Entities.UTENTI;
 
@@ -23,7 +25,11 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
     @Override
     public Utente doRetrieveByKey(Object... key) throws SQLException {
 
-        List<Utente> utente = doRetrieveByCondition(UTENTI + ".email = " + "'" + key.toString() + "'");
+        if (key == null || key.length != 1)
+            throw new InvalidPrimaryKeyException();
+
+        List<Utente> utente = doRetrieveByCondition(
+                String.format("%s.email = '%s'", UTENTI, key[0]));
         return utente.isEmpty() ? null : utente.get(0);
     }
 
@@ -36,18 +42,7 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
     @Override
     public boolean doSave(Utente obj) throws SQLException {
 
-        return genericDoSave(UTENTI, new HashMap<>() {{
-                    put("email", obj.getEmail());
-                    put("nome", obj.getNome());
-                    put("cognome", obj.getCognome());
-                    put("username", obj.getUsername());
-                    put("password_utente", obj.getPassword_utente());
-                    put("data_registrazione", obj.getData_registrazione().toString());
-                    put("ruolo", obj.isRuolo());
-                    put("saldo", obj.getSaldo());
-                    put("biografia", obj.getBiografia());
-                }},
-                this.source);
+        return genericDoSave(UTENTI, obj.toHashMap(), this.source);
     }
 
     @Override
@@ -62,18 +57,8 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
         if (doRetrieveByKey(obj.getEmail()) == null)
             return doSave(obj);
 
-        return doUpdate(new HashMap<>() {{
-            put("email", obj.getEmail());
-            put("nome", obj.getNome());
-            put("cognome", obj.getCognome());
-            put("username", obj.getUsername());
-            put("password_utente", obj.getPassword_utente());
-            put("data_registrazione", obj.getData_registrazione().toString());
-            put("ruolo", obj.isRuolo());
-            put("saldo", obj.getSaldo());
-            put("biografia", obj.getBiografia());
-
-        }}, UTENTI + ".email = " + "'" + obj.getEmail() + "'");
+        return doUpdate(obj.toHashMap(),
+                String.format("%s.email = '%s'", UTENTI, obj.getEmail()));
     }
 
     @Override

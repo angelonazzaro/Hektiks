@@ -1,10 +1,13 @@
 package Model.Carrello;
 
+import Model.Storage.IEntity;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.HashMap;
 
-public class Carrello implements Serializable {
+public class Carrello implements Serializable, IEntity {
 
     @Serial
     private static final long serialVersionUID = -5843497590632721035L;
@@ -20,6 +23,18 @@ public class Carrello implements Serializable {
                 ", data_creazione=" + data_creazione +
                 ", data_modifica=" + data_modifica +
                 '}';
+    }
+
+    @Override
+    public HashMap<String, ?> toHashMap() {
+
+        return new HashMap<>() {
+            {
+                put("email_utente", email_utente);
+                put("data_creazione", data_creazione.toString());
+                put("data_modifica", data_modifica.toString());
+            }
+        };
     }
 
     public String getEmail_utente() {
@@ -45,6 +60,4 @@ public class Carrello implements Serializable {
     public void setData_modifica(Date data_modifica) {
         this.data_modifica = data_modifica;
     }
-
-
 }

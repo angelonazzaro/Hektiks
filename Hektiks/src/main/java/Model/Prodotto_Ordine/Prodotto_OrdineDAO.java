@@ -2,10 +2,10 @@ package Model.Prodotto_Ordine;
 
 import Model.Storage.DAO;
 import Model.Storage.SQLDAO;
+import Utils.InvalidPrimaryKeyException;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +25,14 @@ public class Prodotto_OrdineDAO extends SQLDAO implements DAO<Prodotto_Ordine> {
 
     @Override
     public Prodotto_Ordine doRetrieveByKey(Object... key) throws SQLException {
-        return null;
+
+        if (key == null || key.length != 4)
+            throw new InvalidPrimaryKeyException();
+
+        List<Prodotto_Ordine> prodotto_Ordine = doRetrieveByCondition(
+                String.format("%s.email_utente = '%s' AND %s.codice_ordine = '%s' AND %s.codice_gioco = '%s' AND %s.data_ora_creazione = '%s'",
+                        PRODOTTI_ORDINI, key[0], PRODOTTI_ORDINI, key[1], PRODOTTI_ORDINI, key[2], PRODOTTI_ORDINI, key[3]));
+        return prodotto_Ordine.isEmpty() ? null : prodotto_Ordine.get(0);
     }
 
     @Override
@@ -37,14 +44,7 @@ public class Prodotto_OrdineDAO extends SQLDAO implements DAO<Prodotto_Ordine> {
     @Override
     public boolean doSave(Prodotto_Ordine obj) throws SQLException {
 
-        return genericDoSave(PRODOTTI_ORDINI, new HashMap<>() {{
-                    put("email_utente", obj.getEmail_utente());
-                    put("codice_ordine", obj.getCodice_ordine());
-                    put("codice_gioco", obj.getCodice_gioco());
-                    put("data_ora_creazione", obj.getData_ora_creazione().toString());
-                    put("quantità", obj.getQuantita());
-                }},
-                this.source);
+        return genericDoSave(PRODOTTI_ORDINI, obj.toHashMap(), this.source);
     }
 
     @Override
@@ -55,7 +55,13 @@ public class Prodotto_OrdineDAO extends SQLDAO implements DAO<Prodotto_Ordine> {
 
     @Override
     public boolean doSaveOrUpdate(Prodotto_Ordine obj) throws SQLException {
-        return false;
+
+        if (doRetrieveByKey(obj.getEmail_utente(), obj.getCodice_ordine(), obj.getCodice_gioco(), obj.getData_ora_creazione().toString()) == null)
+            return doSave(obj);
+
+        return doUpdate(obj.toHashMap(),
+                String.format("%s.email_utente = '%s' AND %s.codice_ordine = '%s' AND %s.codice_gioco = '%s' AND %s.data_ora_creazione = '%s'",
+                        PRODOTTI_ORDINI, obj.getCodice_ordine(), PRODOTTI_ORDINI, obj.getCodice_ordine(), PRODOTTI_ORDINI, obj.getCodice_gioco(), PRODOTTI_ORDINI, obj.getData_ora_creazione().toString()));
     }
 
     @Override

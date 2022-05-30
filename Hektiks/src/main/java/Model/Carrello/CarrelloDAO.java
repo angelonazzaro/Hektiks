@@ -6,7 +6,8 @@ import Utils.InvalidPrimaryKeyException;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 import static Model.Storage.Entities.CARRELLI;
 
@@ -25,7 +26,7 @@ public class CarrelloDAO extends SQLDAO implements DAO<Carrello> {
     @Override
     public Carrello doRetrieveByKey(Object... key) throws SQLException, InvalidPrimaryKeyException {
 
-        if(key.length != 2)
+        if(key == null || key.length != 2)
             throw new InvalidPrimaryKeyException();
 
         List<Carrello> carrello = doRetrieveByCondition(
@@ -43,12 +44,7 @@ public class CarrelloDAO extends SQLDAO implements DAO<Carrello> {
     @Override
     public boolean doSave(Carrello obj) throws SQLException {
 
-        return genericDoSave(CARRELLI, new HashMap<>() {{
-            put("email_utente", obj.getEmail_utente());
-            put("data_creazione", obj.getData_creazione().toString());
-            put("data_modifica", obj.getData_modifica().toString());
-
-        }}, this.source);
+        return genericDoSave(CARRELLI, obj.toHashMap(), this.source);
     }
 
     @Override
@@ -63,12 +59,9 @@ public class CarrelloDAO extends SQLDAO implements DAO<Carrello> {
         if (doRetrieveByKey(obj.getEmail_utente(), obj.getData_creazione().toString()) == null)
             return doSave(obj);
 
-        return doUpdate(new HashMap<>() {{
-            put("email_utente", obj.getEmail_utente());
-            put("data_creazione", obj.getData_creazione().toString());
-            put("data_modifica", obj.getData_modifica().toString());
-
-        }}, CARRELLI + ".email_utente = " + "'" + obj.getEmail_utente() + "'");
+        return doUpdate(obj.toHashMap(),
+                String.format("%s.email_utente = '%s' AND %s.data_creazione = '%s'",
+                        CARRELLI, obj.getEmail_utente(), CARRELLI, obj.getData_creazione().toString()));
     }
 
     @Override

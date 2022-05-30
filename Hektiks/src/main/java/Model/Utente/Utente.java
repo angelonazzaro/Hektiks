@@ -1,5 +1,7 @@
 package Model.Utente;
 
+import Model.Storage.IEntity;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigInteger;
@@ -7,8 +9,9 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
+import java.util.HashMap;
 
-public class Utente implements Serializable {
+public class Utente implements Serializable, IEntity {
 
     @Serial
     private static final long serialVersionUID = 6645001885280633923L;
@@ -36,6 +39,24 @@ public class Utente implements Serializable {
                 ", saldo=" + saldo +
                 ", biografia='" + biografia + '\'' +
                 '}';
+    }
+
+    @Override
+    public HashMap<String, ?> toHashMap() {
+
+        return new HashMap<>() {
+            {
+                put("email", email);
+                put("nome", nome);
+                put("cognome", cognome);
+                put("username", username);
+                put("password_utente", password_utente);
+                put("data_registrazione", data_registrazione.toString());
+                put("ruolo", ruolo);
+                put("saldo", saldo);
+                put("biografia", biografia);
+            }
+        };
     }
 
     public String getEmail() {
@@ -75,6 +96,7 @@ public class Utente implements Serializable {
     }
 
     public void setPassword_utente(String password_utente) {
+
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-1");
             digest.reset();

@@ -16,7 +16,7 @@ public class ScontoExtractor implements ResultSetExtractor<Sconto> {
         sconto.setCodice_gioco(resultSet.getString(SCONTI + ".codice_gioco"));
         sconto.setCodice_sconto(resultSet.getString(SCONTI + ".codice_sconto"));
         sconto.setData_creazione(resultSet.getDate(SCONTI + ".data_creazione"));
-        sconto.setPrecentuale(resultSet.getByte(SCONTI + ".precentuale"));
+        sconto.setPercentuale(resultSet.getByte(SCONTI + ".percentuale"));
         sconto.setData_fine(resultSet.getDate(SCONTI + ".data_fine"));
 
         return sconto;

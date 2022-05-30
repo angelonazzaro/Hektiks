@@ -1,10 +1,13 @@
 package Model.Sconto;
 
+import Model.Storage.IEntity;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.HashMap;
 
-public class Sconto implements Serializable  {
+public class Sconto implements Serializable, IEntity {
 
     @Serial
     private static final long serialVersionUID = -6140573396807378229L;
@@ -12,7 +15,7 @@ public class Sconto implements Serializable  {
     private String codice_sconto;
     private String codice_gioco;
     private Date data_creazione;
-    private byte precentuale;
+    private byte percentuale;
     private Date data_fine;
 
     @Override
@@ -21,9 +24,23 @@ public class Sconto implements Serializable  {
                 "codice_sconto='" + codice_sconto + '\'' +
                 ", codice_gioco='" + codice_gioco + '\'' +
                 ", data_creazione=" + data_creazione +
-                ", precentuale=" + precentuale +
+                ", percentuale=" + percentuale +
                 ", data_fine=" + data_fine +
                 '}';
+    }
+
+    @Override
+    public HashMap<String, ?> toHashMap() {
+
+        return new HashMap<>() {
+            {
+                put("codice_gioco", codice_gioco);
+                put("codice_sconto", codice_sconto);
+                put("data_creazione", data_creazione);
+                put("percentuale", percentuale);
+                put("data_fine", data_fine.toString());
+            }
+        };
     }
 
     public String getCodice_sconto() {
@@ -50,12 +67,12 @@ public class Sconto implements Serializable  {
         this.data_creazione = data_creazione;
     }
 
-    public byte getPrecentuale() {
-        return precentuale;
+    public byte getPercentuale() {
+        return percentuale;
     }
 
-    public void setPrecentuale(byte precentuale) {
-        this.precentuale = precentuale;
+    public void setPercentuale(byte percentuale) {
+        this.percentuale = percentuale;
     }
 
     public Date getData_fine() {
@@ -65,5 +82,4 @@ public class Sconto implements Serializable  {
     public void setData_fine(Date data_fine) {
         this.data_fine = data_fine;
     }
-
 }

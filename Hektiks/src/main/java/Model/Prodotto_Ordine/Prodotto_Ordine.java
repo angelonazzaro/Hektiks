@@ -1,10 +1,13 @@
 package Model.Prodotto_Ordine;
 
+import Model.Storage.IEntity;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.HashMap;
 
-public class Prodotto_Ordine implements Serializable  {
+public class Prodotto_Ordine implements Serializable, IEntity {
 
     @Serial
     private static final long serialVersionUID = -4914161285010290458L;
@@ -24,6 +27,21 @@ public class Prodotto_Ordine implements Serializable  {
                 ", data_ora_creazione=" + data_ora_creazione +
                 ", quantita=" + quantita +
                 '}';
+    }
+
+
+    @Override
+    public HashMap<String, ?> toHashMap() {
+
+        return new HashMap<>() {
+            {
+                put("email_utente", email_utente);
+                put("codice_ordine", codice_ordine);
+                put("codice_gioco", codice_gioco);
+                put("data_ora_creazione", data_ora_creazione.toString());
+                put("quantita", quantita);
+            }
+        };
     }
 
     public String getEmail_utente() {

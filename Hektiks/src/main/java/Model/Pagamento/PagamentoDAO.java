@@ -2,10 +2,10 @@ package Model.Pagamento;
 
 import Model.Storage.DAO;
 import Model.Storage.SQLDAO;
+import Utils.InvalidPrimaryKeyException;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +26,12 @@ public class PagamentoDAO extends SQLDAO implements DAO<Pagamento> {
     @Override
     public Pagamento doRetrieveByKey(Object... key) throws SQLException {
 
-        List<Pagamento> pagamento = doRetrieveByCondition(PAGAMENTI + ".email_utente = " + "'" + key.toString() + "'");
+        if (key == null || key.length != 3)
+            throw new InvalidPrimaryKeyException();
+
+        List<Pagamento> pagamento = doRetrieveByCondition(
+                String.format("%s.email_utente = '%s' AND %s.codice_ordine = '%s' AND %s.data_ora_pagamento = '%s'",
+                        PAGAMENTI, key[0], PAGAMENTI, key[1], PAGAMENTI, key[2]));
         return pagamento.isEmpty() ? null : pagamento.get(0);
     }
 
@@ -39,14 +44,7 @@ public class PagamentoDAO extends SQLDAO implements DAO<Pagamento> {
     @Override
     public boolean doSave(Pagamento obj) throws SQLException {
 
-        return genericDoSave(PAGAMENTI, new HashMap<>() {{
-                    put("email_utente", obj.getEmail_utente());
-                    put("codice_ordine", obj.getCodice_ordine());
-                    put("data_ora_pagamento", obj.getData_ora_pagamento().toString());
-                    put("importo", obj.getImporto());
-
-                }},
-                this.source);
+        return genericDoSave(PAGAMENTI, obj.toHashMap(), this.source);
     }
 
     @Override
@@ -57,7 +55,13 @@ public class PagamentoDAO extends SQLDAO implements DAO<Pagamento> {
 
     @Override
     public boolean doSaveOrUpdate(Pagamento obj) throws SQLException {
-        return false;
+
+        if (doRetrieveByKey(obj.getEmail_utente(), obj.getCodice_ordine(), obj.getData_ora_pagamento().toString()) == null)
+            return doSave(obj);
+
+        return doUpdate(obj.toHashMap(),
+                String.format("%s.email_utente = '%s' AND %s.codice_ordine = '%s' AND %s.data_ora_pagamento = '%s'",
+                    PAGAMENTI, obj.getEmail_utente(), PAGAMENTI, obj.getCodice_ordine(), PAGAMENTI,  obj.getData_ora_pagamento().toString()));
     }
 
     @Override
