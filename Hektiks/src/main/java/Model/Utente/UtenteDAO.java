@@ -23,7 +23,7 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
     }
 
     @Override
-    public Utente doRetrieveByKey(Object... key) throws SQLException {
+    public Utente doRetrieveByKey(String... key) throws SQLException {
 
         if (key == null || key.length != 1)
             throw new InvalidPrimaryKeyException();

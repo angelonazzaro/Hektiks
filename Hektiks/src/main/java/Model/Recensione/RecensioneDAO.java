@@ -24,7 +24,7 @@ public class RecensioneDAO extends SQLDAO implements DAO<Recensione> {
     }
 
     @Override
-    public Recensione doRetrieveByKey(Object... key) throws SQLException {
+    public Recensione doRetrieveByKey(String... key) throws SQLException {
 
         if (key == null || key.length != 3)
             throw new InvalidPrimaryKeyException();

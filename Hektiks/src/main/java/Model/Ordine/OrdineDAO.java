@@ -24,7 +24,7 @@ public class OrdineDAO extends SQLDAO implements DAO<Ordine> {
     }
 
     @Override
-    public Ordine doRetrieveByKey(Object... key) throws SQLException {
+    public Ordine doRetrieveByKey(String... key) throws SQLException {
 
         if (key == null || key.length != 2)
             throw new InvalidPrimaryKeyException();

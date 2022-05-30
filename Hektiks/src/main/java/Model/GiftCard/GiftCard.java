@@ -34,7 +34,7 @@ public class GiftCard implements Serializable, IEntity {
 
         return new HashMap<>() {
             {
-                put("codice_giftcard", codice_giftCard);
+                put("codice_giftCard", codice_giftCard);
                 put("email_utente", email_utente);
                 put("importo", importo);
                 put("data_ora_creazione", data_ora_creazione.toString());

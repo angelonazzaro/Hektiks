@@ -24,7 +24,7 @@ public class GiftCardDAO extends SQLDAO implements DAO<GiftCard> {
     }
 
     @Override
-    public GiftCard doRetrieveByKey(Object... key) throws SQLException {
+    public GiftCard doRetrieveByKey(String... key) throws SQLException {
 
         if(key == null || key.length != 1)
             throw new InvalidPrimaryKeyException();

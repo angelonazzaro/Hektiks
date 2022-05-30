@@ -24,7 +24,7 @@ public class GenereDAO extends SQLDAO implements DAO<Genere> {
     }
 
     @Override
-    public Genere doRetrieveByKey(Object... key) throws SQLException {
+    public Genere doRetrieveByKey(String... key) throws SQLException {
 
         if (key == null || key.length != 1)
             throw new InvalidPrimaryKeyException();

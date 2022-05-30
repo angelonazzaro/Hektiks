@@ -24,7 +24,7 @@ public class PagamentoDAO extends SQLDAO implements DAO<Pagamento> {
     }
 
     @Override
-    public Pagamento doRetrieveByKey(Object... key) throws SQLException {
+    public Pagamento doRetrieveByKey(String... key) throws SQLException {
 
         if (key == null || key.length != 3)
             throw new InvalidPrimaryKeyException();

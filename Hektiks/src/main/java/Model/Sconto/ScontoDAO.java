@@ -24,7 +24,7 @@ public class ScontoDAO extends SQLDAO implements DAO<Sconto> {
     }
 
     @Override
-    public Sconto doRetrieveByKey(Object... key) throws SQLException {
+    public Sconto doRetrieveByKey(String... key) throws SQLException {
 
         if (key == null || key.length != 2)
             throw new InvalidPrimaryKeyException();

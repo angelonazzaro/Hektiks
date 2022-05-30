@@ -24,7 +24,7 @@ public class CarrelloDAO extends SQLDAO implements DAO<Carrello> {
     }
 
     @Override
-    public Carrello doRetrieveByKey(Object... key) throws SQLException, InvalidPrimaryKeyException {
+    public Carrello doRetrieveByKey(String... key) throws SQLException, InvalidPrimaryKeyException {
 
         if(key == null || key.length != 2)
             throw new InvalidPrimaryKeyException();

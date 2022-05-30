@@ -14,7 +14,7 @@ public class GiftCardExtractor implements ResultSetExtractor<GiftCard> {
 
         GiftCard giftCard = new GiftCard();
 
-        giftCard.setCodice_giftCard(resultSet.getString(GIFTCARDS + ".codice_giftcard"));
+        giftCard.setCodice_giftCard(resultSet.getString(GIFTCARDS + ".codice_giftCard"));
         giftCard.setEmail_utente(resultSet.getString(GIFTCARDS + ".email_utente"));
         giftCard.setImporto(resultSet.getDouble(GIFTCARDS + ".importo"));
         giftCard.setData_ora_creazione(resultSet.getTimestamp(GIFTCARDS + ".data_ora_creazione"));

@@ -24,7 +24,7 @@ public class GiocoDAO extends SQLDAO implements DAO<Gioco> {
     }
 
     @Override
-    public Gioco doRetrieveByKey(Object... key) throws SQLException {
+    public Gioco doRetrieveByKey(String... key) throws SQLException {
 
         if(key == null || key.length != 1)
             throw new InvalidPrimaryKeyException();
