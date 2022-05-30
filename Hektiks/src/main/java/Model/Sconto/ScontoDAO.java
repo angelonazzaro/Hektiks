@@ -2,10 +2,10 @@ package Model.Sconto;
 
 import Model.Storage.DAO;
 import Model.Storage.SQLDAO;
+import Utils.InvalidPrimaryKeyException;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +24,18 @@ public class ScontoDAO extends SQLDAO implements DAO<Sconto> {
     }
 
     @Override
+    public Sconto doRetrieveByKey(String... key) throws SQLException {
+
+        if (key == null || key.length != 2)
+            throw new InvalidPrimaryKeyException();
+
+        List<Sconto> sconto = doRetrieveByCondition(
+                String.format("%s.codice_sconto = '%s' AND %s.codice_gioco = '%s'",
+                        SCONTI, key[0], SCONTI, key[1]));
+        return sconto.isEmpty() ? null : sconto.get(0);
+    }
+
+    @Override
     public List<Sconto> doRetrieveAll() throws SQLException {
 
         return doRetrieveByCondition("TRUE");
@@ -32,20 +44,24 @@ public class ScontoDAO extends SQLDAO implements DAO<Sconto> {
     @Override
     public boolean doSave(Sconto obj) throws SQLException {
 
-        return genericDoSave(SCONTI, new HashMap<>() {{
-                    put("codice_gioco", obj.getCodice_gioco());
-                    put("codice_sconto", obj.getCodice_sconto());
-                    put("data_creazione", obj.getData_creazione());
-                    put("precentuale", obj.getPrecentuale());
-                    put("data_fine", obj.getData_fine().toString());
-                }},
-                this.source);
+        return genericDoSave(SCONTI, obj.toHashMap(), this.source);
     }
 
     @Override
     public boolean doUpdate(Map<String, ?> values, String condition) throws SQLException {
 
         return genericDoUpdate(SCONTI, condition, values, this.source);
+    }
+
+    @Override
+    public boolean doSaveOrUpdate(Sconto obj) throws SQLException {
+
+        if (doRetrieveByKey(obj.getCodice_sconto(), obj.getCodice_gioco()) == null)
+            return doSave(obj);
+
+        return doUpdate(obj.toHashMap(),
+                String.format("%s.codice_sconto = '%s' AND %s.codice_gioco = '%s'",
+                    SCONTI, obj.getCodice_sconto(), SCONTI, obj.getCodice_gioco()));
     }
 
     @Override

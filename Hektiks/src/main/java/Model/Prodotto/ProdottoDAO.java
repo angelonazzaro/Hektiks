@@ -2,10 +2,10 @@ package Model.Prodotto;
 
 import Model.Storage.DAO;
 import Model.Storage.SQLDAO;
+import Utils.InvalidPrimaryKeyException;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +24,18 @@ public class ProdottoDAO extends SQLDAO implements DAO<Prodotto> {
     }
 
     @Override
+    public Prodotto doRetrieveByKey(String... key) throws SQLException {
+
+        if (key == null || key.length != 2)
+            throw new InvalidPrimaryKeyException();
+
+        List<Prodotto> prodotto = doRetrieveByCondition(
+                String.format("%s.email_utente = '%s' AND %s.codice_gioco = '%s'",
+                        PRODOTTI, key[0], PRODOTTI, key[1]));
+        return prodotto.isEmpty() ? null : prodotto.get(0);
+    }
+
+    @Override
     public List<Prodotto> doRetrieveAll() throws SQLException {
 
         return doRetrieveByCondition("TRUE");
@@ -32,18 +44,24 @@ public class ProdottoDAO extends SQLDAO implements DAO<Prodotto> {
     @Override
     public boolean doSave(Prodotto obj) throws SQLException {
 
-        return genericDoSave(PRODOTTI, new HashMap<>() {{
-                    put("email_utente", obj.getEmail_utente());
-                    put("codice_gioco", obj.getCodice_gioco());
-                    put("quantita_disponibile", obj.getQuantita_disponibile());
-                }},
-                this.source);
+        return genericDoSave(PRODOTTI, obj.toHashMap(), this.source);
     }
 
     @Override
     public boolean doUpdate(Map<String, ?> values, String condition) throws SQLException {
 
         return genericDoUpdate(PRODOTTI, condition, values, this.source);
+    }
+
+    @Override
+    public boolean doSaveOrUpdate(Prodotto obj) throws SQLException {
+
+        if (doRetrieveByKey(obj.getEmail_utente(), obj.getCodice_gioco()) == null)
+            return doSave(obj);
+
+        return doUpdate(obj.toHashMap(),
+                String.format("%s.email_utente = '%s' AND %s.codice_gioco = '%s'",
+                    PRODOTTI, obj.getEmail_utente(), PRODOTTI, obj.getCodice_gioco()));
     }
 
     @Override

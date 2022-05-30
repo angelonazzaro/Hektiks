@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import static Model.Storage.Entities.GIOCHI;
 
-public class GiocoExtracotor implements ResultSetExtractor<Gioco> {
+public class GiocoExtractor implements ResultSetExtractor<Gioco> {
 
     @Override
     public Gioco extract(ResultSet resultSet) throws SQLException {

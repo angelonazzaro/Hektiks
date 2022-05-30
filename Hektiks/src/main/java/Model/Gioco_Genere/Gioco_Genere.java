@@ -1,9 +1,12 @@
 package Model.Gioco_Genere;
 
+import Model.Storage.IEntity;
+
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.HashMap;
 
-public class Gioco_Genere implements Serializable {
+public class Gioco_Genere implements Serializable, IEntity {
 
     @Serial
     private static final long serialVersionUID = -1076342045661803008L;
@@ -17,6 +20,17 @@ public class Gioco_Genere implements Serializable {
                 "codice_gioco='" + codice_gioco + '\'' +
                 ", nome_genere='" + nome_genere + '\'' +
                 '}';
+    }
+
+    @Override
+    public HashMap<String, ?> toHashMap() {
+
+        return new HashMap<>() {
+            {
+                put("codice_gioco", codice_gioco);
+                put("nome_genere", nome_genere);
+            }
+        };
     }
 
     public String getCodice_gioco() {

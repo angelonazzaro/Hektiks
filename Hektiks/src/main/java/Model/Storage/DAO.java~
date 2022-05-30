@@ -22,6 +22,7 @@ public interface DAO<T> {
     * Object... key -> String... key questo perchè nel db abbiamo tutte
     * primary key di tipo char/varchar/date/datetime
     */
+
     T doRetrieveByKey(String... key) throws SQLException, InvalidPrimaryKeyException;
 
     List<T> doRetrieveAll() throws SQLException;

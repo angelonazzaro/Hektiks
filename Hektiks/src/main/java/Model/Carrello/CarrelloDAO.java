@@ -2,10 +2,12 @@ package Model.Carrello;
 
 import Model.Storage.DAO;
 import Model.Storage.SQLDAO;
+import Utils.InvalidPrimaryKeyException;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 import static Model.Storage.Entities.CARRELLI;
 
@@ -22,6 +24,17 @@ public class CarrelloDAO extends SQLDAO implements DAO<Carrello> {
     }
 
     @Override
+    public Carrello doRetrieveByKey(String... key) throws SQLException, InvalidPrimaryKeyException {
+
+        if(key == null || key.length != 2)
+            throw new InvalidPrimaryKeyException();
+
+        List<Carrello> carrello = doRetrieveByCondition(
+                String.format("%s.email_utente = '%s' AND %s.data_creazione = '%s'", CARRELLI, key[0], CARRELLI, key[1]));
+        return carrello.isEmpty() ? null : carrello.get(0);
+    }
+
+    @Override
     public List<Carrello> doRetrieveAll() throws SQLException {
 
         return doRetrieveByCondition("TRUE");
@@ -31,18 +44,24 @@ public class CarrelloDAO extends SQLDAO implements DAO<Carrello> {
     @Override
     public boolean doSave(Carrello obj) throws SQLException {
 
-        return genericDoSave(CARRELLI, new HashMap<>() {{
-            put("email_utente", obj.getEmail_utente());
-            put("data_creazione", obj.getData_creazione().toString());
-            put("data_modifica", obj.getData_modifica().toString());
-
-        }}, this.source);
+        return genericDoSave(CARRELLI, obj.toHashMap(), this.source);
     }
 
     @Override
     public boolean doUpdate(Map<String, ?> values, String condition) throws SQLException {
 
         return genericDoUpdate(CARRELLI, condition, values, this.source);
+    }
+
+    @Override
+    public boolean doSaveOrUpdate(Carrello obj) throws SQLException {
+
+        if (doRetrieveByKey(obj.getEmail_utente(), obj.getData_creazione().toString()) == null)
+            return doSave(obj);
+
+        return doUpdate(obj.toHashMap(),
+                String.format("%s.email_utente = '%s' AND %s.data_creazione = '%s'",
+                        CARRELLI, obj.getEmail_utente(), CARRELLI, obj.getData_creazione().toString()));
     }
 
     @Override

@@ -1,18 +1,23 @@
 package Controller;
 
-import java.io.*;
-import java.sql.Date;
-import java.sql.SQLException;
-import java.util.List;
-
+import Model.GiftCard.GiftCardDAO;
 import Model.Utente.Utente;
 import Model.Utente.UtenteDAO;
 import Utils.JSONResponse;
 import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.*;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import javax.sql.DataSource;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.Serial;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.util.List;
 
 public class HomeServlet extends HttpServlet {
 
@@ -42,7 +47,16 @@ public class HomeServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         Gson gsonObj = new Gson();
 
+
         if (action.equals("login")) {
+
+            GiftCardDAO c = new GiftCardDAO((DataSource) getServletContext().getAttribute("DataSource"));
+            try {
+                c.doRetrieveByKey("ciccio@a.com");
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
             try {
                 List<Utente> utenti = utenteDAO.doRetrieveByCondition("email='" + email + "' AND password_utente=SHA1('" + password + "')");
 

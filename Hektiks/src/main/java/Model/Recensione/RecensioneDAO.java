@@ -2,10 +2,10 @@ package Model.Recensione;
 
 import Model.Storage.DAO;
 import Model.Storage.SQLDAO;
+import Utils.InvalidPrimaryKeyException;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +24,18 @@ public class RecensioneDAO extends SQLDAO implements DAO<Recensione> {
     }
 
     @Override
+    public Recensione doRetrieveByKey(String... key) throws SQLException {
+
+        if (key == null || key.length != 3)
+            throw new InvalidPrimaryKeyException();
+
+        List<Recensione> recensione = doRetrieveByCondition(
+                String.format("%s.email_utente = '%s' AND %s.data_creazione = '%s' AND %s.data_ora_pubblicazione = '%s'",
+                        RECENSIONI, key[0], RECENSIONI, key[1], RECENSIONI, key[2]));
+        return recensione.isEmpty() ? null : recensione.get(0);
+    }
+
+    @Override
     public List<Recensione> doRetrieveAll() throws SQLException {
 
         return doRetrieveByCondition("TRUE");
@@ -32,20 +44,24 @@ public class RecensioneDAO extends SQLDAO implements DAO<Recensione> {
     @Override
     public boolean doSave(Recensione obj) throws SQLException {
 
-        return genericDoSave(RECENSIONI, new HashMap<>() {{
-                    put("email_utente", obj.getEmail_utente());
-                    put("codice_gioco", obj.getCodice_gioco());
-                    put("data_ora_pubblicazione", obj.getData_ora_pubblicazione().toString());
-                    put("percentuale", obj.getPercentuale());
-                    put("descrizione", obj.getDescrizione());
-                }},
-                this.source);
+        return genericDoSave(RECENSIONI, obj.toHashMap(), this.source);
     }
 
     @Override
     public boolean doUpdate(Map<String, ?> values, String condition) throws SQLException {
 
         return genericDoUpdate(RECENSIONI, condition, values, this.source);
+    }
+
+    @Override
+    public boolean doSaveOrUpdate(Recensione obj) throws SQLException {
+
+        if (doRetrieveByKey(obj.getEmail_utente(), obj.getCodice_gioco(), obj.getData_ora_pubblicazione().toString()) == null)
+            return doSave(obj);
+
+        return doUpdate(obj.toHashMap(),
+                String.format("%s.email_utente = '%s' AND %s.data_creazione = '%s' AND %s.data_ora_pubblicazione = '%s'",
+                    RECENSIONI, obj.getEmail_utente(), RECENSIONI, obj.getCodice_gioco(), RECENSIONI, obj.getData_ora_pubblicazione().toString()));
     }
 
     @Override

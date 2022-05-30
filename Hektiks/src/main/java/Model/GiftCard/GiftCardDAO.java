@@ -2,10 +2,10 @@ package Model.GiftCard;
 
 import Model.Storage.DAO;
 import Model.Storage.SQLDAO;
+import Utils.InvalidPrimaryKeyException;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +24,17 @@ public class GiftCardDAO extends SQLDAO implements DAO<GiftCard> {
     }
 
     @Override
+    public GiftCard doRetrieveByKey(String... key) throws SQLException {
+
+        if(key == null || key.length != 1)
+            throw new InvalidPrimaryKeyException();
+
+        List<GiftCard> giftCard = doRetrieveByCondition(
+                String.format("%s.codice_giftCard = '%s'", GIFTCARDS, key[0]));
+        return giftCard.isEmpty() ? null : giftCard.get(0);
+    }
+
+    @Override
     public List<GiftCard> doRetrieveAll() throws SQLException {
 
         return doRetrieveByCondition("TRUE");
@@ -32,21 +43,23 @@ public class GiftCardDAO extends SQLDAO implements DAO<GiftCard> {
     @Override
     public boolean doSave(GiftCard obj) throws SQLException {
 
-        return genericDoSave(GIFTCARDS, new HashMap<>() {{
-
-            put("codice_giftcard", obj.getCodice_giftCard());
-            put("email_utente", obj.getEmail_utente());
-            put("importo", obj.getImporto());
-            put("data_ora_creazione", obj.getData_ora_creazione().toString());
-            put("data_ora_utilizzo", obj.getData_ora_utilizzo().toString());
-
-        }}, this.source);
+        return genericDoSave(GIFTCARDS, obj.toHashMap(), this.source);
     }
 
     @Override
     public boolean doUpdate(Map<String, ?> values, String condition) throws SQLException {
 
         return genericDoUpdate(GIFTCARDS, condition, values, this.source);
+    }
+
+    @Override
+    public boolean doSaveOrUpdate(GiftCard obj) throws SQLException {
+
+        if (doRetrieveByKey(obj.getCodice_giftCard()) == null)
+            return doSave(obj);
+
+        return doUpdate(obj.toHashMap(),
+                String.format("%s.codice_giftCard = '%s'", GIFTCARDS, obj.getCodice_giftCard()));
     }
 
     @Override
