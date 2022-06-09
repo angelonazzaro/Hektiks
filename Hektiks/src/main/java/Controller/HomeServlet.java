@@ -28,9 +28,10 @@ public class HomeServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         request.setAttribute("title", "Hektiks | Home Page");
+        GiocoDAO giocoDAO = new GiocoDAO((DataSource) getServletContext().getAttribute("DataSource"));
 
         try {
-            request.setAttribute("giochi", new GiocoDAO((DataSource) getServletContext().getAttribute("DataSource")).doRetrieveAll());
+            request.setAttribute("giochi", giocoDAO.doRetrieveAll(9));
         } catch (SQLException e) {
             e.printStackTrace();
         }

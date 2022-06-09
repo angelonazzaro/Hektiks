@@ -10,7 +10,7 @@ CREATE TABLE Utenti (
     nome VARCHAR(35) NOT NULL,
     cognome VARCHAR(35) NOT NULL,
     username VARCHAR(25) NOT NULL,
-    password_utente VARCHAR(320) NOT NULL,
+    password_utente VARCHAR(40) NOT NULL,
     data_registrazione DATE NOT NULL,
     ruolo BOOL NOT NULL DEFAULT FALSE, -- TRUE per Admin, FALSE per User
     saldo DECIMAL (10, 2) NOT NULL CHECK (saldo >= 0) DEFAULT 0, 
@@ -27,12 +27,12 @@ CREATE TABLE Generi (
 CREATE TABLE Giochi (
 
 	codice_gioco CHAR(6) PRIMARY KEY,
-	titolo VARCHAR(35) NOT NULL,
+	titolo VARCHAR(55) NOT NULL,
     descrizione TEXT NOT NULL,
     trailer VARCHAR(2048) NOT NULL,
     data_uscita DATE NOT NULL,
     copertina VARCHAR(2048) NOT NULL,
-    prezzo DECIMAL (5, 2) NOT NULL CHECK (prezzo > 0), 
+    prezzo DECIMAL (5, 2) NOT NULL CHECK (prezzo >= 0), 
 	quantita_disponibile INT UNSIGNED NOT NULL,
     numero_vendite INT UNSIGNED NOT NULL DEFAULT 0,
     

@@ -165,26 +165,118 @@ INSERT INTO Giochi VALUES
 	19.99, 
 	50, 
 	4
-);
--- ALTRI GIOCHI
-/*("FNx9td", "Dying Light 2 Stay Human", "", "", "", "", "", 50, 4),
-("6PiPPb", "Hitman 3", "", "", "", "", "", 50, 4),
-("fBqTqo", "Postal 4: No Regerts", "", "", "", "", "", 50, 4),
-("nOWiwe", "Forgive me Father", "", "", "", "", "", 50, 4),
-("hUnUBt", "Call of Duty: Vanguard Ultimate Edition", "", "", "", "", "", 50, 4),
-("5ywyXE", "Cyberpunk 2077", "", "", "", "", "", 50, 4),
-("Hg1Ssx", "MotoGP 22", "", "", "", "", "", 50, 4),
-("KKzHol", "Football Manager 2022", "", "", "", "", "", 50, 4),
-("81mzZG", "Terraformers", "", "", "", "", "", 50, 4),
-("bgvLci", "WWE 2K22", "", "", "", "", "", 50, 4),
-("umPIPT", "WWE 2K22 Deluxe Edition", "", "", "", "", "", 50, 4),
-("3cssyj", "For Honor", "", "", "", "", "", 50, 4),
-("yHrgCW", "Batman: Arkham Origins", "", "", "", "", "", 50, 4),
-("oYxZfy", "Elex II", "", "", "", "", "", 50, 4),
-("GrOoDB", "Age of Empires IV", "", "", "", "", "", 50, 4),
-("6jGIUW", "Motorcycle Mechanic Simulator 2021", "", "", "", "", "", 50, 4),
-("Q6HnRX", "Wanderer", "", "", "", "", "", 50, 4),
-("aKFt3e", "Resident Evil 7 Biohazard", "", "", "", "", "", 50, 4);*/
+),
+(
+	"FNx9td", 
+	"Hitman 3", 
+	"Hitman 3 per PC è l'ottavo della serie Hitman e l'episodio finale della trilogia di World of Assassination, 
+	composta da Hitman, Hitman 2 e ora Hitman 3. La trilogia segue un arco narrativo che si conclude in questo gioco 
+	giocando la modalità giocatore singolo. In questo gioco, il sicario geneticamente modificato, l'Agente 47, 
+	ha il compito di trovare ed eliminare i leader della cabala segreta, la Provvidenza, che controlla tutti gli affari mondiali.", 
+	"https://www.youtube.com/watch?v=Z29ORu6_p34&ab_channel=IGN", 
+	"2022-01-20", 
+	"https://s3.gaming-cdn.com/images/products/6851/616x353/hitman-3-pc-gioco-epic-games-europe-cover.jpg?v=1644802754", 
+	60.00, 
+	50, 
+	13
+),
+(
+	"5ywyXE", 
+	"Cyberpunk 2077", 
+	"Cyberpunk 2077 per PC è un gioco sparatutto in prima persona, ma con una differenza. 
+    É ambientato in uno stato distopico della California, in cui le regole della nazione e dello stato non si applicano più. Invece, 
+     giocando come un mercenario di nome V, il giocatore deve muoversi per la città, 
+    raggiungere i propri obiettivi e nel frattempo combattere i nemici.", 
+	"https://www.youtube.com/watch?v=JFf8I_8Ubv4&ab_channel=Cyberpunk2077", 
+	"2020-12-10", 
+	"https://s1.gaming-cdn.com/images/products/840/616x353/cyberpunk-2077-pc-gioco-gog-com-cover.jpg?v=1650474174", 
+	59.00, 
+	89, 
+	47
+),
+(
+	"Q6HnRX", 
+	"Counter-Strike: Global Offensive", 
+	"Counter-Strike: Global Offensive (CS:GO) amplia il gameplay d'azione a squadre presentato per la prima volta 19 anni fa.
+     CS:GO include nuove mappe, personaggi, armi e modalità di gioco e offre versioni aggiornate del classico contenuto di Counter-Strike (de_dust2, ecc.).", 
+	"https://www.youtube.com/watch?v=edYCtaNueQY&ab_channel=Valve", 
+	"2012-08-21", 
+	"https://s1.gaming-cdn.com/images/products/9459/616x353/counter-strike-global-offensive-pc-mac-gioco-steam-cover.jpg?v=1644770250", 
+	0.00, 
+	200, 
+	134
+),
+(
+	"FeS7d3", 
+	"Batman: Arkham Origins", 
+	"Batman: Arkham Origins is the next installment in the blockbuster Batman: Arkham videogame franchise. 
+    Developed by WB Games Montréal, the game features an expanded Gotham City and introduces an original prequel storyline set 
+    several years before the events of Batman: Arkham Asylum and Batman: Arkham City, 
+    the first two critically acclaimed games of the franchise. Taking place before the rise of Gotham City’s most dangerous 
+    criminals, the game showcases a young and unrefined Batman as he faces a defining moment in his early career as a 
+    crime fighter that sets his path to becoming the Dark Knight.", 
+	"https://www.youtube.com/watch?v=9pnK8akbd2M", 
+	"2013-10-25", 
+	"https://s2.gaming-cdn.com/images/products/184/616x353/batman-arkham-origins-pc-gioco-steam-cover.jpg?v=1649085257", 
+	20.00, 
+	45, 
+	39
+),
+(
+	"81mzZG", 
+	"Valorant", 
+	"VALORANT è un FPS competitivo 5 vs 5 basato sui personaggi di Riot. Disponibile ovunque. 
+    Padroneggia decine di armi e abilità diverse, e sfoggia le tue capacità", 
+	"https://www.youtube.com/watch?v=e_E9W2vsRbQ&ab_channel=VALORANT", 
+	"2020-06-02", 
+	"https://s2.gaming-cdn.com/images/products/6568/616x353/valorant-pc-gioco-steam-cover.jpg?v=1646313124", 
+	 0.00, 
+	 80, 
+	 120
+),
+(
+	"3cssyj", 
+	"Tom Clancy's Rainbow Six Siege - Europe", 
+	"Rainbow Six Siege per PC è un gioco sparatutto tattico che si fa online. 
+     C'è una forte enfasi sulla distruzione ambientale e sulla cooperazione tra i giocatori, con ogni giocatore che assume 
+     il controllo di un personaggio da difendere o attaccare in ogni diverso scenario. 
+     Tra le attività da svolgere: il salvataggio di ostaggi, il disinnesco di bombe e la cattura o la difesa di un punto di controllo.", 
+	"https://www.youtube.com/watch?v=weqnfymIU2w&ab_channel=UbisoftItalia", 
+	"2015-11-26", 
+	"https://s2.gaming-cdn.com/images/products/406/616x353/tom-clancy-s-rainbow-six-siege-pc-gioco-ubisoft-connect-europe-cover.jpg?v=1649421231", 
+	20.00, 
+	70, 
+	150
+),
+(
+	"umP3PT", 
+	"Tiny Tina's Wonderlands: Chaotic Great Edition - Europe", 
+	"Vivi un'avventura epica piena di armi uniche, stravaganti e prodigiose! Tuffati nel vortice di proiettili, 
+     lame e magie del caotico mondo fantasy partorito dall'imprevedibile mente di Tiny Tina.
+     Crea il tuo eroe multiclasse, affronta mostri bizzarri e saccheggia dungeon pieni di bottini. Spara, 
+     fendi, lancia incantesimi: la tua missione è fermare il malvagio Signore dei draghi. 
+     Chiunque può unirsi al gruppo e partire all'avventura. La regola è una sola: dimostrare di essere caotici veri!", 
+	"https://www.youtube.com/watch?v=Ikqs6B4ozM0&ab_channel=Borderlands", 
+	"2022-03-25", 
+	"https://s1.gaming-cdn.com/images/products/10386/616x353/tiny-tina-s-wonderlands-chaotic-great-edition-chaotic-great-edition-pc-gioco-epic-games-europe-cover.jpg?v=1648139448", 
+	80.00, 
+	70, 
+	150
+),
+(
+	"8cxsej", 
+	"Assassin's Creed Valhalla: L'alba del Ragnarok - Europe", 
+	"In Assassin's Creed Valhalla: L'alba del Ragnarok, l'espansione più ambiziosa nella storia della serie, 
+    Eivor affronterà il proprio destino nei panni di Odino, il dio norreno della guerra e della saggezza. 
+    Scatena i tuoi nuovi poteri divini in una disperata missione che ti porterà ad attraversare un universo mozzafiato.", 
+	"https://www.youtube.com/watch?v=mlxNLhZ-mG8&ab_channel=Assassin%27sCreedIT", 
+	"2022-03-10", 
+	"https://s1.gaming-cdn.com/images/products/9891/616x353/assassin-s-creed-valhalla-l-alba-del-ragnarok-pc-gioco-ubisoft-connect-europe-cover.jpg?v=1649333093", 
+	40.00, 
+	30, 
+	15
+)
+;
 
 INSERT INTO Giochi_Genere VALUES 
 ("oSzZp3", "Multiplayer"),
@@ -214,7 +306,32 @@ INSERT INTO Giochi_Genere VALUES
 ("zo2ft8", "Singleplayer"),
 ("OkIufY", "Azione"),
 ("OkIufY", "Avventura"),
-("OkIufY", "FPS");
+("OkIufY", "FPS"),
+("8cxsej", "Azione"),
+("8cxsej", "Avventura"),
+("umP3PT", "Azione"),
+("umP3PT", "Avventura"),
+("umP3PT", "Action RPG"),
+("umP3PT", "FPS"),
+("3cssyj", "Azione"),
+("umPIPT", "Avventura"), 
+("3cssyj", "FPS"),
+("81mzZG", "Azione"),
+("81mzZG", "FPS"),
+("81mzZG", "Multiplayer"), 
+("Q6HnRX", "Azione"),
+("Q6HnRX", "FPS"),
+("Q6HnRX", "Multiplayer"),
+("FeS7d3", "Azione"),
+("FeS7d3", "Picchiaduro"),
+("FeS7d3", "Arcade"),
+("FeS7d3", "Singleplayer"),
+("5ywyXE", "Azione"),
+("5ywyXE", "FPS"),
+("5ywyXE", "Singleplayer"),
+("FNx9td", "Azione"),
+("FNx9td", "Avventura"), 
+("FNx9td", "Singleplayer");
 
 INSERT INTO GiftCards VALUES 
 ("y0g63d", NULL, 30.50, NOW(), NULL),
