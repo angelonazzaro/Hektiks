@@ -42,6 +42,18 @@ public class ProdottoDAO extends SQLDAO implements DAO<Prodotto> {
     }
 
     @Override
+    public List<Prodotto> doRetrieveAll(int row_count) throws SQLException {
+
+        return doRetrieveByCondition("TRUE LIMIT " + row_count);
+    }
+
+    @Override
+    public List<Prodotto> doRetrieveAll(int offset, int row_count) throws SQLException {
+
+        return doRetrieveByCondition("TRUE LIMIT " + offset + ", " + row_count);
+    }
+
+    @Override
     public boolean doSave(Prodotto obj) throws SQLException {
 
         return genericDoSave(PRODOTTI, obj.toHashMap(), this.source);

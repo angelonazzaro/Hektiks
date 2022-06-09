@@ -41,6 +41,18 @@ public class GiftCardDAO extends SQLDAO implements DAO<GiftCard> {
     }
 
     @Override
+    public List<GiftCard> doRetrieveAll(int row_count) throws SQLException {
+
+        return doRetrieveByCondition("TRUE LIMIT " + row_count);
+    }
+
+    @Override
+    public List<GiftCard> doRetrieveAll(int offset, int row_count) throws SQLException {
+
+        return doRetrieveByCondition("TRUE LIMIT " + offset + ", " + row_count);
+    }
+
+    @Override
     public boolean doSave(GiftCard obj) throws SQLException {
 
         return genericDoSave(GIFTCARDS, obj.toHashMap(), this.source);

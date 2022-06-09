@@ -42,6 +42,18 @@ public class RecensioneDAO extends SQLDAO implements DAO<Recensione> {
     }
 
     @Override
+    public List<Recensione> doRetrieveAll(int row_count) throws SQLException {
+
+        return doRetrieveByCondition("TRUE LIMIT " + row_count);
+    }
+
+    @Override
+    public List<Recensione> doRetrieveAll(int offset, int row_count) throws SQLException {
+
+        return doRetrieveByCondition("TRUE LIMIT " + offset + ", " + row_count);
+    }
+
+    @Override
     public boolean doSave(Recensione obj) throws SQLException {
 
         return genericDoSave(RECENSIONI, obj.toHashMap(), this.source);

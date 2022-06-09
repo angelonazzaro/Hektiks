@@ -42,6 +42,18 @@ public class OrdineDAO extends SQLDAO implements DAO<Ordine> {
     }
 
     @Override
+    public List<Ordine> doRetrieveAll(int row_count) throws SQLException {
+
+        return doRetrieveByCondition("TRUE LIMIT " + row_count);
+    }
+
+    @Override
+    public List<Ordine> doRetrieveAll(int offset, int row_count) throws SQLException {
+
+        return doRetrieveByCondition("TRUE LIMIT " + offset + ", " + row_count);
+    }
+
+    @Override
     public boolean doSave(Ordine obj) throws SQLException {
 
         return genericDoSave(ORDINI, obj.toHashMap(), this.source);

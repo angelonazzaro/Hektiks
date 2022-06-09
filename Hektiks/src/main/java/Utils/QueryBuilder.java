@@ -181,19 +181,19 @@ public class QueryBuilder {
     /**
      * Appends a "limit" clause to a query.
      *
-     * @param count The limit count.
+     * @param row_count The limit count.
      * @return The {@link QueryBuilder} instance.
      */
 
-    public QueryBuilder LIMIT(int count) {
+    public QueryBuilder LIMIT(int row_count) {
 
-        if (count < 0) {
+        if (row_count < 0) {
 
             throw new IllegalArgumentException();
         }
 
         sqlBuilder.append(" limit ");
-        sqlBuilder.append(count);
+        sqlBuilder.append(row_count);
 
         return this;
     }
@@ -201,21 +201,21 @@ public class QueryBuilder {
     /**
      * Appends a "limit" clause to a query.
      *
-     * @param start Starting offset
-     * @param end   Ending offset
+     * @param offset Starting offset
+     * @param row_count   Ending offset
      * @return The {@link QueryBuilder} instance.
      */
-    public QueryBuilder LIMIT(int start, int end) {
+    public QueryBuilder LIMIT(int offset, int row_count) {
 
-        if (start < 0 || end < 0) {
+        if (offset < 0 || row_count < 0) {
 
             throw new IllegalArgumentException();
         }
 
         sqlBuilder.append(" limit ");
-        sqlBuilder.append(start);
+        sqlBuilder.append(offset);
         sqlBuilder.append(", ");
-        sqlBuilder.append(end);
+        sqlBuilder.append(row_count);
 
         return this;
     }

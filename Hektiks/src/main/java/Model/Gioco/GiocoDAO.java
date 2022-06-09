@@ -41,6 +41,18 @@ public class GiocoDAO extends SQLDAO implements DAO<Gioco> {
     }
 
     @Override
+    public List<Gioco> doRetrieveAll(int row_count) throws SQLException {
+
+        return doRetrieveByCondition("TRUE LIMIT " + row_count);
+    }
+
+    @Override
+    public List<Gioco> doRetrieveAll(int offset, int row_count) throws SQLException {
+
+        return doRetrieveByCondition("TRUE LIMIT " + offset + ", " + row_count);
+    }
+
+    @Override
     public boolean doSave(Gioco obj) throws SQLException {
 
         return genericDoSave(GIOCHI, obj.toHashMap(), this.source);
