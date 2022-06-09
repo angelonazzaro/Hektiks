@@ -43,6 +43,32 @@
                     <% } %>
                 </div>
             </div>
+            <div class="separator">
+                <div class="separator-content">
+                    <div class="feature-card">
+                        <img src="<%= request.getContextPath() %>/assets/images/icons/icon-download.svg" alt="icon download">
+                        <div class="feature-text">
+                            <h5 class="hs-5">Super veloce</h5>
+                            <p class="text">Download digitale instantaneo</p>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <img src="<%= request.getContextPath() %>/assets/images/icons/icon-secure.svg" alt="icon secure">
+                        <div class="feature-text">
+                            <h5 class="hs-5">Affidabile & sicuro</h5>
+                            <p class="text">Più di 10,000 giochi</p>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <img src="<%= request.getContextPath() %>/assets/images/icons/icon-customer-support.svg" alt="icon customer support">
+                        <div class="feature-text">
+                            <h5 class="hs-5">Supporto clienti</h5>
+                            <p class="text">Supporto 24/7</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     <% }%>
 </div>
