@@ -77,6 +77,10 @@
     gap: 2rem;
 }
 
+.login-registration-form > .form-body .form-control {
+    background-color: var(--header-bg);
+}
+
 .login-registration-form .row {
     display: flex;
     flex-direction: row;
