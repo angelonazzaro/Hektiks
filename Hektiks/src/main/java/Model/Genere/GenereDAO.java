@@ -41,6 +41,18 @@ public class GenereDAO extends SQLDAO implements DAO<Genere> {
     }
 
     @Override
+    public List<Genere> doRetrieveAll(int row_count) throws SQLException {
+
+        return doRetrieveByCondition("TRUE LIMIT " + row_count);
+    }
+
+    @Override
+    public List<Genere> doRetrieveAll(int offset, int row_count) throws SQLException {
+
+        return doRetrieveByCondition("TRUE LIMIT " + offset + ", " + row_count);
+    }
+
+    @Override
     public boolean doSave(Genere obj) throws SQLException {
 
         return genericDoSave(GENERI, obj.toHashMap(), this.source);

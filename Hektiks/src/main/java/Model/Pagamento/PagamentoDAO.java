@@ -42,6 +42,18 @@ public class PagamentoDAO extends SQLDAO implements DAO<Pagamento> {
     }
 
     @Override
+    public List<Pagamento> doRetrieveAll(int row_count) throws SQLException {
+
+        return doRetrieveByCondition("TRUE LIMIT " + row_count);
+    }
+
+    @Override
+    public List<Pagamento> doRetrieveAll(int offset, int row_count) throws SQLException {
+
+        return doRetrieveByCondition("TRUE LIMIT " + offset + ", " + row_count);
+    }
+
+    @Override
     public boolean doSave(Pagamento obj) throws SQLException {
 
         return genericDoSave(PAGAMENTI, obj.toHashMap(), this.source);

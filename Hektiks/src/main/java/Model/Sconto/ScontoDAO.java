@@ -42,6 +42,18 @@ public class ScontoDAO extends SQLDAO implements DAO<Sconto> {
     }
 
     @Override
+    public List<Sconto> doRetrieveAll(int row_count) throws SQLException {
+
+        return doRetrieveByCondition("TRUE LIMIT " + row_count);
+    }
+
+    @Override
+    public List<Sconto> doRetrieveAll(int offset, int row_count) throws SQLException {
+
+        return doRetrieveByCondition("TRUE LIMIT " + offset + ", " + row_count);
+    }
+
+    @Override
     public boolean doSave(Sconto obj) throws SQLException {
 
         return genericDoSave(SCONTI, obj.toHashMap(), this.source);

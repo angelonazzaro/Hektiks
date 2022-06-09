@@ -26,6 +26,10 @@ public interface DAO<T> {
 
     List<T> doRetrieveAll() throws SQLException;
 
+    List<T> doRetrieveAll(int row_count) throws SQLException;
+
+    List<T> doRetrieveAll(int offset, int row_count) throws SQLException;
+
     boolean doSave(T obj) throws SQLException;
 
     boolean doUpdate(Map<String, ?> values, String condition) throws SQLException;

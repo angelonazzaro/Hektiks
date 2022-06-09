@@ -40,6 +40,18 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
     }
 
     @Override
+    public List<Utente> doRetrieveAll(int row_count) throws SQLException {
+
+        return doRetrieveByCondition("TRUE LIMIT " + row_count);
+    }
+
+    @Override
+    public List<Utente> doRetrieveAll(int offset, int row_count) throws SQLException {
+
+        return doRetrieveByCondition("TRUE LIMIT " + offset + ", " + row_count);
+    }
+
+    @Override
     public boolean doSave(Utente obj) throws SQLException {
 
         return genericDoSave(UTENTI, obj.toHashMap(), this.source);

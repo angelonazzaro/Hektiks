@@ -58,8 +58,9 @@ public class HomeServlet extends HttpServlet {
         List<Utente> utenti = null;
 
         if (action.equals("login")) {
+
             try {
-                 utenti = utenteDAO.doRetrieveByCondition("email='" + email + "' AND password_utente=SHA1('" + password + "')");
+                utenti = utenteDAO.doRetrieveByCondition("email='" + email + "' AND password_utente=SHA1('" + password + "')");
 
                 if (utenti.isEmpty()) {
                     response.setContentType("application/json");
