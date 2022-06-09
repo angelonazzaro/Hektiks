@@ -137,7 +137,7 @@ INSERT INTO Giochi VALUES
 	È in questo mondo ostile e spietato che dovrà combattere per la sopravvivenza e insegnare a suo figlio a fare lo stesso.", 
 	"https://www.youtube.com/watch?v=RQK_40a0XUY&ab_channel=PlayStation", 
 	"2022-01-14", 
-	"asdasd", 
+	"https://www.instant-gaming.com/images/products/7325/380x218/7325.jpg", 
 	50.00, 
 	50, 
 	200
@@ -149,7 +149,7 @@ INSERT INTO Giochi VALUES
 	Hidetaka Miyazake (famoso per molti popolari videogiochi: dalla serie Souls, a Bloodborne, a Sekiro).", 
 	"https://www.youtube.com/watch?v=AKXiKBnzpBQ&ab_channel=GameSpot", 
 	"2022-02-25", 
-	"asdad", 
+	"https://www.instant-gaming.com/images/products/4824/380x218/4824.jpg", 
 	60.00, 
 	75, 
 	130
@@ -161,7 +161,7 @@ INSERT INTO Giochi VALUES
 	È un gioco sandbox in cui i giocatori devono scavare, costruire e creare il loro mondo ideale", 
 	"https://www.youtube.com/watch?v=MmB9b5njVbA&ab_channel=Minecraft", 
 	"2011-11-19", 
-	"asdasd", 
+	"https://www.instant-gaming.com/images/products/442/380x218/442.jpg", 
 	19.99, 
 	50, 
 	4
@@ -169,8 +169,6 @@ INSERT INTO Giochi VALUES
 -- ALTRI GIOCHI
 /*("FNx9td", "Dying Light 2 Stay Human", "", "", "", "", "", 50, 4),
 ("6PiPPb", "Hitman 3", "", "", "", "", "", 50, 4),
-("ACi702", "Elden Ring", "", "", "", "", "", 50, 4),
-("oTwPW4", "God of War", "", "", "", "", "", 50, 4),
 ("fBqTqo", "Postal 4: No Regerts", "", "", "", "", "", 50, 4),
 ("nOWiwe", "Forgive me Father", "", "", "", "", "", 50, 4),
 ("hUnUBt", "Call of Duty: Vanguard Ultimate Edition", "", "", "", "", "", 50, 4),
@@ -186,7 +184,6 @@ INSERT INTO Giochi VALUES
 ("GrOoDB", "Age of Empires IV", "", "", "", "", "", 50, 4),
 ("6jGIUW", "Motorcycle Mechanic Simulator 2021", "", "", "", "", "", 50, 4),
 ("Q6HnRX", "Wanderer", "", "", "", "", "", 50, 4),
-("oSzZp3", "Minecraft Java Edition", "", "", "", "", "", 50, 4),
 ("aKFt3e", "Resident Evil 7 Biohazard", "", "", "", "", "", 50, 4);*/
 
 INSERT INTO Giochi_Genere VALUES 

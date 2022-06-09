@@ -68,7 +68,7 @@
                 </div>
                 <input type="hidden" name="action" value="register">
                 <div class="form-footer">
-                    <button type="submit" class="btn form-control-submit-btn">Register</button>
+                    <button type="submit" class="btn form-control-submit-btn">Registrati</button>
                     <br>
                     <p>Sei già registrato? <a href="#" class="next-form-btn" data-next-form="login"
                                               data-prev-form="registration">Accedi.</a></p>
