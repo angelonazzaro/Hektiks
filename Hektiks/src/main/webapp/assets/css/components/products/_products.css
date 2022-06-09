@@ -1,0 +1,138 @@
+.products-container {
+    width: 80%;
+    margin: auto;
+    min-height: 100%;
+    text-align: center;
+}
+
+.products-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    margin-bottom: 4rem;
+}
+
+.show-all-btn {
+    background-color: var(--dark-grey);
+    padding: 1rem;
+    border-radius: 35px;
+    transition: background-color 500ms ease;
+}
+
+.show-all-btn:hover {
+    background-color: var(--orange);
+}
+
+.products-content {
+    margin-top: 10px;
+    width: 100%;
+    min-height: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, calc(33.33% - 30px));
+    grid-template-rows: auto;
+    column-gap: 3rem;
+    row-gap: 3rem;
+    justify-items: center;
+    align-self: center;
+}
+
+.card {
+    max-width: 100%;
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+}
+
+.card-header {
+    width: 100%;
+    height: 85%;
+    border-radius: inherit;
+    position: relative;
+    transition: transform 500ms ease;
+}
+
+.card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+}
+
+.discount {
+    z-index: 2;
+    color: white;
+    background-color: var(--orange);
+    font-weight: 700;
+    width: fit-content;
+    padding: 0.4rem;
+    border-radius: 8px 8px 0;
+    position: absolute;
+    top: 100%;
+    transform: translateY(-100%);
+}
+
+.discount::after {
+    transform: skewX(16deg);
+    width: 100%;
+    border-radius: 10px 5px;
+    content: "";
+    position: absolute;
+    background-color: var(--orange);
+    top: 0;
+    bottom: 0;
+    right: -4px;
+    z-index: -1;
+}
+
+.card-body {
+    color: white;
+    margin-top: 0.65rem;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 1rem;
+}
+
+.price {
+    font-weight: bold;
+}
+
+.card-header:hover {
+    transform: scale(1.03);
+}
+
+@media only screen and (max-width: 1400px) {
+    .products-container {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .products-content {
+        grid-template-columns: repeat(2, calc(50%));
+    }
+
+    /*.card-body {*/
+    /*    width: 100%;*/
+    /*    position: absolute;*/
+    /*    top: 80%;*/
+    /*    transform: translateY(-100%);*/
+    /*}*/
+
+    /*.price {*/
+    /*    position: relative;*/
+    /*    right: 0;*/
+    /*}*/
+
+    .name {
+        display: none;
+    }
+}

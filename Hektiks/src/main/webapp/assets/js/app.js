@@ -1,192 +1,116 @@
-const notifier = new AWN({position: "top-right"});
-
-// https://www.freecodecamp.org/news/javascript-debounce-example/
 function debounce(cb, delay = 1000) {
     let timeout;
 
     return (...args) => {
-        clearTimeout(timeout)
+        clearTimeout(timeout);
         timeout = setTimeout(() => {
             cb(...args);
         }, delay);
     };
 }
 
-function addLoader(form) {
-    const submitBtn = form.querySelector("button[type='submit']");
-    // disattivo gli eventi del puntatore sul bottone così che l'utente non possa inviare
-    // più di una richiesta di registrazione per volta
-    submitBtn.style.pointerEvents = "none";
-    const span = submitBtn.querySelector("span");
-    span.textContent = "";
-    span.classList.add("loader");
-}
-
-function removeLoader(form, text = "Invia") {
-    const submitBtn = form.querySelector("button[type='submit']");
-    const span = submitBtn.querySelector("span");
-    span.classList.remove("loader");
-    span.textContent = text;
-    submitBtn.style.pointerEvents = "all";
-}
-
 const burger = document.getElementById("burger");
-const login_reg_section = document.getElementById("login-registration");
+const login_registration_section = document.getElementById(
+    "login-registration-section"
+);
 
-burger.addEventListener("click", () => {
-    burger.classList.toggle("active")
-    if (login_reg_section) {
-        login_reg_section.classList.toggle("active");
-        document.body.classList.toggle("stop-scrolling");
-    }
-});
-
-const eye_icons = document.querySelectorAll("i.fas.fa-eye");
-
-eye_icons.forEach(eye => {
-    eye.addEventListener("click", () => {
-        eye.classList.toggle("fa-eye-slash");
-
-        let type = "password", change_to = "text";
-        if (!eye.classList.contains("fa-eye-slash")) {
-            type = "text";
-            change_to = "password";
-        }
-
-        eye.parentElement.parentElement.querySelector(`input[type=${type}]`).setAttribute("type", change_to);
-    })
-})
-
-// -- REGISTRAZIONE E LOGIN INIZIO --
-const go_to_login = document.querySelector(".login-registration-form__btn[data-form=login]");
-const go_to_reg = document.querySelector(".login-registration-form__btn[data-form=registration]");
-
-if (go_to_login && go_to_reg) {
-
-    const reg_form = go_to_login.parentElement;
-    const login_form = go_to_reg.parentElement;
-
-    go_to_login.addEventListener("click", () => {
-        reg_form.classList.remove("show");
-        reg_form.classList.add("hide");
-
-        login_form.classList.remove("hide");
-        login_form.classList.add("show");
+if (login_registration_section !== null) {
+    burger.addEventListener("click", () => {
+        burger.classList.toggle("active");
+        document.body.classList.toggle("no-scroll");
+        login_registration_section.classList.toggle("active");
     });
 
-    go_to_reg.addEventListener("click", () => {
-        login_form.classList.remove("show");
-        login_form.classList.add("hide");
+    const next_btns = document.querySelectorAll("[data-next-form]");
+    // Vai dal form di registration a quello di login e viceversa.
+    next_btns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const next_form = document.getElementById(
+                `${btn.dataset.nextForm}-form`
+            );
+            const prev_form = document.getElementById(
+                `${btn.dataset.prevForm}-form`
+            );
 
-        reg_form.classList.remove("hide");
-        reg_form.classList.add("show");
+            prev_form.classList.toggle("active");
+            prev_form.classList.toggle("hide");
+
+            next_form.classList.toggle("hide");
+            next_form.classList.toggle("active");
+        });
     });
 
-    // -- REGISTRAZIONE INIZIO --
-    const reg_password = reg_form.querySelector("input[name=password]");
-    const confirm_password = reg_form.querySelector("input[name=cnf-pwd]");
+    const registration_form = document.getElementById("registration-form");
 
-    function passwordRegex(elem) {
+    const password = registration_form.querySelector(
+        "input[name=password]"
+    );
+    const confirm_password = registration_form.querySelector(
+        "input[name=confirm-password]"
+    );
+
+    // Verifica se le due password corrispondono. L'esecuzione della funzione è ritardata tramite il debounce
+    const match_password_regex = (elem) => {
         if (elem.value.length === 0) return;
 
-        const pattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
+        const pattern =
+            /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
 
-        if (!pattern.test(elem.value))
-            elem.setCustomValidity("La password deve essere lunga almeno 8 caratteri e massimo 16. " +
-                "\nDeve contenere almeno: \n- 1 numero\n- 1 lettera maiuscola\n- 1 lettera minuscola\n- 1 carattere speciale");
-        else
+        if (!pattern.test(elem.value)) {
+            elem.setCustomValidity(
+                "La password deve essere lunga almeno 8 caratteri e massimo 16.\n" +
+                "\nDeve contenere almeno: \n- 1 numero\n- 1 lettera maiuscola\n- 1 lettera minuscola\n- 1 carattere speciale"
+            );
+        } else {
             elem.setCustomValidity("");
-
-        elem.reportValidity();
-    }
-
-    function matchPassword(pwd, cnf) {
-        if (pwd.value.length === 0) return;
-
-        let match = false;
-        if (pwd.value !== cnf.value) cnf.setCustomValidity("Le due password non corrispondono");
-        else {
-            cnf.setCustomValidity("");
-            match = true;
         }
 
-        cnf.reportValidity();
-        return match;
-    }
+        elem.reportValidity();
+    };
 
-    const passwordRegexDebounce = debounce((elem) => passwordRegex(elem));
-    const matchPasswordDebounce = debounce((pwd, cnf) => matchPassword(pwd, cnf));
+    const match_password_value = (first, second) => {
+        if (first.value.length === 0 || second.value.length === 0) return;
 
-    confirm_password.addEventListener("input", (e) => {
-        passwordRegexDebounce(e.target)
-        matchPasswordDebounce(reg_password, confirm_password);
+        if (first.value !== second.value)
+            second.setCustomValidity(
+                "Le password non corrispondono."
+            );
+        else second.setCustomValidity("");
+
+        second.reportValidity();
+    };
+
+    const match_password_regex_debounce = debounce((elem) => match_password_regex(elem));
+    const match_password_value_debounce = debounce((first, second) => match_password_value(first, second));
+
+    password.addEventListener("input", () => {
+        match_password_regex_debounce(password);
+        match_password_value_debounce(password, confirm_password);
     });
 
-    reg_password.addEventListener("input", (e) => {
-        passwordRegexDebounce(e.target);
-        matchPasswordDebounce(reg_password, confirm_password);
+    confirm_password.addEventListener("input", () => {
+        match_password_regex_debounce(confirm_password);
+        match_password_value_debounce(password, confirm_password);
     });
-
-    reg_form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        if (!matchPassword(reg_password, confirm_password)) return;
-
-        addLoader(this);
-
-        const fd = new FormData(this);
-        const data = {};
-
-        for (const pair of fd.entries())
-            data[pair[0]] = pair[1];
-
-        $.ajax({
-            type: "POST",
-            data: data,
-            url: this.getAttribute("action")
-        }).done((response) => {
-            response = JSON.parse(response);
-
-            if (response.type === "success") {
-                const formInputs = this.querySelectorAll("input");
-                // Pulisco i campi del form di registrazione in caso di successo
-                formInputs.forEach(input => input.value = "");
-
-                notifier.success(response.message);
-            } else
-                notifier.alert(response.message);
-
-        }).always(() => {
-            removeLoader(this);
-        })
-    })
-    // -- REGISTRAZIONE FINE --
-
-    // -- LOGIN INIZIO --
-    login_form.addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        addLoader(this);
-
-        const fd = new FormData(this);
-        const data = {};
-
-        for (const pair of fd.entries())
-            data[pair[0]] = pair[1];
-
-        $.ajax({
-            type: "POST",
-            data: data,
-            url: this.getAttribute("action")
-        }).done((response) => {
-            if (response.type === "success") {
-                window.location.reload();
-            } else
-                notifier.alert(response.message);
-        }).always(() => {
-            removeLoader(this);
-        })
-
-    })
-    // -- LOGIN FINE --
 }
-// --- Registrazione e login FINE ---
+
+const password_icons = document.querySelectorAll(".password-icon-js");
+// Cambia il tipo dell'input da password a testo e viceversa quando si clicca sull'icona dell'occhio
+password_icons.forEach((icon) => {
+    icon.addEventListener("click", () => {
+        let current_type = "password",
+            new_type = "text";
+        const i = icon.firstChild;
+
+        i.classList.toggle("fa-eye-slash");
+
+        if (!i.classList.contains("fa-eye-slash")) {
+            current_type = "text";
+            new_type = "password";
+        }
+
+        icon.parentElement
+            .querySelector(`input[type=${current_type}]`)
+            .setAttribute("type", new_type);
+    });
+});

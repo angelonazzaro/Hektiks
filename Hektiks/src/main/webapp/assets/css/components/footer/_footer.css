@@ -1,0 +1,22 @@
+/* FOOTER */
+footer {
+    position: relative;
+    bottom: 0;
+    color: white;
+    min-height: 30vh;
+    background-color: var(--footer-bg);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+}
+
+.footer-container {
+    position: relative;
+    width: 70%;
+    min-height: inherit;
+}
+.footer-container .bottom-line {
+    margin-top: 1px solid var(--dark-grey);
+}

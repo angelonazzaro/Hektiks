@@ -8,8 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- footer start -->
 <footer>
-    <div class="footer__content">
-        <p class="hs-6">Copyright &copy; Hektiks 2022 ~ developed with <span style="color: red">&#10083;</span> by Angelo Nazzaro & Francesco Granozio</p>
+    <div class="footer-container">
+        <div class="bottom-line">
+            <p class="text">Copyright &copy; Hektiks 2022 ~ developed with <span style="color: red">&#10083;</span> by Angelo Nazzaro & Francesco Granozio</p>
+        </div>
     </div>
 </footer>
 <script src="<%= request.getContextPath() %>/assets/libs/jquery/jquery.min.js"></script>

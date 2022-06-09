@@ -1,4 +1,5 @@
 @import "./_general.css";
-@import "components/_header.css";
-@import "components/_loginregistration.css";
-@import "components/_footer.css";
+@import "./components/header/_header.css";
+@import "./components/login_registration/_loginregistration.css";
+@import "./components/products/_products.css";
+@import "./components/footer/_footer.css";

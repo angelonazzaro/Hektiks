@@ -1,38 +1,40 @@
+/* HEADER */
 header {
-    width: 100%;
-    min-height: 10vh;
     background-color: var(--header-bg);
+    min-height: 7.5vh;
+    width: 100%;
 }
 
-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: auto;
+header nav {
     width: 90%;
     min-height: inherit;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0;
 }
 
-/* BURGER MENU */
-#burger {
+header #burger {
     display: block;
     position: relative;
     cursor: pointer;
     z-index: 10;
 }
 
-#burger .line {
+header #burger .line {
     display: block;
     padding: 0.2rem 2rem;
     background-color: white;
     transition: all 200ms ease;
 }
 
-#burger .line:nth-child(2) {
+header #burger .line:nth-child(2) {
     margin: 0.5rem 0;
 }
 
-#burger:hover .line {
+header #burger:hover .line {
     background-color: var(--orange);
 }
 

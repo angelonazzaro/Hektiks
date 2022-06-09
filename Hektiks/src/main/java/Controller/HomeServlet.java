@@ -1,6 +1,8 @@
 package Controller;
 
 import Model.GiftCard.GiftCardDAO;
+import Model.Gioco.Gioco;
+import Model.Gioco.GiocoDAO;
 import Model.Utente.Utente;
 import Model.Utente.UtenteDAO;
 import Utils.JSONResponse;
@@ -27,6 +29,12 @@ public class HomeServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         request.setAttribute("title", "Hektiks | Home Page");
 
+        try {
+            request.setAttribute("giochi", new GiocoDAO((DataSource) getServletContext().getAttribute("DataSource")).doRetrieveAll());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
     }
 
@@ -47,18 +55,11 @@ public class HomeServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         Gson gsonObj = new Gson();
 
+        List<Utente> utenti = null;
 
         if (action.equals("login")) {
-
-            GiftCardDAO c = new GiftCardDAO((DataSource) getServletContext().getAttribute("DataSource"));
             try {
-                c.doRetrieveByKey("ciccio@a.com");
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-
-            try {
-                List<Utente> utenti = utenteDAO.doRetrieveByCondition("email='" + email + "' AND password_utente=SHA1('" + password + "')");
+                 utenti = utenteDAO.doRetrieveByCondition("email='" + email + "' AND password_utente=SHA1('" + password + "')");
 
                 if (utenti.isEmpty()) {
                     response.setContentType("application/json");
@@ -79,8 +80,7 @@ public class HomeServlet extends HttpServlet {
             }
         } else {
             try {
-
-                List<Utente> utenti = utenteDAO.doRetrieveByCondition("email='" + email + "'");
+                utenti = utenteDAO.doRetrieveByCondition("email='" + email + "'");
 
                 if (!utenti.isEmpty()) {
                     response.setContentType("application/json");
