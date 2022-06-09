@@ -137,7 +137,7 @@ INSERT INTO Giochi VALUES
 	È in questo mondo ostile e spietato che dovrà combattere per la sopravvivenza e insegnare a suo figlio a fare lo stesso.", 
 	"https://www.youtube.com/watch?v=RQK_40a0XUY&ab_channel=PlayStation", 
 	"2022-01-14", 
-	"asdasd", 
+	"https://www.instant-gaming.com/images/products/7325/380x218/7325.jpg", 
 	50.00, 
 	50, 
 	200
@@ -149,7 +149,7 @@ INSERT INTO Giochi VALUES
 	Hidetaka Miyazake (famoso per molti popolari videogiochi: dalla serie Souls, a Bloodborne, a Sekiro).", 
 	"https://www.youtube.com/watch?v=AKXiKBnzpBQ&ab_channel=GameSpot", 
 	"2022-02-25", 
-	"asdad", 
+	"https://www.instant-gaming.com/images/products/4824/380x218/4824.jpg", 
 	60.00, 
 	75, 
 	130
@@ -161,7 +161,7 @@ INSERT INTO Giochi VALUES
 	È un gioco sandbox in cui i giocatori devono scavare, costruire e creare il loro mondo ideale", 
 	"https://www.youtube.com/watch?v=MmB9b5njVbA&ab_channel=Minecraft", 
 	"2011-11-19", 
-	"asdasd", 
+	"https://www.instant-gaming.com/images/products/442/380x218/442.jpg", 
 	19.99, 
 	50, 
 	4

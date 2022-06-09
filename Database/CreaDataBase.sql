@@ -39,6 +39,17 @@ CREATE TABLE Giochi (
     UNIQUE (titolo)
 );
 
+CREATE TABLE GiftCards (
+
+	codice_giftCard CHAR(6) PRIMARY KEY,
+	email_utente VARCHAR(320), 
+    importo DECIMAL (10, 2) NOT NULL CHECK (importo  > 0), 
+    data_ora_creazione DATETIME NOT NULL,
+	data_ora_utilizzo DATETIME,
+    
+    FOREIGN KEY (email_utente) REFERENCES Utenti (email) ON UPDATE CASCADE ON DELETE NO ACTION
+);
+
 CREATE TABLE Carrelli (
 
 	email_utente VARCHAR(320), 
@@ -93,17 +104,6 @@ CREATE TABLE Recensioni (
 	FOREIGN KEY (email_utente) REFERENCES Utenti (email) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (codice_gioco) REFERENCES Giochi (codice_gioco) ON UPDATE CASCADE ON DELETE CASCADE,
 	PRIMARY KEY (email_utente, codice_gioco, data_ora_pubblicazione)
-);
-
-CREATE TABLE GiftCards (
-
-	codice_giftCard CHAR(6) PRIMARY KEY,
-	email_utente VARCHAR(320), 
-    importo DECIMAL (10, 2) NOT NULL CHECK (importo  > 0), 
-    data_ora_creazione DATETIME NOT NULL,
-	data_ora_utilizzo DATETIME,
-    
-    FOREIGN KEY (email_utente) REFERENCES Utenti (email) ON UPDATE CASCADE ON DELETE NO ACTION
 );
 
 CREATE TABLE Ordini (
