@@ -28,8 +28,8 @@
                     <% for (Gioco gioco : giochi) { %>
                         <div class="card">
                             <div class="card-header">
-                                <a href="#"><img class="card-img" src="<%= request.getContextPath() + "/assets/images/products/" +  gioco.getCopertina()%>" alt="<%= gioco.getTitolo() %> - Copertina"></a>
-<%--                                <div class="discount"></div>--%>
+                                <a href="#"><img class="card-img" src="<%= gioco.getCopertina() %>" alt="<%= gioco.getTitolo() %> - Copertina"></a>
+                                <div class="discount text">-25%</div>
                             </div>
                             <div class="card-body">
                                 <div class="name text">
