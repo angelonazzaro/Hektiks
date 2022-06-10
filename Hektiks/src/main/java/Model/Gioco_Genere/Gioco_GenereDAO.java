@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import static Model.Storage.Entities.GIOCHI_GENERE;
+import static Model.Storage.Entities.*;
 
 public class Gioco_GenereDAO extends SQLDAO implements DAO<Gioco_Genere> {
 
@@ -21,6 +21,18 @@ public class Gioco_GenereDAO extends SQLDAO implements DAO<Gioco_Genere> {
     public List<Gioco_Genere> doRetrieveByCondition(String condition) throws SQLException {
 
         return genericDoRetrieveByCondition(GIOCHI_GENERE, condition, new Gioco_GenereExtractor(), this.source);
+    }
+
+    @Override
+    public List<Gioco_Genere> doRetrieveByJoin(String joinTable, String join, String predicate, String condition) throws SQLException {
+
+        return genericDoRetrieveByJoin(GIOCHI_GENERE, joinTable, join, predicate, condition, new Gioco_GenereExtractor(), this.source);
+    }
+
+    @Override
+    public List<Gioco_Genere> doRetrieveByJoin(String joinTable, String join, String predicate, String condition, int row_count) throws SQLException {
+
+        return genericDoRetrieveByJoin(GIOCHI_GENERE, joinTable, join, predicate, condition + " LIMIT " + row_count, new Gioco_GenereExtractor(), this.source);
     }
 
     @Override

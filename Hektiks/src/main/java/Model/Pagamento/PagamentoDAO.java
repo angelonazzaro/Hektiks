@@ -24,6 +24,18 @@ public class PagamentoDAO extends SQLDAO implements DAO<Pagamento> {
     }
 
     @Override
+    public List<Pagamento> doRetrieveByJoin(String joinTable, String join, String predicate, String condition) throws SQLException {
+
+        return genericDoRetrieveByJoin(PAGAMENTI, joinTable, join, predicate, condition, new PagamentoExtractor(), this.source);
+    }
+
+    @Override
+    public List<Pagamento> doRetrieveByJoin(String joinTable, String join, String predicate, String condition, int row_count) throws SQLException {
+
+        return genericDoRetrieveByJoin(PAGAMENTI, joinTable, join, predicate, condition + " LIMIT " + row_count, new PagamentoExtractor(), this.source);
+    }
+
+    @Override
     public Pagamento doRetrieveByKey(String... key) throws SQLException {
 
         if (key == null || key.length != 3)

@@ -24,6 +24,18 @@ public class CarrelloDAO extends SQLDAO implements DAO<Carrello> {
     }
 
     @Override
+    public List<Carrello> doRetrieveByJoin(String joinTable, String join, String predicate, String condition) throws SQLException {
+
+        return genericDoRetrieveByJoin(CARRELLI, joinTable, join, predicate, condition, new CarrelloExtractor(), this.source);
+    }
+
+    @Override
+    public List<Carrello> doRetrieveByJoin(String joinTable, String join, String predicate, String condition, int row_count) throws SQLException {
+
+        return genericDoRetrieveByJoin(CARRELLI, joinTable, join, predicate, condition + " LIMIT " + row_count, new CarrelloExtractor(), this.source);
+    }
+
+    @Override
     public Carrello doRetrieveByKey(String... key) throws SQLException, InvalidPrimaryKeyException {
 
         if(key == null || key.length != 2)

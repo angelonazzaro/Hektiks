@@ -348,3 +348,12 @@ INSERT INTO GiftCards VALUES
 ("CYBMsB", NULL, 125.00, NOW(), NULL),
 ("2lj16n", NULL, 30.00, NOW(), NULL),
 ("J2gSsr", NULL, 20.00, NOW(), NULL);
+
+INSERT INTO Sconti VALUES 
+("1aD3xF", "Z38JDu", "2022-06-10", 25, "2022-08-10"), 
+("1bD3xF", "uUfaYA", "2022-06-10", 15, "2022-08-10"),
+("1cD3xF", "OkIufY", "2022-06-10", 10, "2022-08-10"),
+("1dD3xF", "FNx9td", "2022-06-10", 75, "2022-08-10"),
+("1eD3xF", "oTwPW4", "2022-05-10", 20, "2022-07-10"),
+("1fD3xF", "5ywyXE", "2022-06-10", 7, "2022-08-11"),
+("1gD3xF", "ACi702", "2022-05-10", 27, "2022-07-10");

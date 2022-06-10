@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import static Model.Storage.Entities.GIFTCARDS;
+import static Model.Storage.Entities.*;
 
 public class GiftCardDAO extends SQLDAO implements DAO<GiftCard> {
 
@@ -21,6 +21,17 @@ public class GiftCardDAO extends SQLDAO implements DAO<GiftCard> {
     public List<GiftCard> doRetrieveByCondition(String condition) throws SQLException {
 
         return genericDoRetrieveByCondition(GIFTCARDS, condition, new GiftCardExtractor(), this.source);
+    }
+
+    @Override
+    public List<GiftCard> doRetrieveByJoin(String joinTable, String join, String predicate, String condition) throws SQLException {
+
+        return genericDoRetrieveByJoin(GIFTCARDS, joinTable, join, predicate, condition, new GiftCardExtractor(), this.source);
+    }
+
+    public List<GiftCard> doRetrieveByJoin(String joinTable, String join, String predicate, String condition, int row_count) throws SQLException {
+
+        return genericDoRetrieveByJoin(GIFTCARDS, joinTable, join, predicate, condition + " LIMIT " + row_count, new GiftCardExtractor(), this.source);
     }
 
     @Override

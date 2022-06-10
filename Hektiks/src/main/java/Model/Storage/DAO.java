@@ -18,6 +18,9 @@ public interface DAO<T> {
 
     List<T> doRetrieveByCondition(String condition) throws SQLException;
 
+    List<T> doRetrieveByJoin(String joinTable, String join, String predicate, String condition) throws SQLException;
+
+    List<T> doRetrieveByJoin(String joinTable, String join, String predicate, String condition, int row_count) throws SQLException;
     /*
     * Object... key -> String... key questo perchè nel db abbiamo tutte
     * primary key di tipo char/varchar/date/datetime
@@ -47,6 +50,33 @@ public interface DAO<T> {
             String query = QueryBuilder.SELECT("*").FROM(table).WHERE(condition).toString();
 
             System.out.print("[GENERIC-DO-RETRIEVE-BY-CONDITION] ");
+            System.out.println(query);
+
+            try (PreparedStatement ps = conn.prepareStatement(query)) {
+                ResultSet set = ps.executeQuery();
+
+                while (set.next()) {
+                    entity.add(extractor.extract(set));
+                }
+            }
+        }
+        return entity;
+    }
+
+    default <E extends ResultSetExtractor<T>> List<T> genericDoRetrieveByJoin(String table, String joinTable, String join, String predicate,  String condition, E extractor, DataSource source) throws SQLException {
+        final List<T> entity = new ArrayList<T>();
+
+        try (Connection conn = source.getConnection()) {
+
+            String query = null;
+            if (join.equals("left"))
+                query = QueryBuilder.SELECT("*").FROM(table).LEFT_JOIN(joinTable).ON(predicate).WHERE(condition).toString();
+            else if (join.equals("right"))
+                query = QueryBuilder.SELECT("*").FROM(table).RIGHT_JOIN(joinTable).ON(predicate).WHERE(condition).toString();
+            else
+                query = QueryBuilder.SELECT("*").FROM(table).JOIN(joinTable).ON(predicate).WHERE(condition).toString();
+
+            System.out.print("[GENERIC-DO-RETRIEVE-BY-JOIN] ");
             System.out.println(query);
 
             try (PreparedStatement ps = conn.prepareStatement(query)) {

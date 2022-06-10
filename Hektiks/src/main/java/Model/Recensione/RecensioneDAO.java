@@ -24,6 +24,18 @@ public class RecensioneDAO extends SQLDAO implements DAO<Recensione> {
     }
 
     @Override
+    public List<Recensione> doRetrieveByJoin(String joinTable, String join, String predicate, String condition) throws SQLException {
+
+        return genericDoRetrieveByJoin(RECENSIONI, joinTable, join, predicate, condition, new RecensioneExtractor(), this.source);
+    }
+
+    @Override
+    public List<Recensione> doRetrieveByJoin(String joinTable, String join, String predicate, String condition, int row_count) throws SQLException {
+
+        return genericDoRetrieveByJoin(RECENSIONI, joinTable, join, predicate, condition + " LIMIT " + row_count, new RecensioneExtractor(), this.source);
+    }
+
+    @Override
     public Recensione doRetrieveByKey(String... key) throws SQLException {
 
         if (key == null || key.length != 3)

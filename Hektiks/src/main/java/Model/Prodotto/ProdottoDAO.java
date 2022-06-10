@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import static Model.Storage.Entities.PRODOTTI;
+import static Model.Storage.Entities.*;
 
 public class ProdottoDAO extends SQLDAO implements DAO<Prodotto> {
 
@@ -21,6 +21,18 @@ public class ProdottoDAO extends SQLDAO implements DAO<Prodotto> {
     public List<Prodotto> doRetrieveByCondition(String condition) throws SQLException {
 
         return genericDoRetrieveByCondition(PRODOTTI, condition, new ProdottoExtractor(), this.source);
+    }
+
+    @Override
+    public List<Prodotto> doRetrieveByJoin(String joinTable, String join, String predicate, String condition) throws SQLException {
+
+        return genericDoRetrieveByJoin(PRODOTTI, joinTable, join, predicate, condition, new ProdottoExtractor(), this.source);
+    }
+
+    @Override
+    public List<Prodotto> doRetrieveByJoin(String joinTable, String join, String predicate, String condition, int row_count) throws SQLException {
+
+        return genericDoRetrieveByJoin(PRODOTTI, joinTable, join, predicate, condition + " LIMIT " + row_count, new ProdottoExtractor(), this.source);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package Model.Gioco;
 
+
 import Model.Storage.DAO;
 import Model.Storage.SQLDAO;
 import Utils.InvalidPrimaryKeyException;
@@ -8,6 +9,7 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
+
 
 import static Model.Storage.Entities.GIOCHI;
 
@@ -21,6 +23,18 @@ public class GiocoDAO extends SQLDAO implements DAO<Gioco> {
     public List<Gioco> doRetrieveByCondition(String condition) throws SQLException {
 
         return genericDoRetrieveByCondition(GIOCHI, condition, new GiocoExtractor(), this.source);
+    }
+
+    @Override
+    public List<Gioco> doRetrieveByJoin(String joinTable, String join, String predicate, String condition) throws SQLException {
+
+        return genericDoRetrieveByJoin(GIOCHI, joinTable, join, predicate, condition, new GiocoExtractor(), this.source);
+    }
+
+    @Override
+    public List<Gioco> doRetrieveByJoin(String joinTable, String join, String predicate, String condition, int row_count) throws SQLException {
+
+        return genericDoRetrieveByJoin(GIOCHI, joinTable, join, predicate, condition + " LIMIT " + row_count, new GiocoExtractor(), this.source);
     }
 
     @Override

@@ -1,10 +1,9 @@
 package Controller;
 
-import Model.GiftCard.GiftCardDAO;
-import Model.Gioco.Gioco;
 import Model.Gioco.GiocoDAO;
 import Model.Utente.Utente;
 import Model.Utente.UtenteDAO;
+import static Model.Storage.Entities.*;
 import Utils.JSONResponse;
 import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
@@ -31,7 +30,8 @@ public class HomeServlet extends HttpServlet {
         GiocoDAO giocoDAO = new GiocoDAO((DataSource) getServletContext().getAttribute("DataSource"));
 
         try {
-            request.setAttribute("giochi", giocoDAO.doRetrieveAll(9));
+            request.setAttribute("giochiDelMomento", giocoDAO.doRetrieveByJoin(SCONTI, "left", SCONTI + ".codice_gioco=" + GIOCHI + ".codice_gioco", "TRUE", 9));
+            request.setAttribute("bestSellers", giocoDAO.doRetrieveByCondition("TRUE ORDER BY numero_vendite DESC LIMIT 9"));
         } catch (SQLException e) {
             e.printStackTrace();
         }

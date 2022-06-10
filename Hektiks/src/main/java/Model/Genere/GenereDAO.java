@@ -24,6 +24,18 @@ public class GenereDAO extends SQLDAO implements DAO<Genere> {
     }
 
     @Override
+    public List<Genere> doRetrieveByJoin(String joinTable, String join, String predicate, String condition) throws SQLException {
+
+        return genericDoRetrieveByJoin(GENERI, joinTable, join, predicate, condition, new GenereExtractor(), this.source);
+    }
+
+    @Override
+    public List<Genere> doRetrieveByJoin(String joinTable, String join, String predicate, String condition, int row_count) throws SQLException {
+
+        return genericDoRetrieveByJoin(GENERI, joinTable, join, predicate, condition + " LIMIT " + row_count, new GenereExtractor(), this.source);
+    }
+
+    @Override
     public Genere doRetrieveByKey(String... key) throws SQLException {
 
         if (key == null || key.length != 1)

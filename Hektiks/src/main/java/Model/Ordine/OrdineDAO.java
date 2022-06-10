@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import static Model.Storage.Entities.ORDINI;
+import static Model.Storage.Entities.*;
 
 public class OrdineDAO extends SQLDAO implements DAO<Ordine> {
 
@@ -21,6 +21,18 @@ public class OrdineDAO extends SQLDAO implements DAO<Ordine> {
     public List<Ordine> doRetrieveByCondition(String condition) throws SQLException {
 
         return genericDoRetrieveByCondition(ORDINI, condition, new OrdineExtractor(), this.source);
+    }
+
+    @Override
+    public List<Ordine> doRetrieveByJoin(String joinTable, String join, String predicate, String condition) throws SQLException {
+
+        return genericDoRetrieveByJoin(ORDINI, joinTable, join, predicate, condition, new OrdineExtractor(), this.source);
+    }
+
+    @Override
+    public List<Ordine> doRetrieveByJoin(String joinTable, String join, String predicate, String condition, int row_count) throws SQLException {
+
+        return genericDoRetrieveByJoin(ORDINI, joinTable, join, predicate, condition + " LIMIT " + row_count, new OrdineExtractor(), this.source);
     }
 
     @Override

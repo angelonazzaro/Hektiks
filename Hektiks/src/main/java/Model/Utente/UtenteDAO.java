@@ -1,5 +1,7 @@
 package Model.Utente;
 
+import Model.Sconto.Sconto;
+import Model.Sconto.ScontoExtractor;
 import Model.Storage.DAO;
 import Model.Storage.SQLDAO;
 import Utils.InvalidPrimaryKeyException;
@@ -9,6 +11,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import static Model.Storage.Entities.SCONTI;
 import static Model.Storage.Entities.UTENTI;
 
 public class UtenteDAO extends SQLDAO implements DAO<Utente> {
@@ -20,6 +23,18 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
     public List<Utente> doRetrieveByCondition(String condition) throws SQLException {
 
         return genericDoRetrieveByCondition(UTENTI, condition, new UtenteExtractor(), this.source);
+    }
+
+    @Override
+    public List<Utente> doRetrieveByJoin(String joinTable, String join, String predicate, String condition) throws SQLException {
+
+        return genericDoRetrieveByJoin(UTENTI, joinTable, join, predicate, condition, new UtenteExtractor(), this.source);
+    }
+
+    @Override
+    public List<Utente> doRetrieveByJoin(String joinTable, String join, String predicate, String condition, int row_count) throws SQLException {
+
+        return genericDoRetrieveByJoin(UTENTI, joinTable, join, predicate, condition + " LIMIT " + row_count, new UtenteExtractor(), this.source);
     }
 
     @Override
