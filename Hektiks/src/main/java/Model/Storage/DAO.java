@@ -1,13 +1,11 @@
 package Model.Storage;
 
+import Model.GenericBean.GenericBean;
 import Utils.InvalidPrimaryKeyException;
 import Utils.QueryBuilder;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,13 +16,14 @@ public interface DAO<T> {
 
     List<T> doRetrieveByCondition(String condition) throws SQLException;
 
-    List<T> doRetrieveByJoin(String joinTable, String join, String predicate, String condition) throws SQLException;
+    GenericBean doRetrieveByJoin(String joinTable, String join, String predicate, String condition) throws SQLException;
 
-    List<T> doRetrieveByJoin(String joinTable, String join, String predicate, String condition, int row_count) throws SQLException;
+    GenericBean doRetrieveByJoin(String joinTable, String join, String predicate, String condition, int row_count) throws SQLException;
+
     /*
-    * Object... key -> String... key questo perchè nel db abbiamo tutte
-    * primary key di tipo char/varchar/date/datetime
-    */
+     * Object... key -> String... key questo perchè nel db abbiamo tutte
+     * primary key di tipo char/varchar/date/datetime
+     */
     T doRetrieveByKey(String... key) throws SQLException, InvalidPrimaryKeyException;
 
     List<T> doRetrieveAll() throws SQLException;
@@ -63,8 +62,9 @@ public interface DAO<T> {
         return entity;
     }
 
-    default <E extends ResultSetExtractor<T>> List<T> genericDoRetrieveByJoin(String table, String joinTable, String join, String predicate,  String condition, E extractor, DataSource source) throws SQLException {
-        final List<T> entity = new ArrayList<T>();
+    default GenericBean genericDoRetrieveByJoin(String table, String joinTable, String join, String predicate, String condition, DataSource source) throws SQLException {
+
+        final GenericBean genericBean = new GenericBean();
 
         try (Connection conn = source.getConnection()) {
 
@@ -82,12 +82,22 @@ public interface DAO<T> {
             try (PreparedStatement ps = conn.prepareStatement(query)) {
                 ResultSet set = ps.executeQuery();
 
-                while (set.next()) {
-                    entity.add(extractor.extract(set));
+                ResultSetMetaData rsMetaData = set.getMetaData();
+                int count = rsMetaData.getColumnCount();
+
+                for (int i = 1; i <= count; i++) {
+
+                    genericBean.addEntry(rsMetaData.getColumnName(i), set.getObject(i));
                 }
+
+                System.out.println(genericBean);
+
+                /*while (set.next()) {
+                    entity.add(extractor.extract(set));
+                }*/
             }
         }
-        return entity;
+        return genericBean;
     }
 
     default boolean genericDoSave(String table, HashMap<String, ?> map, DataSource source) throws SQLException {

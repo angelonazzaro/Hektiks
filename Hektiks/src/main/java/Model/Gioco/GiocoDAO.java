@@ -1,6 +1,7 @@
 package Model.Gioco;
 
 
+import Model.GenericBean.GenericBean;
 import Model.Storage.DAO;
 import Model.Storage.SQLDAO;
 import Utils.InvalidPrimaryKeyException;
@@ -26,15 +27,15 @@ public class GiocoDAO extends SQLDAO implements DAO<Gioco> {
     }
 
     @Override
-    public List<Gioco> doRetrieveByJoin(String joinTable, String join, String predicate, String condition) throws SQLException {
+    public GenericBean doRetrieveByJoin(String joinTable, String join, String predicate, String condition) throws SQLException {
 
-        return genericDoRetrieveByJoin(GIOCHI, joinTable, join, predicate, condition, new GiocoExtractor(), this.source);
+        return genericDoRetrieveByJoin(GIOCHI, joinTable, join, predicate, condition, this.source);
     }
 
     @Override
-    public List<Gioco> doRetrieveByJoin(String joinTable, String join, String predicate, String condition, int row_count) throws SQLException {
+    public GenericBean doRetrieveByJoin(String joinTable, String join, String predicate, String condition, int row_count) throws SQLException {
 
-        return genericDoRetrieveByJoin(GIOCHI, joinTable, join, predicate, condition + " LIMIT " + row_count, new GiocoExtractor(), this.source);
+        return genericDoRetrieveByJoin(GIOCHI, joinTable, join, predicate, condition + " LIMIT " + row_count, this.source);
     }
 
     @Override

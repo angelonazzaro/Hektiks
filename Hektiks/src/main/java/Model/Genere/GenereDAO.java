@@ -1,5 +1,6 @@
 package Model.Genere;
 
+import Model.GenericBean.GenericBean;
 import Model.Storage.DAO;
 import Model.Storage.SQLDAO;
 import Utils.InvalidPrimaryKeyException;
@@ -24,15 +25,15 @@ public class GenereDAO extends SQLDAO implements DAO<Genere> {
     }
 
     @Override
-    public List<Genere> doRetrieveByJoin(String joinTable, String join, String predicate, String condition) throws SQLException {
+    public GenericBean doRetrieveByJoin(String joinTable, String join, String predicate, String condition) throws SQLException {
 
-        return genericDoRetrieveByJoin(GENERI, joinTable, join, predicate, condition, new GenereExtractor(), this.source);
+        return genericDoRetrieveByJoin(GENERI, joinTable, join, predicate, condition, this.source);
     }
 
     @Override
-    public List<Genere> doRetrieveByJoin(String joinTable, String join, String predicate, String condition, int row_count) throws SQLException {
+    public GenericBean doRetrieveByJoin(String joinTable, String join, String predicate, String condition, int row_count) throws SQLException {
 
-        return genericDoRetrieveByJoin(GENERI, joinTable, join, predicate, condition + " LIMIT " + row_count, new GenereExtractor(), this.source);
+        return genericDoRetrieveByJoin(GENERI, joinTable, join, predicate, condition + " LIMIT " + row_count, this.source);
     }
 
     @Override

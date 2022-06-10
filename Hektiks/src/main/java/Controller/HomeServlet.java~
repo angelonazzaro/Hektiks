@@ -30,7 +30,7 @@ public class HomeServlet extends HttpServlet {
 
         request.setAttribute("title", "Hektiks | Home Page");
         GiocoDAO giocoDAO = new GiocoDAO((DataSource) getServletContext().getAttribute("DataSource"));
-
+        
         try {
 
             request.setAttribute("giochiDelMomento", giocoDAO.doRetrieveByJoin(SCONTI, "left", SCONTI + ".codice_gioco=" + GIOCHI + ".codice_gioco", "TRUE", 9));
