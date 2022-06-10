@@ -1,5 +1,6 @@
 package Model.Utente;
 
+import Model.GenericBean.GenericBean;
 import Model.Sconto.Sconto;
 import Model.Sconto.ScontoExtractor;
 import Model.Storage.DAO;
@@ -26,15 +27,15 @@ public class UtenteDAO extends SQLDAO implements DAO<Utente> {
     }
 
     @Override
-    public List<Utente> doRetrieveByJoin(String joinTable, String join, String predicate, String condition) throws SQLException {
+    public GenericBean doRetrieveByJoin(String joinTable, String join, String predicate, String condition) throws SQLException {
 
-        return genericDoRetrieveByJoin(UTENTI, joinTable, join, predicate, condition, new UtenteExtractor(), this.source);
+        return genericDoRetrieveByJoin(UTENTI, joinTable, join, predicate, condition, this.source);
     }
 
     @Override
-    public List<Utente> doRetrieveByJoin(String joinTable, String join, String predicate, String condition, int row_count) throws SQLException {
+    public GenericBean doRetrieveByJoin(String joinTable, String join, String predicate, String condition, int row_count) throws SQLException {
 
-        return genericDoRetrieveByJoin(UTENTI, joinTable, join, predicate, condition + " LIMIT " + row_count, new UtenteExtractor(), this.source);
+        return genericDoRetrieveByJoin(UTENTI, joinTable, join, predicate, condition + " LIMIT " + row_count, this.source);
     }
 
     @Override
