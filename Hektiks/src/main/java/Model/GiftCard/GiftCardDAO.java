@@ -1,5 +1,6 @@
 package Model.GiftCard;
 
+import Model.GenericBean.GenericBean;
 import Model.Storage.DAO;
 import Model.Storage.SQLDAO;
 import Utils.InvalidPrimaryKeyException;
@@ -24,14 +25,14 @@ public class GiftCardDAO extends SQLDAO implements DAO<GiftCard> {
     }
 
     @Override
-    public List<GiftCard> doRetrieveByJoin(String joinTable, String join, String predicate, String condition) throws SQLException {
+    public GenericBean doRetrieveByJoin(String joinTable, String join, String predicate, String condition) throws SQLException {
 
-        return genericDoRetrieveByJoin(GIFTCARDS, joinTable, join, predicate, condition, new GiftCardExtractor(), this.source);
+        return genericDoRetrieveByJoin(GIFTCARDS, joinTable, join, predicate, condition, this.source);
     }
 
-    public List<GiftCard> doRetrieveByJoin(String joinTable, String join, String predicate, String condition, int row_count) throws SQLException {
+    public GenericBean doRetrieveByJoin(String joinTable, String join, String predicate, String condition, int row_count) throws SQLException {
 
-        return genericDoRetrieveByJoin(GIFTCARDS, joinTable, join, predicate, condition + " LIMIT " + row_count, new GiftCardExtractor(), this.source);
+        return genericDoRetrieveByJoin(GIFTCARDS, joinTable, join, predicate, condition + " LIMIT " + row_count, this.source);
     }
 
     @Override
