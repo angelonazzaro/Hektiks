@@ -10,7 +10,7 @@ import static Model.Storage.Entities.PRODOTTI;
 public class ProdottoExtractor implements ResultSetExtractor<Prodotto> {
 
     @Override
-    public Prodotto extract(ResultSet resultSet) throws SQLException {
+    public Prodotto extract(ResultSet resultSet, String... tables) throws SQLException {
 
         Prodotto prodotto = new Prodotto();
 

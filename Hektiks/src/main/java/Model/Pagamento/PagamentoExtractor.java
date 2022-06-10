@@ -10,7 +10,7 @@ import static Model.Storage.Entities.PAGAMENTI;
 public class PagamentoExtractor implements ResultSetExtractor<Pagamento> {
 
     @Override
-    public Pagamento extract(ResultSet resultSet) throws SQLException {
+    public Pagamento extract(ResultSet resultSet, String... tables) throws SQLException {
 
         Pagamento pagamento = new Pagamento();
 

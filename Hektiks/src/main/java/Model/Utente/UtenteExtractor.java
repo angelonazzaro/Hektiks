@@ -11,7 +11,7 @@ import static Model.Storage.Entities.UTENTI;
 public class UtenteExtractor implements ResultSetExtractor<Utente> {
 
     @Override
-    public Utente extract(ResultSet resultSet) throws SQLException {
+    public Utente extract(ResultSet resultSet, String... tables) throws SQLException {
 
         Utente utente = new Utente();
 

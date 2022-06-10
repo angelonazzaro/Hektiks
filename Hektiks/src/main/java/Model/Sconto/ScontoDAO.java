@@ -1,6 +1,6 @@
 package Model.Sconto;
 
-import Model.GenericBean.GenericBean;
+
 import Model.Recensione.Recensione;
 import Model.Recensione.RecensioneExtractor;
 import Model.Storage.DAO;
@@ -28,15 +28,9 @@ public class ScontoDAO extends SQLDAO implements DAO<Sconto> {
     }
 
     @Override
-    public GenericBean doRetrieveByJoin(String joinTable, String join, String predicate, String condition) throws SQLException {
+    public List<Sconto> doRetrieveByJoin(String joinType, String joinCondition, String condition, String... tables) throws SQLException {
 
-        return genericDoRetrieveByJoin(SCONTI, joinTable, join, predicate, condition, this.source);
-    }
-
-    @Override
-    public GenericBean doRetrieveByJoin(String joinTable, String join, String predicate, String condition, int row_count) throws SQLException {
-
-        return genericDoRetrieveByJoin(SCONTI, joinTable, join, predicate, condition + " LIMIT " + row_count, this.source);
+        return genericDoRetrieveByJoin(SCONTI, joinType, joinCondition, condition, new ScontoExtractor(), this.source, tables);
     }
 
     @Override

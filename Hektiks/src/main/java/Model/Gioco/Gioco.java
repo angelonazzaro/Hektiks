@@ -6,6 +6,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.List;
 
 public class Gioco implements Serializable, IEntity {
 
@@ -21,6 +22,7 @@ public class Gioco implements Serializable, IEntity {
     private double prezzo;
     private int quantita_disponibile;
     private int numero_vendite;
+    private List<Object> join;
 
     @Override
     public String toString() {
@@ -127,4 +129,9 @@ public class Gioco implements Serializable, IEntity {
         this.numero_vendite = numero_vendite;
     }
 
+    public List<Object> getJoin() { return join; }
+
+    public void setJoin(List<Object> join) { this.join = join; }
+
+    public void addToJoin(Object obj) { this.join.add(obj); }
 }

@@ -10,7 +10,7 @@ import static Model.Storage.Entities.ORDINI;
 public class OrdineExtractor implements ResultSetExtractor<Ordine> {
 
     @Override
-    public Ordine extract(ResultSet resultSet) throws SQLException {
+    public Ordine extract(ResultSet resultSet, String... tables) throws SQLException {
 
         Ordine ordine = new Ordine();
 

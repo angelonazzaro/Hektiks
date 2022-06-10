@@ -1,6 +1,9 @@
 package Model.Recensione;
 
-import Model.GenericBean.GenericBean;
+
+import Model.Prodotto_Ordine.Prodotto_Ordine;
+import Model.Prodotto_Ordine.Prodotto_OrdineDAO;
+import Model.Prodotto_Ordine.Prodotto_OrdineExtractor;
 import Model.Storage.DAO;
 import Model.Storage.SQLDAO;
 import Utils.InvalidPrimaryKeyException;
@@ -25,15 +28,9 @@ public class RecensioneDAO extends SQLDAO implements DAO<Recensione> {
     }
 
     @Override
-    public GenericBean doRetrieveByJoin(String joinTable, String join, String predicate, String condition) throws SQLException {
+    public List<Recensione> doRetrieveByJoin(String joinType, String joinCondition, String condition, String... tables) throws SQLException {
 
-        return genericDoRetrieveByJoin(RECENSIONI, joinTable, join, predicate, condition, this.source);
-    }
-
-    @Override
-    public GenericBean doRetrieveByJoin(String joinTable, String join, String predicate, String condition, int row_count) throws SQLException {
-
-        return genericDoRetrieveByJoin(RECENSIONI, joinTable, join, predicate, condition + " LIMIT " + row_count, this.source);
+        return genericDoRetrieveByJoin(RECENSIONI, joinType, joinCondition, condition, new RecensioneExtractor(), this.source, tables);
     }
 
     @Override

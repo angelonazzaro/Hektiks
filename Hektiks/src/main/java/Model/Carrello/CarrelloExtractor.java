@@ -10,7 +10,7 @@ import static Model.Storage.Entities.CARRELLI;
 public class CarrelloExtractor implements ResultSetExtractor<Carrello> {
 
     @Override
-    public Carrello extract(ResultSet resultSet) throws SQLException {
+    public Carrello extract(ResultSet resultSet, String... tables) throws SQLException {
 
         Carrello carrello = new Carrello();
 

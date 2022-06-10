@@ -10,7 +10,7 @@ import static Model.Storage.Entities.GIOCHI_GENERE;
 public class Gioco_GenereExtractor implements ResultSetExtractor<Gioco_Genere> {
 
     @Override
-    public Gioco_Genere extract(ResultSet resultSet) throws SQLException {
+    public Gioco_Genere extract(ResultSet resultSet, String... tables) throws SQLException {
 
         Gioco_Genere gioco_genere = new Gioco_Genere();
 

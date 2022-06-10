@@ -1,6 +1,6 @@
 package Model.Prodotto;
 
-import Model.GenericBean.GenericBean;
+
 import Model.Storage.DAO;
 import Model.Storage.SQLDAO;
 import Utils.InvalidPrimaryKeyException;
@@ -25,15 +25,9 @@ public class ProdottoDAO extends SQLDAO implements DAO<Prodotto> {
     }
 
     @Override
-    public GenericBean doRetrieveByJoin(String joinTable, String join, String predicate, String condition) throws SQLException {
+    public  List<Prodotto> doRetrieveByJoin(String joinType, String joinCondition, String condition, String... tables) throws SQLException {
 
-        return genericDoRetrieveByJoin(PRODOTTI, joinTable, join, predicate, condition, this.source);
-    }
-
-    @Override
-    public GenericBean doRetrieveByJoin(String joinTable, String join, String predicate, String condition, int row_count) throws SQLException {
-
-        return genericDoRetrieveByJoin(PRODOTTI, joinTable, join, predicate, condition + " LIMIT " + row_count, this.source);
+        return genericDoRetrieveByJoin(PRODOTTI, joinType, joinCondition,  condition, new ProdottoExtractor(), this.source, tables);
     }
 
     @Override
