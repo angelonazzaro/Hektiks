@@ -12,10 +12,10 @@
         <div class="footer-main-content">
             <h1 class="hs-4">Seguici su Github</h1>
             <br>
-            <a href="https://github.com/sl1mSha4dey" target="_blank" class="github">
+            <a title="Angelo Nazzaro" href="https://github.com/sl1mSha4dey" target="_blank" class="github">
                 <img src="<%= request.getContextPath() %>/assets/images/angelo_nazzaro_github.jpg" alt="angelo nazzaro github">
             </a>
-            <a href="https://github.com/Francesco-Granozio" target="_blank" class="github">
+            <a title="Francesco Granozio" href="https://github.com/Francesco-Granozio" target="_blank" class="github">
                 <img src="<%= request.getContextPath() %>/assets/images/francesco_granozio_github.jpg" alt="francesco granozio github">
             </a>
         </div>
