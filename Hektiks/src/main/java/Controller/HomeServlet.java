@@ -56,7 +56,7 @@ public class HomeServlet extends HttpServlet {
         UtenteDAO utenteDAO = new UtenteDAO((DataSource) getServletContext().getAttribute("DataSource"));
         PrintWriter out = response.getWriter();
 
-        List<Utente> utenti = null;
+        List<Utente> utenti;
 
         if (action.equals("login")) {
 
