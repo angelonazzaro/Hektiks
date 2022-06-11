@@ -25,15 +25,9 @@ public class Gioco_GenereDAO extends SQLDAO implements DAO<Gioco_Genere> {
     }
 
     @Override
-    public GenericBean doRetrieveByJoin(String joinTable, String join, String predicate, String condition) throws SQLException {
+    public List<Gioco_Genere> doRetrieveByJoin(String joinType, String joinCondition, String condition, String... tables) throws SQLException {
 
-        return genericDoRetrieveByJoin(GIOCHI_GENERE, joinTable, join, predicate, condition, this.source);
-    }
-
-    @Override
-    public GenericBean doRetrieveByJoin(String joinTable, String join, String predicate, String condition, int row_count) throws SQLException {
-
-        return genericDoRetrieveByJoin(GIOCHI_GENERE, joinTable, join, predicate, condition + " LIMIT " + row_count, this.source);
+        return genericDoRetrieveByJoin(GIOCHI_GENERE, joinType, joinCondition, condition, new Gioco_GenereExtractor(), this.source, tables);
     }
 
     @Override

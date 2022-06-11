@@ -9,7 +9,7 @@ import static Model.Storage.Entities.SCONTI;
 
 public class ScontoExtractor implements ResultSetExtractor<Sconto> {
     @Override
-    public Sconto extract(ResultSet resultSet) throws SQLException {
+    public Sconto extract(ResultSet resultSet, String... tables) throws SQLException {
 
         Sconto sconto = new Sconto();
 

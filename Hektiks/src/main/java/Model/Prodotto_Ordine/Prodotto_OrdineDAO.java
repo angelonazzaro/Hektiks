@@ -25,15 +25,9 @@ public class Prodotto_OrdineDAO extends SQLDAO implements DAO<Prodotto_Ordine> {
     }
 
     @Override
-    public GenericBean doRetrieveByJoin(String joinTable, String join, String predicate, String condition) throws SQLException {
+    public List<Prodotto_Ordine> doRetrieveByJoin(String joinType, String joinCondition, String condition, String... tables) throws SQLException {
 
-        return genericDoRetrieveByJoin(PRODOTTI_ORDINI, joinTable, join, predicate, condition, this.source);
-    }
-
-    @Override
-    public GenericBean doRetrieveByJoin(String joinTable, String join, String predicate, String condition, int row_count) throws SQLException {
-
-        return genericDoRetrieveByJoin(PRODOTTI_ORDINI, joinTable, join, predicate, condition + " LIMIT " + row_count, this.source);
+        return genericDoRetrieveByJoin(PRODOTTI_ORDINI, joinType, joinCondition, condition, new Prodotto_OrdineExtractor(), this.source, tables);
     }
 
     @Override

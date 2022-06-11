@@ -10,7 +10,7 @@ import static Model.Storage.Entities.GIOCHI;
 public class GiocoExtractor implements ResultSetExtractor<Gioco> {
 
     @Override
-    public Gioco extract(ResultSet resultSet) throws SQLException {
+    public Gioco extract(ResultSet resultSet, String... tables) throws SQLException {
 
         Gioco gioco = new Gioco();
 
@@ -23,6 +23,9 @@ public class GiocoExtractor implements ResultSetExtractor<Gioco> {
         gioco.setPrezzo(resultSet.getDouble(GIOCHI + ".prezzo"));
         gioco.setQuantita_disponibile(resultSet.getInt(GIOCHI + ".quantita_disponibile"));
         gioco.setNumero_vendite(resultSet.getInt(GIOCHI + ".numero_vendite"));
+
+        if (tables.length > 0)
+            for (String table : tables) gioco.addToJoin(findExtractor(table).extract(resultSet));
 
         return gioco;
     }

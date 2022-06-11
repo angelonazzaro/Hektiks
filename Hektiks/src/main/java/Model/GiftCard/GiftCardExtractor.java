@@ -10,7 +10,7 @@ import static Model.Storage.Entities.GIFTCARDS;
 public class GiftCardExtractor implements ResultSetExtractor<GiftCard> {
 
     @Override
-    public GiftCard extract(ResultSet resultSet) throws SQLException {
+    public GiftCard extract(ResultSet resultSet, String... tables) throws SQLException {
 
         GiftCard giftCard = new GiftCard();
 

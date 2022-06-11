@@ -10,7 +10,7 @@ import static Model.Storage.Entities.RECENSIONI;
 public class RecensioneExtractor implements ResultSetExtractor<Recensione> {
 
     @Override
-    public Recensione extract(ResultSet resultSet) throws SQLException {
+    public Recensione extract(ResultSet resultSet, String... tables) throws SQLException {
 
         Recensione recensione = new Recensione();
 

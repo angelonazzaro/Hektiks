@@ -6,19 +6,14 @@ import Utils.QueryBuilder;
 
 import javax.sql.DataSource;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public interface DAO<T> {
 
     List<T> doRetrieveByCondition(String condition) throws SQLException;
 
-    GenericBean doRetrieveByJoin(String joinTable, String join, String predicate, String condition) throws SQLException;
-
-    GenericBean doRetrieveByJoin(String joinTable, String join, String predicate, String condition, int row_count) throws SQLException;
+    List<T> doRetrieveByJoin(String joinType, String joinCondition, String condition, String... tables) throws SQLException;
 
     /*
      * Object... key -> String... key questo perchè nel db abbiamo tutte
@@ -62,19 +57,19 @@ public interface DAO<T> {
         return entity;
     }
 
-    default GenericBean genericDoRetrieveByJoin(String table, String joinTable, String join, String predicate, String condition, DataSource source) throws SQLException {
+    default <E extends ResultSetExtractor<T>> List<T> genericDoRetrieveByJoin(String table, String joinType, String joinCondition, String condition, E extractor, DataSource source, String...tables) throws SQLException {
 
-        final GenericBean genericBean = new GenericBean();
+        final List<T> entity = new ArrayList<T>();
 
         try (Connection conn = source.getConnection()) {
 
             String query = null;
-            if (join.equals("left"))
-                query = QueryBuilder.SELECT("*").FROM(table).LEFT_JOIN(joinTable).ON(predicate).WHERE(condition).toString();
-            else if (join.equals("right"))
-                query = QueryBuilder.SELECT("*").FROM(table).RIGHT_JOIN(joinTable).ON(predicate).WHERE(condition).toString();
+            if (joinType.toUpperCase(Locale.ROOT).equals("LEFT"))
+                query = QueryBuilder.SELECT("*").FROM(table).LEFT_JOIN(joinCondition).WHERE(condition).toString();
+            else if (joinType.toUpperCase(Locale.ROOT).equals("RIGHT"))
+                query = QueryBuilder.SELECT("*").FROM(table).RIGHT_JOIN(joinCondition).WHERE(condition).toString();
             else
-                query = QueryBuilder.SELECT("*").FROM(table).JOIN(joinTable).ON(predicate).WHERE(condition).toString();
+                query = QueryBuilder.SELECT("*").FROM(table).JOIN(joinCondition).WHERE(condition).toString();
 
             System.out.print("[GENERIC-DO-RETRIEVE-BY-JOIN] ");
             System.out.println(query);
@@ -82,22 +77,12 @@ public interface DAO<T> {
             try (PreparedStatement ps = conn.prepareStatement(query)) {
                 ResultSet set = ps.executeQuery();
 
-                ResultSetMetaData rsMetaData = set.getMetaData();
-                int count = rsMetaData.getColumnCount();
-
-                for (int i = 1; i <= count; i++) {
-
-                    genericBean.addEntry(rsMetaData.getColumnName(i), set.getObject(i));
+                while (set.next()) {
+                    entity.add(extractor.extract(set, tables));
                 }
-
-                System.out.println(genericBean);
-
-                /*while (set.next()) {
-                    entity.add(extractor.extract(set));
-                }*/
             }
         }
-        return genericBean;
+        return entity;
     }
 
     default boolean genericDoSave(String table, HashMap<String, ?> map, DataSource source) throws SQLException {
