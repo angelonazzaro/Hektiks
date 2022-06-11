@@ -1,5 +1,6 @@
 package Model.Sconto;
 
+import Model.Storage.GenericBean;
 import Model.Storage.IEntity;
 
 import java.io.Serial;
@@ -7,7 +8,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.HashMap;
 
-public class Sconto implements Serializable, IEntity {
+public class Sconto extends GenericBean implements Serializable, IEntity {
 
     @Serial
     private static final long serialVersionUID = -6140573396807378229L;

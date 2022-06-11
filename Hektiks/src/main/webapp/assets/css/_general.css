@@ -49,7 +49,7 @@ body {
     min-height: 92.5vh;
     width: 100%;
     background-color: var(--section-bg);
-    padding: 10rem 0;
+    padding-top: 10rem;
 }
 
 .row {
@@ -98,24 +98,23 @@ a {
 }
 
 .btn {
+    color: white;
     padding: 1.8rem;
     font-weight: 700;
     border-radius: 0.5rem;
     font-size: calc(1em + 1vmin);
     border: none;
     cursor: pointer;
-    background: rgba(215, 222, 217, 0.7);
-}
-
-.form-control-submit-btn {
-    width: 100%;
-    color: white;
     transition: background-color 200ms ease;
     background-color: var(--orange);
 }
 
-.form-control-submit-btn:hover {
+.btn:hover {
     background-color: var(--yellow);
+}
+
+.form-control-submit-btn {
+    width: 100%;
 }
 
 /* INTESTAZIONI E TESTO */

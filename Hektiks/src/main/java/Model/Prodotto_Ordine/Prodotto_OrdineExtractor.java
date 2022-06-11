@@ -4,6 +4,7 @@ import Model.Storage.ResultSetExtractor;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import static Model.Storage.Entities.PRODOTTI_ORDINI;
 
@@ -19,6 +20,11 @@ public class Prodotto_OrdineExtractor implements ResultSetExtractor<Prodotto_Ord
         prodotto_ordine.setCodice_gioco(resultSet.getString(PRODOTTI_ORDINI + ".codice_gioco"));
         prodotto_ordine.setData_ora_creazione(resultSet.getTimestamp(PRODOTTI_ORDINI + ".data_ora_creazione"));
         prodotto_ordine.setQuantita(resultSet.getInt(PRODOTTI_ORDINI + ".quantita"));
+
+        if (tables.length > 0) {
+            prodotto_ordine.setJoin(new ArrayList<>());
+            for (String table : tables) prodotto_ordine.addToJoin(findExtractor(table).extract(resultSet));
+        }
 
         return prodotto_ordine;
     }

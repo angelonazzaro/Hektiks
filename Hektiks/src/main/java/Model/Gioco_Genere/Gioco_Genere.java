@@ -1,12 +1,13 @@
 package Model.Gioco_Genere;
 
+import Model.Storage.GenericBean;
 import Model.Storage.IEntity;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashMap;
 
-public class Gioco_Genere implements Serializable, IEntity {
+public class Gioco_Genere extends GenericBean implements Serializable, IEntity {
 
     @Serial
     private static final long serialVersionUID = -1076342045661803008L;

@@ -31,7 +31,6 @@ public class GiocoExtractor implements ResultSetExtractor<Gioco> {
             for (String table : tables) gioco.addToJoin(findExtractor(table).extract(resultSet));
         }
 
-
         return gioco;
     }
 }

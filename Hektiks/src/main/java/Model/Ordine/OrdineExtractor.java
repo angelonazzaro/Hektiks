@@ -4,6 +4,7 @@ import Model.Storage.ResultSetExtractor;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import static Model.Storage.Entities.ORDINI;
 
@@ -18,6 +19,11 @@ public class OrdineExtractor implements ResultSetExtractor<Ordine> {
         ordine.setCodice_ordine(resultSet.getString(ORDINI + ".codice_ordine"));
         ordine.setData_ora_ordinazione(resultSet.getTimestamp(ORDINI + ".data_ora_ordinazione"));
         ordine.setPrezzo_totale(resultSet.getDouble(ORDINI + ".prezzo_totale"));
+
+        if (tables.length > 0) {
+            ordine.setJoin(new ArrayList<>());
+            for (String table : tables) ordine.addToJoin(findExtractor(table).extract(resultSet));
+        }
 
         return ordine;
     }

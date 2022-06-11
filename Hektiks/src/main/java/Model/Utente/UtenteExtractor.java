@@ -4,6 +4,7 @@ import Model.Storage.ResultSetExtractor;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import static Model.Storage.Entities.UTENTI;
 
@@ -24,6 +25,11 @@ public class UtenteExtractor implements ResultSetExtractor<Utente> {
         utente.setRuolo(resultSet.getBoolean(UTENTI + ".ruolo"));
         utente.setSaldo(resultSet.getDouble(UTENTI + ".saldo"));
         utente.setBiografia(resultSet.getString(UTENTI + ".biografia"));
+
+        if (tables.length > 0) {
+            utente.setJoin(new ArrayList<>());
+            for (String table : tables) utente.addToJoin(findExtractor(table).extract(resultSet));
+        }
 
         return utente;
     }

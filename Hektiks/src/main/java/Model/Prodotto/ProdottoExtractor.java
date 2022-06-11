@@ -4,6 +4,7 @@ import Model.Storage.ResultSetExtractor;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import static Model.Storage.Entities.PRODOTTI;
 
@@ -17,6 +18,11 @@ public class ProdottoExtractor implements ResultSetExtractor<Prodotto> {
         prodotto.setEmail_utente(resultSet.getString(PRODOTTI + ".email_utente"));
         prodotto.setCodice_gioco(resultSet.getString(PRODOTTI + ".codice_gioco"));
         prodotto.setQuantita_disponibile(resultSet.getInt(PRODOTTI + ".quantita_disponibile"));
+
+        if (tables.length > 0) {
+            prodotto.setJoin(new ArrayList<>());
+            for (String table : tables) prodotto.addToJoin(findExtractor(table).extract(resultSet));
+        }
 
         return prodotto;
     }

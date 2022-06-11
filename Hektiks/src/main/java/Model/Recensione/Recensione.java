@@ -1,5 +1,6 @@
 package Model.Recensione;
 
+import Model.Storage.GenericBean;
 import Model.Storage.IEntity;
 
 import java.io.Serial;
@@ -7,7 +8,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.HashMap;
 
-public class Recensione implements Serializable, IEntity {
+public class Recensione extends GenericBean implements Serializable, IEntity {
 
     @Serial
     private static final long serialVersionUID = -6606424426975407660L;

@@ -1,5 +1,6 @@
 package Model.GiftCard;
 
+import Model.Storage.GenericBean;
 import Model.Storage.IEntity;
 
 import java.io.Serial;
@@ -7,7 +8,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.HashMap;
 
-public class GiftCard implements Serializable, IEntity {
+public class GiftCard extends GenericBean implements Serializable, IEntity {
 
     @Serial
     private static final long serialVersionUID = -733297996749609206L;

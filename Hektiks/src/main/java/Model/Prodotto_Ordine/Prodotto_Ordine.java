@@ -1,5 +1,6 @@
 package Model.Prodotto_Ordine;
 
+import Model.Storage.GenericBean;
 import Model.Storage.IEntity;
 
 import java.io.Serial;
@@ -7,7 +8,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.HashMap;
 
-public class Prodotto_Ordine implements Serializable, IEntity {
+public class Prodotto_Ordine extends GenericBean implements Serializable, IEntity {
 
     @Serial
     private static final long serialVersionUID = -4914161285010290458L;

@@ -4,8 +4,7 @@ import Model.Gioco.GiocoDAO;
 import Model.Utente.Utente;
 import Model.Utente.UtenteDAO;
 import static Model.Storage.Entities.*;
-import Utils.JSONResponse;
-import com.google.gson.Gson;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,7 +31,7 @@ public class HomeServlet extends HttpServlet {
 
         try {
 
-            request.setAttribute("giochiDelMomento", giocoDAO.doRetrieveByJoin("left", SCONTI + " ON " + SCONTI + ".codice_gioco=" + GIOCHI + ".codice_gioco", SCONTI + ".data_creazione <= DATE() AND (" + SCONTI + ".data_fine IS NULL OR " + SCONTI + ".data_fine >= DATE()) LIMIT 9", SCONTI));
+            request.setAttribute("giochiDelMomento", giocoDAO.doRetrieveByJoin("left", SCONTI + " ON " + SCONTI + ".codice_gioco=" + GIOCHI + ".codice_gioco", "TRUE LIMIT 9", SCONTI));
             request.setAttribute("bestSellers", giocoDAO.doRetrieveByJoin("left", SCONTI + " ON " + SCONTI + ".codice_gioco=" + GIOCHI + ".codice_gioco", "TRUE ORDER BY numero_vendite DESC LIMIT 9", SCONTI));
         } catch (SQLException e) {
             e.printStackTrace();
@@ -56,7 +55,6 @@ public class HomeServlet extends HttpServlet {
         String email = request.getParameter("email"), password = request.getParameter("password");
         UtenteDAO utenteDAO = new UtenteDAO((DataSource) getServletContext().getAttribute("DataSource"));
         PrintWriter out = response.getWriter();
-        Gson gsonObj = new Gson();
 
         List<Utente> utenti = null;
 
@@ -69,12 +67,12 @@ public class HomeServlet extends HttpServlet {
                     response.setContentType("application/json");
                     response.setCharacterEncoding("UTF-8");
 
-                    out.write(gsonObj.toJson(new JSONResponse<String>("danger", "Credenziali errate")));
+//                    out.write(gsonObj.toJson(new JSONResponse<String>("danger", "Credenziali errate")));
                 } else {
                     session = request.getSession();
                     session.setAttribute("user", utenti.get(0));
 
-                    out.write(gsonObj.toJson(new JSONResponse<String>("success")));
+//                    out.write(gsonObj.toJson(new JSONResponse<String>("success")));
                 }
 
                 out.flush();
@@ -87,11 +85,11 @@ public class HomeServlet extends HttpServlet {
                 utenti = utenteDAO.doRetrieveByCondition("email='" + email + "'");
 
                 if (!utenti.isEmpty()) {
-                    response.setContentType("application/json");
-                    response.setCharacterEncoding("UTF-8");
-
-                    out.write(gsonObj.toJson(new JSONResponse<String>("danger", "Email già registrata")));
-                    out.flush();
+//                    response.setContentType("application/json");
+//                    response.setCharacterEncoding("UTF-8");
+//
+//                    out.write(gsonObj.toJson(new JSONResponse<String>("danger", "Email già registrata")));
+//                    out.flush();
                     return;
                 }
 
@@ -131,12 +129,12 @@ public class HomeServlet extends HttpServlet {
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
 
-                if (utenteDAO.doSave(utente))
-                    out.write(gsonObj.toJson(new JSONResponse<String>("success", "Registrazione avvenuta con successo!")));
-                else
-                    out.write(gsonObj.toJson(new JSONResponse<String>("danger", "Qualcosa è andato storto :(")));
-
-                out.flush();
+//                if (utenteDAO.doSave(utente))
+//                    out.write(gsonObj.toJson(new JSONResponse<String>("success", "Registrazione avvenuta con successo!")));
+//                else
+//                    out.write(gsonObj.toJson(new JSONResponse<String>("danger", "Qualcosa è andato storto :(")));
+//
+//                out.flush();
 
             } catch (SQLException e) {
                 e.printStackTrace();

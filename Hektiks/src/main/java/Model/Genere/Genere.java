@@ -1,12 +1,14 @@
 package Model.Genere;
 
+import Model.Storage.GenericBean;
 import Model.Storage.IEntity;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 
-public class Genere implements Serializable, IEntity {
+public class Genere extends GenericBean implements Serializable, IEntity {
 
     @Serial
     private static final long serialVersionUID = -2680613387299216950L;

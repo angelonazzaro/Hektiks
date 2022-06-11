@@ -1,13 +1,15 @@
 package Model.Carrello;
 
+import Model.Storage.GenericBean;
 import Model.Storage.IEntity;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.List;
 
-public class Carrello implements Serializable, IEntity {
+public class Carrello extends GenericBean implements Serializable, IEntity {
 
     @Serial
     private static final long serialVersionUID = -5843497590632721035L;

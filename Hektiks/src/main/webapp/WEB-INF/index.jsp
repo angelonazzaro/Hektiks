@@ -1,6 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="Model.Gioco.Gioco" %>
-<%@ page import="Model.Sconto.Sconto" %><%--
+<%@ page import="Model.Sconto.Sconto" %>
+<%@ page import="java.util.Date" %><%--
   Created by IntelliJ IDEA.
   User: Panin
   Date: 26/04/2022
@@ -33,7 +34,9 @@
                             <div class="card-header">
                                 <a href="#"><img class="card-img" src="<%= gioco.getCopertina() %>" alt="<%= gioco.getTitolo() %> - Copertina"></a>
                                 <% if (sconto != null && sconto.getCodice_sconto() != null && sconto.getPercentuale() > 0) {%>
-                                    <div class="discount text">-<%= sconto.getPercentuale() %>%</div>
+                                    <% if (sconto.getData_fine() == null || sconto.getData_fine().after(new Date()) || sconto.getData_fine().equals(new Date())) {%>
+                                        <div class="discount text">-<%= sconto.getPercentuale() %>%</div>
+                                    <% } %>
                                 <% } %>
                             </div>
                             <div class="card-body">
@@ -42,7 +45,9 @@
                                 </div>
                                 <div class="price hs-4">
                                     <% if (sconto != null && sconto.getCodice_sconto() != null && sconto.getPercentuale() > 0) {%>
-                                        <%= String.format("%.2f", gioco.getPrezzo() - ((gioco.getPrezzo()) * sconto.getPercentuale()) / 100).replace(",", ".") %>€
+                                        <% if (sconto.getData_fine() == null || sconto.getData_fine().after(new Date()) || sconto.getData_fine().equals(new Date())) {%>
+                                            <%= String.format("%.2f", gioco.getPrezzo() - ((gioco.getPrezzo()) * sconto.getPercentuale()) / 100).replace(",", ".") %>€
+                                        <% } %>
                                     <% } else { %>
                                         <%= String.format("%.2f", gioco.getPrezzo()).replace(",", ".") %>€
                                     <% } %>
@@ -89,7 +94,9 @@
                         <div class="card-header">
                             <a href="#"><img class="card-img" src="<%= gioco.getCopertina() %>" alt="<%= gioco.getTitolo() %> - Copertina"></a>
                             <% if (sconto != null && sconto.getCodice_sconto() != null && sconto.getPercentuale() > 0) {%>
-                            <div class="discount text">-<%= sconto.getPercentuale() %>%</div>
+                                <% if (sconto.getData_fine() == null || sconto.getData_fine().after(new Date()) || sconto.getData_fine().equals(new Date())) {%>
+                                    <div class="discount text">-<%= sconto.getPercentuale() %>%</div>
+                                <% } %>
                             <% } %>
                         </div>
                         <div class="card-body">
@@ -98,7 +105,9 @@
                             </div>
                             <div class="price hs-4">
                                 <% if (sconto != null && sconto.getCodice_sconto() != null && sconto.getPercentuale() > 0) {%>
+                                <% if (sconto.getData_fine() == null || sconto.getData_fine().after(new Date()) || sconto.getData_fine().equals(new Date())) {%>
                                 <%= String.format("%.2f", gioco.getPrezzo() - ((gioco.getPrezzo()) * sconto.getPercentuale()) / 100).replace(",", ".") %>€
+                                <% } %>
                                 <% } else { %>
                                 <%= String.format("%.2f", gioco.getPrezzo()).replace(",", ".") %>€
                                 <% } %>
@@ -106,6 +115,16 @@
                         </div>
                     </div>
                     <% } %>
+                </div>
+            </div>
+            <div class="separator" id="telegram-separator">
+                <div class="separator-content" \>
+                    <img src="<%= request.getContextPath() %>/assets/images/icons/telegram.svg" alt="telegram">
+                    <div style="text-align: center; padding: 0 1.2rem;">
+                        <h2 class="hs-5">Non perderti nessuna offerta o promozione!</h2>
+                        <p class="text" style="color: var(--light-grey); margin-top: 0.2rem">Sii il primo a ricevere offerte e promozioni!</p>
+                    </div>
+                    <a href="https://t.me/WarehouseDealsItalia" target="_blank" class="btn">Unisciti</a>
                 </div>
             </div>
         </div>

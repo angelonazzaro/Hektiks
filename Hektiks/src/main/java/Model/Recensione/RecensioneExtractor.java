@@ -4,6 +4,7 @@ import Model.Storage.ResultSetExtractor;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import static Model.Storage.Entities.RECENSIONI;
 
@@ -19,6 +20,11 @@ public class RecensioneExtractor implements ResultSetExtractor<Recensione> {
         recensione.setData_ora_pubblicazione(resultSet.getTimestamp(RECENSIONI + ".data_ora_pubblicazione"));
         recensione.setPercentuale(resultSet.getByte(RECENSIONI + ".percentuale"));
         recensione.setDescrizione(resultSet.getString(RECENSIONI + ".descrizione"));
+
+        if (tables.length > 0) {
+            recensione.setJoin(new ArrayList<>());
+            for (String table : tables) recensione.addToJoin(findExtractor(table).extract(resultSet));
+        }
 
         return recensione;
     }

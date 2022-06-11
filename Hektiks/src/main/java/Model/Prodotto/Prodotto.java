@@ -1,12 +1,13 @@
 package Model.Prodotto;
 
+import Model.Storage.GenericBean;
 import Model.Storage.IEntity;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashMap;
 
-public class Prodotto implements Serializable, IEntity {
+public class Prodotto extends GenericBean implements Serializable, IEntity {
 
     @Serial
     private static final long serialVersionUID = -3011038005386033858L;

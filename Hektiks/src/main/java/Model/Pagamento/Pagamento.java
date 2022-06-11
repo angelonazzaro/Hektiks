@@ -1,5 +1,6 @@
 package Model.Pagamento;
 
+import Model.Storage.GenericBean;
 import Model.Storage.IEntity;
 
 import java.io.Serial;
@@ -7,7 +8,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.HashMap;
 
-public class Pagamento implements Serializable, IEntity {
+public class Pagamento extends GenericBean implements Serializable, IEntity {
 
     @Serial
     private static final long serialVersionUID = -8787575923741811571L;

@@ -1,5 +1,6 @@
 package Model.Utente;
 
+import Model.Storage.GenericBean;
 import Model.Storage.IEntity;
 
 import java.io.Serial;
@@ -11,7 +12,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.util.HashMap;
 
-public class Utente implements Serializable, IEntity {
+public class Utente extends GenericBean implements Serializable, IEntity {
 
     @Serial
     private static final long serialVersionUID = 6645001885280633923L;

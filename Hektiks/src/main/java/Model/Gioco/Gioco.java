@@ -1,5 +1,6 @@
 package Model.Gioco;
 
+import Model.Storage.GenericBean;
 import Model.Storage.IEntity;
 
 import java.io.Serial;
@@ -8,7 +9,7 @@ import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 
-public class Gioco implements Serializable, IEntity {
+public class Gioco extends GenericBean implements Serializable, IEntity {
 
     @Serial
     private static final long serialVersionUID = 4089603497457100111L;
@@ -22,7 +23,6 @@ public class Gioco implements Serializable, IEntity {
     private double prezzo;
     private int quantita_disponibile;
     private int numero_vendite;
-    private List<Object> join;
 
     @Override
     public String toString() {
@@ -129,9 +129,4 @@ public class Gioco implements Serializable, IEntity {
         this.numero_vendite = numero_vendite;
     }
 
-    public List<Object> getJoin() { return join; }
-
-    public void setJoin(List<Object> join) { this.join = join; }
-
-    public void addToJoin(Object obj) { this.join.add(obj); }
 }

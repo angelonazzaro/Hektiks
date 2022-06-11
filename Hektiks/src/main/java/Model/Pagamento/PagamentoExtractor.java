@@ -4,6 +4,7 @@ import Model.Storage.ResultSetExtractor;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import static Model.Storage.Entities.PAGAMENTI;
 
@@ -18,6 +19,11 @@ public class PagamentoExtractor implements ResultSetExtractor<Pagamento> {
         pagamento.setCodice_ordine(resultSet.getString(PAGAMENTI + ".codice_ordine"));
         pagamento.setData_ora_pagamento(resultSet.getTimestamp(PAGAMENTI + ".data_ora_pagamento"));
         pagamento.setImporto(resultSet.getDouble(PAGAMENTI + ".importo"));
+
+        if (tables.length > 0) {
+            pagamento.setJoin(new ArrayList<>());
+            for (String table : tables) pagamento.addToJoin(findExtractor(table).extract(resultSet));
+        }
 
         return pagamento;
     }
