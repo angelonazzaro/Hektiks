@@ -15,7 +15,7 @@ public class Sconto implements Serializable, IEntity {
     private String codice_sconto;
     private String codice_gioco;
     private Date data_creazione;
-    private byte percentuale;
+    private double percentuale;
     private Date data_fine;
 
     @Override
@@ -67,11 +67,11 @@ public class Sconto implements Serializable, IEntity {
         this.data_creazione = data_creazione;
     }
 
-    public byte getPercentuale() {
+    public double getPercentuale() {
         return percentuale;
     }
 
-    public void setPercentuale(byte percentuale) {
+    public void setPercentuale(double percentuale) {
         this.percentuale = percentuale;
     }
 

@@ -1,13 +1,5 @@
 package Model.Recensione;
 
-<<<<<<< HEAD
-import Model.GenericBean.GenericBean;
-=======
-
->>>>>>> 6fa742118c6fb45341fe09fd97464f963361178b
-import Model.Prodotto_Ordine.Prodotto_Ordine;
-import Model.Prodotto_Ordine.Prodotto_OrdineDAO;
-import Model.Prodotto_Ordine.Prodotto_OrdineExtractor;
 import Model.Storage.DAO;
 import Model.Storage.SQLDAO;
 import Utils.InvalidPrimaryKeyException;

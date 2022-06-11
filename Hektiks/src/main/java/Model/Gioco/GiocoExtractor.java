@@ -4,6 +4,8 @@ import Model.Storage.ResultSetExtractor;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static Model.Storage.Entities.GIOCHI;
 
@@ -24,8 +26,11 @@ public class GiocoExtractor implements ResultSetExtractor<Gioco> {
         gioco.setQuantita_disponibile(resultSet.getInt(GIOCHI + ".quantita_disponibile"));
         gioco.setNumero_vendite(resultSet.getInt(GIOCHI + ".numero_vendite"));
 
-        if (tables.length > 0)
+        if (tables.length > 0) {
+            gioco.setJoin(new ArrayList<>());
             for (String table : tables) gioco.addToJoin(findExtractor(table).extract(resultSet));
+        }
+
 
         return gioco;
     }
