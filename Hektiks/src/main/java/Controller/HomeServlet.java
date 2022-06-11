@@ -32,7 +32,7 @@ public class HomeServlet extends HttpServlet {
 
         try {
 
-            //Fixare 
+            //Fixare
             request.setAttribute("giochiDelMomento", giocoDAO.doRetrieveByJoin("left", ));
             request.setAttribute("bestSellers", giocoDAO.doRetrieveByCondition("TRUE ORDER BY numero_vendite DESC LIMIT 9"));
         } catch (SQLException e) {
