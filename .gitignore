@@ -8,3 +8,5 @@
 /build/
 /.idea/
 /META-INF/context.xml
+/META-INF/
+/META-INF/*
