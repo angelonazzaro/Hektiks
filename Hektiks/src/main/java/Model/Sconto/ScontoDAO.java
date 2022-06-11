@@ -1,8 +1,5 @@
 package Model.Sconto;
 
-
-import Model.Recensione.Recensione;
-import Model.Recensione.RecensioneExtractor;
 import Model.Storage.DAO;
 import Model.Storage.SQLDAO;
 import Utils.InvalidPrimaryKeyException;
@@ -12,7 +9,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import static Model.Storage.Entities.RECENSIONI;
 import static Model.Storage.Entities.SCONTI;
 
 public class ScontoDAO extends SQLDAO implements DAO<Sconto> {
