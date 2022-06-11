@@ -24,15 +24,10 @@ public class GiftCardDAO extends SQLDAO implements DAO<GiftCard> {
     }
 
     @Override
-    public List<GiftCard> doRetrieveByJoin(String joinTable, String join, String predicate, String condition) throws SQLException {
-
-        return genericDoRetrieveByJoin(GIFTCARDS, joinTable, join, predicate, condition, new GiftCardExtractor(), this.source);
+    public List<GiftCard> doRetrieveByJoin(String joinType, String joinCondition, String condition, String... tables) throws SQLException {
+        return null;
     }
 
-    public List<GiftCard> doRetrieveByJoin(String joinTable, String join, String predicate, String condition, int row_count) throws SQLException {
-
-        return genericDoRetrieveByJoin(GIFTCARDS, joinTable, join, predicate, condition + " LIMIT " + row_count, new GiftCardExtractor(), this.source);
-    }
 
     @Override
     public GiftCard doRetrieveByKey(String... key) throws SQLException {

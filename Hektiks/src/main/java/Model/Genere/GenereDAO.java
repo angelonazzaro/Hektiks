@@ -1,6 +1,5 @@
 package Model.Genere;
 
-import Model.GenericBean.GenericBean;
 import Model.Storage.DAO;
 import Model.Storage.SQLDAO;
 import Utils.InvalidPrimaryKeyException;

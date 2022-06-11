@@ -1,6 +1,5 @@
 package Controller;
 
-import Model.GenericBean.GenericBean;
 import Model.Gioco.GiocoDAO;
 import Model.Utente.Utente;
 import Model.Utente.UtenteDAO;
@@ -33,7 +32,8 @@ public class HomeServlet extends HttpServlet {
 
         try {
 
-            request.setAttribute("giochiDelMomento", giocoDAO.doRetrieveByJoin(SCONTI, "left", SCONTI + ".codice_gioco=" + GIOCHI + ".codice_gioco", "TRUE", 9));
+            //Fixare 
+            request.setAttribute("giochiDelMomento", giocoDAO.doRetrieveByJoin("left", ));
             request.setAttribute("bestSellers", giocoDAO.doRetrieveByCondition("TRUE ORDER BY numero_vendite DESC LIMIT 9"));
         } catch (SQLException e) {
             e.printStackTrace();

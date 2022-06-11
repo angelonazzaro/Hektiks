@@ -1,6 +1,6 @@
 package Model.Sconto;
 
-import Model.GenericBean.GenericBean;
+
 import Model.Recensione.Recensione;
 import Model.Recensione.RecensioneExtractor;
 import Model.Storage.DAO;

@@ -1,6 +1,6 @@
 package Model.Utente;
 
-import Model.GenericBean.GenericBean;
+
 import Model.Sconto.Sconto;
 import Model.Sconto.ScontoExtractor;
 import Model.Storage.DAO;
