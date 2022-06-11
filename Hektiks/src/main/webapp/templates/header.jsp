@@ -25,13 +25,16 @@
 <!-- header start -->
 <header>
     <nav>
-        <div id="cart">
-            <a href="#"><i class="fas fa-shopping-cart"></i></a>
-        </div>
-        <div id="burger">
-            <span class="line"></span>
-            <span class="line"></span>
-            <span class="line"></span>
+        <h1 id="logo" class="hs-1">HEKTIKS</h1>
+        <div style="display: flex">
+            <div id="cart">
+                <a href="#"><i class="fas fa-shopping-cart"></i></a>
+            </div>
+            <div id="burger">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+            </div>
         </div>
     </nav>
 </header>
