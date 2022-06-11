@@ -1,9 +1,5 @@
 package Model.Recensione;
 
-
-import Model.Prodotto_Ordine.Prodotto_Ordine;
-import Model.Prodotto_Ordine.Prodotto_OrdineDAO;
-import Model.Prodotto_Ordine.Prodotto_OrdineExtractor;
 import Model.Storage.DAO;
 import Model.Storage.SQLDAO;
 import Utils.InvalidPrimaryKeyException;

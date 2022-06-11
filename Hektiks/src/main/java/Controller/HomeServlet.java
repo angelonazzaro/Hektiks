@@ -32,9 +32,8 @@ public class HomeServlet extends HttpServlet {
 
         try {
 
-            //Fixare
-            request.setAttribute("giochiDelMomento", giocoDAO.doRetrieveByJoin("left", ));
-            request.setAttribute("bestSellers", giocoDAO.doRetrieveByCondition("TRUE ORDER BY numero_vendite DESC LIMIT 9"));
+            request.setAttribute("giochiDelMomento", giocoDAO.doRetrieveByJoin("left", SCONTI + " ON " + SCONTI + ".codice_gioco=" + GIOCHI + ".codice_gioco", SCONTI + ".data_creazione <= DATE() AND (" + SCONTI + ".data_fine IS NULL OR " + SCONTI + ".data_fine >= DATE()) LIMIT 9", SCONTI));
+            request.setAttribute("bestSellers", giocoDAO.doRetrieveByJoin("left", SCONTI + " ON " + SCONTI + ".codice_gioco=" + GIOCHI + ".codice_gioco", "TRUE ORDER BY numero_vendite DESC LIMIT 9", SCONTI));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -59,7 +58,7 @@ public class HomeServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         Gson gsonObj = new Gson();
 
-        List<Utente> utenti = null;
+        List<Utente> utenti;
 
         if (action.equals("login")) {
 

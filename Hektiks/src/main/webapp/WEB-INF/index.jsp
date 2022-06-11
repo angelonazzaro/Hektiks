@@ -1,5 +1,6 @@
 <%@ page import="java.util.List" %>
-<%@ page import="Model.Gioco.Gioco" %><%--
+<%@ page import="Model.Gioco.Gioco" %>
+<%@ page import="Model.Sconto.Sconto" %><%--
   Created by IntelliJ IDEA.
   User: Panin
   Date: 26/04/2022
@@ -27,17 +28,24 @@
                 </div>
                 <div class="products-content">
                     <% for (Gioco gioco : giochiDelMomento) { %>
+                    <% Sconto sconto = (Sconto) gioco.getJoin().get(0); %>
                         <div class="card">
                             <div class="card-header">
                                 <a href="#"><img class="card-img" src="<%= gioco.getCopertina() %>" alt="<%= gioco.getTitolo() %> - Copertina"></a>
-                                <div class="discount text">-25%</div>
+                                <% if (sconto != null && sconto.getCodice_sconto() != null && sconto.getPercentuale() > 0) {%>
+                                    <div class="discount text">-<%= sconto.getPercentuale() %>%</div>
+                                <% } %>
                             </div>
                             <div class="card-body">
                                 <div class="name text">
                                     <%= gioco.getTitolo() %>
                                 </div>
                                 <div class="price hs-4">
-                                    <%= String.format("%.2f", gioco.getPrezzo()).replace(",", ".") %>€
+                                    <% if (sconto != null && sconto.getCodice_sconto() != null && sconto.getPercentuale() > 0) {%>
+                                        <%= String.format("%.2f", gioco.getPrezzo() - ((gioco.getPrezzo()) * sconto.getPercentuale()) / 100).replace(",", ".") %>€
+                                    <% } else { %>
+                                        <%= String.format("%.2f", gioco.getPrezzo()).replace(",", ".") %>€
+                                    <% } %>
                                 </div>
                             </div>
                         </div>
@@ -76,17 +84,24 @@
                 </div>
                 <div class="products-content">
                     <% for (Gioco gioco : bestSellers) { %>
+                    <% Sconto sconto = (Sconto) gioco.getJoin().get(0); %>
                     <div class="card">
                         <div class="card-header">
                             <a href="#"><img class="card-img" src="<%= gioco.getCopertina() %>" alt="<%= gioco.getTitolo() %> - Copertina"></a>
-                            <div class="discount text">-25%</div>
+                            <% if (sconto != null && sconto.getCodice_sconto() != null && sconto.getPercentuale() > 0) {%>
+                            <div class="discount text">-<%= sconto.getPercentuale() %>%</div>
+                            <% } %>
                         </div>
                         <div class="card-body">
                             <div class="name text">
                                 <%= gioco.getTitolo() %>
                             </div>
                             <div class="price hs-4">
+                                <% if (sconto != null && sconto.getCodice_sconto() != null && sconto.getPercentuale() > 0) {%>
+                                <%= String.format("%.2f", gioco.getPrezzo() - ((gioco.getPrezzo()) * sconto.getPercentuale()) / 100).replace(",", ".") %>€
+                                <% } else { %>
                                 <%= String.format("%.2f", gioco.getPrezzo()).replace(",", ".") %>€
+                                <% } %>
                             </div>
                         </div>
                     </div>

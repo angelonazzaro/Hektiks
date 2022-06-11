@@ -62,7 +62,8 @@ public interface DAO<T> {
 
         try (Connection conn = source.getConnection()) {
 
-            String query;
+            String query = null;
+
             if (joinType.toUpperCase(Locale.ROOT).equals("LEFT"))
                 query = QueryBuilder.SELECT("*").FROM(table).LEFT_JOIN(joinCondition).WHERE(condition).toString();
             else if (joinType.toUpperCase(Locale.ROOT).equals("RIGHT"))

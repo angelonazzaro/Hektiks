@@ -1,8 +1,5 @@
 package Model.Utente;
 
-
-import Model.Sconto.Sconto;
-import Model.Sconto.ScontoExtractor;
 import Model.Storage.DAO;
 import Model.Storage.SQLDAO;
 import Utils.InvalidPrimaryKeyException;
@@ -12,7 +9,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import static Model.Storage.Entities.SCONTI;
 import static Model.Storage.Entities.UTENTI;
 
 public class UtenteDAO extends SQLDAO implements DAO<Utente> {
