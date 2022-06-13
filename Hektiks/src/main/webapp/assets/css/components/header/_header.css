@@ -16,6 +16,11 @@ header nav {
     gap: 0;
 }
 
+#logo {
+    color: var(--orange);
+    font-family: "Lobster", "Source Code Pro", sans-serif;
+}
+
 header #burger {
     display: block;
     position: relative;

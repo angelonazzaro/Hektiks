@@ -1,5 +1,6 @@
-/* FONTS: Roboto, Lato, Poppins, Water Brush, Source Sans Pro*/
-@import url('https://fonts.googleapis.com/css2?family=Lato&family=Poppins&family=Roboto&family=Source+Sans+Pro&family=Water+Brush&display=swap');
+/* FONTS: Roboto, Lato, Poppins, Water Brush, Source Sans Pro, Lobster*/
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Lobster&family=Poppins&family=Roboto&family=Source+Sans+Pro&family=Water+Brush&display=swap');
+
 
 :root {
     --orange: #ff5400;
