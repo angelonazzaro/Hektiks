@@ -50,7 +50,13 @@ body {
     min-height: 92.5vh;
     width: 100%;
     background-color: var(--section-bg);
-    padding-top: 10rem;
+    padding: 10rem 0;
+}
+
+.main-content {
+    width: 80%;
+    min-height: 100%;
+    margin: auto;
 }
 
 .row {
@@ -141,4 +147,10 @@ a {
 
 .text {
     font-size: calc(0.9em + 1vmin);
+}
+
+@media only screen and (max-width: 1400px) {
+    .main-content {
+        width: 90%;
+    }
 }

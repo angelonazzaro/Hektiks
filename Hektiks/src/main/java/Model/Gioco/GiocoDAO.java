@@ -24,7 +24,7 @@ public class GiocoDAO extends SQLDAO implements DAO<Gioco> {
         return genericDoRetrieveByCondition(GIOCHI, condition, new GiocoExtractor(), this.source);
     }
 
-    @Override
+    @Override 
     public List<Gioco> doRetrieveByJoin(String joinType, String joinCondition, String condition, String... tables) throws SQLException {
 
         return genericDoRetrieveByJoin(GIOCHI, joinType, joinCondition, condition, new GiocoExtractor(), this.source, tables);

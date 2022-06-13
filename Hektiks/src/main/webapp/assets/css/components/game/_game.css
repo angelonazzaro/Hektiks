@@ -1,0 +1,65 @@
+.game-info-cards-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.game-card {
+    flex-basis: 45%;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    gap: 2rem;
+}
+
+.game-card-header {
+    text-align: center;
+}
+
+.game-card-header h1 {
+    padding: 1rem 2rem;
+}
+
+.game-card-header-info {
+    width: 80%;
+    margin: auto;
+    background-color: #151518;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+}
+
+.game-card-body {
+    width: 100%;
+}
+
+.game-card-price {
+    width: 40%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: auto auto 2rem;
+}
+
+.original-price {
+    text-decoration: line-through;
+}
+
+.game-card-discount {
+    color: var(--orange);
+}
+
+.game-card-buy {
+    display: flex;
+    gap: 1rem;
+}
+
+.game-card-buy > button.btn {
+    flex-basis: 90%;
+    text-align: center;
+}
+
+.game-card-buy > a.btn {
+    flex-basis: 10%;
+    text-align: center;
+}

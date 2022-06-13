@@ -92,6 +92,31 @@ if (login_registration_section !== null) {
         match_password_regex_debounce(confirm_password);
         match_password_value_debounce(password, confirm_password);
     });
+
+    $(".login-registration-form").on("submit", function (e)  {
+        e.preventDefault();
+
+        const submit_btn = $(this).find("button[type=submit]").first();
+        submit_btn.prop("disabled", true); // L'utente non può effettuare più richieste fin quando quella in corso non è finita.
+
+        $.ajax({
+            url: $(this).attr("action"),
+            method: $(this).attr("method"),
+            data: $(this).serializeArray()
+        }).done((response) => {
+            if (response.type === "success") {
+                $(this).trigger("reset"); // pulisco i campi del form
+
+                if ($(this).attr("id") === "registration-form") notifier.success(response.value);
+                else window.location.reload();
+            }
+            else notifier.alert(response.value);
+
+        }).fail().always(() => {
+            submit_btn.prop("disabled", false);
+        });
+
+    });
 }
 
 const password_icons = document.querySelectorAll(".password-icon-js");

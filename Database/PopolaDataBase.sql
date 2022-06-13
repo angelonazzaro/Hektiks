@@ -3,7 +3,7 @@ USE Hektiks;
 INSERT INTO Utenti VALUES 
 ("francescog@gmail.com", "Francesco", "Granozio", "Explosion", sha1("francescobello"), "2022-04-26", TRUE, 420.69, "bla... bla... bla..."),
 ("angelon@gmail.com", "Angelo", "Nazzaro",  "NGLX", sha1("bald"), "2022-04-26", TRUE, 69.42, "bla... bla... bla..."),
-("somaxd@gmail.com", "Carmine", "Nardo", "somarello", sha1("wZ?Yg<7f;5B3>Ff{"), CURDATE(), FALSE, 0, "bla... bla... bla..."),
+("somaxd@gmail.com", "Carmine", "Nardo", "somarello", sha1("soma"), CURDATE(), FALSE, 0, "bla... bla... bla..."),
 ("boxxerello@gmail.com", "Francesco", "Bosso", "Boxxo", sha1("~r~c*<\D8q$K5FWu"), CURDATE(), FALSE, 92.40, "bla... bla... bla..."),
 ("mickymouse@gmail.com", "Giuseppe", "La Voglia", "pippo", sha1("zZpippZz"), CURDATE(), FALSE, 7.90, "bla... bla... bla..."),
 ("giampix@gmail.com", "Giampaolo", "Joestar", "giampix", sha1("password123"), CURDATE(), FALSE, 0.90, "bla... bla... bla..."),

@@ -5,6 +5,8 @@ import Model.Utente.Utente;
 import Model.Utente.UtenteDAO;
 import static Model.Storage.Entities.*;
 
+import Utils.JSONResponse;
+import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -47,16 +49,20 @@ public class HomeServlet extends HttpServlet {
 
         String action = request.getParameter("action");
 
-        if (!action.equals("register") && !action.equals("login")) {
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        if (action == null || (!action.equals("register") && !action.equals("login"))) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             response.sendRedirect("/ErrorHandlerServlet");
         }
 
         String email = request.getParameter("email"), password = request.getParameter("password");
         UtenteDAO utenteDAO = new UtenteDAO((DataSource) getServletContext().getAttribute("DataSource"));
         PrintWriter out = response.getWriter();
+        Gson gson = new Gson();
 
         List<Utente> utenti;
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
 
         if (action.equals("login")) {
 
@@ -64,15 +70,12 @@ public class HomeServlet extends HttpServlet {
                 utenti = utenteDAO.doRetrieveByCondition("email='" + email + "' AND password_utente=SHA1('" + password + "')");
 
                 if (utenti.isEmpty()) {
-                    response.setContentType("application/json");
-                    response.setCharacterEncoding("UTF-8");
-
-//                    out.write(gsonObj.toJson(new JSONResponse<String>("danger", "Credenziali errate")));
+                    out.write(gson.toJson(new JSONResponse<String>("error", "Email o password errati")));
                 } else {
                     session = request.getSession();
                     session.setAttribute("user", utenti.get(0));
 
-//                    out.write(gsonObj.toJson(new JSONResponse<String>("success")));
+                   out.write(gson.toJson(new JSONResponse<String>("success")));
                 }
 
                 out.flush();
@@ -85,11 +88,8 @@ public class HomeServlet extends HttpServlet {
                 utenti = utenteDAO.doRetrieveByCondition("email='" + email + "'");
 
                 if (!utenti.isEmpty()) {
-//                    response.setContentType("application/json");
-//                    response.setCharacterEncoding("UTF-8");
-//
-//                    out.write(gsonObj.toJson(new JSONResponse<String>("danger", "Email già registrata")));
-//                    out.flush();
+                    out.write(gson.toJson(new JSONResponse<String>("danger", "Email già registrata")));
+                    out.flush();
                     return;
                 }
 
@@ -126,15 +126,12 @@ public class HomeServlet extends HttpServlet {
                 utente.setPassword_utente(password);
                 utente.setData_registrazione(new Date(System.currentTimeMillis()));
 
-                response.setContentType("application/json");
-                response.setCharacterEncoding("UTF-8");
+                if (utenteDAO.doSave(utente))
+                    out.write(gson.toJson(new JSONResponse<String>("success", "Registrazione avvenuta con successo!")));
+                else
+                    out.write(gson.toJson(new JSONResponse<String>("error", "Qualcosa è andato storto :(")));
 
-//                if (utenteDAO.doSave(utente))
-//                    out.write(gsonObj.toJson(new JSONResponse<String>("success", "Registrazione avvenuta con successo!")));
-//                else
-//                    out.write(gsonObj.toJson(new JSONResponse<String>("danger", "Qualcosa è andato storto :(")));
-//
-//                out.flush();
+                out.flush();
 
             } catch (SQLException e) {
                 e.printStackTrace();
