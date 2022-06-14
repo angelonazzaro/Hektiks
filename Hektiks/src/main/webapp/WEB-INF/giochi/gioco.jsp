@@ -35,7 +35,7 @@
         </div>
         <div class="actions">
             <a class="btn"><span><i class="fas fa-heart"></i></span></a>
-            <button class="btn">Compra</button>
+            <button class="btn">Acquista</button>
         </div>
     </div>
     <div class="game-separator"></div>

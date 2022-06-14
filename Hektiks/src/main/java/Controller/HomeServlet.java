@@ -62,6 +62,7 @@ public class HomeServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
+        assert action != null;
         if (action.equals("login")) {
 
             try {
