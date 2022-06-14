@@ -32,13 +32,12 @@ public class HomeServlet extends HttpServlet {
         GiocoDAO giocoDAO = new GiocoDAO((DataSource) getServletContext().getAttribute("DataSource"));
 
         try {
-
-            request.setAttribute("giochiDelMomento", giocoDAO.doRetrieveByJoin("left", SCONTI + " ON " + SCONTI + ".codice_gioco=" + GIOCHI + ".codice_gioco", "TRUE LIMIT 9", SCONTI));
-            request.setAttribute("bestSellers", giocoDAO.doRetrieveByJoin("left", SCONTI + " ON " + SCONTI + ".codice_gioco=" + GIOCHI + ".codice_gioco", "TRUE ORDER BY numero_vendite DESC LIMIT 9", SCONTI));
+            // order by codice gioco?
+            request.setAttribute("giochiDelMomento", giocoDAO.doRetrieveByCondition("TRUE ORDER BY " + GIOCHI + ".codice_gioco LIMIT 9"));
+            request.setAttribute("bestSellers", giocoDAO.doRetrieveByCondition("TRUE ORDER BY " + GIOCHI + ".numero_vendite DESC LIMIT 9"));
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
     }
 
@@ -46,7 +45,6 @@ public class HomeServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
 
         if (session != null && session.getAttribute("user") != null) this.doGet(request, response);
-
         String action = request.getParameter("action");
 
         if (action == null || (!action.equals("register") && !action.equals("login"))) {

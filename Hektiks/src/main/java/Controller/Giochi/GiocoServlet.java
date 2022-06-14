@@ -1,13 +1,9 @@
 package Controller.Giochi;
 
-import Model.Genere.Genere;
-import Model.Genere.GenereDAO;
 import Model.Gioco.Gioco;
 import Model.Gioco.GiocoDAO;
 import Model.Gioco_Genere.Gioco_Genere;
 import Model.Gioco_Genere.Gioco_GenereDAO;
-import Model.Sconto.Sconto;
-import Model.Sconto.ScontoDAO;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 
@@ -16,8 +12,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-import static Model.Storage.Entities.GIOCHI;
-import static Model.Storage.Entities.SCONTI;
 
 public class GiocoServlet extends HttpServlet {
     @Override

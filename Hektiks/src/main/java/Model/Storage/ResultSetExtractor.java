@@ -3,7 +3,6 @@ package Model.Storage;
 import Model.Carrello.CarrelloExtractor;
 import Model.Genere.GenereExtractor;
 import Model.GiftCard.GiftCardExtractor;
-import Model.Gioco.Gioco;
 import Model.Gioco.GiocoExtractor;
 import Model.Gioco_Genere.Gioco_GenereExtractor;
 import Model.Ordine.OrdineExtractor;
@@ -11,7 +10,6 @@ import Model.Pagamento.PagamentoExtractor;
 import Model.Prodotto.ProdottoExtractor;
 import Model.Prodotto_Ordine.Prodotto_OrdineExtractor;
 import Model.Recensione.RecensioneExtractor;
-import Model.Sconto.ScontoExtractor;
 import Model.Utente.UtenteExtractor;
 
 import java.sql.ResultSet;
@@ -35,7 +33,6 @@ public interface ResultSetExtractor<B> {
             case PRODOTTI -> new ProdottoExtractor();
             case PRODOTTI_ORDINI -> new Prodotto_OrdineExtractor();
             case RECENSIONI -> new RecensioneExtractor();
-            case SCONTI -> new ScontoExtractor();
             case UTENTI -> new UtenteExtractor();
             default -> null;
         };

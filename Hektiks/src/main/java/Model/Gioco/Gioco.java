@@ -23,21 +23,7 @@ public class Gioco extends GenericBean implements Serializable, IEntity {
     private double prezzo;
     private int quantita_disponibile;
     private int numero_vendite;
-
-    @Override
-    public String toString() {
-        return "Gioco{" +
-                "codice_gioco='" + codice_gioco + '\'' +
-                ", titolo='" + titolo + '\'' +
-                ", descrizione='" + descrizione + '\'' +
-                ", trailer='" + trailer + '\'' +
-                ", data_uscita=" + data_uscita +
-                ", copertina='" + copertina + '\'' +
-                ", prezzo=" + prezzo +
-                ", quantita_disponibile=" + quantita_disponibile +
-                ", numero_vendite=" + numero_vendite +
-                '}';
-    }
+    private int percentuale_sconto;
 
     @Override
     public HashMap<String, ?> toHashMap() {
@@ -53,8 +39,33 @@ public class Gioco extends GenericBean implements Serializable, IEntity {
                 put("prezzo", prezzo);
                 put("quantita_disponibile", quantita_disponibile);
                 put("numero_vendite", numero_vendite);
+                put("percentuale_sconto", percentuale_sconto);
             }
         };
+    }
+
+    @Override
+    public String toString() {
+        return "Gioco{" +
+                "codice_gioco='" + codice_gioco + '\'' +
+                ", titolo='" + titolo + '\'' +
+                ", descrizione='" + descrizione + '\'' +
+                ", trailer='" + trailer + '\'' +
+                ", data_uscita=" + data_uscita +
+                ", copertina='" + copertina + '\'' +
+                ", prezzo=" + prezzo +
+                ", quantita_disponibile=" + quantita_disponibile +
+                ", numero_vendite=" + numero_vendite +
+                ", percentuale_sconto=" + percentuale_sconto +
+                '}';
+    }
+
+    public int getPercentuale_sconto() {
+        return percentuale_sconto;
+    }
+
+    public void setPercentuale_sconto(int percentuale_sconto) {
+        this.percentuale_sconto = percentuale_sconto;
     }
 
     public String getCodice_gioco() {

@@ -24,6 +24,7 @@ public class GiocoExtractor implements ResultSetExtractor<Gioco> {
         gioco.setPrezzo(resultSet.getDouble(GIOCHI + ".prezzo"));
         gioco.setQuantita_disponibile(resultSet.getInt(GIOCHI + ".quantita_disponibile"));
         gioco.setNumero_vendite(resultSet.getInt(GIOCHI + ".numero_vendite"));
+        gioco.setPercentuale_sconto(resultSet.getInt(GIOCHI + ".percentuale_sconto"));
 
         if (tables.length > 0) {
             gioco.setJoin(new ArrayList<>());
