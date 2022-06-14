@@ -1,5 +1,4 @@
 <%@ page import="Model.Gioco.Gioco" %>
-<%@ page import="Model.Sconto.Sconto" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="Model.Genere.Genere" %>
