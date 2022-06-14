@@ -54,7 +54,7 @@ INSERT INTO Giochi VALUES
 	"Scopri l'epica conclusione della lunga faida della famiglia Mishima e le ragioni che si celano dietro ogni episodio della loro storia. Sfruttando l'Unreal Engine 4, il leggendario gioco di combattimenti torna con stupefacenti battaglie cinematiche narrative e intensi duelli da vivere con amici e rivali.
 	Amore, vendetta, orgoglio. Ognuno ha una ragione per combattere. I valori sono ciò che ci danno una ragione di vivere e ci rendono umani, indipendentemente dalle nostre debolezze o punti di forza. Non ci sono motivazioni sbagliate, solo la strada che decidiamo di percorrere.
 	Amplia le tue possibilità di combattente acquistando il Season Pass di TEKKEN 7 separatamente e ottieni l'accesso a incredibili contenuti aggiuntivi.",
-	"https://www.youtube.com/watch?v=kKLCwDg2JLA", 
+	"https://www.youtube.com/embed/kKLCwDg2JLA", 
 	"2017-06-01", 
     "https://s1.gaming-cdn.com/images/products/1515/616x353/tekken-7-pc-gioco-steam-cover.jpg", 
 	5.49, 
@@ -67,7 +67,7 @@ INSERT INTO Giochi VALUES
     "Avanti il prossimo! Assapora la nuova generazione della saga di combattimento numero 1.
 	Mortal Kombat X combina animazioni cinematografiche uniche a un nuovo stile di gioco. Per la prima volta, potrai scegliere tra diverse varianti di ogni personaggio, che influenzeranno strategie e stili di combattimento.
 	Il leggendario Goro viene offerto come bonus per i preordini.", 
-    "https://www.youtube.com/watch?v=jSi2LDkyKmI", 
+    "https://www.youtube.com/embed/jSi2LDkyKmI", 
     "2015-04-14", 
     "https://s3.gaming-cdn.com/images/products/2420/616x353/mortal-kombat-xl-xl-pc-gioco-steam-cover.jpg", 
     3.90, 
@@ -79,7 +79,7 @@ INSERT INTO Giochi VALUES
     "Sniper Elite 5", 
     "Il nuovo capitolo della pluripremiata serie, Sniper Elite 5, offre cecchinaggio senza precedenti, combattimenti tattici in terza persona e una telecamera uccisione migliorata. Fatti strada su mappe più coinvolgenti che mai, con molti luoghi del mondo reale catturati con dettagli sorprendenti e un sistema di attraversamento migliorato, che consente di esplorare ancora di più.
 	Francia, 1944 – Chiamato a svolgere un'operazione segreta dei Ranger statunitensi per indebolire le fortificazioni del Vallo Atlantico lungo la costa della Bretagna, il tiratore scelto Karl Fairburne entra in contatto con la Resistenza francese. Ben presto si viene a conoscenza di un progetto nazista segreto che minaccia di porre fine alla guerra prima che gli Alleati possano invadere l'Europa: l'operazione Kraken.", 
-    "https://www.youtube.com/watch?v=h5HLwAo5gnw", 
+    "https://www.youtube.com/embed/h5HLwAo5gnw", 
     "2022-05-26", 
     "https://s3.gaming-cdn.com/images/products/9578/616x353/sniper-elite-5-pc-gioco-steam-europe-cover.jpg", 
     37.98, 
@@ -94,7 +94,7 @@ INSERT INTO Giochi VALUES
 	Questa versione di Street Fighter V è detta “Arcade Edition” e include l'Arcade Mode, la Team Battle Mode e l'Extra Battle Mode, giocabile anche online, in cui è possibile guadagnare ricompense, punti esperienza e Fight Money da usare per acquistare personaggi aggiuntivi, costumi, livelli e molto altro!
 	Scarica oggi stesso e GRATUITAMENTE il contenuto animato dal titolo “A Shadow Falls""! Il folle M. Bison riesce a mettere in orbita sette lune nere ottenendo un potere inimmaginabile e piombando la Terra nell'oscurità.
 	Street Fighter V: Champion Edition è il pacchetto per eccellenza e include tutti i contenuti (tranne i costumi Fighting Chance, quelli delle collaborazioni speciali e i DLC di Capcom Pro Tour) sia della versione originale che di Street Fighter V: Arcade Edition. Inoltre, contiene tutti i personaggi, scenari e costumi rilasciati dopo l'Arcade Edition ossia 40 personaggi, 34 livelli e oltre 200 costumi!", 
-    "https://www.youtube.com/watch?v=0nFd7Iylj5A", 
+    "https://www.youtube.com/embed/0nFd7Iylj5A", 
     "2016-02-16", 
     "https://s3.gaming-cdn.com/images/products/671/616x353/street-fighter-v-pc-gioco-steam-cover.jpg", 
     4.54, 
@@ -124,7 +124,7 @@ INSERT INTO Giochi VALUES
 	Discarded – Alang, in alto sulla costa occidentale dell'India, le cui spiagge ospitano un immensità di navi abbandonate
 	Breakaway – Ti porta nella Queen Maud Land nel Circolo Polare Artico, un territorio della Norvegia
 	Revival – Forse visitato dai faraoni in passato, il Deserto Orientale, la parte più orientale del Sahara, dove confina con il Nilo, è un buon posto da consultare.", 
-    "https://www.youtube.com/watch?v=ASzOzrB-a9E", 
+    "https://www.youtube.com/embed/ASzOzrB-a9E", 
     "2021-11-19", 
     "https://s1.gaming-cdn.com/images/products/6690/616x353/battlefield-2042-pc-gioco-origin-cover.jpg", 
     21.39, 
@@ -135,7 +135,7 @@ INSERT INTO Giochi VALUES
 	"God of War", 
 	"Lasciatosi alle spalle la sua sete di vendetta verso gli dèi dell'Olimpo, Kratos ora vive nella terra delle divinità e dei mostri norreni. 
 	È in questo mondo ostile e spietato che dovrà combattere per la sopravvivenza e insegnare a suo figlio a fare lo stesso.", 
-	"https://www.youtube.com/watch?v=RQK_40a0XUY&ab_channel=PlayStation", 
+	"https://www.youtube.com/embed/RQK_40a0XUY", 
 	"2022-01-14", 
 	"https://www.instant-gaming.com/images/products/7325/380x218/7325.jpg", 
 	50.00, 
@@ -147,7 +147,7 @@ INSERT INTO Giochi VALUES
 	"Elden Ring per PC è un gioco di ruolo d'azione (ARPG) scritto dalle superstar George RR Martin 
 	(l'autore della serie di libri Le Cronache del Ghiaccio e del Fuoco che ha dato origine alla serie televisiva Game of Thrones) e 
 	Hidetaka Miyazake (famoso per molti popolari videogiochi: dalla serie Souls, a Bloodborne, a Sekiro).", 
-	"https://www.youtube.com/watch?v=AKXiKBnzpBQ&ab_channel=GameSpot", 
+	"https://www.youtube.com/embed/AKXiKBnzpBQ", 
 	"2022-02-25", 
 	"https://www.instant-gaming.com/images/products/4824/380x218/4824.jpg", 
 	60.00, 
@@ -159,7 +159,7 @@ INSERT INTO Giochi VALUES
 	"Minecraft per PC è il videogioco più venduto di tutti i tempi. Questo da solo dovrebbe essere sufficiente per farlo comprare, 
 	ma ecco qualche informazione in più sul perché dovresti iniziare a giocare ora. 
 	È un gioco sandbox in cui i giocatori devono scavare, costruire e creare il loro mondo ideale", 
-	"https://www.youtube.com/watch?v=MmB9b5njVbA&ab_channel=Minecraft", 
+	"https://www.youtube.com/embed/MmB9b5njVbA", 
 	"2011-11-19", 
 	"https://www.instant-gaming.com/images/products/442/380x218/442.jpg", 
 	19.99, 
@@ -173,7 +173,7 @@ INSERT INTO Giochi VALUES
 	composta da Hitman, Hitman 2 e ora Hitman 3. La trilogia segue un arco narrativo che si conclude in questo gioco 
 	giocando la modalità giocatore singolo. In questo gioco, il sicario geneticamente modificato, l'Agente 47, 
 	ha il compito di trovare ed eliminare i leader della cabala segreta, la Provvidenza, che controlla tutti gli affari mondiali.", 
-	"https://www.youtube.com/watch?v=Z29ORu6_p34&ab_channel=IGN", 
+	"https://www.youtube.com/embed/Z29ORu6_p34", 
 	"2022-01-20", 
 	"https://s3.gaming-cdn.com/images/products/6851/616x353/hitman-3-pc-gioco-epic-games-europe-cover.jpg?v=1644802754", 
 	60.00, 
@@ -187,7 +187,7 @@ INSERT INTO Giochi VALUES
     É ambientato in uno stato distopico della California, in cui le regole della nazione e dello stato non si applicano più. Invece, 
      giocando come un mercenario di nome V, il giocatore deve muoversi per la città, 
     raggiungere i propri obiettivi e nel frattempo combattere i nemici.", 
-	"https://www.youtube.com/watch?v=JFf8I_8Ubv4&ab_channel=Cyberpunk2077", 
+	"https://www.youtube.com/embed/JFf8I_8Ubv4", 
 	"2020-12-10", 
 	"https://s1.gaming-cdn.com/images/products/840/616x353/cyberpunk-2077-pc-gioco-gog-com-cover.jpg?v=1650474174", 
 	59.00, 
@@ -199,7 +199,7 @@ INSERT INTO Giochi VALUES
 	"Counter-Strike: Global Offensive", 
 	"Counter-Strike: Global Offensive (CS:GO) amplia il gameplay d'azione a squadre presentato per la prima volta 19 anni fa.
      CS:GO include nuove mappe, personaggi, armi e modalità di gioco e offre versioni aggiornate del classico contenuto di Counter-Strike (de_dust2, ecc.).", 
-	"https://www.youtube.com/watch?v=edYCtaNueQY&ab_channel=Valve", 
+	"https://www.youtube.com/embed/edYCtaNueQY", 
 	"2012-08-21", 
 	"https://s1.gaming-cdn.com/images/products/9459/616x353/counter-strike-global-offensive-pc-mac-gioco-steam-cover.jpg?v=1644770250", 
 	0.00, 
@@ -215,7 +215,7 @@ INSERT INTO Giochi VALUES
     the first two critically acclaimed games of the franchise. Taking place before the rise of Gotham City’s most dangerous 
     criminals, the game showcases a young and unrefined Batman as he faces a defining moment in his early career as a 
     crime fighter that sets his path to becoming the Dark Knight.", 
-	"https://www.youtube.com/watch?v=9pnK8akbd2M", 
+	"https://www.youtube.com/embed/9pnK8akbd2M", 
 	"2013-10-25", 
 	"https://s2.gaming-cdn.com/images/products/184/616x353/batman-arkham-origins-pc-gioco-steam-cover.jpg?v=1649085257", 
 	20.00, 
@@ -227,7 +227,7 @@ INSERT INTO Giochi VALUES
 	"Valorant", 
 	"VALORANT è un FPS competitivo 5 vs 5 basato sui personaggi di Riot. Disponibile ovunque. 
     Padroneggia decine di armi e abilità diverse, e sfoggia le tue capacità", 
-	"https://www.youtube.com/watch?v=e_E9W2vsRbQ&ab_channel=VALORANT", 
+	"https://www.youtube.com/embed/e_E9W2vsRbQ", 
 	"2020-06-02", 
 	"https://s2.gaming-cdn.com/images/products/6568/616x353/valorant-pc-gioco-steam-cover.jpg?v=1646313124", 
 	 0.00, 
@@ -241,7 +241,7 @@ INSERT INTO Giochi VALUES
      C'è una forte enfasi sulla distruzione ambientale e sulla cooperazione tra i giocatori, con ogni giocatore che assume 
      il controllo di un personaggio da difendere o attaccare in ogni diverso scenario. 
      Tra le attività da svolgere: il salvataggio di ostaggi, il disinnesco di bombe e la cattura o la difesa di un punto di controllo.", 
-	"https://www.youtube.com/watch?v=weqnfymIU2w&ab_channel=UbisoftItalia", 
+	"https://www.youtube.com/embed/weqnfymIU2w", 
 	"2015-11-26", 
 	"https://s2.gaming-cdn.com/images/products/406/616x353/tom-clancy-s-rainbow-six-siege-pc-gioco-ubisoft-connect-europe-cover.jpg?v=1649421231", 
 	20.00, 
@@ -256,7 +256,7 @@ INSERT INTO Giochi VALUES
      Crea il tuo eroe multiclasse, affronta mostri bizzarri e saccheggia dungeon pieni di bottini. Spara, 
      fendi, lancia incantesimi: la tua missione è fermare il malvagio Signore dei draghi. 
      Chiunque può unirsi al gruppo e partire all'avventura. La regola è una sola: dimostrare di essere caotici veri!", 
-	"https://www.youtube.com/watch?v=Ikqs6B4ozM0&ab_channel=Borderlands", 
+	"https://www.youtube.com/embed/Ikqs6B4ozM0", 
 	"2022-03-25", 
 	"https://s1.gaming-cdn.com/images/products/10386/616x353/tiny-tina-s-wonderlands-chaotic-great-edition-chaotic-great-edition-pc-gioco-epic-games-europe-cover.jpg?v=1648139448", 
 	80.00, 
@@ -269,7 +269,7 @@ INSERT INTO Giochi VALUES
 	"In Assassin's Creed Valhalla: L'alba del Ragnarok, l'espansione più ambiziosa nella storia della serie, 
     Eivor affronterà il proprio destino nei panni di Odino, il dio norreno della guerra e della saggezza. 
     Scatena i tuoi nuovi poteri divini in una disperata missione che ti porterà ad attraversare un universo mozzafiato.", 
-	"https://www.youtube.com/watch?v=mlxNLhZ-mG8&ab_channel=Assassin%27sCreedIT", 
+	"https://www.youtube.com/embed/mlxNLhZ-mG8", 
 	"2022-03-10", 
 	"https://s1.gaming-cdn.com/images/products/9891/616x353/assassin-s-creed-valhalla-l-alba-del-ragnarok-pc-gioco-ubisoft-connect-europe-cover.jpg?v=1649333093", 
 	40.00, 

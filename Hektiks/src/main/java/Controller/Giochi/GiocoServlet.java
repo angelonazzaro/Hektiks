@@ -1,17 +1,23 @@
 package Controller.Giochi;
 
+import Model.Genere.Genere;
+import Model.Genere.GenereDAO;
 import Model.Gioco.Gioco;
 import Model.Gioco.GiocoDAO;
+import Model.Gioco_Genere.Gioco_Genere;
+import Model.Gioco_Genere.Gioco_GenereDAO;
+import Model.Sconto.Sconto;
+import Model.Sconto.ScontoDAO;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import static Model.Storage.Entities.GIOCHI;
 import static Model.Storage.Entities.SCONTI;
-
 
 public class GiocoServlet extends HttpServlet {
     @Override
@@ -23,16 +29,22 @@ public class GiocoServlet extends HttpServlet {
             response.sendRedirect("/ErrorHandlerServlet");
         }
 
-        GiocoDAO giocoDAO = new GiocoDAO((DataSource) getServletContext().getAttribute("DataSource"));
+        DataSource source = (DataSource) getServletContext().getAttribute("DataSource");
+        GiocoDAO giocoDAO = new GiocoDAO(source);
         try {
-            Gioco gioco = giocoDAO.doRetrieveByJoin("left", SCONTI + " ON " + SCONTI + ".codice_gioco=" + GIOCHI + ".codice_gioco", GIOCHI + ".codice_gioco='" + codiceGioco + "'", SCONTI).get(0) ;
+            Gioco gioco = giocoDAO.doRetrieveByKey(codiceGioco);
 
             if (gioco == null) {
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 request.getRequestDispatcher("/ErrorHandlerServlet").forward(request, response);
             }
 
+//            Sconto sconto = (Sconto) new ScontoDAO(source).doRetrieveByCondition("codice_gioco = '" + codiceGioco + "'");
+            List<Gioco_Genere> generi = new Gioco_GenereDAO(source).doRetrieveByCondition("codice_gioco = '" + codiceGioco + "'");
+
             request.setAttribute("gioco", gioco);
+            request.setAttribute("generi", generi);
+//            request.setAttribute("sconto", sconto);
             request.setAttribute("title", gioco.getTitolo());
             request.setAttribute("page", "giochi/gioco.jsp");
 

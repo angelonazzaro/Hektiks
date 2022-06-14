@@ -1,6 +1,10 @@
 <%@ page import="Model.Gioco.Gioco" %>
 <%@ page import="Model.Sconto.Sconto" %>
-<%@ page import="java.util.Date" %><%--
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="Model.Genere.Genere" %>
+<%@ page import="java.util.List" %>
+<%@ page import="Model.Gioco_Genere.Gioco_Genere" %><%--
   Created by IntelliJ IDEA.
   User: Panin
   Date: 12/06/2022
@@ -9,66 +13,62 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% Gioco gioco = (Gioco) request.getAttribute("gioco"); %>
-<% Sconto sconto = gioco.getJoin() != null ? (Sconto) gioco.getJoin().get(0) : null; %>
+<% List<Gioco_Genere> generi = (List<Gioco_Genere>) request.getAttribute("generi"); %>
+<%--<% Sconto sconto = gioco.getJoin() != null ? (Sconto) gioco.getJoin().get(0) : null; %>--%>
 
-<div class="game-info-cards-container">
-    <div class="game-card card">
-        <div class="game-card-header">
-            <img src="<%= gioco.getCopertina() %>" alt="<%= gioco.getTitolo() %> - Copertina" class="card-img">
+<div class="game-presentation">
+    <div class="banner">
+        <img src="<%= gioco.getCopertina() %>" alt="<%= gioco.getTitolo() %> - Copertina">
+    </div>
+    <div class="game-card">
+        <div class="title">
+            <h1 class="hs-3"><%= gioco.getTitolo() %></h1>
+        </div>
+        <div class="subinfos">
+            <p class="subinfo text <%= gioco.getQuantita_disponibile() > 0 ? "tick" : "cross" %>">
+               <%= gioco.getQuantita_disponibile() > 0 ? "" : " Non" %> Disponibile
+            </p>
+        </div>
+        <div class="amount">
+            <p class="original-amount text">60€</p>
+            <p class="discount-amount text ">-30%</p>
+            <p class="current-amount hs-3">41.90€</p>
+        </div>
+        <div class="actions">
+            <a class="btn"><span><i class="fas fa-heart"></i></span></a>
+            <button class="btn">Compra</button>
         </div>
     </div>
-    <div class="game-card card">
-        <div class="game-card-header">
-            <h1 class="hs-3"><%= gioco.getTitolo() %>
-            </h1>
-            <div class="game-card-header-info">
-                <p class="game-card-info text">
-                    <% if (gioco.getQuantita_disponibile() > 0) { %>
-                        <span style="color: green">
-                            <i class="fas fa-check"></i>
-                        </span>
-                        Disponibile
-                    <% } else { %>
-                        <span style="color: red">
-                            <i class="fas fa-times"></i>
-                        </span>
-                        Non disponibile
-                    <% } %>
-                </p>
-            </div>
+    <div class="game-separator"></div>
+    <div class="details">
+        <div class="headline">
+            <h1 class="hs-3">Visuals</h1>
         </div>
-        <div class="game-card-body">
-            <div class="game-card-price">
-                <% if (sconto != null && sconto.getCodice_sconto() != null && sconto.getPercentuale() > 0) { %>
-                    <% if (sconto.getData_fine() == null || sconto.getData_fine().after(new Date()) || sconto.getData_fine().equals(new Date())) {%>
-                        <div class="original-price text">
-                            <%= String.format("%.2f", gioco.getPrezzo()).replace(",", ".") %>€
-                        </div>
-                        <div class="game-card-discount text">
-                            -<%= sconto.getPercentuale() %>%
-                        </div>
-                        <div class="price hs-2">
-                            <%= String.format("%.2f", gioco.getPrezzo() - ((gioco.getPrezzo()) * sconto.getPercentuale()) / 100).replace(",", ".") %>€
-                        </div>
-                    <% } else { %>
-                        <div class="price hs-2">
-                            <%= String.format("%.2f", gioco.getPrezzo()).replace(",", ".") %>€
-                        </div>
-                    <% } %>
-                <% } else { %>
-                <div class="price hs-2">
-                    <%= String.format("%.2f", gioco.getPrezzo()).replace(",", ".") %>€
-                </div>
-                <% } %>
-            </div>
-            <div class="game-card-buy">
-                <a title="Aggiungi al Carrello" class="btn">
-                    <i class="fas fa-heart"></i>
-                </a>
-                <button class="btn">
-                    Compra
-                </button>
-            </div>
+        <div class="details-content">
+            <iframe src="<%= gioco.getTrailer() %>" title="<%= gioco.getTitolo() %> - Trailer" frameborder="0"></iframe>
+        </div>
+    </div>
+    <div class="game-separator"></div>
+    <div class="details">
+        <div class="headline">
+            <h1 class="hs-3">About the game</h1>
+        </div>
+        <div class="details-content">
+            <p class="text"><%= gioco.getDescrizione() %></p>
+            <div class="game-separator"></div>
+            <p class="text">
+                Data di uscita: <span style="color: white; font-weight: bold"><%= new SimpleDateFormat("dd MMMMMMMMMM yyyy").format(gioco.getData_uscita()) %></span>
+            </p>
+            <% if (generi != null && generi.size() > 0) {%>
+                <p class="text">
+                    Generi:
+                    <span style="color: white; font-weight: bold">
+                        <% for (int i = 0; i < generi.size(); i++) {%>
+                            <%= (i + 1 == generi.size()) ? generi.get(i).getNome_genere() : generi.get(i).getNome_genere() + ", " %>
+                        <% }%>
+                    </span>
+                </p>
+            <% } %>
         </div>
     </div>
 </div>

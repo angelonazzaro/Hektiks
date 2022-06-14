@@ -181,11 +181,6 @@
 }
 
 @media only screen and (max-width: 800px) {
-
-    #telegram-separator .separator-content > img {
-        max-width: 8%;
-    }
-
     .feature-card:nth-child(1) {
         display: none;
     }
@@ -200,10 +195,6 @@
 }
 
 @media only screen and (max-width: 600px) {
-
-    #telegram-separator .separator-content > img {
-        max-width: 10%;
-    }
 
     .products-content {
         grid-template-columns: 1fr;

@@ -55,7 +55,7 @@ body {
 
 .main-content {
     width: 80%;
-    min-height: 100%;
+    min-height: inherit;
     margin: auto;
 }
 
