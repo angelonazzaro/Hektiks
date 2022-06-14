@@ -35,6 +35,7 @@ CREATE TABLE Giochi (
     prezzo DECIMAL (5, 2) NOT NULL CHECK (prezzo >= 0), 
 	quantita_disponibile INT UNSIGNED NOT NULL,
     numero_vendite INT UNSIGNED NOT NULL DEFAULT 0,
+    percentuale_sconto TINYINT,
     
     UNIQUE (titolo)
 );
@@ -79,18 +80,6 @@ CREATE TABLE Prodotti (
 	FOREIGN KEY (email_utente) REFERENCES Carrelli (email_utente) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (codice_gioco) REFERENCES Giochi (codice_gioco) ON UPDATE CASCADE ON DELETE CASCADE,
     PRIMARY KEY (email_utente, codice_gioco) 
-);
-
-CREATE TABLE Sconti (
-
-	codice_sconto CHAR(6),
-    codice_gioco CHAR(6),
-    data_creazione DATE NOT NULL,
-    percentuale TINYINT NOT NULL,
-    data_fine DATE,
-    
-    FOREIGN KEY (codice_gioco) REFERENCES Giochi (codice_gioco) ON UPDATE CASCADE ON DELETE CASCADE,
-    PRIMARY KEY (codice_sconto, codice_gioco)
 );
 
 CREATE TABLE Recensioni (

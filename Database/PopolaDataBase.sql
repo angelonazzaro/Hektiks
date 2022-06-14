@@ -59,7 +59,8 @@ INSERT INTO Giochi VALUES
     "https://s1.gaming-cdn.com/images/products/1515/616x353/tekken-7-pc-gioco-steam-cover.jpg", 
 	5.49, 
 	50, 
-	8
+	8,
+    20
 ),
 (
 	"uUfaYA", 
@@ -72,7 +73,8 @@ INSERT INTO Giochi VALUES
     "https://s3.gaming-cdn.com/images/products/2420/616x353/mortal-kombat-xl-xl-pc-gioco-steam-cover.jpg", 
     3.90, 
     70, 
-    1
+    1,
+    5
 ),
 (
 	"1tW4aB", 
@@ -84,7 +86,8 @@ INSERT INTO Giochi VALUES
     "https://s3.gaming-cdn.com/images/products/9578/616x353/sniper-elite-5-pc-gioco-steam-europe-cover.jpg", 
     37.98, 
     0, 
-    0
+    0,
+    60
 ),
 (
 	"zo2ft8", 
@@ -99,6 +102,7 @@ INSERT INTO Giochi VALUES
     "https://s3.gaming-cdn.com/images/products/671/616x353/street-fighter-v-pc-gioco-steam-cover.jpg", 
     4.54, 
     150, 
+    12,
     12
 ),
 (
@@ -129,30 +133,8 @@ INSERT INTO Giochi VALUES
     "https://s1.gaming-cdn.com/images/products/6690/616x353/battlefield-2042-pc-gioco-origin-cover.jpg", 
     21.39, 
     25, 
-    6
-),
-(	"oTwPW4", 
-	"God of War", 
-	"Lasciatosi alle spalle la sua sete di vendetta verso gli dèi dell'Olimpo, Kratos ora vive nella terra delle divinità e dei mostri norreni. 
-	È in questo mondo ostile e spietato che dovrà combattere per la sopravvivenza e insegnare a suo figlio a fare lo stesso.", 
-	"https://www.youtube.com/embed/RQK_40a0XUY", 
-	"2022-01-14", 
-	"https://www.instant-gaming.com/images/products/7325/380x218/7325.jpg", 
-	50.00, 
-	50, 
-	200
-),
-(	"ACi702", 
-	"Elden Ring", 
-	"Elden Ring per PC è un gioco di ruolo d'azione (ARPG) scritto dalle superstar George RR Martin 
-	(l'autore della serie di libri Le Cronache del Ghiaccio e del Fuoco che ha dato origine alla serie televisiva Game of Thrones) e 
-	Hidetaka Miyazake (famoso per molti popolari videogiochi: dalla serie Souls, a Bloodborne, a Sekiro).", 
-	"https://www.youtube.com/embed/AKXiKBnzpBQ", 
-	"2022-02-25", 
-	"https://www.instant-gaming.com/images/products/4824/380x218/4824.jpg", 
-	60.00, 
-	75, 
-	130
+    6,
+    25
 ),
 (	"oSzZp3", 
 	"Minecraft Java Edition", 
@@ -164,7 +146,8 @@ INSERT INTO Giochi VALUES
 	"https://www.instant-gaming.com/images/products/442/380x218/442.jpg", 
 	19.99, 
 	50, 
-	4
+	4,
+    15
 ),
 (
 	"FNx9td", 
@@ -178,7 +161,8 @@ INSERT INTO Giochi VALUES
 	"https://s3.gaming-cdn.com/images/products/6851/616x353/hitman-3-pc-gioco-epic-games-europe-cover.jpg?v=1644802754", 
 	60.00, 
 	50, 
-	13
+	13,
+    30
 ),
 (
 	"5ywyXE", 
@@ -192,7 +176,8 @@ INSERT INTO Giochi VALUES
 	"https://s1.gaming-cdn.com/images/products/840/616x353/cyberpunk-2077-pc-gioco-gog-com-cover.jpg?v=1650474174", 
 	59.00, 
 	89, 
-	47
+	47,
+    10
 ),
 (
 	"Q6HnRX", 
@@ -204,7 +189,8 @@ INSERT INTO Giochi VALUES
 	"https://s1.gaming-cdn.com/images/products/9459/616x353/counter-strike-global-offensive-pc-mac-gioco-steam-cover.jpg?v=1644770250", 
 	0.00, 
 	200, 
-	134
+	134,
+    3
 ),
 (
 	"FeS7d3", 
@@ -220,19 +206,8 @@ INSERT INTO Giochi VALUES
 	"https://s2.gaming-cdn.com/images/products/184/616x353/batman-arkham-origins-pc-gioco-steam-cover.jpg?v=1649085257", 
 	20.00, 
 	45, 
-	39
-),
-(
-	"81mzZG", 
-	"Valorant", 
-	"VALORANT è un FPS competitivo 5 vs 5 basato sui personaggi di Riot. Disponibile ovunque. 
-    Padroneggia decine di armi e abilità diverse, e sfoggia le tue capacità", 
-	"https://www.youtube.com/embed/e_E9W2vsRbQ", 
-	"2020-06-02", 
-	"https://s2.gaming-cdn.com/images/products/6568/616x353/valorant-pc-gioco-steam-cover.jpg?v=1646313124", 
-	 0.00, 
-	 80, 
-	 120
+	39,
+    5
 ),
 (
 	"3cssyj", 
@@ -246,7 +221,8 @@ INSERT INTO Giochi VALUES
 	"https://s2.gaming-cdn.com/images/products/406/616x353/tom-clancy-s-rainbow-six-siege-pc-gioco-ubisoft-connect-europe-cover.jpg?v=1649421231", 
 	20.00, 
 	70, 
-	150
+	150,
+    15
 ),
 (
 	"umP3PT", 
@@ -261,8 +237,11 @@ INSERT INTO Giochi VALUES
 	"https://s1.gaming-cdn.com/images/products/10386/616x353/tiny-tina-s-wonderlands-chaotic-great-edition-chaotic-great-edition-pc-gioco-epic-games-europe-cover.jpg?v=1648139448", 
 	80.00, 
 	70, 
-	150
-),
+	150,
+    40
+);
+
+INSERT INTO Giochi (codice_gioco, titolo, descrizione, trailer, data_uscita, copertina, prezzo, quantita_disponibile, numero_vendite) VALUES
 (
 	"8cxsej", 
 	"Assassin's Creed Valhalla: L'alba del Ragnarok - Europe", 
@@ -275,8 +254,44 @@ INSERT INTO Giochi VALUES
 	40.00, 
 	30, 
 	15
-)
-;
+),
+(
+	"81mzZG", 
+	"Valorant", 
+	"VALORANT è un FPS competitivo 5 vs 5 basato sui personaggi di Riot. Disponibile ovunque. 
+    Padroneggia decine di armi e abilità diverse, e sfoggia le tue capacità", 
+	"https://www.youtube.com/embed/e_E9W2vsRbQ", 
+	"2020-06-02", 
+	"https://s2.gaming-cdn.com/images/products/6568/616x353/valorant-pc-gioco-steam-cover.jpg?v=1646313124", 
+	 0.00, 
+	 80, 
+	 120
+),
+(	
+	"oTwPW4", 
+	"God of War", 
+	"Lasciatosi alle spalle la sua sete di vendetta verso gli dèi dell'Olimpo, Kratos ora vive nella terra delle divinità e dei mostri norreni. 
+	È in questo mondo ostile e spietato che dovrà combattere per la sopravvivenza e insegnare a suo figlio a fare lo stesso.", 
+	"https://www.youtube.com/embed/RQK_40a0XUY", 
+	"2022-01-14", 
+	"https://www.instant-gaming.com/images/products/7325/380x218/7325.jpg", 
+	50.00, 
+	50, 
+	200
+),
+(	
+	"ACi702", 
+	"Elden Ring", 
+	"Elden Ring per PC è un gioco di ruolo d'azione (ARPG) scritto dalle superstar George RR Martin 
+	(l'autore della serie di libri Le Cronache del Ghiaccio e del Fuoco che ha dato origine alla serie televisiva Game of Thrones) e 
+	Hidetaka Miyazake (famoso per molti popolari videogiochi: dalla serie Souls, a Bloodborne, a Sekiro).", 
+	"https://www.youtube.com/embed/AKXiKBnzpBQ", 
+	"2022-02-25", 
+	"https://www.instant-gaming.com/images/products/4824/380x218/4824.jpg", 
+	60.00, 
+	75, 
+	130
+);
 
 INSERT INTO Giochi_Genere VALUES 
 ("oSzZp3", "Multiplayer"),
@@ -349,11 +364,4 @@ INSERT INTO GiftCards VALUES
 ("2lj16n", NULL, 30.00, NOW(), NULL),
 ("J2gSsr", NULL, 20.00, NOW(), NULL);
 
-INSERT INTO Sconti VALUES 
-("1aD3xF", "Z38JDu", "2022-06-10", 25, "2022-08-10"), 
-("1bD3xF", "uUfaYA", "2022-06-10", 15, "2022-08-10"),
-("1cD3xF", "OkIufY", "2022-06-10", 10, "2022-08-10"),
-("1dD3xF", "FNx9td", "2022-06-10", 75, "2022-08-10"),
-("1eD3xF", "oTwPW4", "2022-05-10", 20, "2022-07-10"),
-("1fD3xF", "5ywyXE", "2022-06-10", 7, "2022-08-11"),
-("1gD3xF", "ACi702", "2022-05-10", 27, "2022-07-10");
+

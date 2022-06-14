@@ -45,6 +45,7 @@ public class GiocoServlet extends HttpServlet {
             request.setAttribute("gioco", gioco);
             request.setAttribute("generi", generi);
 //            request.setAttribute("sconto", sconto);
+            assert gioco != null; //gioco potrebbe essere null
             request.setAttribute("title", gioco.getTitolo());
             request.setAttribute("page", "giochi/gioco.jsp");
 
