@@ -73,6 +73,13 @@
     font-weight: bold;
 }
 
+.free-to-play {
+    color: #3591db;
+    background-color: #3b568f;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+}
+
 .actions {
     width: 80%;
     display: flex;
@@ -107,7 +114,7 @@
 .details-content > iframe {
     border-radius: 10px;
     width: 100%;
-    min-height: 90.5vh;
+    min-height: 92.5vh;
 }
 
 .details-content > p {
@@ -148,12 +155,17 @@
 }
 
 @media only screen and (max-width: 768px) {
+
     .subinfos {
         width: 70%;
     }
 
     .amount {
         width: 60%;
+    }
+
+    .details-content > iframe {
+        min-height: 55vh;
     }
 }
 
@@ -168,5 +180,13 @@
 
     .actions > button {
         flex-basis:70%;
+    }
+
+    .details-content > iframe {
+        min-height: 45vh;
+    }
+
+    .free-to-play {
+        padding: 0.5rem 1rem;
     }
 }

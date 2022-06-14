@@ -10,6 +10,7 @@ function debounce(cb, delay = 1000) {
 }
 
 const burger = document.getElementById("burger");
+const header = document.querySelector("header");
 const login_registration_section = document.getElementById(
     "login-registration-section"
 );
@@ -19,6 +20,12 @@ if (login_registration_section !== null) {
         burger.classList.toggle("active");
         document.body.classList.toggle("no-scroll");
         login_registration_section.classList.toggle("active");
+        const headerStyle = window.getComputedStyle(header);
+        // Fix "overflow" burgerma
+        if (headerStyle.getPropertyValue("position") === "fixed")
+            header.style.setProperty("position", "static");
+        else
+            setTimeout(() => header.style.setProperty("position", "fixed"), 500);
     });
 
     const next_btns = document.querySelectorAll("[data-next-form]");
@@ -93,7 +100,7 @@ if (login_registration_section !== null) {
         match_password_value_debounce(password, confirm_password);
     });
 
-    $(".login-registration-form").on("submit", function (e)  {
+    $(".login-registration-form").on("submit", function (e) {
         e.preventDefault();
 
         const submit_btn = $(this).find("button[type=submit]").first();
@@ -109,8 +116,7 @@ if (login_registration_section !== null) {
 
                 if ($(this).attr("id") === "registration-form") notifier.success(response.value);
                 else window.location.reload();
-            }
-            else notifier.alert(response.value);
+            } else notifier.alert(response.value);
 
         }).fail().always(() => {
             submit_btn.prop("disabled", false);

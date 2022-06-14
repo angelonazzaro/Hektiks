@@ -33,13 +33,10 @@ public class GiocoServlet extends HttpServlet {
                 request.getRequestDispatcher("/ErrorHandlerServlet").forward(request, response);
             }
 
-//            Sconto sconto = (Sconto) new ScontoDAO(source).doRetrieveByCondition("codice_gioco = '" + codiceGioco + "'");
             List<Gioco_Genere> generi = new Gioco_GenereDAO(source).doRetrieveByCondition("codice_gioco = '" + codiceGioco + "'");
 
             request.setAttribute("gioco", gioco);
             request.setAttribute("generi", generi);
-//            request.setAttribute("sconto", sconto);
-            assert gioco != null; //gioco potrebbe essere null
             request.setAttribute("title", gioco.getTitolo());
             request.setAttribute("page", "giochi/gioco.jsp");
 

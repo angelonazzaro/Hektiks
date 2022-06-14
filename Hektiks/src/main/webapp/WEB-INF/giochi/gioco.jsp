@@ -1,7 +1,5 @@
 <%@ page import="Model.Gioco.Gioco" %>
-<%@ page import="java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="Model.Genere.Genere" %>
 <%@ page import="java.util.List" %>
 <%@ page import="Model.Gioco_Genere.Gioco_Genere" %><%--
   Created by IntelliJ IDEA.
@@ -13,7 +11,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% Gioco gioco = (Gioco) request.getAttribute("gioco"); %>
 <% List<Gioco_Genere> generi = (List<Gioco_Genere>) request.getAttribute("generi"); %>
-<%--<% Sconto sconto = gioco.getJoin() != null ? (Sconto) gioco.getJoin().get(0) : null; %>--%>
 
 <div class="game-presentation">
     <div class="banner">
@@ -29,9 +26,16 @@
             </p>
         </div>
         <div class="amount">
-            <p class="original-amount text">60€</p>
-            <p class="discount-amount text ">-30%</p>
-            <p class="current-amount hs-3">41.90€</p>
+            <% if (gioco.getPrezzo() == 0) { %>
+                <p class="current-amount hs-3 free-to-play">Free to play</p>
+            <% } else if (gioco.getPercentuale_sconto() > 0) {%>
+                <p class="original-amount text"><%= String.format("%.2f€", gioco.getPrezzo()).replace(",", ".") %></p>
+                <p class="discount-amount text ">-<%= gioco.getPercentuale_sconto() %>%</p>
+                <p class="current-amount hs-3"><%=  String.format("%.2f€", gioco.getPrezzo() - ((gioco.getPrezzo() * gioco.getPercentuale_sconto() / 100))).replace(",", ".") %></p>
+            <% } else { %>
+                <p class="current-amount hs-3"><%= String.format("%.2f€", gioco.getPrezzo()).replace(",", ".") %></p>
+            <% } %>
+
         </div>
         <div class="actions">
             <a class="btn"><span><i class="fas fa-heart"></i></span></a>
