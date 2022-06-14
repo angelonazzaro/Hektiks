@@ -1,4 +1,5 @@
 *.pdf
+*.iml
 *.png
 *.zip
 /.idea

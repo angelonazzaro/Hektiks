@@ -12,6 +12,16 @@
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>GiocoServlet</servlet-name>
+        <servlet-class>Controller.Giochi.GiocoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GiocoServlet</servlet-name>
+        <url-pattern>/gioco</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>ErrorHandlerServlet</servlet-name>
         <servlet-class>Controller.ErrorHandlerServlet</servlet-class>

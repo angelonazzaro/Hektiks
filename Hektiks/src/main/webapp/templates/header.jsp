@@ -25,7 +25,7 @@
 <!-- header start -->
 <header>
     <nav>
-        <h1 id="logo" class="hs-1">HEKTIKS</h1>
+        <a href="" id="logo" class="hs-1">HEKTIKS</a>
         <div style="display: flex">
             <div id="cart">
                 <a href="#"><i class="fas fa-shopping-cart"></i></a>
@@ -39,70 +39,71 @@
     </nav>
 </header>
 
-    <% if (user == null) { %>
-<div id="login-registration-section">
-    <div class="login-registration-child" id="child-1">
-        <div id="forms-container">
-            <form action="#" method="POST" class="login-registration-form active" id="registration-form">
-                <div class="form-header">
-                    <h2>Registrazione</h2>
-                </div>
-                <div class="form-body">
-                    <div class="row">
-                        <input type="text" class="form-control" name="nome" placeholder="Nome" required="required">
-                        <input type="text" class="form-control" name="cognome" placeholder="Cognome"
-                               required="required">
+<% if (user == null) { %>
+    <div id="login-registration-section">
+        <div class="login-registration-child" id="child-1">
+            <div id="forms-container">
+                <form action="" method="POST" class="login-registration-form active" id="registration-form">
+                    <div class="form-header">
+                        <h2>Registrazione</h2>
                     </div>
-                    <div class="row">
-                        <input type="email" name="email" placeholder="Email" required="required" class="form-control">
-                    </div>
-                    <div class="row">
-                        <div class="input-group-append">
-                            <input type="password" name="password" placeholder="Password" required="required"
-                                   class="form-control">
-                            <span class="password-icon-js"><i class="fas fa-eye"></i></span>
+                    <div class="form-body">
+                        <div class="row">
+                            <input type="text" class="form-control" name="nome" placeholder="Nome" required="required">
+                            <input type="text" class="form-control" name="cognome" placeholder="Cognome"
+                                   required="required">
                         </div>
-                        <div class="input-group-append">
-                            <input type="password" name="confirm-password" placeholder="Conferma Password"
-                                   required="required" class="form-control">
-                            <span class="password-icon-js"><i class="fas fa-eye"></i></span>
+                        <div class="row">
+                            <input type="email" name="email" placeholder="Email" required="required" class="form-control">
                         </div>
-                    </div>
-                </div>
-                <input type="hidden" name="action" value="register">
-                <div class="form-footer">
-                    <button type="submit" class="btn form-control-submit-btn">Registrati</button>
-                    <br>
-                    <p>Sei già registrato? <a href="#" class="next-form-btn" data-next-form="login"
-                                              data-prev-form="registration">Accedi.</a></p>
-                </div>
-            </form>
-            <form action="#" method="POST" class="login-registration-form hide" id="login-form">
-                <div class="form-header">
-                    <h2>Login</h2>
-                </div>
-                <div class="form-body">
-                    <div class="row">
-                        <input type="email" name="email" placeholder="Email" required="required" class="form-control">
-                    </div>
-                    <div class="row">
-                        <div class="input-group-append">
-                            <input type="password" name="password" placeholder="Password" required="required"
-                                   class="form-control">
-                            <span class="password-icon-js"><i class="fas fa-eye"></i></span>
+                        <div class="row">
+                            <div class="input-group-append">
+                                <input type="password" name="password" placeholder="Password" required="required"
+                                       class="form-control">
+                                <span class="password-icon-js"><i class="fas fa-eye"></i></span>
+                            </div>
+                            <div class="input-group-append">
+                                <input type="password" name="confirm-password" placeholder="Conferma Password"
+                                       required="required" class="form-control">
+                                <span class="password-icon-js"><i class="fas fa-eye"></i></span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <input type="hidden" name="action" value="login">
-                <div class="form-footer">
-                    <button type="submit" class="btn form-control-submit-btn">Login</button>
-                    <br>
-                    <p>Non hai un account? <a href="#" class="next-form-btn" data-next-form="registration"
-                                              data-prev-form="login">Registrati.</a></p>
-                </div>
-            </form>
+                    <input type="hidden" name="action" value="register">
+                    <div class="form-footer">
+                        <button type="submit" class="btn form-control-submit-btn">Registrati</button>
+                        <br>
+                        <p>Sei già registrato? <a href="#" class="next-form-btn" data-next-form="login"
+                                                  data-prev-form="registration">Accedi.</a></p>
+                    </div>
+                </form>
+                <form action="" method="POST" class="login-registration-form hide" id="login-form">
+                    <div class="form-header">
+                        <h2>Login</h2>
+                    </div>
+                    <div class="form-body">
+                        <div class="row">
+                            <input type="email" name="email" placeholder="Email" required="required" class="form-control">
+                        </div>
+                        <div class="row">
+                            <div class="input-group-append">
+                                <input type="password" name="password" placeholder="Password" required="required"
+                                       class="form-control">
+                                <span class="password-icon-js"><i class="fas fa-eye"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="action" value="login">
+                    <div class="form-footer">
+                        <button type="submit" class="btn form-control-submit-btn">Login</button>
+                        <br>
+                        <p>Non hai un account? <a href="#" class="next-form-btn" data-next-form="registration"
+                                                  data-prev-form="login">Registrati.</a></p>
+                    </div>
+                </form>
+            </div>
         </div>
+        <div class="login-registration-child" id="child-2"></div>
     </div>
-    <div class="login-registration-child" id="child-2"></div>
-</div>
 <% } %>
+<!-- header end -->

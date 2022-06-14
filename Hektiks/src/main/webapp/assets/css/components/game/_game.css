@@ -1,0 +1,172 @@
+.game-presentation {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.banner > img {
+    border-radius: 10px;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.game-card {
+    width: 65%;
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.title {
+    width: 100%;
+    margin-top: 2rem;
+    padding: 0 2rem;
+}
+
+.subinfos {
+    width: 40%;
+    margin: auto;
+    background-color: rgba(16, 16, 16, 0.3);
+    padding: 0.7rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100px;
+}
+
+.subinfo {
+    padding: 0 1rem;
+}
+
+.tick::before {
+    content: "\2713";
+    color: #25de57;
+}
+
+.cross::before {
+    content: "\00D7";
+    color: #e51f3d;
+}
+
+.amount {
+    width: 30%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.original-amount {
+    text-decoration: line-through;
+}
+
+.discount-amount {
+    color: var(--orange);
+}
+
+.current-amount {
+    font-weight: bold;
+}
+
+.actions {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 2rem;
+}
+
+.actions > a {
+    flex-basis: 10%;
+}
+
+.actions > button {
+    flex-basis: 85%;
+}
+
+.game-separator {
+    height: 60px;
+}
+
+.details {
+    width: 100%;
+    color: white;
+    text-align: left;
+    min-height: inherit;
+}
+
+.headline {
+    margin-bottom: 2rem;
+}
+
+.details-content > iframe {
+    border-radius: 10px;
+    width: 100%;
+    min-height: 92.5vh;
+}
+
+.details-content > p {
+    color: var(--light-grey);
+    line-height: 3rem;
+}
+
+@media only screen and (max-width: 1200px) {
+    .actions {
+        width: 90%;
+    }
+
+    .subinfos {
+        width: 50%;
+    }
+
+    .amount {
+        width: 40%;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .actions {
+        width: 100%;
+    }
+
+    .actions > button {
+        flex-basis: 80%;
+    }
+
+    .subinfos {
+        width: 60%;
+    }
+
+    .amount {
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .subinfos {
+        width: 70%;
+    }
+
+    .amount {
+        width: 60%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .subinfos {
+        width: 80%;
+    }
+
+    .amount {
+        width: 70%;
+    }
+
+    .actions > button {
+        flex-basis:70%;
+    }
+}
