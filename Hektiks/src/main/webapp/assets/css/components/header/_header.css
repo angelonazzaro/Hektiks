@@ -63,12 +63,31 @@ header #burger:hover .line {
     color: white;
     cursor: pointer;
     margin-right: 2rem;
+    z-index: 9;
 }
 
 #cart a {
     transition: color 200ms ease;
+    position: relative;
 }
 
 #cart:hover {
     color: var(--orange);
 }
+
+.caret {
+    position: absolute;
+    top: -20%;
+    right: -25%;
+    background-color: var(--orange);
+    border-radius: 10px;
+    font-size: 1.5rem;
+    padding: 0 0.175rem;
+    transition: all 100ms ease;
+}
+
+#cart:hover a > .caret {
+    color: var(--orange);
+    background-color: white;
+}
+

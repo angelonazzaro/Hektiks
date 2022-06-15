@@ -1,4 +1,5 @@
-<%@ page import="Model.Utente.Utente" %><%--
+<%@ page import="Model.Utente.Utente" %>
+<%@ page import="Model.Carrello.Carrello" %><%--
   Created by IntelliJ IDEA.
   User: Panin
   Date: 26/04/2022
@@ -25,16 +26,27 @@
 <!-- header start -->
 <header>
     <nav>
-        <a href="" id="logo" class="hs-1">HEKTIKS</a>
+        <a href="<%= request.getContextPath() %>/" id="logo" class="hs-1">HEKTIKS</a>
         <div style="display: flex">
             <div id="cart">
-                <a href="#"><i class="fas fa-shopping-cart"></i></a>
+                <a href="<%= request.getContextPath() %>/carrello">
+                    <span class="caret">
+                        <% if (session.getAttribute("carrello") != null) { %>
+                            <%= ((List<Gioco>) session.getAttribute("carrello")).size() %>
+                        <% } else { %>
+                            0
+                        <% } %>
+                    </span>
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
             </div>
-            <div id="burger">
-                <span class="line"></span>
-                <span class="line"></span>
-                <span class="line"></span>
-            </div>
+            <% if (user == null) { %>
+                <div id="burger">
+                    <span class="line"></span>
+                    <span class="line"></span>
+                    <span class="line"></span>
+                </div>
+            <% } %>
         </div>
     </nav>
 </header>
@@ -43,7 +55,7 @@
     <div id="login-registration-section">
         <div class="login-registration-child" id="child-1">
             <div id="forms-container">
-                <form action="" method="POST" class="login-registration-form active" id="registration-form">
+                <form action="<%= request.getContextPath() %>/" method="POST" class="login-registration-form active" id="registration-form">
                     <div class="form-header">
                         <h2>Registrazione</h2>
                     </div>
@@ -77,7 +89,7 @@
                                                   data-prev-form="registration">Accedi.</a></p>
                     </div>
                 </form>
-                <form action="" method="POST" class="login-registration-form hide" id="login-form">
+                <form action="<%= request.getContextPath() %>/" method="POST" class="login-registration-form hide" id="login-form">
                     <div class="form-header">
                         <h2>Login</h2>
                     </div>

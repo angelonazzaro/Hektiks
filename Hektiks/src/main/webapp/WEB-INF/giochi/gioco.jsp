@@ -16,7 +16,7 @@
     <div class="banner">
         <img src="<%= gioco.getCopertina() %>" alt="<%= gioco.getTitolo() %> - Copertina">
     </div>
-    <div class="game-card">
+    <div class="game-card" data-code="<%= gioco.getCodice_gioco() %>" data-title="<%= gioco.getTitolo() %>" data-price="<%= gioco.getPrezzo() %>" data-discount="<%= gioco.getPercentuale_sconto() %>">
         <div class="title">
             <h1 class="hs-3"><%= gioco.getTitolo() %></h1>
         </div>
@@ -38,9 +38,10 @@
 
         </div>
         <div class="actions">
-            <a class="btn"><span><i class="fas fa-heart"></i></span></a>
+            <a class="btn" id="add-to-cart-btn" data-quantity="<%= gioco.getQuantita_disponibile() %>"><span><i class="fas fa-shopping-cart"></i></span></a>
             <button class="btn">Acquista</button>
         </div>
+        <p class="text" id="p-error" style="color: red"></p>
     </div>
     <div class="game-separator"></div>
     <div class="details">

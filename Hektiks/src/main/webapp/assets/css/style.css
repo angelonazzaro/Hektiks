@@ -2,5 +2,23 @@
 @import "./components/header/_header.css";
 @import "./components/login_registration/_loginregistration.css";
 @import "./components/products/_products.css";
- @import "./components/game/_game.css";
+@import "./components/game/_game.css";
 @import "./components/footer/_footer.css";
+
+/* body {
+    overflow-x: hidden;
+} */
+
+#cart-container {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: red;
+    z-index: 10;
+    left: 100%;
+    transition: transform 200ms ease;
+}
+
+#cart-container.active {
+    transform: translateX(-100%);
+}

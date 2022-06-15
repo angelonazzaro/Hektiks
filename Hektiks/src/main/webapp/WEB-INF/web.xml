@@ -14,8 +14,17 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>CarrelloServlet</servlet-name>
+        <servlet-class>Controller.CarrelloServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CarrelloServlet</servlet-name>
+        <url-pattern>/carrello</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>GiocoServlet</servlet-name>
-        <servlet-class>Controller.Giochi.GiocoServlet</servlet-class>
+        <servlet-class>Controller.GiocoServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>GiocoServlet</servlet-name>

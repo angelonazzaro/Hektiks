@@ -1,4 +1,4 @@
-package Controller.Giochi;
+package Controller;
 
 import Model.Gioco.Gioco;
 import Model.Gioco.GiocoDAO;
@@ -11,7 +11,6 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-
 
 public class GiocoServlet extends HttpServlet {
     @Override
@@ -39,16 +38,12 @@ public class GiocoServlet extends HttpServlet {
             request.setAttribute("generi", generi);
             request.setAttribute("title", gioco.getTitolo());
             request.setAttribute("page", "giochi/gioco.jsp");
+            request.setAttribute("scripts", new String[]{"game.js"});
 
             request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

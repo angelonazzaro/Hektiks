@@ -1,6 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="Model.Gioco.Gioco" %>
-<%@ page import="java.util.Date" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: Panin
   Date: 26/04/2022
@@ -8,6 +8,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <% String pagePath = (String) request.getAttribute("page"); %>
+<% String[] scripts = (String[]) request.getAttribute("scripts"); %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../templates/header.jsp" %>
 
@@ -33,9 +34,7 @@
                     <div class="card-header">
                         <a href="gioco?codice_gioco=<%= gioco.getCodice_gioco() %>"><img class="card-img" src="<%= gioco.getCopertina() %>" alt="<%= gioco.getTitolo() %> - Copertina"></a>
                         <% if (percentuale_sconto > 0) {%>
-<%--                        <% if (sconto.getData_fine() == null || sconto.getData_fine().after(new Date()) || sconto.getData_fine().equals(new Date())) {%>--%>
-                        <div class="discount text">-<%= percentuale_sconto %>%</div>
-<%--                        <% } %>--%>
+                            <div class="discount text">-<%= percentuale_sconto %>%</div>
                         <% } %>
                     </div>
                     <div class="card-body">
@@ -104,13 +103,13 @@
                         </div>
                         <div class="price hs-4">
                             <% if (gioco.getPrezzo() > 0) { %>
-                            <% if (percentuale_sconto > 0) {%>
-                            <%= String.format("%.2f€", gioco.getPrezzo() - ((gioco.getPrezzo()) * percentuale_sconto) / 100).replace(",", ".") %>
+                                <% if (percentuale_sconto > 0) {%>
+                                    <%= String.format("%.2f€", gioco.getPrezzo() - ((gioco.getPrezzo()) * percentuale_sconto) / 100).replace(",", ".") %>
+                                <% } else { %>
+                                    <%= String.format("%.2f€", gioco.getPrezzo()).replace(",", ".") %>
+                                <% } %>
                             <% } else { %>
-                            <%= String.format("%.2f€", gioco.getPrezzo()).replace(",", ".") %>
-                            <% } %>
-                            <% } else { %>
-                            Gratis
+                                Gratis
                             <% } %>
                         </div>
                     </div>
@@ -125,3 +124,8 @@
 <!-- page content end -->
 
 <%@ include file="../templates/footer.jsp" %>
+<% if (scripts != null && scripts.length > 0) { %>
+    <% for (String script : scripts) { %>
+        <script src="<%= request.getContextPath() %>/assets/js/<%= script %>"></script>
+    <% } %>
+<% } %>

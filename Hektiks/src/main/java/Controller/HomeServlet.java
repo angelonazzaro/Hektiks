@@ -32,8 +32,7 @@ public class HomeServlet extends HttpServlet {
         GiocoDAO giocoDAO = new GiocoDAO((DataSource) getServletContext().getAttribute("DataSource"));
 
         try {
-            // order by codice gioco?
-            request.setAttribute("giochiDelMomento", giocoDAO.doRetrieveByCondition("TRUE ORDER BY " + GIOCHI + ".codice_gioco LIMIT 9"));
+            request.setAttribute("giochiDelMomento", giocoDAO.doRetrieveByCondition("TRUE LIMIT 9"));
             request.setAttribute("bestSellers", giocoDAO.doRetrieveByCondition("TRUE ORDER BY " + GIOCHI + ".numero_vendite DESC LIMIT 9"));
         } catch (SQLException e) {
             e.printStackTrace();
