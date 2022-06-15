@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.Carrello.Carrello;
+import Model.Carrello.CarrelloDAO;
 import Model.Gioco.GiocoDAO;
 import Model.Utente.Utente;
 import Model.Utente.UtenteDAO;
@@ -61,7 +63,6 @@ public class HomeServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
-        assert action != null;
         if (action.equals("login")) {
 
             try {
@@ -73,7 +74,24 @@ public class HomeServlet extends HttpServlet {
                     session = request.getSession();
                     session.setAttribute("user", utenti.get(0));
 
-                   out.write(gson.toJson(new JSONResponse<String>("success")));
+                    out.write(gson.toJson(new JSONResponse<String>("success")));
+                }
+
+                // [Granozio] vedo se l'utente loggato ha già un carrello
+                CarrelloDAO carrelloDAO = new CarrelloDAO((DataSource) getServletContext().getAttribute("DataSource"));
+                List<Carrello> carrelli =  carrelloDAO.doRetrieveByJoin("inner",
+                        String.format("%s ON %s.email = %s.email_utente", UTENTI, UTENTI, CARRELLI), UTENTI + ".email = '" + utenti.get(0).getEmail() + "'",
+                        UTENTI);
+
+                // [Granozio] se è vuoto creo il carrello
+                if (carrelli.isEmpty()) {
+
+                    Carrello carrello = new Carrello();
+                    carrello.setEmail_utente(utenti.get(0).getEmail());
+                    carrello.setData_creazione(new Date(System.currentTimeMillis()));
+                    carrello.setData_modifica(new Date(System.currentTimeMillis()));
+                    carrelloDAO = new CarrelloDAO((DataSource) getServletContext().getAttribute("DataSource"));
+                    carrelloDAO.doSave(carrello);
                 }
 
                 out.flush();

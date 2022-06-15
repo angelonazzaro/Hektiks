@@ -29,6 +29,7 @@ import static Model.Storage.Entities.*;
 public class CarrelloServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        System.out.println("CARRELLO DO GET");
         CarrelloDAO carrelloDAO = new CarrelloDAO((DataSource) getServletContext().getAttribute("DataSource"));
         HttpSession session = request.getSession(false);
 
@@ -37,7 +38,7 @@ public class CarrelloServlet extends HttpServlet {
             Utente utente = (Utente) session.getAttribute("user");
             try {
                 if (session.getAttribute("carrello") == null) {
-                    Carrello carrello = carrelloDAO.doRetrieveByJoin("inner", String.format("%s ON %s.email_utente = %s.email_utente JOIN %s ON %s.codice_gioco = %s.codice_gioco", PRODOTTI, PRODOTTI, CARRELLI, GIOCHI, GIOCHI, PRODOTTI),  CARRELLI + ".email_utente = '" + utente.getEmail() + "'", GIOCHI).get(0);
+                    Carrello carrello = carrelloDAO.doRetrieveByJoin("inner", String.format("%s ON %s.email_utente = %s.email_utente JOIN %s ON %s.codice_gioco = %s.codice_gioco", PRODOTTI, PRODOTTI, CARRELLI, GIOCHI, GIOCHI, PRODOTTI), CARRELLI + ".email_utente = '" + utente.getEmail() + "'", GIOCHI).get(0);
                     session.setAttribute("carrello", carrello.getJoin());
                     System.out.println(carrello.getJoin());
                 }
@@ -53,6 +54,9 @@ public class CarrelloServlet extends HttpServlet {
     }
 
     protected synchronized void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        System.out.println("DO POOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOST");
+
         HttpSession session = request.getSession(false);
         DataSource source = (DataSource) getServletContext().getAttribute("DataSource");
         GiocoDAO giocoDAO = new GiocoDAO(source);
