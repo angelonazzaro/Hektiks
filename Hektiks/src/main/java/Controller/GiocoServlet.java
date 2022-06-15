@@ -4,6 +4,7 @@ import Model.Gioco.Gioco;
 import Model.Gioco.GiocoDAO;
 import Model.Gioco_Genere.Gioco_Genere;
 import Model.Gioco_Genere.Gioco_GenereDAO;
+import Utils.Logger.Logger;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 
@@ -15,6 +16,9 @@ import java.util.List;
 public class GiocoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        Logger.consoleLog(Logger.INFO, "GIOCO SERVLET DO GET");
+
         String codiceGioco = request.getParameter("codice_gioco");
 
         if (codiceGioco == null) {

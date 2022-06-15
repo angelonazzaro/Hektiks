@@ -8,6 +8,7 @@ import Model.Prodotto.Prodotto;
 import Model.Prodotto.ProdottoDAO;
 import Model.Utente.Utente;
 import Utils.JSONResponse;
+import Utils.Logger.Logger;
 import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -29,16 +30,26 @@ import static Model.Storage.Entities.*;
 public class CarrelloServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        System.out.println("CARRELLO DO GET");
+        Logger.consoleLog(Logger.INFO, "CARRELLO SERVLET DO GET");
         CarrelloDAO carrelloDAO = new CarrelloDAO((DataSource) getServletContext().getAttribute("DataSource"));
         HttpSession session = request.getSession(false);
 
         // Se l'utente è loggato ma il carrello non esiste, lo creo
+        // ti devo chiedere una cosa sulla quantità disponibile di questa query:
+        // select * from Carrelli join Prodotti ON Prodotti.email_utente = Carrelli.email_utente
+        // JOIN Giochi ON Giochi.codice_gioco = Prodotti.codice_gioco
+        // where Carrelli.email_utente = 'francescogranozio@test.it
+        // l'icona degli item del carrello si azzera ogni volta che runno, anche se ho già roba nel carrello
+
         if (session != null && session.getAttribute("user") != null) {
             Utente utente = (Utente) session.getAttribute("user");
             try {
                 if (session.getAttribute("carrello") == null) {
-                    Carrello carrello = carrelloDAO.doRetrieveByJoin("inner", String.format("%s ON %s.email_utente = %s.email_utente JOIN %s ON %s.codice_gioco = %s.codice_gioco", PRODOTTI, PRODOTTI, CARRELLI, GIOCHI, GIOCHI, PRODOTTI), CARRELLI + ".email_utente = '" + utente.getEmail() + "'", GIOCHI).get(0);
+                    Carrello carrello = carrelloDAO.doRetrieveByJoin("inner",
+                            String.format("%s ON %s.email_utente = %s.email_utente JOIN %s ON %s.codice_gioco = %s.codice_gioco",
+                                    PRODOTTI, PRODOTTI, CARRELLI, GIOCHI, GIOCHI, PRODOTTI),
+                            CARRELLI + ".email_utente = '" + utente.getEmail() + "'", GIOCHI).get(0);
+
                     session.setAttribute("carrello", carrello.getJoin());
                     System.out.println(carrello.getJoin());
                 }
@@ -55,7 +66,7 @@ public class CarrelloServlet extends HttpServlet {
 
     protected synchronized void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        System.out.println("DO POOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOST");
+        Logger.consoleLog(Logger.INFO, "CARRELLO SERVLET DO POST");
 
         HttpSession session = request.getSession(false);
         DataSource source = (DataSource) getServletContext().getAttribute("DataSource");

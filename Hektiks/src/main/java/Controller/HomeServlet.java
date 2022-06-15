@@ -8,6 +8,7 @@ import Model.Utente.UtenteDAO;
 import static Model.Storage.Entities.*;
 
 import Utils.JSONResponse;
+import Utils.Logger.Logger;
 import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -30,6 +31,8 @@ public class HomeServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
+        Logger.consoleLog(Logger.INFO, "HOME SERVLET DO GET");
+
         request.setAttribute("title", "Hektiks | Home Page");
         GiocoDAO giocoDAO = new GiocoDAO((DataSource) getServletContext().getAttribute("DataSource"));
 
@@ -43,6 +46,9 @@ public class HomeServlet extends HttpServlet {
     }
 
     public synchronized void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+        Logger.consoleLog(Logger.INFO, "HOME SERVLET DO POST");
+
         HttpSession session = request.getSession(false);
 
         if (session != null && session.getAttribute("user") != null) this.doGet(request, response);

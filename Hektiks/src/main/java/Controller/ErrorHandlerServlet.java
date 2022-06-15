@@ -1,5 +1,6 @@
 package Controller;
 
+import Utils.Logger.Logger;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,10 +15,14 @@ public class ErrorHandlerServlet extends HttpServlet {
     private static final long serialVersionUID = 5982139399022378053L;
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+        Logger.consoleLog(Logger.INFO, "ERROR HANDLER SERVLET DO GET");
         processError(request, response);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+        Logger.consoleLog(Logger.INFO, "ERROR HANDLER SERVLET DO POST");
         processError(request, response);
     }
 
