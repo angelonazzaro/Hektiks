@@ -20,6 +20,7 @@ import static Model.Storage.Entities.GIOCHI_GENERE;
 
 public class SearchServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         Logger.consoleLog(Logger.INFO, "SEARCH SERVLET DO GET");
 
         String search = request.getParameter("q");

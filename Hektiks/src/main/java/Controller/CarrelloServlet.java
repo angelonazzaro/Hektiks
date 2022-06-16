@@ -40,6 +40,8 @@ public class CarrelloServlet extends HttpServlet {
         // JOIN Giochi ON Giochi.codice_gioco = Prodotti.codice_gioco
         // where Carrelli.email_utente = 'francescogranozio@test.it
         // l'icona degli item del carrello si azzera ogni volta che runno, anche se ho già roba nel carrello
+        // l'item aggiunto al carrello se viene cliccato il <- e non il tasto home non viene contato
+        
 
         if (session != null && session.getAttribute("user") != null) {
             Utente utente = (Utente) session.getAttribute("user");
@@ -57,6 +59,7 @@ public class CarrelloServlet extends HttpServlet {
                 throw new RuntimeException(e);
             }
         }
+
 
         request.setAttribute("title", "Hektiks | Carrello");
         request.setAttribute("page", "carrello/carrello.jsp");
