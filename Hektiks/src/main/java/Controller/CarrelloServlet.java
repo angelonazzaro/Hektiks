@@ -41,24 +41,48 @@ public class CarrelloServlet extends HttpServlet {
         // where Carrelli.email_utente = 'francescogranozio@test.it
         // l'icona degli item del carrello si azzera ogni volta che runno, anche se ho già roba nel carrello
         // l'item aggiunto al carrello se viene cliccato il <- e non il tasto home non viene contato
-        
+
 
         if (session != null && session.getAttribute("user") != null) {
+
             Utente utente = (Utente) session.getAttribute("user");
             try {
-                if (session.getAttribute("carrello") == null) {
-                    Carrello carrello = carrelloDAO.doRetrieveByJoin("inner",
-                            String.format("%s ON %s.email_utente = %s.email_utente JOIN %s ON %s.codice_gioco = %s.codice_gioco",
-                                    PRODOTTI, PRODOTTI, CARRELLI, GIOCHI, GIOCHI, PRODOTTI),
-                            CARRELLI + ".email_utente = '" + utente.getEmail() + "'", GIOCHI).get(0);
 
-                    session.setAttribute("carrello", carrello.getJoin());
-                    System.out.println(carrello.getJoin());
+                if (session.getAttribute("carrello") == null) {
+
+                    GiocoDAO giocoDAO = new GiocoDAO((DataSource) getServletContext().getAttribute("DataSource"));
+                    List<Gioco> giochi_carrello = giocoDAO.doRetrieveByJoin("inner",
+                            String.format("%s ON %s.codice_gioco = %s.codice_gioco JOIN %s ON %s.email_utente = %s.email_utente",
+                                    PRODOTTI, GIOCHI, PRODOTTI, CARRELLI, PRODOTTI, CARRELLI),
+                            CARRELLI + ".email_utente = '" + utente.getEmail() + "'", PRODOTTI, CARRELLI);
+
+                    session.setAttribute("carrello", giochi_carrello);
                 }
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
         }
+
+        // se vuoi testare decommenta questo codice, crea un account dal sito e aggiungi i giochi al carrello
+        // se non hai l'account da eccezione, ma è normale perchè non faccio il controllo
+        /*try {
+
+                Utente utente = (Utente) session.getAttribute("user");
+                GiocoDAO giocoDAO = new GiocoDAO((DataSource) getServletContext().getAttribute("DataSource"));
+                List<Gioco> giochi_carrello = giocoDAO.doRetrieveByJoin("inner",
+                        String.format("%s ON %s.codice_gioco = %s.codice_gioco JOIN %s ON %s.email_utente = %s.email_utente",
+                                PRODOTTI, GIOCHI, PRODOTTI, CARRELLI, PRODOTTI, CARRELLI),
+                        CARRELLI + ".email_utente = '" + utente.getEmail() + "'", PRODOTTI, CARRELLI);
+
+                for(Gioco g : giochi_carrello) {
+                    System.out.println(g.getJoin());
+                }
+                session.setAttribute("carrello", giochi_carrello);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }*/
+
 
 
         request.setAttribute("title", "Hektiks | Carrello");
