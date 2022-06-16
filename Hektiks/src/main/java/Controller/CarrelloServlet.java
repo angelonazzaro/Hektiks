@@ -125,6 +125,7 @@ public class CarrelloServlet extends HttpServlet {
                     prodotto.setQuantita_disponibile(prodotto.getQuantita_disponibile() + quantita);
                     HashMap<String, Integer> map = new HashMap<>();
                     map.put("quantita_disponibile", prodotto.getQuantita_disponibile());
+
                     prodottoDAO.doUpdate(map, "email_utente = '" + utente.getEmail() + "' AND codice_gioco = '" + codice_gioco + "'");
                 }
 

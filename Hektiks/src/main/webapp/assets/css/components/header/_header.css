@@ -91,3 +91,23 @@ header #burger:hover .line {
     background-color: white;
 }
 
+/* SEARCH BAR */
+.search-bar {
+    position: relative;
+    flex-basis: 40%;
+    padding: 1rem 0;
+}
+
+.search-bar > input {
+    border-radius: 90px;
+}
+
+.search-bar > span {
+    color: var(--light-grey);
+    font-size: calc(0.9em + 1vmin);
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translate(-5%, -50%);
+    border-radius: 50%;
+}

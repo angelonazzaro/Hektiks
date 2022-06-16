@@ -27,6 +27,10 @@
 <header>
     <nav>
         <a href="<%= request.getContextPath() %>/" id="logo" class="hs-1">HEKTIKS</a>
+        <div class="search-bar">
+            <input type="text" class="form-control" placeholder="Cerca..."/>
+            <span><i class="fas fa-search"></i></span>
+        </div>
         <div style="display: flex">
             <div id="cart">
                 <a href="<%= request.getContextPath() %>/carrello">
@@ -85,7 +89,7 @@
                     <div class="form-footer">
                         <button type="submit" class="btn form-control-submit-btn">Registrati</button>
                         <br>
-                        <p>Sei già registrato? <a href="#" class="next-form-btn" data-next-form="login"
+                        <p data-next-form="login">Sei già registrato? <a href="#" class="next-form-btn"
                                                   data-prev-form="registration">Accedi.</a></p>
                     </div>
                 </form>
@@ -109,7 +113,7 @@
                     <div class="form-footer">
                         <button type="submit" class="btn form-control-submit-btn">Login</button>
                         <br>
-                        <p>Non hai un account? <a href="#" class="next-form-btn" data-next-form="registration"
+                        <p data-next-form="registration">Non hai un account? <a href="#" class="next-form-btn"
                                                   data-prev-form="login">Registrati.</a></p>
                     </div>
                 </form>

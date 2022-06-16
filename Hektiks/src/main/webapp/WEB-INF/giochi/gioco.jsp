@@ -30,7 +30,7 @@
                 <p class="current-amount hs-3 free-to-play">Free to play</p>
             <% } else if (gioco.getPercentuale_sconto() > 0) {%>
                 <p class="original-amount text"><%= String.format("%.2f€", gioco.getPrezzo()).replace(",", ".") %></p>
-                <p class="discount-amount text ">-<%= gioco.getPercentuale_sconto() %>%</p>
+                <p class="discount-amount text ">-<%= String.format("%.2f", gioco.getPercentuale_sconto()).replace(",", ".") %>%</p>
                 <p class="current-amount hs-3"><%=  String.format("%.2f€", gioco.getPrezzo() - ((gioco.getPrezzo() * gioco.getPercentuale_sconto() / 100))).replace(",", ".") %></p>
             <% } else { %>
                 <p class="current-amount hs-3"><%= String.format("%.2f€", gioco.getPrezzo()).replace(",", ".") %></p>

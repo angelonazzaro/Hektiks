@@ -241,7 +241,7 @@ INSERT INTO Giochi VALUES
     40
 );
 
-INSERT INTO Giochi (codice_gioco, titolo, descrizione, trailer, data_uscita, copertina, prezzo, quantita_disponibile, numero_vendite) VALUES
+INSERT INTO Giochi (codice_gioco, titolo, descrizione, trailer, data_uscita, copertina, prezzo, quantita_disponibile, numero_vendite, percentuale_sconto) VALUES
 (
 	"8cxsej", 
 	"Assassin's Creed Valhalla: L'alba del Ragnarok - Europe", 
@@ -253,7 +253,8 @@ INSERT INTO Giochi (codice_gioco, titolo, descrizione, trailer, data_uscita, cop
 	"https://s1.gaming-cdn.com/images/products/9891/616x353/assassin-s-creed-valhalla-l-alba-del-ragnarok-pc-gioco-ubisoft-connect-europe-cover.jpg?v=1649333093", 
 	40.00, 
 	30, 
-	15
+	15,
+    0
 ),
 (
 	"81mzZG", 
@@ -265,7 +266,8 @@ INSERT INTO Giochi (codice_gioco, titolo, descrizione, trailer, data_uscita, cop
 	"https://s2.gaming-cdn.com/images/products/6568/616x353/valorant-pc-gioco-steam-cover.jpg?v=1646313124", 
 	 0.00, 
 	 80, 
-	 120
+	 120,
+     0
 ),
 (	
 	"oTwPW4", 
@@ -277,7 +279,8 @@ INSERT INTO Giochi (codice_gioco, titolo, descrizione, trailer, data_uscita, cop
 	"https://www.instant-gaming.com/images/products/7325/380x218/7325.jpg", 
 	50.00, 
 	50, 
-	200
+	200,
+    0
 ),
 (	
 	"ACi702", 
@@ -290,7 +293,87 @@ INSERT INTO Giochi (codice_gioco, titolo, descrizione, trailer, data_uscita, cop
 	"https://www.instant-gaming.com/images/products/4824/380x218/4824.jpg", 
 	60.00, 
 	75, 
-	130
+	130,
+    0
+),
+(
+	'AC3b02',
+	'Assassin\'s Creed IV Black Flag',
+	'Corre l\'anno 1715. I Caraibi sono sotto il controllo dei Pirati che hanno fondato una vera e propria repubblica, 
+     priva però di qualsiasi legge, perciò corruzione, avidità e crudeltà sono all\'ordine del giorno.Tra questi fuorilegge vive un 
+	 giovane ed esuberante capitano di nome Edward Kenway.',
+	 'https://www.youtube.com/embed/6iH_tYD0skE',
+     '2013-10-29',
+	'https://s1.gaming-cdn.com/images/products/597/616x353/assassin-s-creed-iv-black-flag-xbox-one-xbox-series-x-s-xbox-one-xbox-series-x-s-game-microsoft-store-europe-cover.jpg',
+    19.99,
+    20,
+	10,
+    0
+),
+(
+	'B34dcX',
+	'Fallout 4',
+	'Bethesda Game Studios, pluripremiati creatori di Fallout 3 e The Elder Scrolls V: Skyrim, 
+	vi danno il benvenuto nel mondo di Fallout 4, il loro gioco più ambizioso di sempre e la nuova generazione dei giochi in un mondo aperto.',
+	'https://www.youtube.com/embed/Rs1CrdSuA6k',
+	'2015-11-10',
+    'https://www.instant-gaming.com/images/products/755/380x218/755.jpg',
+	29.99,
+	25,
+	1,
+    0
+),
+(
+	'BeDdcX',
+	'Far Cry 3',
+	'Un paradiso tropicale ribolle di malvagità nascosta in Far Cry, uno sparatutto d\'azione astutamente dettagliato che spinge i 
+	confini del combattimento a nuovi livelli scioccanti. Il marinaio freelance Jack Carver sta maledicendo il giorno in cui è mai 
+	arrivato su quest\'isola.',
+	'https://www.youtube.com/embed/axHGJjh1_oU',
+	'2004-03-23',
+	'https://www.instant-gaming.com/images/products/96/380x218/96.jpg',
+	9.99,
+	134,
+	10,
+    0
+),
+(
+	'JhgE37',
+	'The Sims 4',
+	'Acquisisci il potere di creare e controllare personaggi in un mondo virtuale dove non esistono regole. 
+	Goditi il potere e la libertà, divertiti e gioca con la vita!',
+    'https://www.youtube.com/embed/22I4Aeid13c',
+    '2017-09-02',
+	'https://s3.gaming-cdn.com/images/products/272/616x353/the-sims-4-pc-mac-game-origin-cover.jpg',
+	39.99,
+	10,
+	0,
+    34.5
+),
+(
+	'D3Vm4C',
+	'Devil May Cry 4 Special Edition',
+	'DMC4 e la sua esplosione di stile sono tornati con nuovi personaggi giocabili e modalità di gioco.',
+	'https://www.youtube.com/embed/Uz58uS7FZ28',
+    '2015-06-23',
+    'https://www.instant-gaming.com/images/products/5166/380x218/5166.jpg',
+	 24.99,
+	130,
+	11,
+    0
+),
+(
+	'D00mEt',
+	'DOOM Eternal',
+	'Le armate infernali hanno invaso la Terra. Diventa lo Slayer in un\'epica campagna per giocatore singolo, 
+	conquista demoni attraverso le dimensioni e ferma la distruzione finale dell\'umanità. L\'unica cosa che temono... sei tu.',
+    'https://www.youtube.com/embed/x5xuV4H-OU8',
+    '2020-05-20',
+	'https://www.instant-gaming.com/images/products/2669/380x218/2669.jpg',
+	19.99,
+	30,
+	10,
+    66.68
 );
 
 INSERT INTO Giochi_Genere VALUES 

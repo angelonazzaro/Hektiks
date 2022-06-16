@@ -10,10 +10,10 @@
 <% String pagePath = (String) request.getAttribute("page"); %>
 <% String[] scripts = (String[]) request.getAttribute("scripts"); %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <%@ include file="../templates/header.jsp" %>
 
 <!-- page content start -->
-
 <div class="wrapper">
     <div class="main-content">
         <% if (pagePath != null) { %>
@@ -25,35 +25,35 @@
         <div class="products-container">
             <div class="products-heading">
                 <h1 class="hs-1">Giochi del Momento</h1>
-                <a class="show-all-btn hs-5" href="#">Mostra tutti</a>
+                <a class="show-all-btn hs-5" href="<%= request.getContextPath() %>/gioco?action=show-all">Mostra tutti</a>
             </div>
             <div class="products-content">
                 <% for (Gioco gioco : giochiDelMomento) { %>
-                <% int percentuale_sconto = gioco.getPercentuale_sconto(); %>
-                <div class="card">
-                    <div class="card-header">
-                        <a href="gioco?codice_gioco=<%= gioco.getCodice_gioco() %>"><img class="card-img" src="<%= gioco.getCopertina() %>" alt="<%= gioco.getTitolo() %> - Copertina"></a>
-                        <% if (percentuale_sconto > 0) {%>
-                            <div class="discount text">-<%= percentuale_sconto %>%</div>
-                        <% } %>
-                    </div>
-                    <div class="card-body">
-                        <div class="name text">
-                            <%= gioco.getTitolo() %>
+                    <% double percentuale_sconto = gioco.getPercentuale_sconto(); %>
+                    <div class="card">
+                        <div class="card-header">
+                            <a href="gioco?codice_gioco=<%= gioco.getCodice_gioco() %>"><img class="card-img" src="<%= gioco.getCopertina() %>" alt="<%= gioco.getTitolo() %> - Copertina"></a>
+                            <% if (percentuale_sconto > 0) {%>
+                                <div class="discount text">-<%= String.format("%.2f", percentuale_sconto).replace(",", ".") %>%</div>
+                            <% } %>
                         </div>
-                        <div class="price hs-4">
-                            <% if (gioco.getPrezzo() > 0) { %>
-                                <% if (percentuale_sconto > 0) {%>
-                                    <%= String.format("%.2f€", gioco.getPrezzo() - ((gioco.getPrezzo()) * percentuale_sconto) / 100).replace(",", ".") %>
+                        <div class="card-body">
+                            <div class="name text">
+                                <%= gioco.getTitolo() %>
+                            </div>
+                            <div class="price hs-4">
+                                <% if (gioco.getPrezzo() > 0) { %>
+                                    <% if (percentuale_sconto > 0) {%>
+                                        <%= String.format("%.2f€", gioco.getPrezzo() - ((gioco.getPrezzo()) * percentuale_sconto) / 100).replace(",", ".") %>
+                                    <% } else { %>
+                                        <%= String.format("%.2f€", gioco.getPrezzo()).replace(",", ".") %>
+                                <% } %>
                                 <% } else { %>
-                                    <%= String.format("%.2f€", gioco.getPrezzo()).replace(",", ".") %>
-                            <% } %>
-                            <% } else { %>
-                                Gratis
-                            <% } %>
+                                    Gratis
+                                <% } %>
+                            </div>
                         </div>
                     </div>
-                </div>
                 <% } %>
             </div>
         </div>
@@ -85,35 +85,35 @@
         <div class="products-container">
             <div class="products-heading">
                 <h1 class="hs-1">Top Sellers</h1>
-                <a class="show-all-btn hs-5" href="#">Mostra tutti</a>
+                <a class="show-all-btn hs-5" href="<%= request.getContextPath() %>/gioco?action=show-all">Mostra tutti</a>
             </div>
             <div class="products-content">
                 <% for (Gioco gioco : bestSellers) { %>
-                <% int percentuale_sconto = gioco.getPercentuale_sconto(); %>
-                <div class="card">
-                    <div class="card-header">
-                        <a href="gioco?codice_gioco=<%= gioco.getCodice_gioco() %>"><img class="card-img" src="<%= gioco.getCopertina() %>" alt="<%= gioco.getTitolo() %> - Copertina"></a>
-                        <% if (percentuale_sconto > 0) {%>
-                        <div class="discount text">-<%= percentuale_sconto %>%</div>
-                        <% } %>
-                    </div>
-                    <div class="card-body">
-                        <div class="name text">
-                            <%= gioco.getTitolo() %>
-                        </div>
-                        <div class="price hs-4">
-                            <% if (gioco.getPrezzo() > 0) { %>
-                                <% if (percentuale_sconto > 0) {%>
-                                    <%= String.format("%.2f€", gioco.getPrezzo() - ((gioco.getPrezzo()) * percentuale_sconto) / 100).replace(",", ".") %>
-                                <% } else { %>
-                                    <%= String.format("%.2f€", gioco.getPrezzo()).replace(",", ".") %>
-                                <% } %>
-                            <% } else { %>
-                                Gratis
+                    <% double percentuale_sconto = gioco.getPercentuale_sconto(); %>
+                    <div class="card">
+                        <div class="card-header">
+                            <a href="gioco?codice_gioco=<%= gioco.getCodice_gioco() %>"><img class="card-img" src="<%= gioco.getCopertina() %>" alt="<%= gioco.getTitolo() %> - Copertina"></a>
+                            <% if (percentuale_sconto > 0) {%>
+                            <div class="discount text">-<%= String.format("%.2f", percentuale_sconto).replace(",", ".") %>%</div>
                             <% } %>
                         </div>
+                        <div class="card-body">
+                            <div class="name text">
+                                <%= gioco.getTitolo() %>
+                            </div>
+                            <div class="price hs-4">
+                                <% if (gioco.getPrezzo() > 0) { %>
+                                    <% if (percentuale_sconto > 0) {%>
+                                        <%= String.format("%.2f€", gioco.getPrezzo() - ((gioco.getPrezzo()) * percentuale_sconto) / 100).replace(",", ".") %>
+                                    <% } else { %>
+                                        <%= String.format("%.2f€", gioco.getPrezzo()).replace(",", ".") %>
+                                    <% } %>
+                                <% } else { %>
+                                    Gratis
+                                <% } %>
+                            </div>
+                        </div>
                     </div>
-                </div>
                 <% } %>
             </div>
         </div>
@@ -124,6 +124,7 @@
 <!-- page content end -->
 
 <%@ include file="../templates/footer.jsp" %>
+
 <% if (scripts != null && scripts.length > 0) { %>
     <% for (String script : scripts) { %>
         <script src="<%= request.getContextPath() %>/assets/js/<%= script %>"></script>

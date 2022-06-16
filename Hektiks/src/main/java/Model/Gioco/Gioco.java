@@ -23,7 +23,7 @@ public class Gioco extends GenericBean implements Serializable, IEntity {
     private double prezzo;
     private int quantita_disponibile;
     private int numero_vendite;
-    private int percentuale_sconto;
+    private double percentuale_sconto;
 
     @Override
     public HashMap<String, ?> toHashMap() {
@@ -60,11 +60,11 @@ public class Gioco extends GenericBean implements Serializable, IEntity {
                 '}';
     }
 
-    public int getPercentuale_sconto() {
+    public double getPercentuale_sconto() {
         return percentuale_sconto;
     }
 
-    public void setPercentuale_sconto(int percentuale_sconto) {
+    public void setPercentuale_sconto(double percentuale_sconto) {
         this.percentuale_sconto = percentuale_sconto;
     }
 

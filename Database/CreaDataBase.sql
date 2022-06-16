@@ -35,7 +35,7 @@ CREATE TABLE Giochi (
     prezzo DECIMAL (5, 2) NOT NULL CHECK (prezzo >= 0), 
 	quantita_disponibile INT UNSIGNED NOT NULL,
     numero_vendite INT UNSIGNED NOT NULL DEFAULT 0,
-    percentuale_sconto TINYINT,
+    percentuale_sconto DECIMAL(5,2),
     
     UNIQUE (titolo)
 );
