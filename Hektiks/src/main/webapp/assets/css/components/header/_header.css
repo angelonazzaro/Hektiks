@@ -58,7 +58,7 @@ header #burger:hover .line {
 }
 
 /* CARRELLO */
-#cart {
+.cart {
     font-size: calc(1.4em + 1vmin);
     color: white;
     cursor: pointer;
@@ -66,12 +66,12 @@ header #burger:hover .line {
     z-index: 9;
 }
 
-#cart a {
+.cart a {
     transition: color 200ms ease;
     position: relative;
 }
 
-#cart:hover {
+.cart:hover {
     color: var(--orange);
 }
 
@@ -89,6 +89,34 @@ header #burger:hover .line {
 #cart:hover a > .caret {
     color: var(--orange);
     background-color: white;
+}
+
+/* LOGIN */
+#login-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin-right: 2rem;
+    color: white;
+}
+
+#user-balance {
+    font-weight: bold;
+    color: var(--orange);
+}
+
+#login-container > img {
+    max-width: 7%;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-right: 2rem;
 }
 
 /* SEARCH BAR */
@@ -110,4 +138,28 @@ header #burger:hover .line {
     top: 50%;
     transform: translate(-5%, -50%);
     border-radius: 50%;
+}
+
+@media only screen and (max-width: 1300px) {
+    #user-info {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    #login-container > img {
+        max-width: 8.5%;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    #login-container > img {
+        max-width: 10%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #login-container > img {
+        max-width: 14%;
+    }
 }

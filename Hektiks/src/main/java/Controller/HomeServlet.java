@@ -80,6 +80,8 @@ public class HomeServlet extends HttpServlet {
                     session = request.getSession();
                     session.setAttribute("user", utenti.get(0));
 
+
+
                     out.write(gson.toJson(new JSONResponse<String>("success")));
                 }
 
