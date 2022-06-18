@@ -2,8 +2,6 @@ package Controller;
 
 import Model.Carrello.Carrello;
 import Model.Carrello.CarrelloDAO;
-import Model.Gioco.Gioco;
-import Model.Gioco.GiocoDAO;
 import Model.Prodotto.Prodotto;
 import Model.Prodotto.ProdottoDAO;
 import Model.Utente.Utente;
@@ -19,19 +17,13 @@ import jakarta.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-
-import static Model.Storage.Entities.*;
 
 public class CarrelloServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Logger.consoleLog(Logger.INFO, "CARRELLO SERVLET DO GET");
-        HttpSession session = request.getSession(false);
 
         request.setAttribute("title", "Hektiks | Carrello");
         request.setAttribute("page", "carrello/carrello.jsp");
@@ -45,7 +37,6 @@ public class CarrelloServlet extends HttpServlet {
 
         HttpSession session = request.getSession(true);
         DataSource source = (DataSource) getServletContext().getAttribute("DataSource");
-        GiocoDAO giocoDAO = new GiocoDAO(source);
 
         String codice_gioco = request.getParameter("codice_gioco");
         int quantita = Integer.parseInt(request.getParameter("quantita"));
@@ -56,6 +47,7 @@ public class CarrelloServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         HashMap<String, Integer> giochiCarrello = new HashMap<>();
 
+        // Se il carrello esiste, lo prendo dalla sessione
         if (session.getAttribute("carrello") != null)
             giochiCarrello = (HashMap<String, Integer>) session.getAttribute("carrello");
 
@@ -69,15 +61,6 @@ public class CarrelloServlet extends HttpServlet {
 
             try {
                 Carrello carrello = carrelloDAO.doRetrieveByKey(utente.getEmail());
-
-                // Se il carrello non esiste, lo creo
-                if (carrello == null) {
-                    carrello = new Carrello();
-                    carrello.setEmail_utente(utente.getEmail());
-                    carrello.setData_creazione(new Date(System.currentTimeMillis()));
-                    carrello.setData_modifica(new Date(System.currentTimeMillis()));
-                    carrelloDAO.doSave(carrello);
-                }
 
                 // Ci sono due scenari: 1) è un nuovo prodotto 2) è un prodotto già presente nel carrello
                 // Nello scenario 1 bisogna salvare in db il nuovo prodotto e aggiungerlo al carrello

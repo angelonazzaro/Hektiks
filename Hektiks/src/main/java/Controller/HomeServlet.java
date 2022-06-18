@@ -8,9 +8,6 @@ import Model.Prodotto.Prodotto;
 import Model.Prodotto.ProdottoDAO;
 import Model.Utente.Utente;
 import Model.Utente.UtenteDAO;
-
-import static Model.Storage.Entities.*;
-
 import Utils.JSONResponse;
 import Utils.Logger.Logger;
 import com.google.gson.Gson;
@@ -26,9 +23,10 @@ import java.io.PrintWriter;
 import java.io.Serial;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import static Model.Storage.Entities.*;
 
 public class HomeServlet extends HttpServlet {
 
@@ -43,7 +41,7 @@ public class HomeServlet extends HttpServlet {
         GiocoDAO giocoDAO = new GiocoDAO((DataSource) getServletContext().getAttribute("DataSource"));
 
         try {
-
+            // Recupero giochi del momento e best sellers
             request.setAttribute("giochiDelMomento", giocoDAO.doRetrieveByCondition("TRUE LIMIT 9"));
             request.setAttribute("bestSellers", giocoDAO.doRetrieveByCondition("TRUE ORDER BY " + GIOCHI + ".numero_vendite DESC LIMIT 9"));
         } catch (SQLException e) {
@@ -58,10 +56,12 @@ public class HomeServlet extends HttpServlet {
         Logger.consoleLog(Logger.INFO, "HOME SERVLET DO POST");
 
         HttpSession session = request.getSession(false);
-
+        // Se l'utente risulta già loggato, richiamo il doGet
         if (session != null && session.getAttribute("user") != null) this.doGet(request, response);
-        String action = request.getParameter("action");
 
+        String action = request.getParameter("action");
+        // Se non è stato passato nessun parametro "action", o se è diverso da register e login
+        // mando un error 400 come risposta
         if (action == null || (!action.equals("register") && !action.equals("login"))) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             response.sendRedirect("/ErrorHandlerServlet");
@@ -77,6 +77,9 @@ public class HomeServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
+        // Se l'utente sta provando a fare il login, cerco nel database se esiste un match con le credenziali
+        // Se esiste, creo una nuova sessione, setto l'utente nella sessione, creo il carrello e invio un messaggio di successo
+        // altrimenti gli invio un messaggio di errore
         if (action.equals("login")) {
 
             try {
@@ -100,6 +103,8 @@ public class HomeServlet extends HttpServlet {
                 e.printStackTrace();
             }
         } else {
+            // Se l'utente sta provando a fare il registrazione, cerco nel database se esiste un utente con la stessa email
+            // Se non esiste, creo l'utente e invio un messaggio di successo altrimenti gli invio un messaggio di errore
             try {
                 utenti = utenteDAO.doRetrieveByCondition("email='" + email + "'");
 
@@ -173,6 +178,7 @@ public class HomeServlet extends HttpServlet {
             carrelloDAO.doSave(carrello);
         }
 
+        // Cerco se l'utente ha già un carrello in database
         GiocoDAO giocoDAO = new GiocoDAO((DataSource) getServletContext().getAttribute("DataSource"));
         List<Gioco> giochiCarrello = giocoDAO.doRetrieveByJoin("inner",
                 String.format("%s ON %s.codice_gioco = %s.codice_gioco JOIN %s ON %s.email_utente = %s.email_utente",
@@ -204,9 +210,12 @@ public class HomeServlet extends HttpServlet {
             HashMap<String, Integer> carrello_sessione = (HashMap<String, Integer>) session.getAttribute("carrello");
             ProdottoDAO prodottoDAO = new ProdottoDAO((DataSource) getServletContext().getAttribute("DataSource"));
 
+            // Key = codice_gioco
             for (String key : carrello_sessione.keySet()) {
                 Prodotto prodotto = prodottoDAO.doRetrieveByKey(utente.getEmail(), key);
-
+                // Se il carrello_utente, cioè quello già presente in database, contiene lo stesso gioco del carrello della sessione
+                // allora aggiungo la quantità del carrello della sessione al carrello_utente e aggiorno il database
+                // altrimenti aggiungo il nuovo gioco al carrello_utente e lo inserisco nel database
                 if (carrello_utente.containsKey(key)) {
                     quantita_carrello += carrello_sessione.get(key);
 

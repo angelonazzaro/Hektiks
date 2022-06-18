@@ -31,6 +31,8 @@ public class SearchServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
+        // Cerco un qualsiasi gioco che contenga la stringa di ricerca
+        // o che appartenga a un genere che contenga la stringa di ricerca
         try {
             List<Gioco> giochi = giocoDAO.doRetrieveByJoin(
                     "left", String.format("%s ON %s.codice_gioco = %s.codice_gioco", GIOCHI_GENERE, GIOCHI_GENERE, GIOCHI),
