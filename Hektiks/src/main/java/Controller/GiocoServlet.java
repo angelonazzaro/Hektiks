@@ -59,7 +59,7 @@ public class GiocoServlet extends HttpServlet {
 
                 request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
         } else {
             response.sendRedirect(request.getContextPath() + "/");

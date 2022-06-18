@@ -7,6 +7,7 @@ import Model.Gioco.GiocoDAO;
 import Model.Prodotto.Prodotto;
 import Model.Utente.Utente;
 import Model.Utente.UtenteDAO;
+
 import static Model.Storage.Entities.*;
 
 import Utils.JSONResponse;
@@ -25,6 +26,7 @@ import java.io.Serial;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class HomeServlet extends HttpServlet {
@@ -46,7 +48,7 @@ public class HomeServlet extends HttpServlet {
 
             HttpSession session = request.getSession(false);
 
-            if(session != null && session.getAttribute("user") != null){
+            if (session != null && session.getAttribute("user") != null) {
 
                 try {
                     Utente utente = (Utente) session.getAttribute("user");
@@ -57,16 +59,27 @@ public class HomeServlet extends HttpServlet {
                             CARRELLI + ".email_utente = '" + utente.getEmail() + "'", PRODOTTI);
                     //per informazioni dei CARRELLI aggiungere CARRELLI come parametro oltre al parametro PRODOTTO
 
-                    List<Prodotto> carrello_utente = new ArrayList<>();
-                    giochiCarrello.forEach(gioco -> carrello_utente.add((Prodotto) gioco.getJoin()));
+                    int quantita_carrello = 0, quantita_prodotto;
+                    HashMap<String, Integer> carrello_utente = new HashMap<>();
 
-                    int quantita_carrello = 10;
+                    for (Gioco gioco : giochiCarrello) {
 
-                    System.out.println(carrello_utente.get(0));
+                        quantita_prodotto = 0;
+
+                        List<Object> appoggio = gioco.getJoin();
+
+                        for (Object o : appoggio) {
+                            if (o instanceof Prodotto) {
+                                quantita_carrello += ((Prodotto) o).getQuantita_disponibile();
+                                quantita_prodotto += ((Prodotto) o).getQuantita_disponibile();
+                            }
+                        }
+
+                        carrello_utente.put(gioco.getCodice_gioco(), quantita_prodotto);
+                    }
 
                     session.setAttribute("carrello", carrello_utente);
                     session.setAttribute("quantita_carrello", quantita_carrello);
-
 
                 } catch (SQLException e) {
                     e.printStackTrace();
@@ -76,8 +89,6 @@ public class HomeServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        //TODO: FIXARE, DA ERRORE E MANDA NELLA ERROR SERVLET
-        Logger.consoleLog(Logger.INFO, "ARRIVO FIN QUI 2");
         request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
     }
 
@@ -117,13 +128,12 @@ public class HomeServlet extends HttpServlet {
                     session.setAttribute("user", utenti.get(0));
 
 
-
                     out.write(gson.toJson(new JSONResponse<String>("success")));
                 }
 
                 // [Granozio] vedo se l'utente loggato ha già un carrello
                 CarrelloDAO carrelloDAO = new CarrelloDAO((DataSource) getServletContext().getAttribute("DataSource"));
-                List<Carrello> carrelli =  carrelloDAO.doRetrieveByJoin("inner",
+                List<Carrello> carrelli = carrelloDAO.doRetrieveByJoin("inner",
                         String.format("%s ON %s.email = %s.email_utente", UTENTI, UTENTI, CARRELLI), UTENTI + ".email = '" + utenti.get(0).getEmail() + "'",
                         UTENTI);
 
@@ -161,7 +171,6 @@ public class HomeServlet extends HttpServlet {
                 username = nome.toLowerCase() + "" + cognome.toLowerCase();
                 utenti = utenteDAO.doRetrieveByCondition("username LIKE '" + username + "%'");
 
-                System.out.println(utenti);
                 if (!utenti.isEmpty()) {
                     String lastUsername = utenti.get(utenti.size() - 1).getUsername();
 

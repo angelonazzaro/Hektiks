@@ -106,7 +106,7 @@ public class Utente extends GenericBean implements Serializable, IEntity {
             this.password_utente = String.format("%040x", new
                     BigInteger(1, digest.digest()));
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 

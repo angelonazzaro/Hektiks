@@ -39,7 +39,7 @@ public class SearchServlet extends HttpServlet {
             out.write(gson.toJson(giochi));
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 }

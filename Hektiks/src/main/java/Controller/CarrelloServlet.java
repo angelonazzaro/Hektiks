@@ -33,33 +33,6 @@ public class CarrelloServlet extends HttpServlet {
         Logger.consoleLog(Logger.INFO, "CARRELLO SERVLET DO GET");
         HttpSession session = request.getSession(false);
 
-        // Se l'utente è loggato ma il carrello non esiste, lo creo
-        if (session != null && session.getAttribute("user") != null) {
-
-//            try {
-//                Utente utente = (Utente) session.getAttribute("user");
-//                GiocoDAO giocoDAO = new GiocoDAO((DataSource) getServletContext().getAttribute("DataSource"));
-//
-//                List<Gioco> giochiCarrello = giocoDAO.doRetrieveByJoin("inner",
-//                        String.format("%s ON %s.codice_gioco = %s.codice_gioco JOIN %s ON %s.email_utente = %s.email_utente",
-//                                PRODOTTI, GIOCHI, PRODOTTI, CARRELLI, PRODOTTI, CARRELLI),
-//                        CARRELLI + ".email_utente = '" + utente.getEmail() + "'", PRODOTTI);
-//                //per informazioni dei CARRELLI aggiungere CARRELLI come parametro oltre al parametro PRODOTTO
-//                //però a questo punto in home servelt quando si fa il retrieve del numero di prodotti nel carrello
-//                //non va più bene una List<Prodotti>
-//
-//                List<Object> carrello_utente = new ArrayList<>();
-//                giochiCarrello.forEach(gioco -> carrello_utente.add(gioco.getJoin()));
-//
-//                session.setAttribute("carrello", carrello_utente);
-//
-//                System.out.println(carrello_utente);
-//
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-        }
-
         request.setAttribute("title", "Hektiks | Carrello");
         request.setAttribute("page", "carrello/carrello.jsp");
 
@@ -70,7 +43,7 @@ public class CarrelloServlet extends HttpServlet {
 
         Logger.consoleLog(Logger.INFO, "CARRELLO SERVLET DO POST");
 
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession(true);
         DataSource source = (DataSource) getServletContext().getAttribute("DataSource");
         GiocoDAO giocoDAO = new GiocoDAO(source);
 
@@ -81,14 +54,11 @@ public class CarrelloServlet extends HttpServlet {
         Gson gson = new Gson();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        List<Gioco> giochiCarrello = new ArrayList<>();
+        HashMap<String, Integer> giochiCarrello = new HashMap<>();
 
-        // Se non esiste una sessione (utente non loggato) la creo
-        if (session == null) {
-            session = request.getSession(true);
-        } else if (session.getAttribute("carrello") != null) {
-            giochiCarrello = (List<Gioco>) session.getAttribute("carrello");
-        }
+        if (session.getAttribute("carrello") != null)
+            giochiCarrello = (HashMap<String, Integer>) session.getAttribute("carrello");
+
 
         if (session.getAttribute("user") != null) {
             // La sessione esiste e l'utente è loggato
@@ -132,18 +102,30 @@ public class CarrelloServlet extends HttpServlet {
                 }
 
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
 
         }
 
-        try {
-            giochiCarrello.add(giocoDAO.doRetrieveByKey(codice_gioco));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        if (giochiCarrello.containsKey(codice_gioco)) {
+
+            giochiCarrello.replace(codice_gioco, giochiCarrello.get(codice_gioco) + quantita);
+        } else
+            giochiCarrello.put(codice_gioco, quantita);
+
+        int nuova_quantita;
+        if (session.getAttribute("quantita_carrello") != null) {
+
+            nuova_quantita = Integer.parseInt(session.getAttribute("quantita_carrello").toString()) + quantita;
+        } else {
+            nuova_quantita = quantita;
         }
 
+        System.out.println(session.getAttribute("carrello"));
+
         session.setAttribute("carrello", giochiCarrello);
-        out.write(gson.toJson(new JSONResponse<String>("numero_giochi", String.valueOf(giochiCarrello.size()))));
+        session.setAttribute("quantita_carrello", nuova_quantita);
+        out.write(gson.toJson(new JSONResponse<String>("numero_giochi", String.valueOf(nuova_quantita))));
+
     }
 }
