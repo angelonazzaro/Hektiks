@@ -36,20 +36,28 @@ public class CarrelloServlet extends HttpServlet {
         // Se l'utente è loggato ma il carrello non esiste, lo creo
         if (session != null && session.getAttribute("user") != null) {
 
-            try {
-                Utente utente = (Utente) session.getAttribute("user");
-                GiocoDAO giocoDAO = new GiocoDAO((DataSource) getServletContext().getAttribute("DataSource"));
-
-                List<Gioco> giochiCarrello = giocoDAO.doRetrieveByJoin("inner",
-                        String.format("%s ON %s.codice_gioco = %s.codice_gioco JOIN %s ON %s.email_utente = %s.email_utente",
-                                PRODOTTI, GIOCHI, PRODOTTI, CARRELLI, PRODOTTI, CARRELLI),
-                        CARRELLI + ".email_utente = '" + utente.getEmail() + "'", PRODOTTI);
-
-                session.setAttribute("carrello", giochiCarrello);
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                Utente utente = (Utente) session.getAttribute("user");
+//                GiocoDAO giocoDAO = new GiocoDAO((DataSource) getServletContext().getAttribute("DataSource"));
+//
+//                List<Gioco> giochiCarrello = giocoDAO.doRetrieveByJoin("inner",
+//                        String.format("%s ON %s.codice_gioco = %s.codice_gioco JOIN %s ON %s.email_utente = %s.email_utente",
+//                                PRODOTTI, GIOCHI, PRODOTTI, CARRELLI, PRODOTTI, CARRELLI),
+//                        CARRELLI + ".email_utente = '" + utente.getEmail() + "'", PRODOTTI);
+//                //per informazioni dei CARRELLI aggiungere CARRELLI come parametro oltre al parametro PRODOTTO
+//                //però a questo punto in home servelt quando si fa il retrieve del numero di prodotti nel carrello
+//                //non va più bene una List<Prodotti>
+//
+//                List<Object> carrello_utente = new ArrayList<>();
+//                giochiCarrello.forEach(gioco -> carrello_utente.add(gioco.getJoin()));
+//
+//                session.setAttribute("carrello", carrello_utente);
+//
+//                System.out.println(carrello_utente);
+//
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
         }
 
         request.setAttribute("title", "Hektiks | Carrello");

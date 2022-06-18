@@ -46,8 +46,8 @@
                 <div class="cart">
                     <a href="<%= request.getContextPath() %>/carrello">
                             <span class="caret">
-                                <% if (session.getAttribute("carrello") != null) { %>
-                                    <%= ((List<Gioco>) session.getAttribute("carrello")).size() %>
+                                <% if (session.getAttribute("quantita_carrello") != null) { %>
+                                    <%= (session.getAttribute("quantita_carrello")) %>
                                 <% } else { %>
                                     0
                                 <% } %>
@@ -61,8 +61,8 @@
                 <div class="cart">
                     <a href="<%= request.getContextPath() %>/carrello">
                     <span class="caret">
-                        <% if (session.getAttribute("carrello") != null) { %>
-                            <%= ((List<Gioco>) session.getAttribute("carrello")).size() %>
+                        <% if (session.getAttribute("quantita_carrello") != null) { %>
+                            <%= (session.getAttribute("quantita_carrello")) %>
                         <% } else { %>
                             0
                         <% } %>

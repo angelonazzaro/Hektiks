@@ -2,7 +2,9 @@ package Controller;
 
 import Model.Carrello.Carrello;
 import Model.Carrello.CarrelloDAO;
+import Model.Gioco.Gioco;
 import Model.Gioco.GiocoDAO;
+import Model.Prodotto.Prodotto;
 import Model.Utente.Utente;
 import Model.Utente.UtenteDAO;
 import static Model.Storage.Entities.*;
@@ -22,6 +24,7 @@ import java.io.PrintWriter;
 import java.io.Serial;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeServlet extends HttpServlet {
@@ -37,11 +40,44 @@ public class HomeServlet extends HttpServlet {
         GiocoDAO giocoDAO = new GiocoDAO((DataSource) getServletContext().getAttribute("DataSource"));
 
         try {
+
             request.setAttribute("giochiDelMomento", giocoDAO.doRetrieveByCondition("TRUE LIMIT 9"));
             request.setAttribute("bestSellers", giocoDAO.doRetrieveByCondition("TRUE ORDER BY " + GIOCHI + ".numero_vendite DESC LIMIT 9"));
+
+            HttpSession session = request.getSession(false);
+
+            if(session != null && session.getAttribute("user") != null){
+
+                try {
+                    Utente utente = (Utente) session.getAttribute("user");
+
+                    List<Gioco> giochiCarrello = giocoDAO.doRetrieveByJoin("inner",
+                            String.format("%s ON %s.codice_gioco = %s.codice_gioco JOIN %s ON %s.email_utente = %s.email_utente",
+                                    PRODOTTI, GIOCHI, PRODOTTI, CARRELLI, PRODOTTI, CARRELLI),
+                            CARRELLI + ".email_utente = '" + utente.getEmail() + "'", PRODOTTI);
+                    //per informazioni dei CARRELLI aggiungere CARRELLI come parametro oltre al parametro PRODOTTO
+
+                    List<Prodotto> carrello_utente = new ArrayList<>();
+                    giochiCarrello.forEach(gioco -> carrello_utente.add((Prodotto) gioco.getJoin()));
+
+                    int quantita_carrello = 10;
+
+                    System.out.println(carrello_utente.get(0));
+
+                    session.setAttribute("carrello", carrello_utente);
+                    session.setAttribute("quantita_carrello", quantita_carrello);
+
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        //TODO: FIXARE, DA ERRORE E MANDA NELLA ERROR SERVLET
+        Logger.consoleLog(Logger.INFO, "ARRIVO FIN QUI 2");
         request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
     }
 
