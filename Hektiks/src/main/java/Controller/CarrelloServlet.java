@@ -121,8 +121,6 @@ public class CarrelloServlet extends HttpServlet {
             nuova_quantita = quantita;
         }
 
-        System.out.println(session.getAttribute("carrello"));
-
         session.setAttribute("carrello", giochiCarrello);
         session.setAttribute("quantita_carrello", nuova_quantita);
         out.write(gson.toJson(new JSONResponse<String>("numero_giochi", String.valueOf(nuova_quantita))));

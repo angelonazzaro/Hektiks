@@ -83,7 +83,7 @@
     <div id="login-registration-section">
         <div class="login-registration-child" id="child-1">
             <div id="forms-container">
-                <form action="<%= request.getContextPath() %>/" method="POST" class="login-registration-form active"
+                <form action="<%= request.getContextPath() %>/" method="POST" class="login-registration-form hide"
                       id="registration-form">
                     <div class="form-header">
                         <h2>Registrazione</h2>
@@ -119,7 +119,7 @@
                         >Accedi.</a></p>
                     </div>
                 </form>
-                <form action="<%= request.getContextPath() %>/" method="POST" class="login-registration-form hide"
+                <form action="<%= request.getContextPath() %>/" method="POST" class="login-registration-form active"
                       id="login-form">
                     <div class="form-header">
                         <h2>Login</h2>

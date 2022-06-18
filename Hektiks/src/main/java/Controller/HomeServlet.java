@@ -5,6 +5,7 @@ import Model.Carrello.CarrelloDAO;
 import Model.Gioco.Gioco;
 import Model.Gioco.GiocoDAO;
 import Model.Prodotto.Prodotto;
+import Model.Prodotto.ProdottoDAO;
 import Model.Utente.Utente;
 import Model.Utente.UtenteDAO;
 
@@ -45,46 +46,6 @@ public class HomeServlet extends HttpServlet {
 
             request.setAttribute("giochiDelMomento", giocoDAO.doRetrieveByCondition("TRUE LIMIT 9"));
             request.setAttribute("bestSellers", giocoDAO.doRetrieveByCondition("TRUE ORDER BY " + GIOCHI + ".numero_vendite DESC LIMIT 9"));
-
-            HttpSession session = request.getSession(false);
-
-            if (session != null && session.getAttribute("user") != null) {
-
-                try {
-                    Utente utente = (Utente) session.getAttribute("user");
-
-                    List<Gioco> giochiCarrello = giocoDAO.doRetrieveByJoin("inner",
-                            String.format("%s ON %s.codice_gioco = %s.codice_gioco JOIN %s ON %s.email_utente = %s.email_utente",
-                                    PRODOTTI, GIOCHI, PRODOTTI, CARRELLI, PRODOTTI, CARRELLI),
-                            CARRELLI + ".email_utente = '" + utente.getEmail() + "'", PRODOTTI);
-                    //per informazioni dei CARRELLI aggiungere CARRELLI come parametro oltre al parametro PRODOTTO
-
-                    int quantita_carrello = 0, quantita_prodotto;
-                    HashMap<String, Integer> carrello_utente = new HashMap<>();
-
-                    for (Gioco gioco : giochiCarrello) {
-
-                        quantita_prodotto = 0;
-
-                        List<Object> appoggio = gioco.getJoin();
-
-                        for (Object o : appoggio) {
-                            if (o instanceof Prodotto) {
-                                quantita_carrello += ((Prodotto) o).getQuantita_disponibile();
-                                quantita_prodotto += ((Prodotto) o).getQuantita_disponibile();
-                            }
-                        }
-
-                        carrello_utente.put(gioco.getCodice_gioco(), quantita_prodotto);
-                    }
-
-                    session.setAttribute("carrello", carrello_utente);
-                    session.setAttribute("quantita_carrello", quantita_carrello);
-
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -127,25 +88,10 @@ public class HomeServlet extends HttpServlet {
                     session = request.getSession();
                     session.setAttribute("user", utenti.get(0));
 
+                    creaCarrello(session, utenti.get(0));
 
+                    Logger.consoleLog(Logger.INFO, "UTENTE LOGG");
                     out.write(gson.toJson(new JSONResponse<String>("success")));
-                }
-
-                // [Granozio] vedo se l'utente loggato ha già un carrello
-                CarrelloDAO carrelloDAO = new CarrelloDAO((DataSource) getServletContext().getAttribute("DataSource"));
-                List<Carrello> carrelli = carrelloDAO.doRetrieveByJoin("inner",
-                        String.format("%s ON %s.email = %s.email_utente", UTENTI, UTENTI, CARRELLI), UTENTI + ".email = '" + utenti.get(0).getEmail() + "'",
-                        UTENTI);
-
-                // [Granozio] se è vuoto creo il carrello
-                if (carrelli.isEmpty()) {
-
-                    Carrello carrello = new Carrello();
-                    carrello.setEmail_utente(utenti.get(0).getEmail());
-                    carrello.setData_creazione(new Date(System.currentTimeMillis()));
-                    carrello.setData_modifica(new Date(System.currentTimeMillis()));
-                    carrelloDAO = new CarrelloDAO((DataSource) getServletContext().getAttribute("DataSource"));
-                    carrelloDAO.doSave(carrello);
                 }
 
                 out.flush();
@@ -206,5 +152,87 @@ public class HomeServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void creaCarrello(HttpSession session, Utente utente) throws SQLException {
+
+        // vedo se l'utente loggato ha già un carrello
+        CarrelloDAO carrelloDAO = new CarrelloDAO((DataSource) getServletContext().getAttribute("DataSource"));
+        List<Carrello> carrelli = carrelloDAO.doRetrieveByJoin("inner",
+                String.format("%s ON %s.email = %s.email_utente", UTENTI, UTENTI, CARRELLI), UTENTI + ".email = '" + utente.getEmail() + "'",
+                UTENTI);
+
+        // se è vuoto creo il carrello
+        if (carrelli.isEmpty()) {
+
+            Carrello carrello = new Carrello();
+            carrello.setEmail_utente(utente.getEmail());
+            carrello.setData_creazione(new Date(System.currentTimeMillis()));
+            carrello.setData_modifica(new Date(System.currentTimeMillis()));
+            carrelloDAO = new CarrelloDAO((DataSource) getServletContext().getAttribute("DataSource"));
+            carrelloDAO.doSave(carrello);
+        }
+
+        GiocoDAO giocoDAO = new GiocoDAO((DataSource) getServletContext().getAttribute("DataSource"));
+        List<Gioco> giochiCarrello = giocoDAO.doRetrieveByJoin("inner",
+                String.format("%s ON %s.codice_gioco = %s.codice_gioco JOIN %s ON %s.email_utente = %s.email_utente",
+                        PRODOTTI, GIOCHI, PRODOTTI, CARRELLI, PRODOTTI, CARRELLI),
+                CARRELLI + ".email_utente = '" + utente.getEmail() + "'", PRODOTTI);
+        //per informazioni dei CARRELLI aggiungere CARRELLI come parametro oltre al parametro PRODOTTO
+
+        int quantita_carrello = 0, quantita_prodotto;
+        HashMap<String, Integer> carrello_utente = new HashMap<>();
+
+        for (Gioco gioco : giochiCarrello) {
+
+            quantita_prodotto = 0;
+
+            List<Object> appoggio = gioco.getJoin();
+
+            for (Object o : appoggio) {
+                if (o instanceof Prodotto) {
+                    quantita_carrello += ((Prodotto) o).getQuantita_disponibile();
+                    quantita_prodotto = ((Prodotto) o).getQuantita_disponibile();
+                }
+            }
+
+            carrello_utente.put(gioco.getCodice_gioco(), quantita_prodotto);
+        }
+
+        // Uniamo i carrelli dell'utente con quello della sessione
+        if (session.getAttribute("carrello") != null) {
+            HashMap<String, Integer> carrello_sessione = (HashMap<String, Integer>) session.getAttribute("carrello");
+            ProdottoDAO prodottoDAO = new ProdottoDAO((DataSource) getServletContext().getAttribute("DataSource"));
+
+            for (String key : carrello_sessione.keySet()) {
+                Prodotto prodotto = prodottoDAO.doRetrieveByKey(utente.getEmail(), key);
+
+                if (carrello_utente.containsKey(key)) {
+                    quantita_carrello += carrello_sessione.get(key);
+
+                    carrello_utente.replace(key, carrello_utente.get(key) + carrello_sessione.get(key));
+                    prodotto.setQuantita_disponibile(prodotto.getQuantita_disponibile() + carrello_sessione.get(key));
+
+                    HashMap<String, Integer> map = new HashMap<>();
+                    map.put("quantita_disponibile", prodotto.getQuantita_disponibile());
+
+                    prodottoDAO.doUpdate(map, "email_utente = '" + utente.getEmail() + "' AND codice_gioco = '" + key + "'");
+
+                } else {
+                    quantita_carrello += carrello_sessione.get(key);
+
+                    carrello_utente.put(key, carrello_sessione.get(key));
+                    prodotto = new Prodotto();
+                    prodotto.setEmail_utente(utente.getEmail());
+                    prodotto.setCodice_gioco(key);
+                    prodotto.setQuantita_disponibile(carrello_sessione.get(key));
+
+                    prodottoDAO.doSave(prodotto);
+                }
+            }
+        }
+
+        session.setAttribute("carrello", carrello_utente);
+        session.setAttribute("quantita_carrello", quantita_carrello);
     }
 }
