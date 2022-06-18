@@ -36,18 +36,17 @@ public class CarrelloServlet extends HttpServlet {
         // Se l'utente è loggato ma il carrello non esiste, lo creo
         if (session != null && session.getAttribute("user") != null) {
 
-            Utente utente = (Utente) session.getAttribute("user");
             try {
+                Utente utente = (Utente) session.getAttribute("user");
+                GiocoDAO giocoDAO = new GiocoDAO((DataSource) getServletContext().getAttribute("DataSource"));
 
-                if (session.getAttribute("carrello") == null) {
-                    GiocoDAO giocoDAO = new GiocoDAO((DataSource) getServletContext().getAttribute("DataSource"));
-                    List<Gioco> giochiCarrello = giocoDAO.doRetrieveByJoin("inner",
-                            String.format("%s ON %s.codice_gioco = %s.codice_gioco JOIN %s ON %s.email_utente = %s.email_utente",
-                                    PRODOTTI, GIOCHI, PRODOTTI, CARRELLI, PRODOTTI, CARRELLI),
-                            CARRELLI + ".email_utente = '" + utente.getEmail() + "'");
-                    System.out.println(giochiCarrello);
-                    session.setAttribute("carrello", giochiCarrello);
-                }
+                List<Gioco> giochiCarrello = giocoDAO.doRetrieveByJoin("inner",
+                        String.format("%s ON %s.codice_gioco = %s.codice_gioco JOIN %s ON %s.email_utente = %s.email_utente",
+                                PRODOTTI, GIOCHI, PRODOTTI, CARRELLI, PRODOTTI, CARRELLI),
+                        CARRELLI + ".email_utente = '" + utente.getEmail() + "'", PRODOTTI);
+
+                session.setAttribute("carrello", giochiCarrello);
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }

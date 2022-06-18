@@ -5,6 +5,7 @@ const game_card = p_error.parentElement;
 const subinfos = game_card.querySelector(".subinfos > p");
 
 add_to_cart_btn.addEventListener("click", () => {
+
     if (add_to_cart_btn.dataset.quantity === "0") {
         subinfos.classList.remove("tick");
         subinfos.classList.add("cross");
@@ -20,9 +21,8 @@ add_to_cart_btn.addEventListener("click", () => {
             "codice_gioco": game_card.dataset.code,
             "quantita": 1,
             "action": "add"
-        },
+        }
     }).done((response) => {
-        console.log(response)
         update_cart_caret(response.value);
         add_to_cart_btn.dataset.quantity =
             parseInt(add_to_cart_btn.dataset.quantity) - 1;
@@ -34,6 +34,4 @@ add_to_cart_btn.addEventListener("click", () => {
             p_error.innerText = "";
         }
     });
-
-
 });

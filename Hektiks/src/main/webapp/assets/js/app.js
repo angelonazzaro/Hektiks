@@ -151,10 +151,9 @@ password_icons.forEach((icon) => {
     });
 });
 
-const cart_caret = document.querySelector("#cart .caret");
+const cart_caret = document.querySelector(".cart .caret");
 
 const update_cart_caret = (quantity) => {
-    console.log(quantity)
     cart_caret.textContent = quantity;
 }
 
