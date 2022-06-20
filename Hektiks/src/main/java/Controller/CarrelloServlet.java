@@ -2,6 +2,8 @@ package Controller;
 
 import Model.Carrello.Carrello;
 import Model.Carrello.CarrelloDAO;
+import Model.Gioco.Gioco;
+import Model.Gioco.GiocoDAO;
 import Model.Prodotto.Prodotto;
 import Model.Prodotto.ProdottoDAO;
 import Model.Utente.Utente;
@@ -18,15 +20,39 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import static Model.Storage.Entities.PRODOTTI;
 
 public class CarrelloServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Logger.consoleLog(Logger.INFO, "CARRELLO SERVLET DO GET");
 
+        HttpSession session = request.getSession(false);
+
+        if (session != null && session.getAttribute("carrello") != null) {
+            GiocoDAO giocoDAO = new GiocoDAO((DataSource) getServletContext().getAttribute("DataSource"));
+            HashMap<String, Integer> carrello = (HashMap<String, Integer>) session.getAttribute("carrello");
+            List<Gioco> giochi = new ArrayList<>();
+
+            for (String codice_gioco : carrello.keySet()) {
+                try {
+                   giochi.add(giocoDAO.doRetrieveByKey(codice_gioco));
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+            request.setAttribute("giochiCarrello" , giochi);
+        }
+
         request.setAttribute("title", "Hektiks | Carrello");
         request.setAttribute("page", "carrello/carrello.jsp");
+        request.setAttribute("scripts", new String[]{"cart.js"});
+
 
         request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
     }
@@ -39,6 +65,7 @@ public class CarrelloServlet extends HttpServlet {
         DataSource source = (DataSource) getServletContext().getAttribute("DataSource");
 
         String codice_gioco = request.getParameter("codice_gioco");
+        String action = request.getParameter("action");
         int quantita = Integer.parseInt(request.getParameter("quantita"));
 
         PrintWriter out = response.getWriter();
@@ -51,6 +78,9 @@ public class CarrelloServlet extends HttpServlet {
         if (session.getAttribute("carrello") != null)
             giochiCarrello = (HashMap<String, Integer>) session.getAttribute("carrello");
 
+        // Action = add -> proviene da GiocoServlet -> aggiungo il gioco al carrello e incremento di 1
+        // Action = update -> proviene da CarrelloServlet -> aggiorno la quantita del gioco nel carrello
+        // Action = remove -> proviene da CarrelloServlet -> tolgo il gioco dal carrello
 
         if (session.getAttribute("user") != null) {
             // La sessione esiste e l'utente è loggato
@@ -67,7 +97,7 @@ public class CarrelloServlet extends HttpServlet {
                 // Nello scenario 2 bisogna aggiornare la quantità del prodotto nel carrello e nel db
                 Prodotto prodotto = prodottoDAO.doRetrieveByKey(utente.getEmail(), codice_gioco);
 
-                // Scenario 1
+                // Scenario 1 (comprende sia add che update ma non remove)
                 if (prodotto == null) {
                     prodotto = new Prodotto();
                     prodotto.setEmail_utente(utente.getEmail());
@@ -77,9 +107,19 @@ public class CarrelloServlet extends HttpServlet {
                     prodottoDAO.doSave(prodotto);
                 } else {
                     // Scenario 2
-                    prodotto.setQuantita_disponibile(prodotto.getQuantita_disponibile() + quantita);
+                    int quantita_disponibile = prodotto.getQuantita_disponibile();
+
+                    if (action.equals("remove"))
+                        prodottoDAO.doDelete(String.format("%s.email_utente = '%s' AND %s.codice_gioco = '%s'", PRODOTTI, utente.getEmail(), PRODOTTI, codice_gioco));
+                    else if (action.equals("update")) {
+                        quantita_disponibile = quantita;
+                    } else if (action.equals("add")) {
+                        quantita_disponibile += quantita;
+                    }
+
+                    prodotto.setQuantita_disponibile(quantita_disponibile);
                     HashMap<String, Integer> map = new HashMap<>();
-                    map.put("quantita_disponibile", prodotto.getQuantita_disponibile());
+                    map.put("quantita_disponibile", quantita_disponibile);
 
                     prodottoDAO.doUpdate(map, "email_utente = '" + utente.getEmail() + "' AND codice_gioco = '" + codice_gioco + "'");
                 }
@@ -90,19 +130,44 @@ public class CarrelloServlet extends HttpServlet {
 
         }
 
-        if (giochiCarrello.containsKey(codice_gioco)) {
+        int quantita_rimossa = 0, vecchia_quantita = 0;
+        if (action.equals("remove")) {
+            // Rimuovo il gioco dal carrello
+            quantita_rimossa = giochiCarrello.remove(codice_gioco);
+        } else if (action.equals("update") || action.equals("add")) {
+            if (giochiCarrello.containsKey(codice_gioco)) {
+                if (action.equals("update")) {
+                    vecchia_quantita = giochiCarrello.get(codice_gioco);
+                    giochiCarrello.replace(codice_gioco, quantita);
+                }
+                else
+                    giochiCarrello.replace(codice_gioco, giochiCarrello.get(codice_gioco) + quantita);
 
-            giochiCarrello.replace(codice_gioco, giochiCarrello.get(codice_gioco) + quantita);
-        } else
-            giochiCarrello.put(codice_gioco, quantita);
+            } else
+                giochiCarrello.put(codice_gioco, quantita);
+        }
 
-        int nuova_quantita;
+        int nuova_quantita = 0;
         if (session.getAttribute("quantita_carrello") != null) {
+            System.out.println("here");
+            switch (action) {
+                case "remove" ->
+                        nuova_quantita = Integer.parseInt(session.getAttribute("quantita_carrello").toString()) - quantita_rimossa;
+                case "add" ->
+                        nuova_quantita = Integer.parseInt(session.getAttribute("quantita_carrello").toString()) + quantita;
+                case "update" ->
+                        nuova_quantita = Integer.parseInt(session.getAttribute("quantita_carrello").toString()) + (quantita - vecchia_quantita);
+            }
 
-            nuova_quantita = Integer.parseInt(session.getAttribute("quantita_carrello").toString()) + quantita;
+            System.out.println(Integer.parseInt(session.getAttribute("quantita_carrello").toString()) + (quantita - vecchia_quantita));
+            System.out.println(Integer.parseInt(session.getAttribute("quantita_carrello").toString()));
+            System.out.println((quantita - vecchia_quantita));
+            System.out.println(giochiCarrello.get(codice_gioco));
         } else {
             nuova_quantita = quantita;
         }
+
+        System.out.println(nuova_quantita);
 
         session.setAttribute("carrello", giochiCarrello);
         session.setAttribute("quantita_carrello", nuova_quantita);

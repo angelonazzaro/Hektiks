@@ -67,6 +67,5 @@ public class GiocoServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/");
         }
 
-
     }
 }
