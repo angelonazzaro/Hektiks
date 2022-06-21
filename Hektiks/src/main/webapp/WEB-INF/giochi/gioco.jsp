@@ -16,33 +16,39 @@
     <div class="banner">
         <img src="<%= gioco.getCopertina() %>" alt="<%= gioco.getTitolo() %> - Copertina">
     </div>
-    <div class="game-card" data-code="<%= gioco.getCodice_gioco() %>" data-title="<%= gioco.getTitolo() %>" data-price="<%= gioco.getPrezzo() %>" data-discount="<%= gioco.getPercentuale_sconto() %>">
-        <div class="title">
-            <h1 class="hs-3"><%= gioco.getTitolo() %></h1>
-        </div>
-        <div class="subinfos">
-            <p class="subinfo text <%= gioco.getQuantita_disponibile() > 0 ? "tick" : "cross" %>">
-               <%= gioco.getQuantita_disponibile() > 0 ? "" : " Non" %> Disponibile
-            </p>
-        </div>
-        <div class="amount">
-            <% if (gioco.getPrezzo() == 0) { %>
-                <p class="current-amount hs-3 free-to-play">Free to play</p>
-            <% } else if (gioco.getPercentuale_sconto() > 0) {%>
-                <p class="original-amount text"><%= String.format("%.2f€", gioco.getPrezzo()).replace(",", ".") %></p>
-                <p class="discount-amount text ">-<%= String.format("%.2f", gioco.getPercentuale_sconto()).replace(",", ".") %>%</p>
-                <p class="current-amount hs-3"><%=  String.format("%.2f€", gioco.getPrezzo() - ((gioco.getPrezzo() * gioco.getPercentuale_sconto() / 100))).replace(",", ".") %></p>
-            <% } else { %>
-                <p class="current-amount hs-3"><%= String.format("%.2f€", gioco.getPrezzo()).replace(",", ".") %></p>
+    <form action="<%= request.getContextPath() %>/acquisto" method="POST">
+        <div class="game-card" data-code="<%= gioco.getCodice_gioco() %>" data-title="<%= gioco.getTitolo() %>" data-price="<%= gioco.getPrezzo() %>" data-discount="<%= gioco.getPercentuale_sconto() %>">
+            <div class="title">
+                <h1 class="hs-3"><%= gioco.getTitolo() %></h1>
+            </div>
+            <div class="subinfos">
+                <p class="subinfo text <%= gioco.getQuantita_disponibile() > 0 ? "tick" : "cross" %>">
+                    <%= gioco.getQuantita_disponibile() > 0 ? "" : " Non" %> Disponibile
+                </p>
+            </div>
+            <div class="amount">
+                <% if (gioco.getPrezzo() == 0) { %>
+                    <p class="current-amount hs-3 free-to-play">Free to play</p>
+                <% } else if (gioco.getPercentuale_sconto() > 0) {%>
+                    <p class="original-amount text"><%= String.format("%.2f€", gioco.getPrezzo()).replace(",", ".") %></p>
+                    <p class="discount-amount text ">-<%= String.format("%.2f", gioco.getPercentuale_sconto()).replace(",", ".") %>%</p>
+                    <p class="current-amount hs-3"><%=  String.format("%.2f€", gioco.getPrezzo() - ((gioco.getPrezzo() * gioco.getPercentuale_sconto() / 100))).replace(",", ".") %></p>
+                <% } else { %>
+                    <p class="current-amount hs-3"><%= String.format("%.2f€", gioco.getPrezzo()).replace(",", ".") %></p>
+                <% } %>
+            </div>
+            <% if (gioco.getQuantita_disponibile() > 0) {%>
+                <input type="hidden" name="from" value="gioco">
+                <input type="hidden" name="codice_gioco" value="<%= gioco.getCodice_gioco() %>">
+                <div class="actions">
+                    <a class="btn" id="add-to-cart-btn" data-quantity="<%= gioco.getQuantita_disponibile() %>"><span><i class="fas fa-shopping-cart"></i></span></a>
+                    <button class="btn" type="submit">Acquista</button>
+                </div>
+                <p class="text" id="p-error" style="color: red"></p>
             <% } %>
+        </div>
+    </form>
 
-        </div>
-        <div class="actions">
-            <a class="btn" id="add-to-cart-btn" data-quantity="<%= gioco.getQuantita_disponibile() %>"><span><i class="fas fa-shopping-cart"></i></span></a>
-            <button class="btn">Acquista</button>
-        </div>
-        <p class="text" id="p-error" style="color: red"></p>
-    </div>
     <div class="game-separator"></div>
     <div class="details">
         <div class="headline">

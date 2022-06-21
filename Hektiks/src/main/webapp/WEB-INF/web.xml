@@ -41,6 +41,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>AcquistoServlet</servlet-name>
+        <servlet-class>Controller.AcquistoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AcquistoServlet</servlet-name>
+        <url-pattern>/acquisto</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>ErrorHandlerServlet</servlet-name>
         <servlet-class>Controller.ErrorHandlerServlet</servlet-class>
     </servlet>

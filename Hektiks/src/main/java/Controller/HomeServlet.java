@@ -33,7 +33,7 @@ public class HomeServlet extends HttpServlet {
     @Serial
     private static final long serialVersionUID = 5982139499022378053L;
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public synchronized void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         Logger.consoleLog(Logger.INFO, "HOME SERVLET DO GET");
 
@@ -64,7 +64,7 @@ public class HomeServlet extends HttpServlet {
         // mando un error 400 come risposta
         if (action == null || (!action.equals("register") && !action.equals("login"))) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            response.sendRedirect("/ErrorHandlerServlet");
+            response.sendRedirect(request.getContextPath() + "/ErrorHandlerServlet");
         }
 
         String email = request.getParameter("email"), password = request.getParameter("password");

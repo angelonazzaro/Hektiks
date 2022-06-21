@@ -1,7 +1,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="Model.Gioco.Gioco" %>
 <%@ page import="java.util.HashMap" %>
-<%@ page import="java.text.DecimalFormat" %><%--
+
+<%--
   Created by IntelliJ IDEA.
   User: Panin
   Date: 15/06/2022
@@ -12,7 +13,9 @@
 <% List<Gioco> giochiCarrello = request.getAttribute("giochiCarrello") != null ? (List<Gioco>) request.getAttribute("giochiCarrello") : null; %>
 
 <% if (giochiCarrello == null || giochiCarrello.isEmpty()) { %>
-    <h1 class="hs-3">Il tuo carrello è vuoto.</h1>
+    <div style="width: 100%; text-align: center; color: white;">
+        <h1 class="hs-3">Il tuo carrello è vuoto.</h1>
+    </div>
 <% } else { %>
     <!-- mi serve per capire la quantità nel carrello di ogni gioco -->
     <% HashMap<String, Integer> carrello = (HashMap<String, Integer>) session.getAttribute("carrello"); %>
@@ -57,7 +60,10 @@
         <div id="cart-total-price" class="hs-4">
             <p>Totale: <span id="cart-total"><%= String.format("%.2f", totalPrice).replace(",", ".") %></span>€</p>
         </div>
-        <a href="" class="btn" style="width: 100%; text-align: center; margin-top: 2rem;">Procedi all'acquisto</a>
+        <form style="width: 100%" action="<%= request.getContextPath() %>/acquisto" method="POST">
+            <input type="hidden" name="from" value="carrello">
+            <button type="submit" class="btn" style="width: 100%; text-align: center; margin-top: 2rem;">Procedi all'acquisto</button>
+        </form>
     </div>
 
 <% } %>

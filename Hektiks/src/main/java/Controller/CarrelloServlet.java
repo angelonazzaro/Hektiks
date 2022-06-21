@@ -27,7 +27,7 @@ import java.util.List;
 import static Model.Storage.Entities.PRODOTTI;
 
 public class CarrelloServlet extends HttpServlet {
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected synchronized void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Logger.consoleLog(Logger.INFO, "CARRELLO SERVLET DO GET");
 
@@ -162,7 +162,6 @@ public class CarrelloServlet extends HttpServlet {
         } else {
             nuova_quantita = quantita;
         }
-
 
         session.setAttribute("carrello", giochiCarrello);
         session.setAttribute("quantita_carrello", nuova_quantita);

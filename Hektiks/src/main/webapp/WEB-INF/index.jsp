@@ -125,6 +125,20 @@
 
 <%@ include file="../templates/footer.jsp" %>
 
+<% if (session != null && session.getAttribute("msg-error") != null) { %>
+<script>
+    notifier.alert("<%= session.getAttribute("msg-error") %>");
+    <% session.removeAttribute("msg-error"); %>
+</script>
+<% } %>
+
+<% if (session != null && session.getAttribute("success-error") != null) { %>
+<script>
+    notifier.success("<%= session.getAttribute("success-error") %>");
+    <% session.removeAttribute("success-error"); %>
+</script>
+<% } %>
+
 <% if (scripts != null && scripts.length > 0) { %>
     <% for (String script : scripts) { %>
         <script src="<%= request.getContextPath() %>/assets/js/<%= script %>"></script>
