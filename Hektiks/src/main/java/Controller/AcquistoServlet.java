@@ -141,15 +141,17 @@ public class AcquistoServlet extends HttpServlet {
                 map.put("saldo", utente.getSaldo());
                 utenteDAO.doUpdate(map, "email_utente = '" + utente.getEmail() + "'");
 
-                // Svuoto il carrello in sessione e quello nel db
-                session.setAttribute("carrello", new HashMap<String, Integer>());
-                session.setAttribute("quantita_carrello", 0);
+                // Svuoto il carrello in sessione e quello nel db <=> from == "carrello"
+                if (from.equals("carrello")) {
+                    session.setAttribute("carrello", new HashMap<String, Integer>());
+                    session.setAttribute("quantita_carrello", 0);
 
-                CarrelloDAO carrelloDAO = new CarrelloDAO(source);
-                ProdottoDAO prodottoDAO = new ProdottoDAO(source);
+                    CarrelloDAO carrelloDAO = new CarrelloDAO(source);
+                    ProdottoDAO prodottoDAO = new ProdottoDAO(source);
 
-                carrelloDAO.doDelete("email_utente = '" + utente.getEmail() + "'");
-                prodottoDAO.doDelete("email_utente = '" + utente.getEmail() + "'");
+                    carrelloDAO.doDelete("email_utente = '" + utente.getEmail() + "'");
+                    prodottoDAO.doDelete("email_utente = '" + utente.getEmail() + "'");
+                }
 
                 session.setAttribute("success-msg", "Ordine #" + ordine.getCodice_ordine() + " effettutato con successo!");
 
