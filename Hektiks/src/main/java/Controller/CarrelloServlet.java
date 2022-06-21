@@ -149,7 +149,7 @@ public class CarrelloServlet extends HttpServlet {
 
         int nuova_quantita = 0;
         if (session.getAttribute("quantita_carrello") != null) {
-            System.out.println("here");
+
             switch (action) {
                 case "remove" ->
                         nuova_quantita = Integer.parseInt(session.getAttribute("quantita_carrello").toString()) - quantita_rimossa;
@@ -159,15 +159,10 @@ public class CarrelloServlet extends HttpServlet {
                         nuova_quantita = Integer.parseInt(session.getAttribute("quantita_carrello").toString()) + (quantita - vecchia_quantita);
             }
 
-            System.out.println(Integer.parseInt(session.getAttribute("quantita_carrello").toString()) + (quantita - vecchia_quantita));
-            System.out.println(Integer.parseInt(session.getAttribute("quantita_carrello").toString()));
-            System.out.println((quantita - vecchia_quantita));
-            System.out.println(giochiCarrello.get(codice_gioco));
         } else {
             nuova_quantita = quantita;
         }
 
-        System.out.println(nuova_quantita);
 
         session.setAttribute("carrello", giochiCarrello);
         session.setAttribute("quantita_carrello", nuova_quantita);

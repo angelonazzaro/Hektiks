@@ -93,6 +93,7 @@ header #burger:hover .line {
 
 /* LOGIN */
 #login-container {
+    flex-basis: 10%;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -113,7 +114,7 @@ header #burger:hover .line {
 }
 
 #login-container > img {
-    max-width: 7%;
+    max-width: 22%;
     border-radius: 50%;
     cursor: pointer;
     margin-right: 2rem;
@@ -148,18 +149,18 @@ header #burger:hover .line {
 
 @media only screen and (max-width: 1000px) {
     #login-container > img {
-        max-width: 8.5%;
+        max-width: 35%;
     }
 }
 
 @media only screen and (max-width: 800px) {
     #login-container > img {
-        max-width: 10%;
+        max-width: 40%;
     }
 }
 
 @media only screen and (max-width: 600px) {
     #login-container > img {
-        max-width: 14%;
+        max-width: 42%;
     }
 }
