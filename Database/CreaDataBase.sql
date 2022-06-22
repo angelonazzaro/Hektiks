@@ -14,6 +14,7 @@ CREATE TABLE Utenti (
     data_registrazione DATE NOT NULL,
     ruolo BOOL NOT NULL DEFAULT FALSE, -- TRUE per Admin, FALSE per User
     saldo DECIMAL (10, 2) NOT NULL CHECK (saldo >= 0) DEFAULT 0, 
+    profile_pic TEXT,
     biografia TEXT,
     
     UNIQUE (username)

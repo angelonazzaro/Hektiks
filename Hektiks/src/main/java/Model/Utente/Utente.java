@@ -25,6 +25,9 @@ public class Utente extends GenericBean implements Serializable, IEntity {
     private Date data_registrazione;
     private boolean ruolo = false;
     private double saldo = 0;
+
+    private String profile_pic = "";
+
     private String biografia = "";
 
     @Override
@@ -140,5 +143,13 @@ public class Utente extends GenericBean implements Serializable, IEntity {
 
     public void setBiografia(String biografia) {
         this.biografia = biografia;
+    }
+
+    public String getProfile_pic() {
+        return profile_pic;
+    }
+
+    public void setProfile_pic(String profile_pic) {
+        this.profile_pic = profile_pic;
     }
 }

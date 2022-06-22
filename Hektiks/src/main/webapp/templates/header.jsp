@@ -33,15 +33,13 @@
             <span><i class="fas fa-search"></i></span>
         </div>
         <% if (user != null) {  %>
-            <% String profile_pic = request.getContextPath() + "/assets/uploads/users/" + user.getUsername() + "/profile_pic.png"; %>
+            <% String profile_pic = user.getProfile_pic() != null ? request.getContextPath() + "/assets/uploads/users" + user.getProfile_pic() : request.getContextPath() + "/assets/uploads/users/avatar_placeholder.png"; %>
             <div id="login-container">
                 <div id="user-info">
                     <p class="text"><%= user.getUsername() %></p>
                     <p class="text" id="user-balance"><%= String.format("%.2f€", user.getSaldo()).replace(",", ".") %></p>
                 </div>
-                <% if (!(new File(profile_pic).exists())) {%>
-                    <% profile_pic = request.getContextPath() + "/assets/uploads/users/avatar_placeholder.png"; %>
-                <%  }  %>
+
                 <img src="<%= profile_pic %>" alt="profile pic">
                 <div class="cart">
                     <a href="<%= request.getContextPath() %>/carrello">
