@@ -132,10 +132,10 @@
 </script>
 <% } %>
 
-<% if (session != null && session.getAttribute("success-error") != null) { %>
+<% if (session != null && session.getAttribute("msg-success") != null) { %>
 <script>
-    notifier.success("<%= session.getAttribute("success-error") %>");
-    <% session.removeAttribute("success-error"); %>
+    notifier.success("<%= session.getAttribute("msg-success") %>");
+    <% session.removeAttribute("msg-success"); %>
 </script>
 <% } %>
 

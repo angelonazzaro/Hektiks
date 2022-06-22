@@ -100,7 +100,7 @@ CREATE TABLE Ordini (
 	email_utente VARCHAR(320), 
 	codice_ordine CHAR(6),
 	data_ora_ordinazione DATETIME NOT NULL,
-    prezzo_totale DECIMAL (10, 2) NOT NULL CHECK (prezzo_totale > 0), 
+    prezzo_totale DECIMAL (10, 2) NOT NULL CHECK (prezzo_totale >= 0), 
     
 	FOREIGN KEY (email_utente) REFERENCES Utenti (email) ON UPDATE CASCADE ON DELETE NO ACTION,
     PRIMARY KEY (email_utente, codice_ordine)

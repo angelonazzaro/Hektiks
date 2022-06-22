@@ -20,7 +20,6 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -106,7 +105,7 @@ public class AcquistoServlet extends HttpServlet {
         }
 
         ordine.setCodice_ordine(codice_ordine);
-        Timestamp date = Timestamp.valueOf(LocalDateTime.now());
+        Timestamp date = new Timestamp(System.currentTimeMillis());
         ordine.setEmail_utente(utente.getEmail());
         ordine.setData_ora_ordinazione(date);
         ordine.setPrezzo_totale(prezzoTotale);
@@ -115,12 +114,10 @@ public class AcquistoServlet extends HttpServlet {
             // Se l'ordine è andato a buon fine, inserisco i prodotti in db
             // Il procedimento è uguale per entrambe i valori di "from"
             if (ordineDAO.doSave(ordine)) {
-                ordine = ordineDAO.doRetrieveByCondition("email_utente = '" + utente.getEmail() + "' AND data_ora_ordinazione = " + date).get(0);
-
                 Prodotto_Ordine prodotto_ordine = new Prodotto_Ordine();
                 prodotto_ordine.setEmail_utente(utente.getEmail());
                 prodotto_ordine.setData_ora_creazione(date);
-                prodotto_ordine.setCodice_ordine(ordine.getCodice_ordine());
+                prodotto_ordine.setCodice_ordine(codice_ordine);
 
                 for (Gioco giocoDaAcquistare : giochiDaAcquistare) {
                     prodotto_ordine.setCodice_gioco(giocoDaAcquistare.getCodice_gioco());
@@ -139,7 +136,7 @@ public class AcquistoServlet extends HttpServlet {
                 UtenteDAO utenteDAO = new UtenteDAO(source);
                 HashMap<String, Double> map = new HashMap<>();
                 map.put("saldo", utente.getSaldo());
-                utenteDAO.doUpdate(map, "email_utente = '" + utente.getEmail() + "'");
+                utenteDAO.doUpdate(map, "email = '" + utente.getEmail() + "'");
 
                 // Svuoto il carrello in sessione e quello nel db <=> from == "carrello"
                 if (from.equals("carrello")) {
@@ -153,7 +150,7 @@ public class AcquistoServlet extends HttpServlet {
                     prodottoDAO.doDelete("email_utente = '" + utente.getEmail() + "'");
                 }
 
-                session.setAttribute("success-msg", "Ordine #" + ordine.getCodice_ordine() + " effettutato con successo!");
+                session.setAttribute("msg-success", "Ordine <b>#" + ordine.getCodice_ordine() + "</b> effettutato con successo!");
 
             } else {
                 session.setAttribute("msg-error", "Qualcosa è andato storto");
