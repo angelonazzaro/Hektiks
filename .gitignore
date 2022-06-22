@@ -2,6 +2,7 @@
 *.iml
 *.png
 *.zip
+/Documenti/
 /.idea
 /.vscode
 /.idea/*
