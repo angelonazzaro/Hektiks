@@ -155,7 +155,7 @@ public class AcquistoServlet extends HttpServlet {
                 }
 
                 session.setAttribute("msg-success", "Ordine <b>#" + ordine.getCodice_ordine() + "</b> effettutato con successo!");
-
+                response.sendRedirect(request.getContextPath() + "/");
             } else {
                 session.setAttribute("msg-error", "Qualcosa è andato storto");
                 response.sendRedirect(request.getRequestURI());
