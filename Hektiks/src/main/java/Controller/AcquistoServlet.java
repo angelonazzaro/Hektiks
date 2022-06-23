@@ -10,6 +10,7 @@ import Model.Prodotto_Ordine.Prodotto_Ordine;
 import Model.Prodotto_Ordine.Prodotto_OrdineDAO;
 import Model.Utente.Utente;
 import Model.Utente.UtenteDAO;
+import Utils.Logger.Logger;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,6 +29,9 @@ import java.util.Random;
 public class AcquistoServlet extends HttpServlet {
 
     protected synchronized void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        Logger.consoleLog(Logger.INFO, "ACQUISTO SERVLET DO POST");
+
         controllaSeLoggato(request, response);
 
         String from = request.getParameter("from");
@@ -66,7 +70,6 @@ public class AcquistoServlet extends HttpServlet {
             }
         } else {
             String codice_gioco = request.getParameter("codice_gioco");
-
             try {
                 gioco = giocoDAO.doRetrieveByKey(codice_gioco);
 
@@ -181,9 +184,9 @@ public class AcquistoServlet extends HttpServlet {
                 session = request.getSession(true);
 
             session.setAttribute("msg-error", "Per poter effettuare un acquisto devi accedere al tuo account!");
-        }
+            response.sendRedirect(request.getContextPath() + "/");
 
-        response.sendRedirect(request.getContextPath() + "/");
+        }
 
     }
 }
