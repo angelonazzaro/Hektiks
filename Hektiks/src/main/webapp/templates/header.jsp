@@ -40,7 +40,7 @@
                     <p class="text" id="user-balance"><%= String.format("%.2f€", user.getSaldo()).replace(",", ".") %></p>
                 </div>
 
-                <img src="<%= profile_pic %>" alt="profile pic">
+                <img src="<%= profile_pic %>" alt="profile pic" onclick="attiva_disattiva_menu()">
                 <div class="cart">
                     <a href="<%= request.getContextPath() %>/carrello">
                             <span class="caret">

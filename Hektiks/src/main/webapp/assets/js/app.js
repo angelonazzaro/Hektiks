@@ -9,6 +9,11 @@ function debounce(cb, delay = 1000) {
     };
 }
 
+function attiva_disattiva_menu() {
+
+    document.getElementById("panel").classList.toggle("show");
+}
+
 const burger = document.getElementById("burger");
 const header = document.querySelector("header");
 const headerStyle = window.getComputedStyle(header);
