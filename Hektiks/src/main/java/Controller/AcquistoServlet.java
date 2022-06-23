@@ -10,7 +10,6 @@ import Model.Prodotto_Ordine.Prodotto_Ordine;
 import Model.Prodotto_Ordine.Prodotto_OrdineDAO;
 import Model.Utente.Utente;
 import Model.Utente.UtenteDAO;
-import Utils.Logger.Logger;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -29,16 +28,17 @@ import java.util.Random;
 public class AcquistoServlet extends HttpServlet {
 
     protected synchronized void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        Logger.consoleLog(Logger.INFO, "ACQUISTO SERVLET DO POST");
-
-        controllaSeLoggato(request, response);
+        if (!controllaSeLoggato(request, response))  {
+            response.sendRedirect(request.getContextPath() + "/");
+            return;
+        }
 
         String from = request.getParameter("from");
 
         if (!from.equals("carrello") && !from.equals("gioco")) {
             request.getSession().setAttribute("msg-error", "Qualcosa è andato storto!");
             response.sendRedirect(request.getRequestURI());
+            return;
         }
 
         List<Gioco> giochiDaAcquistare = new ArrayList<>();
@@ -70,6 +70,7 @@ public class AcquistoServlet extends HttpServlet {
             }
         } else {
             String codice_gioco = request.getParameter("codice_gioco");
+
             try {
                 gioco = giocoDAO.doRetrieveByKey(codice_gioco);
 
@@ -154,7 +155,7 @@ public class AcquistoServlet extends HttpServlet {
                 }
 
                 session.setAttribute("msg-success", "Ordine <b>#" + ordine.getCodice_ordine() + "</b> effettutato con successo!");
-
+                response.sendRedirect(request.getContextPath() + "/");
             } else {
                 session.setAttribute("msg-error", "Qualcosa è andato storto");
                 response.sendRedirect(request.getRequestURI());
@@ -176,17 +177,19 @@ public class AcquistoServlet extends HttpServlet {
         return sb.toString();
     }
 
-    private void controllaSeLoggato(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private boolean controllaSeLoggato(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession(false);
 
         if (session == null || session.getAttribute("user") == null) {
             if (session == null)
                 session = request.getSession(true);
 
-            session.setAttribute("msg-error", "Per poter effettuare un acquisto devi accedere al tuo account!");
-            response.sendRedirect(request.getContextPath() + "/");
+            System.out.println("cristo porco");
 
+            session.setAttribute("msg-error", "Per poter effettuare un acquisto devi accedere al tuo account!");
+            return false;
         }
 
+        return true;
     }
 }
