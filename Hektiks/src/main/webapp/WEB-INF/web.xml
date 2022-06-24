@@ -50,6 +50,24 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>RecensioneServlet</servlet-name>
+        <servlet-class>Controller.RecensioneServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RecensioneServlet</servlet-name>
+        <url-pattern>/recensione</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>Controller.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>ErrorHandlerServlet</servlet-name>
         <servlet-class>Controller.ErrorHandlerServlet</servlet-class>
     </servlet>
