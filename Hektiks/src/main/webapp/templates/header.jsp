@@ -43,8 +43,14 @@
             </div>
             <img src="<%= profile_pic %>" alt="profile pic">
 
+<<<<<<< HEAD
             <div class="cart">
                 <a href="<%= request.getContextPath() %>/carrello">
+=======
+                <img src="<%= profile_pic %>" alt="profile pic" onclick="attiva_disattiva_menu()">
+                <div class="cart">
+                    <a href="<%= request.getContextPath() %>/carrello">
+>>>>>>> a5b422d373a8cc87854ccc5dae316a2be3747d7b
                             <span class="caret">
                                 <% if (session.getAttribute("quantita_carrello") != null) { %>
                                     <%= (session.getAttribute("quantita_carrello")) %>
