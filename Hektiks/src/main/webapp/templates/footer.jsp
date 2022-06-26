@@ -39,6 +39,7 @@
 <script src="<%= request.getContextPath() %>/assets/libs/jquery/jquery.min.js"></script>
 <script src="<%= request.getContextPath() %>/assets/libs/awesomeNotifications/index.var.js"></script>
 <script src="https://kit.fontawesome.com/bedafbbe2b.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 <script>
     const notifier = new AWN({position: "top-right"});
 </script>

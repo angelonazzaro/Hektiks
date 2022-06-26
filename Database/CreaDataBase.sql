@@ -88,12 +88,12 @@ CREATE TABLE Recensioni (
 	email_utente VARCHAR(320), 
     codice_gioco CHAR(6),
     data_ora_pubblicazione DATETIME,
-    percentuale TINYINT NOT NULL,
+    voto DOUBLE NOT NULL CHECK (voto >= 0 AND voto <= 5),
     descrizione TEXT,
     
 	FOREIGN KEY (email_utente) REFERENCES Utenti (email) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (codice_gioco) REFERENCES Giochi (codice_gioco) ON UPDATE CASCADE ON DELETE CASCADE,
-	PRIMARY KEY (email_utente, codice_gioco, data_ora_pubblicazione)
+	PRIMARY KEY (email_utente, codice_gioco)
 );
 
 CREATE TABLE Ordini (

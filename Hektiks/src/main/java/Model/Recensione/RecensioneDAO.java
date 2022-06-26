@@ -32,12 +32,12 @@ public class RecensioneDAO extends SQLDAO implements DAO<Recensione> {
     @Override
     public Recensione doRetrieveByKey(String... key) throws SQLException {
 
-        if (key == null || key.length != 3)
+        if (key == null || key.length != 2)
             throw new InvalidPrimaryKeyException();
 
         List<Recensione> recensione = doRetrieveByCondition(
-                String.format("%s.email_utente = '%s' AND %s.data_creazione = '%s' AND %s.data_ora_pubblicazione = '%s'",
-                        RECENSIONI, key[0], RECENSIONI, key[1], RECENSIONI, key[2]));
+                String.format("%s.email_utente = '%s' AND %s.codice_gioco = '%s'",
+                        RECENSIONI, key[0], RECENSIONI, key[1]));
         return recensione.isEmpty() ? null : recensione.get(0);
     }
 

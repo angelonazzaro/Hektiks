@@ -16,7 +16,7 @@ public class Recensione extends GenericBean implements Serializable, IEntity {
     private String email_utente;
     private String codice_gioco;
     private Timestamp data_ora_pubblicazione;
-    private byte percentuale;
+    private double voto;
     private String descrizione;
 
     @Override
@@ -25,7 +25,7 @@ public class Recensione extends GenericBean implements Serializable, IEntity {
                 "email_utente='" + email_utente + '\'' +
                 ", codice_gioco='" + codice_gioco + '\'' +
                 ", data_ora_pubblicazione=" + data_ora_pubblicazione +
-                ", percentuale=" + percentuale +
+                ", voto=" + voto +
                 ", descrizione='" + descrizione + '\'' +
                 '}';
     }
@@ -38,7 +38,7 @@ public class Recensione extends GenericBean implements Serializable, IEntity {
                 put("email_utente", email_utente);
                 put("codice_gioco", codice_gioco);
                 put("data_ora_pubblicazione", data_ora_pubblicazione.toString());
-                put("percentuale", percentuale);
+                put("voto", voto);
                 put("descrizione", descrizione);
             }
         };
@@ -68,12 +68,12 @@ public class Recensione extends GenericBean implements Serializable, IEntity {
         this.data_ora_pubblicazione = data_ora_pubblicazione;
     }
 
-    public byte getPercentuale() {
-        return percentuale;
+    public double getVoto() {
+        return voto;
     }
 
-    public void setPercentuale(byte percentuale) {
-        this.percentuale = percentuale;
+    public void setVoto(double voto) {
+        this.voto = voto;
     }
 
     public String getDescrizione() {

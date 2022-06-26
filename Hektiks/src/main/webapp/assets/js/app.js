@@ -9,11 +9,6 @@ function debounce(cb, delay = 1000) {
     };
 }
 
-function attiva_disattiva_menu() {
-
-    document.getElementById("panel").classList.toggle("show");
-}
-
 const burger = document.getElementById("burger");
 const header = document.querySelector("header");
 const headerStyle = window.getComputedStyle(header);
@@ -247,3 +242,14 @@ const search = debounce((value) => {
 search_bar.addEventListener("input", () => {
     search(search_bar.value);
 });
+
+/* MODAL */
+$("[data-toggle='modal']").click(function() {
+    $(`${$(this).attr('data-target')}`).fadeToggle();
+    document.body.classList.toggle("no-scroll");
+});
+
+$(".modal-header > .close").click(function() {
+    $(`${$(this).attr('data-target')}`).fadeOut();
+    document.body.classList.toggle("no-scroll");
+})

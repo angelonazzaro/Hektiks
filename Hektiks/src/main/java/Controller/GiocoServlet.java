@@ -4,6 +4,8 @@ import Model.Gioco.Gioco;
 import Model.Gioco.GiocoDAO;
 import Model.Gioco_Genere.Gioco_Genere;
 import Model.Gioco_Genere.Gioco_GenereDAO;
+import Model.Recensione.Recensione;
+import Model.Recensione.RecensioneDAO;
 import Utils.Logger.Logger;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -14,6 +16,9 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+
+import static Model.Storage.Entities.RECENSIONI;
+import static Model.Storage.Entities.UTENTI;
 
 public class GiocoServlet extends HttpServlet {
     @Override
@@ -38,13 +43,17 @@ public class GiocoServlet extends HttpServlet {
                     request.getRequestDispatcher("/ErrorHandlerServlet").forward(request, response);
                 }
 
+                RecensioneDAO recensioneDAO = new RecensioneDAO(source);
+
                 List<Gioco_Genere> generi = new Gioco_GenereDAO(source).doRetrieveByCondition("codice_gioco = '" + codiceGioco + "'");
+                List<Recensione> recensioni = recensioneDAO.doRetrieveByJoin("inner", String.format("%s ON %s.email = %s.email_utente", UTENTI, UTENTI, RECENSIONI), String.format("%s.codice_gioco = '%s' ORDER BY voto", RECENSIONI, codiceGioco), UTENTI);
 
                 request.setAttribute("gioco", gioco);
+                request.setAttribute("recensioni", recensioni);
                 request.setAttribute("generi", generi);
                 request.setAttribute("title", gioco.getTitolo());
                 request.setAttribute("page", "giochi/gioco.jsp");
-                request.setAttribute("scripts", new String[]{"game.js"});
+                request.setAttribute("scripts", new String[]{"game.js", "recensioni.js"});
 
                 request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
 

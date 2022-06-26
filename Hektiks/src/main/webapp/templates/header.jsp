@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/css/style.css"/>
     <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/libs/awesomeNotifications/style.css"/>
 
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+
     <title><%= request.getAttribute("title") %>
     </title>
 </head>
@@ -41,23 +43,17 @@
                 <p class="text" id="user-balance"><%= String.format("%.2f€", user.getSaldo()).replace(",", ".") %>
                 </p>
             </div>
-            <img src="<%= profile_pic %>" alt="profile pic">
 
-<<<<<<< HEAD
+            <img src="<%= profile_pic %>" alt="profile pic" onclick="attiva_disattiva_menu()">
             <div class="cart">
                 <a href="<%= request.getContextPath() %>/carrello">
-=======
-                <img src="<%= profile_pic %>" alt="profile pic" onclick="attiva_disattiva_menu()">
-                <div class="cart">
-                    <a href="<%= request.getContextPath() %>/carrello">
->>>>>>> a5b422d373a8cc87854ccc5dae316a2be3747d7b
-                            <span class="caret">
-                                <% if (session.getAttribute("quantita_carrello") != null) { %>
-                                    <%= (session.getAttribute("quantita_carrello")) %>
-                                <% } else { %>
-                                    0
-                                <% } %>
-                            </span>
+                    <span class="caret">
+                        <% if (session.getAttribute("quantita_carrello") != null) { %>
+                            <%= (session.getAttribute("quantita_carrello")) %>
+                        <% } else { %>
+                            0
+                        <% } %>
+                    </span>
                     <i class="fas fa-shopping-cart"></i>
                 </a>
             </div>

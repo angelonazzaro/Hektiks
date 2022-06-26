@@ -1,7 +1,10 @@
 <%@ page import="Model.Gioco.Gioco" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.List" %>
-<%@ page import="Model.Gioco_Genere.Gioco_Genere" %><%--
+<%@ page import="Model.Gioco_Genere.Gioco_Genere" %>
+<%@ page import="Model.Recensione.Recensione" %>
+<%@ page import="Model.Utente.Utente" %>
+<%@ page import="java.util.stream.Collectors" %><%--
   Created by IntelliJ IDEA.
   User: Panin
   Date: 12/06/2022
@@ -11,6 +14,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% Gioco gioco = (Gioco) request.getAttribute("gioco"); %>
 <% List<Gioco_Genere> generi = (List<Gioco_Genere>) request.getAttribute("generi"); %>
+<% List<Recensione> recensioni = (List<Recensione>) request.getAttribute("recensioni"); %>
 
 <div class="game-presentation">
     <div class="banner">
@@ -81,4 +85,85 @@
             <% } %>
         </div>
     </div>
+    <div class="game-separator"></div>
+    <div class="details">
+        <div class="headline">
+            <h1 class="hs-3">Recensioni</h1>
+        </div>
+        <div class="details-content">
+            <% if (recensioni == null || recensioni.size() == 0) {%>
+                <div class="no-review-container">
+                    <h2 class="hs-3">Non ci sono recensioni.</h2>
+                    <a class="btn" data-toggle="modal" data-target="#recensioni-modal">Valuta questo gioco! <i class="fas fa-pen-alt"></i></a>
+                </div>
+            <% } else { %>
+                <div class="game-rating">
+                    <div class="rating-info">
+                        <% double votoGenerale = recensioni.stream().mapToDouble(Recensione::getVoto).average().orElse(0); %>
+                        <% String rating = ""; %>
+                        <% if (votoGenerale < 2) { rating = "bad-rating"; %>
+                        <% } else if (votoGenerale > 2 && votoGenerale < 3) { rating = "mid-rating"; %>
+                        <% } else { rating = "good-rating"; } %>
+                        <div class="rating <%= rating %> text">
+                            <% if (votoGenerale % 1 != 0)  {%>
+                                <%= String.format("%.1f", votoGenerale).replace(",", ".") %>
+                            <% } else { %>
+                            <%= String.format("%.0f", votoGenerale) %>
+                            <% } %>
+                        </div>
+                        <div class="info text">
+                            Valutazione Gioco <br>
+                            basata su <u><%= recensioni.size() %> recension<%= recensioni.size() > 1 ? "i" : "e" %></u>
+                        </div>
+                    </div>
+                    <a class="btn" data-toggle="modal" data-target="#recensioni-modal"
+                    >Valuta questo gioco!
+                        <i class="fas fa-pen-alt"></i
+                        ></a>
+                </div>
+                <div class="review-container">
+                    <% int size = Math.min(recensioni.size(), 6); %>
+                    <% for (int i = 0; i < size; i++) { %>
+                        <% Utente utente = (Utente) recensioni.get(i).getJoin().get(0); %>
+                        <% String profile_pic = utente.getProfile_pic() != null ? request.getContextPath() + "/assets/uploads/users" + utente.getProfile_pic() : request.getContextPath() + "/assets/uploads/users/avatar_placeholder.png"; %>
+
+                        <div class="review">
+                                <div class="review-header">
+                                    <a class="user-banner" href="<%= request.getContextPath() + "/utente?username=" + utente.getUsername() %>" title="<%= utente.getUsername() %>">
+                                        <img
+                                            src="<%= profile_pic %>"
+                                            alt="<%= utente.getUsername() %> immagine profilo"
+                                        />
+                                    </a>
+                                    <div class="review-stars">
+                                        <% double voto_rimanente = recensioni.get(i).getVoto(); %>
+                                        <% for (int k = 1; k <= recensioni.get(i).getVoto(); k++) {%>
+                                            <i class="fas fa-star"></i>
+                                            <% voto_rimanente -= 1; %>
+                                        <% } %>
+                                        <% if (voto_rimanente > 0) { %>
+                                            <i class="fas fa-star-half"></i>
+                                        <% } %>
+                                    </div>
+                                </div>
+                                <div class="review-body">
+                                    <p class="text">
+                                        <%= recensioni.get(i).getDescrizione() %>
+                                    </p>
+                                </div>
+                                <hr />
+                                <div class="review-footer">
+                                    <p class="text"><%= new SimpleDateFormat("dd MMMMMMMMMM yyyy HH:mm:ss").format(recensioni.get(i).getData_ora_pubblicazione()) %></p>
+                                </div>
+                            </div>
+                    <% } %>
+                </div>
+                <div class="btn-container">
+                    <a href="<%= request.getContextPath() %>/recensione?codice_gioco=<%= gioco.getCodice_gioco() %>" class="btn">Visualizza più recensioni</a>
+                </div>
+            <% } %>
+        </div>
+    </div>
 </div>
+
+<%@ include file="../includes/recensioni_modal.jsp" %>

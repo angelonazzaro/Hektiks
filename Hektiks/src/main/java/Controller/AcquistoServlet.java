@@ -184,8 +184,6 @@ public class AcquistoServlet extends HttpServlet {
             if (session == null)
                 session = request.getSession(true);
 
-            System.out.println("cristo porco");
-
             session.setAttribute("msg-error", "Per poter effettuare un acquisto devi accedere al tuo account!");
             return false;
         }

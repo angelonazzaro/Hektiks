@@ -14,14 +14,7 @@ public class LogoutServlet extends HttpServlet {
         Logger.consoleLog(Logger.INFO, "LOGOUT SERVLET DO GET");
 
         request.getSession().invalidate();
-        response.sendRedirect("index.jsp");
-    }
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-        Logger.consoleLog(Logger.INFO, "LOGOUT SERVLET DO POST");
-
-        this.doGet(request, response);
+        response.sendRedirect(request.getContextPath() + "/");
     }
 }
 
