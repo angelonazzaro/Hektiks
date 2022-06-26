@@ -280,20 +280,6 @@ form {
     }
 }
 
-@media only screen and (max-width: 800px) {
-    .feature-card:nth-child(1) {
-        display: none;
-    }
-
-    .feature-card {
-        flex-basis: 50%;
-    }
-
-    .feature-card > img {
-        max-width: 35%;
-    }
-}
-
 @media only screen and (max-width: 1000px) {
     .actions {
         width: 100%;
