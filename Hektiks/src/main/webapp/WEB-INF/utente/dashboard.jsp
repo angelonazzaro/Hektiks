@@ -102,9 +102,9 @@
                 </div>
                 <div class="dashboard-card-body">
                     <hr>
-                    <form action="#" method="POST">
+                    <form action="<%= request.getContextPath() %>/giftcard" method="POST">
                         <div class="row">
-                            <input type="text" placeholder="Codice Gift Card" class="form-control">
+                            <input type="text" placeholder="Codice Gift Card" class="form-control" name="codice_giftcard">
                             <button class="btn" type="submit">Riscatta</button>
                         </div>
                     </form>
