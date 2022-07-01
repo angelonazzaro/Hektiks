@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -37,7 +36,7 @@ public class GiftCardServlet extends HttpServlet {
 
         Gson gson = new Gson();
         PrintWriter out = response.getWriter();
-        String response_type = "danger", response_value;
+        String response_type, response_value;
 
         try {
 
