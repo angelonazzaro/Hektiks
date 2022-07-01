@@ -122,26 +122,6 @@ header #burger:hover .line {
     aspect-ratio: 1;
 }
 
-/* DROPDOWN MENU */
-
-/*.dropdown-content {*/
-/*    position: absolute;*/
-/*    top: 100%;*/
-/*    left: 50%;*/
-/*    transform: translateX(-50%);*/
-/*    margin-top: 1.5rem;*/
-/*    border-radius: 15px;*/
-/*    backdrop-filter: blur(60px) saturate(100%);*/
-/*    -webkit-backdrop-filter: blur(60px) saturate(100%);*/
-/*    background-color: rgba(39, 39, 39, .15);*/
-/*    box-shadow: 0 0 0 10000px rgb(16 16 16 / 60%);*/
-/*}*/
-
-
-/*.dropdown-content > * {*/
-/*    display: block;*/
-/*}*/
-
 /* SEARCH BAR */
 .search-bar {
     position: relative;

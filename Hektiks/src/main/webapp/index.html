@@ -8,8 +8,40 @@
 		<title>Sort</title>
 	</head>
 	<body>
-		
+	<!-- header start -->
+	<header>
+		<nav>
+			<a href="<%= request.getContextPath() %>/" id="logo" class="hs-1">HEKTIKS</a>
+			<div class="search-bar">
+				<input type="text" class="form-control" placeholder="Cerca..."/>
+				<span><i class="fas fa-search"></i></span>
+			</div>
+			<div id="login-container">
+					<div id="user-info">
+						<p class="text">Patanella Bella Patana
+						</p>
+						<p class="text" id="user-balance">1052.36€
+						</p>
+					</div>
+					<img src="./assets/uploads/users/avatar_placeholder.png" alt="profile pic">
+				<div class="cart">
+					<a href="<%= request.getContextPath() %>/carrello">
+                    <span class="caret">
+                        0
+                    </span>
+						<i class="fas fa-shopping-cart"></i>
+					</a>
+				</div>
+			</div>
+		</nav>
+	</header>
 	
+		<div class="wrapper">
+			<div class="main-content">
+				
+				
+			</div>
+		</div>
 
 		<script src="https://kit.fontawesome.com/bedafbbe2b.js"></script>
 		<script src="assets/js/app.js"></script>

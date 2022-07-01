@@ -68,6 +68,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>UtenteServlet</servlet-name>
+        <servlet-class>Controller.UtenteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UtenteServlet</servlet-name>
+        <url-pattern>/utente</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>ErrorHandlerServlet</servlet-name>
         <servlet-class>Controller.ErrorHandlerServlet</servlet-class>
     </servlet>
