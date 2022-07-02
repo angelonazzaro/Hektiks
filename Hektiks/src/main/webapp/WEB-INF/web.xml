@@ -68,6 +68,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>GiftCardServlet</servlet-name>
+        <servlet-class>Controller.GiftCardServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GiftCardServlet</servlet-name>
+        <url-pattern>/giftcard</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>UtenteServlet</servlet-name>
         <servlet-class>Controller.UtenteServlet</servlet-class>
     </servlet>
