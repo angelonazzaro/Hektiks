@@ -151,7 +151,10 @@ password_icons.forEach((icon) => {
     });
 });
 
-document.getElementById("profile-pic").addEventListener("click", () => window.location.href = base_url() + "/utente");
+const profile_pic = document.getElementById("profile-pic");
+
+if (profile_pic !== null)
+    profile_pic.addEventListener("click", () => window.location.href = base_url() + "/utente");
 
 const cart_caret = document.querySelector(".cart .caret");
 
