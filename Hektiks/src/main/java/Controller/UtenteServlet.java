@@ -40,7 +40,11 @@ public class UtenteServlet extends HttpServlet {
                 throw new RuntimeException(e);
             }
         } else if (part.equals("orders")) {
-
+            try {
+                List<Ordine> ordini = new OrdineDAO(source).doRetrieveByJoin("email_utente = '" + user.getEmail() + "'");
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         } else if (part.equals("settings")) {
 
         }

@@ -1,0 +1,94 @@
+.orders-wrapper {
+    margin-top: 8rem;
+    width: 100%;
+    min-height: inherit;
+    color: white;
+    text-align: left;
+}
+
+.orders-container {
+    margin-top: 2rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.75rem;
+}
+
+.order {
+    width: 100%;
+    min-height: 30vh;
+    background-color: var(--header-bg);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.order::after {
+    content: "Completato";
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(0.9em + 1vmin);
+    width: 10%;
+    height: 35px;
+    background-color: rgba(37,222,87,.1);
+    color: #25de57;
+    top: 0;
+    right: 0;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.game-order, .order-total, .game-order-separator, .order-info  {
+    width: 95%;
+    margin: auto;
+}
+
+.game-order {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.game-order:nth-of-type(1) {
+    margin-top: 2rem;
+}
+
+.game-info {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 2rem;
+}
+
+.game-info > img {
+    max-width: 38%;
+    border-radius: 10px;
+    object-fit: contain;
+}
+
+.game-price {
+    color: var(--grey);
+}
+
+.order-total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 2rem auto;
+}
+
+.order-info {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.order-info > li:nth-child(1) {
+    list-style: none;
+}

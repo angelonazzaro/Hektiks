@@ -38,8 +38,55 @@
 	
 		<div class="wrapper">
 			<div class="main-content">
-				
-				
+				<div class="user-general-info">
+					<div class="user-card">
+						<div class="user-card-header">
+							<img src="./assets/uploads/users/avatar_placeholder.png" alt="<%= user.getUsername() %> immagine profilo">
+						</div>
+						<div class="user-card-body">
+							<p class="hs-4" style="font-weight: bold; color: white; margin-bottom: 0.5rem">Porcodio</p>
+							<p class="text" style="color: var(--grey)">Membro dal: 2 Luglio 2022</p>
+						</div>
+					</div>
+				</div>
+				<div class="breadcrumb text">
+					<ul class="user-links">
+						<li class="user-link"><a href="#">
+							Dashboard</a>
+						</li>
+						<li class="user-link active"><a href="#">I miei ordini</a></li>
+						<li class="user-link"><a href="<%= request.getContextPath() %>/logout">Logout</a></li>
+					</ul>
+					<div class="user-settings-preview">
+						<a href="#" class="user-link"><i class="fas fa-cog"></i>
+							Impostazioni</a>
+					</div>
+				</div>
+				<div class="orders-wrapper">
+					<h1 class="hs-3">I miei ordini</h1>
+					<div class="orders-container">
+						<div class="order">
+							<div class="game-order">
+								<div class="game-info">
+									<img src="https://s3.gaming-cdn.com/images/products/9755/616x353/monster-hunter-rise-sunbreak-pc-game-steam-cover.jpg?v=1656603055" alt="">
+									<p class="text">Rainbow Six Siege</p>
+								</div>
+								<div class="game-price">
+									<p class="text">20.00</p> 
+								</div>
+							</div>
+							<hr class="game-order-separator">
+							<div class="order-total">
+								<p class="hs-4">Totale</p>
+								<p class="hs-4">20.00</p>
+							</div>
+							<ul class="order-info text">
+								<li>Ordine #17180558</li>
+								<li>26/01/2018 14:39</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 

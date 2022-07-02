@@ -1,5 +1,7 @@
 <%@ page import="Model.Utente.Utente" %>
-<%@ page import="java.text.SimpleDateFormat" %><%--
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="Model.Ordine.Ordine" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: Panin
   Date: 01/07/2022
@@ -31,7 +33,7 @@
         <% if (user.isRuolo()) {%>
             <li class="user-link"><a href="#">Admin</a></li>
         <% } %>
-        <li class="user-link"><a href="#">I miei ordini</a></li>
+        <li class="user-link"><a href="<%= request.getContextPath() %>/utente?part=orders">I miei ordini</a></li>
         <li class="user-link"><a href="<%= request.getContextPath() %>/logout">Logout</a></li>
     </ul>
     <div class="user-settings-preview">
@@ -109,6 +111,35 @@
                         </div>
                     </form>
                 </div>
+            </div>
+        </div>
+    </div>
+<% } else if (partPath.equals("orders")) { %>
+
+    <% List<Ordine> ordini = (List<Ordine>) request.getAttribute("ordini"); %>
+
+    <div class="orders-wrapper">
+        <h1 class="hs-3">I miei ordini</h1>
+        <div class="orders-container">
+            <div class="order">
+                <div class="game-order">
+                    <div class="game-info">
+                        <img src="https://s3.gaming-cdn.com/images/products/9755/616x353/monster-hunter-rise-sunbreak-pc-game-steam-cover.jpg?v=1656603055" alt="">
+                        <p class="text">Rainbow Six Siege</p>
+                    </div>
+                    <div class="game-price">
+                        <p class="text">20.00</p>
+                    </div>
+                </div>
+                <hr class="game-order-separator">
+                <div class="order-total">
+                    <p class="hs-4">Totale</p>
+                    <p class="hs-4">20.00</p>
+                </div>
+                <ul class="order-info text">
+                    <li>Ordine #17180558</li>
+                    <li>26/01/2018 14:39</li>
+                </ul>
             </div>
         </div>
     </div>
