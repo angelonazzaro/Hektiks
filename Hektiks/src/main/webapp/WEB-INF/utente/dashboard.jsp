@@ -1,7 +1,13 @@
 <%@ page import="Model.Utente.Utente" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="Model.Ordine.Ordine" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="Model.Prodotto_Ordine.Prodotto_OrdineDAO" %>
+<%@ page import="Model.Gioco.GiocoDAO" %>
+<%@ page import="Model.Prodotto_Ordine.Prodotto_Ordine" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="Model.Gioco.Gioco" %>
+<%@ page import="java.io.PrintWriter" %><%--
   Created by IntelliJ IDEA.
   User: Panin
   Date: 01/07/2022
@@ -52,7 +58,7 @@
         <div class="dashboard-content">
             <div class="overview-card dashboard-card">
                 <div class="dashboard-card-header">
-                    <img src="<%= request.getContextPath() %>/assets/images/icons/icon-dashboard.svg" alt="">
+                    <img src="<%= request.getContextPath() %>/assets/images/icons/icon-dashboard.svg" alt="dashboard icon">
                     <h1 class="hs-3">
                         Overview
                     </h1>
@@ -73,7 +79,7 @@
             </div>
             <div class="dashboard-card">
                 <div class="dashboard-card-header">
-                    <img src="<%= request.getContextPath() %>/assets/images/icons/icon-wallet.svg" alt="">
+                    <img src="<%= request.getContextPath() %>/assets/images/icons/icon-wallet.svg" alt="wallet icon">
                     <h1 class="hs-3">
                         Portafoglio
                     </h1>
@@ -85,7 +91,7 @@
             </div>
             <div class="dashboard-card">
                 <div class="dashboard-card-header">
-                    <img src="<%= request.getContextPath() %>/assets/images/icons/icon-bank.svg" alt="">
+                    <img src="<%= request.getContextPath() %>/assets/images/icons/icon-bank.svg" alt="bank icon">
                     <h1 class="hs-3">
                         Totale speso
                     </h1>
@@ -97,14 +103,14 @@
             </div>
             <div class="dashboard-card giftcards">
                 <div class="dashboard-card-header">
-                    <img src="<%= request.getContextPath() %>/assets/images/icons/icon-gift.svg" alt="">
+                    <img src="<%= request.getContextPath() %>/assets/images/icons/icon-gift.svg" alt="gift icon">
                     <h1 class="hs-3">
                         Giftcards
                     </h1>
                 </div>
                 <div class="dashboard-card-body">
                     <hr>
-                    <form action="<%= request.getContextPath() %>/giftcard" method="POST">
+                    <form action="<%= request.getContextPath() %>/giftcard" method="POST" id="giftcard-form">
                         <div class="row">
                             <input type="text" placeholder="Codice Gift Card" class="form-control" name="codice_giftcard">
                             <button class="btn" type="submit">Riscatta</button>
@@ -117,30 +123,58 @@
 <% } else if (partPath.equals("orders")) { %>
 
     <% List<Ordine> ordini = (List<Ordine>) request.getAttribute("ordini"); %>
+    <% Prodotto_OrdineDAO prodotto_ordineDAO = (Prodotto_OrdineDAO) request.getAttribute("prodottoOrdineDAO"); %>
+    <% GiocoDAO giocoDAO = (GiocoDAO) request.getAttribute("giocoDAO"); %>
 
     <div class="orders-wrapper">
         <h1 class="hs-3">I miei ordini</h1>
+
+        <% if (ordini.size() > 0) { %>
         <div class="orders-container">
+            <% for (Ordine ordine : ordini) { %>
             <div class="order">
-                <div class="game-order">
-                    <div class="game-info">
-                        <img src="https://s3.gaming-cdn.com/images/products/9755/616x353/monster-hunter-rise-sunbreak-pc-game-steam-cover.jpg?v=1656603055" alt="">
-                        <p class="text">Rainbow Six Siege</p>
-                    </div>
-                    <div class="game-price">
-                        <p class="text">20.00</p>
-                    </div>
-                </div>
-                <hr class="game-order-separator">
+                <% try {
+                    Gioco gioco;
+                    PrintWriter writer = response.getWriter();
+                    List<Prodotto_Ordine> prodottoOrdini = prodotto_ordineDAO.doRetrieveByCondition("codice_ordine = '" + ordine.getCodice_ordine() + "'");
+                    for (Prodotto_Ordine prodottoOrdine : prodottoOrdini) {
+                        gioco = giocoDAO.doRetrieveByKey(prodottoOrdine.getCodice_gioco());
+                        out.write(
+                                "<div class='game-order'>" +
+                                        "<div class='game-info'>" +
+                                        "<img src='" + gioco.getCopertina() + "' alt='" + gioco.getTitolo() + "- Copertina' />" +
+                                        "<div>" +
+                                        "<p class='text'>" + gioco.getTitolo() + "</p>" +
+                                        "<br>" +
+                                        "<p class='text'>Quantità:" + prodottoOrdine.getQuantita() + "</p>" +
+                                        "</div>" +
+                                        "</div>" +
+                                        "<div class='game-price'>" +
+                                        "<p class='text'>" + String.format("%.2f€", prodottoOrdine.getQuantita() * prodottoOrdine.getPrezzo()) + "</p>" +
+                                        "</div>" +
+                                        "</div>" +
+                                        "<hr class='game-order-separator' />");
+                    }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                } %>
                 <div class="order-total">
                     <p class="hs-4">Totale</p>
-                    <p class="hs-4">20.00</p>
+                    <p class="hs-4"><%= String.format("%.2f€", ordine.getPrezzo_totale())%></p>
                 </div>
                 <ul class="order-info text">
-                    <li>Ordine #17180558</li>
-                    <li>26/01/2018 14:39</li>
+                    <li>Ordine #<%= ordine.getCodice_ordine() %></li>
+                    <li><%= new SimpleDateFormat("dd MMMMMMMMMM yyyy HH:mm:ss").format(ordine.getData_ora_ordinazione()) %></li>
                 </ul>
             </div>
+            <% } %>
         </div>
+        <% } else { %>
+            <div style="width: 100%; margin-top: 2rem; text-align: center;">
+                <h1 class="hs-3" style="color: white;">Non hai effettutato nessun ordine.</h1>
+            </div>
+        <% } %>
+
+
     </div>
 <% } %>

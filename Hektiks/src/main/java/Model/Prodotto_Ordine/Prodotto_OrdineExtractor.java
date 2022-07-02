@@ -19,6 +19,7 @@ public class Prodotto_OrdineExtractor implements ResultSetExtractor<Prodotto_Ord
         prodotto_ordine.setCodice_ordine(resultSet.getString(PRODOTTI_ORDINI + ".codice_ordine"));
         prodotto_ordine.setCodice_gioco(resultSet.getString(PRODOTTI_ORDINI + ".codice_gioco"));
         prodotto_ordine.setData_ora_creazione(resultSet.getTimestamp(PRODOTTI_ORDINI + ".data_ora_creazione"));
+        prodotto_ordine.setPrezzo(resultSet.getDouble(PRODOTTI_ORDINI + ".prezzo"));
         prodotto_ordine.setQuantita(resultSet.getInt(PRODOTTI_ORDINI + ".quantita"));
 
         if (tables.length > 0) {

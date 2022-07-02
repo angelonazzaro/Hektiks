@@ -17,6 +17,9 @@ public class Prodotto_Ordine extends GenericBean implements Serializable, IEntit
     private String codice_ordine;
     private String codice_gioco;
     private Timestamp data_ora_creazione;
+
+    private double prezzo;
+
     private int quantita;
 
     @Override
@@ -26,6 +29,7 @@ public class Prodotto_Ordine extends GenericBean implements Serializable, IEntit
                 ", codice_ordine='" + codice_ordine + '\'' +
                 ", codice_gioco='" + codice_gioco + '\'' +
                 ", data_ora_creazione=" + data_ora_creazione +
+                ", prezzo=" + prezzo +
                 ", quantita=" + quantita +
                 '}';
     }
@@ -40,7 +44,9 @@ public class Prodotto_Ordine extends GenericBean implements Serializable, IEntit
                 put("codice_ordine", codice_ordine);
                 put("codice_gioco", codice_gioco);
                 put("data_ora_creazione", data_ora_creazione.toString());
+                put("prezzo", prezzo);
                 put("quantita", quantita);
+
             }
         };
     }
@@ -83,5 +89,13 @@ public class Prodotto_Ordine extends GenericBean implements Serializable, IEntit
 
     public void setQuantita(int quantita) {
         this.quantita = quantita;
+    }
+
+    public double getPrezzo() {
+        return prezzo;
+    }
+
+    public void setPrezzo(double prezzo) {
+        this.prezzo = prezzo;
     }
 }

@@ -124,6 +124,7 @@ CREATE TABLE Prodotti_Ordini (
 	codice_ordine CHAR(6),
 	codice_gioco CHAR(6),
     data_ora_creazione DATETIME,
+    prezzo DECIMAL(5, 2) NOT NULL CHECK (prezzo >= 0),
 	quantita INT UNSIGNED NOT NULL,
         
 	FOREIGN KEY (email_utente, codice_ordine) REFERENCES Ordini (email_utente, codice_ordine) ON UPDATE CASCADE ON DELETE NO ACTION,

@@ -131,6 +131,11 @@ public class AcquistoServlet extends HttpServlet {
                     else
                         prodotto_ordine.setQuantita(1);
 
+                    if (giocoDaAcquistare.getPercentuale_sconto() > 0)
+                        prodotto_ordine.setPrezzo(giocoDaAcquistare.getPrezzo() - ((giocoDaAcquistare.getPrezzo() * giocoDaAcquistare.getPercentuale_sconto()) / 100));
+                    else
+                        prodotto_ordine.setPrezzo(giocoDaAcquistare.getPrezzo());
+
                     prodotto_ordineDAO.doSave(prodotto_ordine);
                 }
 

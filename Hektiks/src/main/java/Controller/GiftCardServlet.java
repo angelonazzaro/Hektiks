@@ -45,7 +45,7 @@ public class GiftCardServlet extends HttpServlet {
 
             if (giftCards.isEmpty()) {
 
-                response_type = "danger";
+                response_type = "error";
                 response_value = "Giftcard non esistente";
             } else {
 
@@ -55,7 +55,7 @@ public class GiftCardServlet extends HttpServlet {
 
                 if (giftCards.isEmpty()) {
 
-                    response_type = "danger";
+                    response_type = "error";
                     response_value = "Giftcard già utilizzata";
 
                 } else {

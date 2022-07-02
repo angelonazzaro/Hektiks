@@ -1,7 +1,10 @@
 package Controller;
 
+import Model.Gioco.Gioco;
+import Model.Gioco.GiocoDAO;
 import Model.Ordine.Ordine;
 import Model.Ordine.OrdineDAO;
+import Model.Prodotto_Ordine.Prodotto_OrdineDAO;
 import Model.Recensione.Recensione;
 import Model.Recensione.RecensioneDAO;
 import Model.Utente.Utente;
@@ -14,6 +17,8 @@ import jakarta.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class UtenteServlet extends HttpServlet {
@@ -24,6 +29,7 @@ public class UtenteServlet extends HttpServlet {
         DataSource source = (DataSource) getServletContext().getAttribute("DataSource");
         Utente user = (Utente) request.getSession().getAttribute("user");
 
+        // se 'part' è nullo, mostro la dashboard
         if (part == null) {
 
             try {
@@ -41,7 +47,11 @@ public class UtenteServlet extends HttpServlet {
             }
         } else if (part.equals("orders")) {
             try {
-                List<Ordine> ordini = new OrdineDAO(source).doRetrieveByJoin("email_utente = '" + user.getEmail() + "'");
+                request.setAttribute("ordini", new OrdineDAO(source).doRetrieveByCondition("email_utente = '" + user.getEmail() + "'"));
+                request.setAttribute("prodottoOrdineDAO", new Prodotto_OrdineDAO(source));
+                request.setAttribute("giocoDAO", new GiocoDAO(source));
+                request.setAttribute("part", "orders");
+
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -51,6 +61,7 @@ public class UtenteServlet extends HttpServlet {
 
         request.setAttribute("title", "Hektiks | " + user.getUsername());
         request.setAttribute("page", "utente/dashboard.jsp");
+        request.setAttribute("scripts", new String[]{"user.js"});
 
         request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
     }
