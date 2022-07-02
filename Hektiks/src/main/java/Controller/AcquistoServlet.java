@@ -89,7 +89,7 @@ public class AcquistoServlet extends HttpServlet {
 
         if (utente.getSaldo() < prezzoTotale) {
             session.setAttribute("msg-error", "Il tuo saldo non è sufficiente ad effettuare l'acquisto");
-            response.sendRedirect(request.getRequestURI());
+            response.sendRedirect(request.getContextPath() + "/");
             return;
         }
 
