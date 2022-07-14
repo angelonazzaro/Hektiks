@@ -123,7 +123,7 @@ public class UtenteServlet extends HttpServlet {
 
                     return;
                 }
-                //se l'utente non avava una propic la salvo per la prima volta
+                //se l'utente non aveva una propic la salvo per la prima volta
                 else {
 
                     newPicPath = salvaImmagineRidimensionata(fileName, userProfilePicFolder, filePart);
@@ -134,16 +134,23 @@ public class UtenteServlet extends HttpServlet {
             else {
 
                 //salvo file di backup
-                String oldFile = trovaRinominaFile(userProfilePicFolder.getPath(), new String[]{"jpeg", "jpg", "png"});
+                File[] files = userProfilePicFolder.listFiles();
+                File oldFile = null;
+
+                // La directory conterrà sempre e solo un file
+                if (files != null && files.length > 0) {
+                    oldFile = files[0];
+                }
+
+                if (oldFile != null)
+                    System.out.println(oldFile.getName());
 
                 newPicPath = salvaImmagineRidimensionata(fileName, userProfilePicFolder, filePart);
 
                 //cancello il file di backup
                 if (new File(newPicPath).exists()) {
-
                     if (oldFile != null)
-                        new File(oldFile).delete();
-
+                        oldFile.delete();
                 } else {
 
                     session.setAttribute("msg-error", "Errore durante il caricamento dell'immagine");
@@ -152,8 +159,7 @@ public class UtenteServlet extends HttpServlet {
                 }
             }
 
-            // serve aggiornare ogni volta anche se il path rimane uguale?? no angioletto ti apro il culo
-            utente.setProfile_pic("/" + utente.getUsername() + "/" + "profile_pic." + newPicPath.substring(newPicPath.lastIndexOf(".") + 1));
+            utente.setProfile_pic("/" + utente.getUsername() + "/" + fileName);
 
             try {
 
@@ -161,22 +167,23 @@ public class UtenteServlet extends HttpServlet {
                 map.put("profile_pic", utente.getProfile_pic());
                 new UtenteDAO((DataSource) getServletContext().getAttribute("DataSource")).doUpdate(map, "email = '" + utente.getEmail() + "'");
                 session.setAttribute("user", utente);
+                System.out.println((Utente) session.getAttribute("user"));
                 session.setAttribute("msg-success", "Immagine caricata con successo");
 
             } catch (SQLException e) {
 
                 e.printStackTrace();
             }
+
+            response.sendRedirect(request.getContextPath() + "/utente?part=settings");
         }
-        response.sendRedirect(request.getContextPath() + "/utente?part=settings");
     }
 
     private String salvaImmagineRidimensionata(String fileName, File userProfilePicFolder, Part filePart) throws IOException {
 
         String[] splitted = fileName.split("\\.");
         String ext = splitted[splitted.length - 1];
-        String newPicPath = userProfilePicFolder.getPath() + "\\profile_pic." + ext;
-        //filePart.write(newPicPath);
+        String newPicPath = userProfilePicFolder.getPath() + File.separator + fileName;
 
         // Ridimensiono l'immagine a 360x360
         BufferedImage bufferedImage = ImageIO.read(filePart.getInputStream());
@@ -185,40 +192,36 @@ public class UtenteServlet extends HttpServlet {
         return newPicPath;
     }
 
-    private String trovaRinominaFile(String path, String[] ext) {
-
-        File[] files = new File[ext.length];
-
-        for (String s : ext) {
-
-            File f = new File(path + "\\profile_pic." + s);
-
-            if (f.exists()) {
-
-                f.renameTo(new File(path + "\\profile_pic_old." + s));
-                return path + "\\profile_pic_old." + s;
-            }
-        }
-        return null;
-    }
+//    private String trovaRinominaFile(File folder) {
+//
+//        File[] files = folder.listFiles();
+//
+//        for (String s : ext) {
+//
+//            File f = new File(path + "\\profile_pic." + s);
+//
+//            if (f.exists()) {
+//
+//                f.renameTo(new File(path + "\\profile_pic_old." + s));
+//                return path + "\\profile_pic_old." + s;
+//            }
+//        }
+//        return null;
+//    }
 
     private BufferedImage creaCopiaRidimensionata(BufferedImage image) {
-
         BufferedImage scaledBI = new BufferedImage(360, 360, image.getType());
         Graphics2D g = scaledBI.createGraphics();
         g.setComposite(AlphaComposite.Src);
         g.drawImage(image, 0, 0, 360, 360, null);
         g.dispose();
-
         return scaledBI;
     }
 
     private boolean controllaSeLoggato(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
         HttpSession session = request.getSession(false);
 
         if (session == null || session.getAttribute("user") == null) {
-
             response.sendRedirect(request.getContextPath() + "/");
             return false;
         }

@@ -35,6 +35,7 @@ public class Utente extends GenericBean implements Serializable, IEntity {
                 ", nome='" + nome + '\'' +
                 ", cognome='" + cognome + '\'' +
                 ", username='" + username + '\'' +
+                ",profile_pic='" + profile_pic + '\'' +
                 ", password_utente='" + password_utente + '\'' +
                 ", data_registrazione=" + data_registrazione +
                 ", ruolo=" + ruolo +
