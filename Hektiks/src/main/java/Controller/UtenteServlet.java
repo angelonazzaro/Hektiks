@@ -126,10 +126,7 @@ public class UtenteServlet extends HttpServlet {
                 //se l'utente non avava una propic la salvo per la prima volta
                 else {
 
-                    String[] splitted = fileName.split("\\.");
-                    String ext = splitted[splitted.length - 1];
-                    newPicPath = userProfilePicFolder.getPath() + "\\profile_pic." + ext;
-                    filePart.write(newPicPath);
+                    newPicPath = salvaImmagineRidimensionata(fileName, userProfilePicFolder, filePart);
                 }
 
             }
@@ -139,25 +136,19 @@ public class UtenteServlet extends HttpServlet {
                 //salvo file di backup
                 String oldFile = trovaRinominaFile(userProfilePicFolder.getPath(), new String[]{"jpeg", "jpg", "png"});
 
-                String[] splitted = fileName.split("\\.");
-                String ext = splitted[splitted.length - 1];
-                newPicPath = userProfilePicFolder.getPath() + "\\profile_pic." + ext;
-                filePart.write(newPicPath);
-                System.out.println("SALVO IL FILE: " + newPicPath);
+                newPicPath = salvaImmagineRidimensionata(fileName, userProfilePicFolder, filePart);
 
                 //cancello il file di backup
-                if(new File(newPicPath).exists())
-                    if(oldFile != null)
+                if (new File(newPicPath).exists()) {
+
+                    if (oldFile != null)
                         new File(oldFile).delete();
-                
-                else {
+                } else {
 
                     session.setAttribute("msg-error", "Errore durante il caricamento dell'immagine");
                     response.sendRedirect(request.getContextPath() + "/utente?part=settings");
                     return;
                 }
-
-
             }
 
             // serve aggiornare ogni volta anche se il path rimane uguale?? no angioletto ti apro il culo
@@ -176,38 +167,21 @@ public class UtenteServlet extends HttpServlet {
 
                 e.printStackTrace();
             }
-//
-//            File renamedPic = new File(renamedPath);
-//
-//            // Ridimensiono l'immagine a 360x360
-//            BufferedImage bufferedImage = ImageIO.read(newPic);
-//            ImageIO.write(creaCopiaRidimensionata(bufferedImage), ext, renamedPic);
-//
-//            if (renamedPic.exists()) {
-//                if (oldPic != null) {
-//                    if (!oldPic.delete()) {
-//                        renamedPic.delete();
-//                        session.setAttribute("msg-error", "Errore durante il caricamento dell'immagine");
-//                        response.sendRedirect(request.getContextPath() + "/utente?part=settings");
-//                        return;
-//                    }
-//                }
-//
-//                utente.setProfile_pic("/" + utente.getUsername() + "/" + "profile_pic." + ext);
-//                try {
-//                    HashMap<String, String> map = new HashMap<>();
-//                    map.put("profile_pic", utente.getProfile_pic());
-//                    new UtenteDAO((DataSource) getServletContext().getAttribute("DataSource")).doUpdate(map, "email = '" + utente.getEmail() + "'");
-//                    session.setAttribute("user", utente);
-//                    session.setAttribute("msg-success", "Immagine caricata con successo");
-//                } catch (SQLException e) {
-//                    throw new RuntimeException(e);
-//                }
-//            } else {
-//                newPic.delete();
-//                session.setAttribute("msg-error", "Errore durante il caricamento dell'immagine");
-//            }
         }
+    }
+
+    private String salvaImmagineRidimensionata(String fileName, File userProfilePicFolder, Part filePart) throws IOException {
+
+        String[] splitted = fileName.split("\\.");
+        String ext = splitted[splitted.length - 1];
+        String newPicPath = userProfilePicFolder.getPath() + "\\profile_pic." + ext;
+        //filePart.write(newPicPath);
+
+        // Ridimensiono l'immagine a 360x360
+        BufferedImage bufferedImage = ImageIO.read(filePart.getInputStream());
+        ImageIO.write(creaCopiaRidimensionata(bufferedImage), ext, new File(newPicPath));
+
+        return newPicPath;
     }
 
     private String trovaRinominaFile(String path, String[] ext) {
