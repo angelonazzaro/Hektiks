@@ -10,6 +10,7 @@ import Model.Prodotto_Ordine.Prodotto_Ordine;
 import Model.Prodotto_Ordine.Prodotto_OrdineDAO;
 import Model.Utente.Utente;
 import Model.Utente.UtenteDAO;
+import Utils.Logger.Logger;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,6 +29,9 @@ import java.util.Random;
 public class AcquistoServlet extends HttpServlet {
 
     protected synchronized void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        Logger.consoleLog(Logger.INFO, "ACQUISTO SERVLET DO POST");
+
         if (!controllaSeLoggato(request, response))  {
             response.sendRedirect(request.getContextPath() + "/");
             return;

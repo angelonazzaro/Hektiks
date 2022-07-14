@@ -62,7 +62,7 @@ if (login_registration_section !== null) {
         if (elem.value.length === 0) return;
 
         const pattern =
-            /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
+            /^(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,16}$/;
 
         if (!pattern.test(elem.value)) {
             elem.setCustomValidity(

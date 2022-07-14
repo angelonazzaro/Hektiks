@@ -8,6 +8,7 @@ import Model.Recensione.Recensione;
 import Model.Recensione.RecensioneDAO;
 import Model.Utente.Utente;
 import Model.Utente.UtenteDAO;
+import Utils.Logger.Logger;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.*;
@@ -21,6 +22,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,6 +34,9 @@ import java.util.List;
 
 public class UtenteServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+        Logger.consoleLog(Logger.INFO, "UTENTE SERVLET DO GET");
+
         if (!controllaSeLoggato(request, response)) return;
 
         String part = request.getParameter("part");
@@ -76,6 +81,9 @@ public class UtenteServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+        Logger.consoleLog(Logger.INFO, "UTENTE SERVLET DO POST");
+
         if (!controllaSeLoggato(request, response)) return;
 
         Part filePart = request.getPart("profile_pic");
@@ -83,10 +91,12 @@ public class UtenteServlet extends HttpServlet {
         Utente utente = (Utente) session.getAttribute("user");
 
         // L'utente ha effettivamente caricato un'immagine
+
         if (filePart != null) {
             String fileName = filePart.getSubmittedFileName();
+
             // Controllo che il file sia un'immagine
-            if (!fileName.endsWith("jpeg") && !fileName.endsWith("jpg") && !fileName.endsWith("png")) {
+            if (!fileName.endsWith(".jpeg") && !fileName.endsWith(".jpg") && !fileName.endsWith(".png")) {
                 session.setAttribute("msg-error", "Il file caricato non è un'immagine");
                 response.sendRedirect(request.getContextPath() + "/utente?part=settings");
                 return;
@@ -99,75 +109,120 @@ public class UtenteServlet extends HttpServlet {
             }
 
             String appPath = request.getServletContext().getRealPath("/");
+            String newPicPath;
+
             File userProfilePicFolder = new File(appPath + "/assets/uploads/users/" + utente.getUsername());
 
-            System.out.println(userProfilePicFolder.getPath());
-            System.out.println(userProfilePicFolder.exists());
-
+            //se non ha un folder per l'utente, lo creo
             if (!userProfilePicFolder.exists()) {
+
                 if (!userProfilePicFolder.mkdir()) {
+
+                    session.setAttribute("msg-error", "Errore durante il caricamento dell'immagine");
+                    response.sendRedirect(request.getContextPath() + "/utente?part=settings");
+
+                    return;
+                }
+                //se l'utente non avava una propic la salvo per la prima volta
+                else {
+
+                    String ext = fileName.split("\\.")[1];
+                    newPicPath = userProfilePicFolder.getPath() + "\\profile_pic." + ext;
+                    filePart.write(newPicPath);
+                }
+
+            }
+            // se l'utente aveva già un'immagine
+            else {
+
+                //salvo file di backup
+                String oldFile = trovaRinominaFile(userProfilePicFolder.getPath(), new String[]{"jpeg", "jpg", "png"});
+
+                String ext = fileName.split("\\.")[1];
+                newPicPath = userProfilePicFolder.getPath() + "\\profile_pic." + ext;
+                filePart.write(newPicPath);
+
+                //cancello il file di backup
+                if(new File(newPicPath).exists())
+                    if(oldFile != null)
+                        new File(oldFile).delete();
+
+                //Todo: rollback in caso di immagine incompatibile
+                else {
+
                     session.setAttribute("msg-error", "Errore durante il caricamento dell'immagine");
                     response.sendRedirect(request.getContextPath() + "/utente?part=settings");
                     return;
                 }
+
+
             }
 
-            File[] files = userProfilePicFolder.listFiles(); // Conterrà sempre e solo un file
-            File oldPic = null;
+            // serve aggiornare ogni volta anche se il path rimane uguale?? no angioletto ti apro il culo
+            response.sendRedirect(request.getContextPath() + "/utente?part=settings");
+            utente.setProfile_pic("/" + utente.getUsername() + "/" + "profile_pic." + newPicPath.substring(newPicPath.lastIndexOf(".") + 1));
 
-            // userProfilePicFolder è una directory
-            if (files != null && files.length > 0) {
-                oldPic = files[0];
+            try {
+
+                HashMap<String, String> map = new HashMap<>();
+                map.put("profile_pic", utente.getProfile_pic());
+                new UtenteDAO((DataSource) getServletContext().getAttribute("DataSource")).doUpdate(map, "email = '" + utente.getEmail() + "'");
+                session.setAttribute("user", utente);
+                session.setAttribute("msg-success", "Immagine caricata con successo");
+
+            } catch (SQLException e) {
+
+                e.printStackTrace();
             }
+//
+//            File renamedPic = new File(renamedPath);
+//
+//            // Ridimensiono l'immagine a 360x360
+//            BufferedImage bufferedImage = ImageIO.read(newPic);
+//            ImageIO.write(creaCopiaRidimensionata(bufferedImage), ext, renamedPic);
+//
+//            if (renamedPic.exists()) {
+//                if (oldPic != null) {
+//                    if (!oldPic.delete()) {
+//                        renamedPic.delete();
+//                        session.setAttribute("msg-error", "Errore durante il caricamento dell'immagine");
+//                        response.sendRedirect(request.getContextPath() + "/utente?part=settings");
+//                        return;
+//                    }
+//                }
+//
+//                utente.setProfile_pic("/" + utente.getUsername() + "/" + "profile_pic." + ext);
+//                try {
+//                    HashMap<String, String> map = new HashMap<>();
+//                    map.put("profile_pic", utente.getProfile_pic());
+//                    new UtenteDAO((DataSource) getServletContext().getAttribute("DataSource")).doUpdate(map, "email = '" + utente.getEmail() + "'");
+//                    session.setAttribute("user", utente);
+//                    session.setAttribute("msg-success", "Immagine caricata con successo");
+//                } catch (SQLException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            } else {
+//                newPic.delete();
+//                session.setAttribute("msg-error", "Errore durante il caricamento dell'immagine");
+//            }
+        }
+    }
 
-            String newPicPath = userProfilePicFolder.getPath() + "/" + fileName;
-            filePart.write(newPicPath);
-            String ext = fileName.split("\\.")[1];
-            String renamedPath = userProfilePicFolder.getPath() + "/" + "profile_pic." + ext;
-            File newPic = new File(newPicPath);
+    private String trovaRinominaFile(String path, String[] ext) {
 
-            if (oldPic != null && oldPic.getName().equals("profile_pic." + ext)) {
-                if (!oldPic.delete()) {
-                    newPic.delete();
-                    session.setAttribute("msg-error", "Errore durante il caricamento dell'immagine");
-                    response.sendRedirect(request.getContextPath() + "/utente?part=settings");
-                    return;
-                }
-            }
+        File[] files = new File[ext.length];
 
-            File renamedPic = new File(renamedPath);
+        for (String s : ext) {
 
-            // Ridimensiono l'immagine a 360x360
-            BufferedImage bufferedImage = ImageIO.read(newPic);
-            ImageIO.write(creaCopiaRidimensionata(bufferedImage), ext, renamedPic);
+            File f = new File(path + "\\profile_pic." + s);
 
-            if (renamedPic.exists()) {
-                if (oldPic != null) {
-                    if (!oldPic.delete()) {
-                        renamedPic.delete();
-                        session.setAttribute("msg-error", "Errore durante il caricamento dell'immagine");
-                        response.sendRedirect(request.getContextPath() + "/utente?part=settings");
-                        return;
-                    }
-                }
+            if (f.exists()) {
 
-                utente.setProfile_pic("/" + utente.getUsername() + "/" + "profile_pic." + ext);
-                try {
-                    HashMap<String, String> map = new HashMap<>();
-                    map.put("profile_pic", utente.getProfile_pic());
-                    new UtenteDAO((DataSource) getServletContext().getAttribute("DataSource")).doUpdate(map, "email = '" + utente.getEmail() + "'");
-                    session.setAttribute("user", utente);
-                    session.setAttribute("msg-success", "Immagine caricata con successo");
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            } else {
-                newPic.delete();
-                session.setAttribute("msg-error", "Errore durante il caricamento dell'immagine");
+                f.renameTo(new File(path + "\\profile_pic_old." + s));
+                return path + "\\profile_pic_old." + s;
             }
         }
-
-        response.sendRedirect(request.getContextPath() + "/utente?part=settings");
+        return null;
     }
 
     private BufferedImage creaCopiaRidimensionata(BufferedImage image) {
