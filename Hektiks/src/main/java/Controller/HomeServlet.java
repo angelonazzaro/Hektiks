@@ -65,6 +65,7 @@ public class HomeServlet extends HttpServlet {
         if (action == null || (!action.equals("register") && !action.equals("login"))) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             response.sendRedirect(request.getContextPath() + "/ErrorHandlerServlet");
+            return;
         }
 
         String email = request.getParameter("email"), password = request.getParameter("password");
