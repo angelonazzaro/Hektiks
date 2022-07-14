@@ -59,6 +59,8 @@ if (login_registration_section !== null) {
 
     // Verifica se le due password corrispondono. L'esecuzione della funzione è ritardata tramite il debounce
     const match_password_regex = (elem) => {
+
+        console.log("ciao")
         if (elem.value.length === 0) return;
 
         const pattern =

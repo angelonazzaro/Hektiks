@@ -143,6 +143,7 @@ public class UtenteServlet extends HttpServlet {
 
                     if (oldFile != null)
                         new File(oldFile).delete();
+
                 } else {
 
                     session.setAttribute("msg-error", "Errore durante il caricamento dell'immagine");
@@ -152,7 +153,6 @@ public class UtenteServlet extends HttpServlet {
             }
 
             // serve aggiornare ogni volta anche se il path rimane uguale?? no angioletto ti apro il culo
-            response.sendRedirect(request.getContextPath() + "/utente?part=settings");
             utente.setProfile_pic("/" + utente.getUsername() + "/" + "profile_pic." + newPicPath.substring(newPicPath.lastIndexOf(".") + 1));
 
             try {
@@ -168,6 +168,7 @@ public class UtenteServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
+        response.sendRedirect(request.getContextPath() + "/utente?part=settings");
     }
 
     private String salvaImmagineRidimensionata(String fileName, File userProfilePicFolder, Part filePart) throws IOException {
@@ -202,18 +203,22 @@ public class UtenteServlet extends HttpServlet {
     }
 
     private BufferedImage creaCopiaRidimensionata(BufferedImage image) {
+
         BufferedImage scaledBI = new BufferedImage(360, 360, image.getType());
         Graphics2D g = scaledBI.createGraphics();
         g.setComposite(AlphaComposite.Src);
         g.drawImage(image, 0, 0, 360, 360, null);
         g.dispose();
+
         return scaledBI;
     }
 
     private boolean controllaSeLoggato(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
         HttpSession session = request.getSession(false);
 
         if (session == null || session.getAttribute("user") == null) {
+
             response.sendRedirect(request.getContextPath() + "/");
             return false;
         }
