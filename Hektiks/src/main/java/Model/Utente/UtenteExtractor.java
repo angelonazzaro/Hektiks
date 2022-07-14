@@ -25,7 +25,6 @@ public class UtenteExtractor implements ResultSetExtractor<Utente> {
         utente.setRuolo(resultSet.getBoolean(UTENTI + ".ruolo"));
         utente.setSaldo(resultSet.getDouble(UTENTI + ".saldo"));
         utente.setProfile_pic(resultSet.getString(UTENTI + ".profile_pic"));
-        utente.setBiografia(resultSet.getString(UTENTI + ".biografia"));
 
         if (tables.length > 0) {
             utente.setJoin(new ArrayList<>());

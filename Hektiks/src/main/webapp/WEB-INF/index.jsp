@@ -17,7 +17,7 @@
 <div class="wrapper">
     <div class="main-content">
         <% if (pagePath != null) { %>
-        <jsp:include page="<%= pagePath %>" />
+            <jsp:include page="<%= pagePath %>" />
         <% } else { %>
         <% List<Gioco> giochiDelMomento = (List<Gioco>) request.getAttribute("giochiDelMomento"); %>
         <% List<Gioco> bestSellers = (List<Gioco>) request.getAttribute("bestSellers"); %>

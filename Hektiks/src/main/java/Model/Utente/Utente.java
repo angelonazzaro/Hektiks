@@ -28,8 +28,6 @@ public class Utente extends GenericBean implements Serializable, IEntity {
 
     private String profile_pic = "";
 
-    private String biografia = "";
-
     @Override
     public String toString() {
         return "Utente{" +
@@ -41,7 +39,6 @@ public class Utente extends GenericBean implements Serializable, IEntity {
                 ", data_registrazione=" + data_registrazione +
                 ", ruolo=" + ruolo +
                 ", saldo=" + saldo +
-                ", biografia='" + biografia + '\'' +
                 '}';
     }
 
@@ -58,7 +55,6 @@ public class Utente extends GenericBean implements Serializable, IEntity {
                 put("data_registrazione", data_registrazione.toString());
                 put("ruolo", ruolo);
                 put("saldo", saldo);
-                put("biografia", biografia);
             }
         };
     }
@@ -135,14 +131,6 @@ public class Utente extends GenericBean implements Serializable, IEntity {
 
     public void setSaldo(double saldo) {
         this.saldo = saldo;
-    }
-
-    public String getBiografia() {
-        return biografia;
-    }
-
-    public void setBiografia(String biografia) {
-        this.biografia = biografia;
     }
 
     public String getProfile_pic() {

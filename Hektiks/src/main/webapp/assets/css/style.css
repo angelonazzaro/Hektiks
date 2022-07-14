@@ -8,4 +8,11 @@
 @import "./components/utente/_ordini.css";
 @import "./components/footer/_footer.css";
 
+.settings-wrapper {
+    color: white;
+}
 
+.settings-container {
+    margin-top: 2rem;
+    width: 100%;
+}

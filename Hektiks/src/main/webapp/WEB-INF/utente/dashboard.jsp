@@ -33,17 +33,17 @@
 </div>
 <div class="breadcrumb text">
     <ul class="user-links">
-        <li class="user-link active"><a href="#">
+        <li class="user-link <%= partPath == null ? "active" : "" %>"><a href="#">
             Dashboard</a>
         </li>
-        <% if (user.isRuolo()) {%>
-            <li class="user-link"><a href="#">Admin</a></li>
+        <% if (user.isRuolo()) { %>
+            <li class="user-link  <%= partPath != null && partPath.contains("admin") ? "active" : "" %>"><a href="#">Admin</a></li>
         <% } %>
-        <li class="user-link"><a href="<%= request.getContextPath() %>/utente?part=orders">I miei ordini</a></li>
+        <li class="user-link <%= partPath != null && partPath.contains("orders") ? "active" : "" %>"><a href="<%= request.getContextPath() %>/utente?part=orders">I miei ordini</a></li>
         <li class="user-link"><a href="<%= request.getContextPath() %>/logout">Logout</a></li>
     </ul>
     <div class="user-settings-preview">
-        <a href="#" class="user-link"><i class="fas fa-cog"></i>
+        <a href="<%= request.getContextPath() %>/utente?part=settings" class="user-link <%= partPath != null && partPath.contains("settings") ? "active" : "" %>"><i class="fas fa-cog"></i>
             Impostazioni</a>
     </div>
 </div>
@@ -55,7 +55,7 @@
     <% double totaleSpeso = (Double) request.getAttribute("totaleSpeso"); %>
 
     <div class="user-overview">
-        <div class="dashboard-content">
+        <div class="dashboard-content dashboard-container">
             <div class="overview-card dashboard-card">
                 <div class="dashboard-card-header">
                     <img src="<%= request.getContextPath() %>/assets/images/icons/icon-dashboard.svg" alt="dashboard icon">
@@ -120,61 +120,6 @@
             </div>
         </div>
     </div>
-<% } else if (partPath.equals("orders")) { %>
-
-    <% List<Ordine> ordini = (List<Ordine>) request.getAttribute("ordini"); %>
-    <% Prodotto_OrdineDAO prodotto_ordineDAO = (Prodotto_OrdineDAO) request.getAttribute("prodottoOrdineDAO"); %>
-    <% GiocoDAO giocoDAO = (GiocoDAO) request.getAttribute("giocoDAO"); %>
-
-    <div class="orders-wrapper">
-        <h1 class="hs-3">I miei ordini</h1>
-
-        <% if (ordini.size() > 0) { %>
-        <div class="orders-container">
-            <% for (Ordine ordine : ordini) { %>
-            <div class="order">
-                <% try {
-                    Gioco gioco;
-                    PrintWriter writer = response.getWriter();
-                    List<Prodotto_Ordine> prodottoOrdini = prodotto_ordineDAO.doRetrieveByCondition("codice_ordine = '" + ordine.getCodice_ordine() + "'");
-                    for (Prodotto_Ordine prodottoOrdine : prodottoOrdini) {
-                        gioco = giocoDAO.doRetrieveByKey(prodottoOrdine.getCodice_gioco());
-                        out.write(
-                                "<div class='game-order'>" +
-                                        "<div class='game-info'>" +
-                                        "<img src='" + gioco.getCopertina() + "' alt='" + gioco.getTitolo() + "- Copertina' />" +
-                                        "<div>" +
-                                        "<p class='text'>" + gioco.getTitolo() + "</p>" +
-                                        "<br>" +
-                                        "<p class='text'>Quantità:" + prodottoOrdine.getQuantita() + "</p>" +
-                                        "</div>" +
-                                        "</div>" +
-                                        "<div class='game-price'>" +
-                                        "<p class='text'>" + String.format("%.2f€", prodottoOrdine.getQuantita() * prodottoOrdine.getPrezzo()) + "</p>" +
-                                        "</div>" +
-                                        "</div>" +
-                                        "<hr class='game-order-separator' />");
-                    }
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                } %>
-                <div class="order-total">
-                    <p class="hs-4">Totale</p>
-                    <p class="hs-4"><%= String.format("%.2f€", ordine.getPrezzo_totale())%></p>
-                </div>
-                <ul class="order-info text">
-                    <li>Ordine #<%= ordine.getCodice_ordine() %></li>
-                    <li><%= new SimpleDateFormat("dd MMMMMMMMMM yyyy HH:mm:ss").format(ordine.getData_ora_ordinazione()) %></li>
-                </ul>
-            </div>
-            <% } %>
-        </div>
-        <% } else { %>
-            <div style="width: 100%; margin-top: 2rem; text-align: center;">
-                <h1 class="hs-3" style="color: white;">Non hai effettutato nessun ordine.</h1>
-            </div>
-        <% } %>
-
-
-    </div>
+<% } else { %>
+    <jsp:include page="<%= partPath %>" />
 <% } %>
