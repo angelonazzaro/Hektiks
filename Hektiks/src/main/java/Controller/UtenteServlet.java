@@ -126,7 +126,8 @@ public class UtenteServlet extends HttpServlet {
                 //se l'utente non avava una propic la salvo per la prima volta
                 else {
 
-                    String ext = fileName.split("\\.")[1];
+                    String[] splitted = fileName.split("\\.");
+                    String ext = splitted[splitted.length - 1];
                     newPicPath = userProfilePicFolder.getPath() + "\\profile_pic." + ext;
                     filePart.write(newPicPath);
                 }
@@ -138,7 +139,8 @@ public class UtenteServlet extends HttpServlet {
                 //salvo file di backup
                 String oldFile = trovaRinominaFile(userProfilePicFolder.getPath(), new String[]{"jpeg", "jpg", "png"});
 
-                String ext = fileName.split("\\.")[1];
+                String[] splitted = fileName.split("\\.");
+                String ext = splitted[splitted.length - 1];
                 newPicPath = userProfilePicFolder.getPath() + "\\profile_pic." + ext;
                 filePart.write(newPicPath);
                 System.out.println("SALVO IL FILE: " + newPicPath);
@@ -147,8 +149,7 @@ public class UtenteServlet extends HttpServlet {
                 if(new File(newPicPath).exists())
                     if(oldFile != null)
                         new File(oldFile).delete();
-
-                //Todo: rollback in caso di immagine incompatibile
+                
                 else {
 
                     session.setAttribute("msg-error", "Errore durante il caricamento dell'immagine");
