@@ -141,6 +141,7 @@ public class UtenteServlet extends HttpServlet {
                 String ext = fileName.split("\\.")[1];
                 newPicPath = userProfilePicFolder.getPath() + "\\profile_pic." + ext;
                 filePart.write(newPicPath);
+                System.out.println("SALVO IL FILE: " + newPicPath);
 
                 //cancello il file di backup
                 if(new File(newPicPath).exists())
