@@ -1,3 +1,4 @@
+// Riscatto la giftcard,  si potrebbe anche togliere perchè le notifiche le gestiamo tramite la sessione adesso
 $("#giftcard-form").submit(function (e) {
     e.preventDefault();
 

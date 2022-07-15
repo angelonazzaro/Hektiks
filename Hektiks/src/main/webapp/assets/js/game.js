@@ -6,6 +6,7 @@ const subinfos = game_card.querySelector(".subinfos > p");
 
 add_to_cart_btn.addEventListener("click", () => {
 
+    // Se la quantità disponibile è 0, non posso più aggiungere al carrello
     if (add_to_cart_btn.dataset.quantity === "0") {
         subinfos.classList.remove("tick");
         subinfos.classList.add("cross");
@@ -14,6 +15,7 @@ add_to_cart_btn.addEventListener("click", () => {
         return;
     }
 
+    // Aggiungo l'elemento al carrello e aggiorno il conteggio
     $.ajax({
         url: base_url() + "/carrello",
         method: "POST",

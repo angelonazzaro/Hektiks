@@ -23,7 +23,7 @@
 <div class="user-general-info">
     <div class="user-card">
         <div class="user-card-header">
-            <img src="<%= profile_pic %>" alt="<%= user.getUsername() %> immagine profilo">
+            <img src="<%= profile_pic %>?time=<%=System.currentTimeMillis()%>" alt="<%= user.getUsername() %> immagine profilo">
         </div>
         <div class="user-card-body">
             <p class="hs-4" style="font-weight: bold; color: white; margin-bottom: 0.5rem"><%= user.getUsername() %></p>

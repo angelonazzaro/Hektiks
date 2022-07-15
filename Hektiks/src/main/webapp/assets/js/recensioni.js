@@ -1,3 +1,4 @@
+// Aggiungo la recensione,  si potrebbe anche togliere perchè le notifiche le gestiamo tramite la sessione adesso
 $("#recensioni-form").submit(function (e) {
     e.preventDefault();
 

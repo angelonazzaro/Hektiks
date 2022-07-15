@@ -1,3 +1,4 @@
+// Serve per ritardare l'esecuzione di una funzione
 function debounce(cb, delay = 1000) {
     let timeout;
 
@@ -16,6 +17,7 @@ const login_registration_section = document.getElementById(
     "login-registration-section"
 );
 
+// Esegui tutto questo blocco di codice solo se l'utente non è loggato
 if (login_registration_section !== null) {
     burger.addEventListener("click", () => {
         burger.classList.toggle("active");
@@ -57,14 +59,14 @@ if (login_registration_section !== null) {
         "input[name=confirm-password]"
     );
 
-    // Verifica se le due password corrispondono. L'esecuzione della funzione è ritardata tramite il debounce
+    // Verifica se le due password corrispondono.
     const match_password_regex = (elem) => {
-        if (elem.value.length === 0) return;
+        if (elem.value.length === 0) return false;
 
         const pattern =
             /^(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,16}$/;
 
-        if (!pattern.test(elem.value)) {
+        if (!(pattern.test(elem.value))) {
             elem.setCustomValidity(
                 "La password deve essere lunga almeno 8 caratteri e massimo 16.\n" +
                 "\nDeve contenere almeno: \n- 1 numero\n- 1 lettera maiuscola\n- 1 lettera minuscola\n- 1 carattere speciale"
@@ -77,34 +79,55 @@ if (login_registration_section !== null) {
     };
 
     const match_password_value = (first, second) => {
-        if (first.value.length === 0 || second.value.length === 0) return;
+        if (first.value.length === 0 || second.value.length === 0) return false;
 
-        if (first.value !== second.value)
+        let matches;
+
+        console.log(first.value);
+        console.log(second.value);
+
+        console.log(first.value === second.value);
+
+        if ((matches = first.value !== second.value))
             second.setCustomValidity("Le password non corrispondono.");
         else second.setCustomValidity("");
 
         second.reportValidity();
+        console.log(matches + " value");
+
+        return !matches;
     };
 
     const match_password_regex_debounce = debounce((elem) =>
         match_password_regex(elem)
     );
+
     const match_password_value_debounce = debounce((first, second) =>
         match_password_value(first, second)
     );
 
     password.addEventListener("input", () => {
         match_password_regex_debounce(password);
-        match_password_value_debounce(password, confirm_password);
     });
 
     confirm_password.addEventListener("input", () => {
-        match_password_regex_debounce(confirm_password);
         match_password_value_debounce(password, confirm_password);
     });
 
+    // La richiesta ajax viene effettuata per mostrare la notifica, si potrebbe anche togliere dato che
+    // adesso la gestiamo in un altro modo
     $(".login-registration-form").on("submit", function (e) {
         e.preventDefault();
+        console.log("pesce rosso");
+
+        // Se ritorna vero, non inviamo la richiesta
+        if (!match_password_value(password, confirm_password)) {
+            console.log(match_password_value(password, confirm_password))
+            console.log("mannaggia cristo");
+            return;
+        }
+
+        console.log("cristo porco")
 
         const submit_btn = $(this).find("button[type=submit]").first();
         submit_btn.prop("disabled", true); // L'utente non può effettuare più richieste fin quando quella in corso non è finita.
@@ -152,7 +175,7 @@ password_icons.forEach((icon) => {
 });
 
 const profile_pic = document.getElementById("profile-pic");
-
+// Clicchi sull'immagine utente e ti porta alla pagina dell'utente
 if (profile_pic !== null)
     profile_pic.addEventListener("click", () => window.location.href = base_url() + "/utente");
 
@@ -162,6 +185,7 @@ const update_cart_caret = (quantity) => {
     cart_caret.textContent = quantity;
 }
 
+// Restituisce l'url base dell'applicazione, come il request.getContextPath()
 const base_url = () => {
 
     const base_url = window.location.origin;
@@ -175,7 +199,6 @@ const base_url = () => {
 
 const current_page = $(".main-content");
 const current_page_content = current_page.html();
-
 const search_bar = document.querySelector(".search-bar > input");
 
 const search = debounce((value) => {
@@ -207,6 +230,7 @@ const search = debounce((value) => {
             return;
         }
 
+        // Creo il nuovo contenuto della pagina
         let content = `<div class="products-container"><div class="products-content">`;
 
         for (const gioco of giochi) {
@@ -249,12 +273,15 @@ search_bar.addEventListener("input", () => {
 });
 
 /* MODAL */
-$("[data-toggle='modal']").click(function() {
+
+// Mostro il modello e rendo il body non scrollable
+$("[data-toggle='modal']").click(function () {
     $(`${$(this).attr('data-target')}`).fadeToggle();
     document.body.classList.toggle("no-scroll");
 });
 
-$(".modal-header > .close").click(function() {
+// Tolgo il modello e rendo il body scrollable
+$(".modal-header > .close").click(function () {
     $(`${$(this).attr('data-target')}`).fadeOut();
     document.body.classList.toggle("no-scroll");
 })
