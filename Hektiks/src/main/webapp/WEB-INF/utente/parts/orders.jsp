@@ -48,7 +48,7 @@
                                     "<hr class='game-order-separator' />");
                 }
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             } %>
             <div class="order-total">
                 <p class="hs-4">Totale</p>

@@ -57,7 +57,7 @@ public class RecensioneServlet extends HttpServlet {
             request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
 
     }
@@ -103,7 +103,7 @@ public class RecensioneServlet extends HttpServlet {
 
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
 
         Timestamp date = new Timestamp(System.currentTimeMillis());
@@ -125,7 +125,7 @@ public class RecensioneServlet extends HttpServlet {
 
             out.write(gson.toJson(new JSONResponse<String>("success", "Recensione lasciata!")));
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 }

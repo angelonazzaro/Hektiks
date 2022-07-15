@@ -9,6 +9,7 @@ import Model.Recensione.RecensioneDAO;
 import Model.Utente.Utente;
 import Model.Utente.UtenteDAO;
 import Utils.Logger.Logger;
+import Utils.PasswordEncrypt;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.*;
@@ -19,16 +20,11 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024, // 1 MB
@@ -37,8 +33,6 @@ import java.util.regex.Pattern;
 )
 
 public class UtenteServlet extends HttpServlet {
-
-    private static final Pattern pattern = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,16}$");
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
@@ -64,7 +58,7 @@ public class UtenteServlet extends HttpServlet {
                 request.setAttribute("totaleSpeso", totaleSpeso);
 
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
         } else if (part.equals("orders")) {
             try {
@@ -74,7 +68,7 @@ public class UtenteServlet extends HttpServlet {
                 request.setAttribute("part", "parts/orders.jsp");
 
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
         } else if (part.equals("settings")) {
             request.setAttribute("part", "parts/settings.jsp");
@@ -200,33 +194,21 @@ public class UtenteServlet extends HttpServlet {
 
         if (password != null && !password.equals("")) {
 
-            if (!pattern.matcher(password).matches()) {
+            if (!password.matches("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}")) {
                 session.setAttribute("msg-error", "La password non rispetta i requisti");
                 response.sendRedirect(request.getContextPath() + "/utente?part=settings");
                 return;
             }
 
-            // Crittazione
-            try {
-                MessageDigest digest =
-                        MessageDigest.getInstance("SHA-1");
-                digest.reset();
-                digest.update(password.getBytes(StandardCharsets.UTF_8));
-                password = String.format("%040x", new
-                        BigInteger(1, digest.digest()));
-            } catch (NoSuchAlgorithmException e) {
-                throw new RuntimeException(e);
-            }
-
             utente.setPassword_utente(password);
         }
-
         try {
 
             HashMap<String, String> map = new HashMap<>();
             map.put("profile_pic", utente.getProfile_pic());
             map.put("username", utente.getUsername());
             map.put("email", utente.getEmail());
+            System.out.println("PASSWORD: " + utente.getPassword_utente());
             map.put("password_utente", utente.getPassword_utente());
             utenteDAO.doUpdate(map, "email = '" + currentEmail + "'");
 
@@ -249,8 +231,9 @@ public class UtenteServlet extends HttpServlet {
 
             return utenti == null || utenti.size() == 0;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
+        return false;
     }
 
     private String salvaImmagineRidimensionata(String fileName, File userProfilePicFolder, Part filePart) throws IOException {
@@ -267,6 +250,7 @@ public class UtenteServlet extends HttpServlet {
     }
 
     private BufferedImage creaCopiaRidimensionata(BufferedImage image) {
+
         BufferedImage scaledBI = new BufferedImage(360, 360, image.getType());
         Graphics2D g = scaledBI.createGraphics();
         g.setComposite(AlphaComposite.Src);
@@ -276,6 +260,7 @@ public class UtenteServlet extends HttpServlet {
     }
 
     private boolean controllaSeLoggato(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
         HttpSession session = request.getSession(false);
 
         if (session == null || session.getAttribute("user") == null) {

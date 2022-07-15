@@ -69,7 +69,7 @@ public class AcquistoServlet extends HttpServlet {
                     prezzoTotale += prezzoGioco * carrello.get(key);
                     giochiDaAcquistare.add(gioco);
                 } catch (SQLException e) {
-                    e.printStackTrace();
+                    throw new RuntimeException(e);
                 }
             }
         } else {
@@ -85,7 +85,7 @@ public class AcquistoServlet extends HttpServlet {
 
                 giochiDaAcquistare.add(gioco);
             } catch (SQLException e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
         }
 
@@ -109,7 +109,7 @@ public class AcquistoServlet extends HttpServlet {
                 codice_ordine = generaCodiceOrdine();
             } while (ordineDAO.doRetrieveByKey(utente.getEmail(), codice_ordine) != null);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
         ordine.setCodice_ordine(codice_ordine);
@@ -170,7 +170,7 @@ public class AcquistoServlet extends HttpServlet {
                 response.sendRedirect(request.getRequestURI());
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 

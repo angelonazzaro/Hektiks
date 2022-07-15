@@ -2,6 +2,7 @@ package Model.Utente;
 
 import Model.Storage.GenericBean;
 import Model.Storage.IEntity;
+import Utils.PasswordEncrypt;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -99,12 +100,8 @@ public class Utente extends GenericBean implements Serializable, IEntity {
     public void setPassword_utente(String password_utente) {
 
         try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-1");
-            digest.reset();
-            digest.update(password_utente.getBytes(StandardCharsets.UTF_8));
-            this.password_utente = password_utente;
-            this.password_utente = String.format("%040x", new
-                    BigInteger(1, digest.digest()));
+            this.password_utente = PasswordEncrypt.sha1(password_utente);
+
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
