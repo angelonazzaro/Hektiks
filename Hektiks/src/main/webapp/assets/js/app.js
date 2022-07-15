@@ -118,16 +118,12 @@ if (login_registration_section !== null) {
     // adesso la gestiamo in un altro modo
     $(".login-registration-form").on("submit", function (e) {
         e.preventDefault();
-        console.log("pesce rosso");
 
         // Se ritorna vero, non inviamo la richiesta
         if (!match_password_value(password, confirm_password)) {
             console.log(match_password_value(password, confirm_password))
-            console.log("mannaggia cristo");
             return;
         }
-
-        console.log("cristo porco")
 
         const submit_btn = $(this).find("button[type=submit]").first();
         submit_btn.prop("disabled", true); // L'utente non può effettuare più richieste fin quando quella in corso non è finita.
