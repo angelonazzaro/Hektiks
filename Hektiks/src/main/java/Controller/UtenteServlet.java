@@ -19,12 +19,16 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024, // 1 MB
@@ -33,6 +37,9 @@ import java.util.List;
 )
 
 public class UtenteServlet extends HttpServlet {
+
+    private static final Pattern pattern = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,16}$");
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         Logger.consoleLog(Logger.INFO, "UTENTE SERVLET DO GET");
@@ -86,13 +93,15 @@ public class UtenteServlet extends HttpServlet {
 
         if (!controllaSeLoggato(request, response)) return;
 
-        Part filePart = request.getPart("profile_pic");
         HttpSession session = request.getSession(false);
         Utente utente = (Utente) session.getAttribute("user");
+        UtenteDAO utenteDAO = new UtenteDAO((DataSource) getServletContext().getAttribute("DataSource"));
 
-        // L'utente ha effettivamente caricato un'immagine
+        /* IMMAGINE PROFILO START */
+        Part filePart = request.getPart("profile_pic");
 
-        if (filePart != null) {
+        // L'utente ha effettivamente caricato un'file
+        if (filePart != null && filePart.getSize() > 0) {
             String fileName = filePart.getSubmittedFileName();
 
             // Controllo che il file sia un'immagine
@@ -118,15 +127,14 @@ public class UtenteServlet extends HttpServlet {
 
                 if (!userProfilePicFolder.mkdir()) {
 
-                    session.setAttribute("msg-error", "Errore durante il caricamento dell'immagine");
+                    session.setAttribute("msg-error", "Errore durante l'aggiornamento del profilo!");
                     response.sendRedirect(request.getContextPath() + "/utente?part=settings");
 
                     return;
                 }
                 //se l'utente non aveva una propic la salvo per la prima volta
                 else {
-
-                    newPicPath = salvaImmagineRidimensionata(fileName, userProfilePicFolder, filePart);
+                    salvaImmagineRidimensionata(fileName, userProfilePicFolder, filePart);
                 }
 
             }
@@ -153,29 +161,95 @@ public class UtenteServlet extends HttpServlet {
                         oldFile.delete();
                 } else {
 
-                    session.setAttribute("msg-error", "Errore durante il caricamento dell'immagine");
+                    session.setAttribute("msg-error", "Errore durante l'aggiornamento del profilo!");
                     response.sendRedirect(request.getContextPath() + "/utente?part=settings");
                     return;
                 }
             }
 
             utente.setProfile_pic("/" + utente.getUsername() + "/" + fileName);
+        }
+        /*IMMAGINE PROFILO END */
 
-            try {
+        String username = request.getParameter("username");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        // Serve per aggiornare l'utente nel db
+        String currentEmail = utente.getEmail();
 
-                HashMap<String, String> map = new HashMap<>();
-                map.put("profile_pic", utente.getProfile_pic());
-                new UtenteDAO((DataSource) getServletContext().getAttribute("DataSource")).doUpdate(map, "email = '" + utente.getEmail() + "'");
-                session.setAttribute("user", utente);
-                System.out.println((Utente) session.getAttribute("user"));
-                session.setAttribute("msg-success", "Immagine caricata con successo");
+        // Controllo che lo username non sia già in uso da un altro utente
+        if (username != null && !username.equals("")) {
+            if (!controllaValiditaCampi("username", username, currentEmail, utenteDAO)) {
+                session.setAttribute("msg-error", "Lo username è già in uso");
+                response.sendRedirect(request.getContextPath() + "/utente?part=settings");
+                return;
+            } else {
+                utente.setUsername(username);
+            }
+        }
 
-            } catch (SQLException e) {
+        if (email != null && !email.equals("")) {
+            if (!controllaValiditaCampi("email", email, currentEmail, utenteDAO)) {
+                session.setAttribute("msg-error", "L'email è già in uso");
+                response.sendRedirect(request.getContextPath() + "/utente?part=settings");
+                return;
+            } else {
+                utente.setEmail(email);
+            }
+        }
 
-                e.printStackTrace();
+        if (password != null && !password.equals("")) {
+
+            if (!pattern.matcher(password).matches()) {
+                session.setAttribute("msg-error", "La password non rispetta i requisti");
+                response.sendRedirect(request.getContextPath() + "/utente?part=settings");
+                return;
             }
 
-            response.sendRedirect(request.getContextPath() + "/utente?part=settings");
+            // Crittazione
+            try {
+                MessageDigest digest =
+                        MessageDigest.getInstance("SHA-1");
+                digest.reset();
+                digest.update(password.getBytes(StandardCharsets.UTF_8));
+                password = String.format("%040x", new
+                        BigInteger(1, digest.digest()));
+            } catch (NoSuchAlgorithmException e) {
+                throw new RuntimeException(e);
+            }
+
+            utente.setPassword_utente(password);
+        }
+
+        try {
+
+            HashMap<String, String> map = new HashMap<>();
+            map.put("profile_pic", utente.getProfile_pic());
+            map.put("username", utente.getUsername());
+            map.put("email", utente.getEmail());
+            map.put("password_utente", utente.getPassword_utente());
+            utenteDAO.doUpdate(map, "email = '" + currentEmail + "'");
+
+            session.setAttribute("user", utente);
+            session.setAttribute("msg-success", "Profilo aggiornato con successo!");
+
+        } catch (SQLException e) {
+            session.setAttribute("msg-error", "Errore durante l'aggiornamento del profilo!");
+            e.printStackTrace();
+        }
+
+        response.sendRedirect(request.getContextPath() + "/utente?part=settings");
+    }
+
+    private boolean controllaValiditaCampi(String campo, String parametro, String email, UtenteDAO utenteDAO) {
+        // Controllo che lo username non sia già in uso da un altro utente
+        List<Utente> utenti = null;
+        try {
+            utenti = utenteDAO.doRetrieveByCondition(campo + " = '" + parametro + "' AND email <> '" + email + "'");
+
+            return utenti == null || utenti.size() == 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -191,23 +265,6 @@ public class UtenteServlet extends HttpServlet {
 
         return newPicPath;
     }
-
-//    private String trovaRinominaFile(File folder) {
-//
-//        File[] files = folder.listFiles();
-//
-//        for (String s : ext) {
-//
-//            File f = new File(path + "\\profile_pic." + s);
-//
-//            if (f.exists()) {
-//
-//                f.renameTo(new File(path + "\\profile_pic_old." + s));
-//                return path + "\\profile_pic_old." + s;
-//            }
-//        }
-//        return null;
-//    }
 
     private BufferedImage creaCopiaRidimensionata(BufferedImage image) {
         BufferedImage scaledBI = new BufferedImage(360, 360, image.getType());
