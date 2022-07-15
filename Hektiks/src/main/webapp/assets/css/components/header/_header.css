@@ -147,22 +147,26 @@ header #burger:hover .line {
     #user-info {
         display: none;
     }
-}
 
-@media only screen and (max-width: 1000px) {
     #login-container > img {
         max-width: 35%;
     }
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1000px) {
     #login-container > img {
         max-width: 40%;
     }
 }
 
+@media only screen and (max-width: 800px) {
+    #login-container > img {
+        max-width: 45%;
+    }
+}
+
 @media only screen and (max-width: 600px) {
     #login-container > img {
-        max-width: 42%;
+        max-width: 50%;
     }
 }

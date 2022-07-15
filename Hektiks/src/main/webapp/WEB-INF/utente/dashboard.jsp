@@ -33,7 +33,7 @@
 </div>
 <div class="breadcrumb text">
     <ul class="user-links">
-        <li class="user-link <%= partPath == null ? "active" : "" %>"><a href="#">
+        <li class="user-link <%= partPath == null ? "active" : "" %>"><a href="<%= request.getContextPath() %>/utente">
             Dashboard</a>
         </li>
         <% if (user.isRuolo()) { %>
@@ -44,7 +44,7 @@
     </ul>
     <div class="user-settings-preview">
         <a href="<%= request.getContextPath() %>/utente?part=settings" class="user-link <%= partPath != null && partPath.contains("settings") ? "active" : "" %>"><i class="fas fa-cog"></i>
-            Impostazioni</a>
+            <span>Impostazioni</span></a>
     </div>
 </div>
 

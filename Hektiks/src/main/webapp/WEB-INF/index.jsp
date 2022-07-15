@@ -125,14 +125,6 @@
 
 <%@ include file="../templates/footer.jsp" %>
 
-<% if (session != null && session.getAttribute("user") != null) { %>
-<script>
-    $(".dropdown-btn").click(() => {
-        $(".dropdown-content").fadeToggle();
-    })
-</script>
-<% } %>
-
 <% if (session != null && session.getAttribute("msg-error") != null) { %>
 <script>
     notifier.alert("<%= session.getAttribute("msg-error") %>");
