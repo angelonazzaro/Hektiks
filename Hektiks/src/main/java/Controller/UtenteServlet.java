@@ -9,6 +9,7 @@ import Model.Recensione.RecensioneDAO;
 import Model.Utente.Utente;
 import Model.Utente.UtenteDAO;
 import Utils.Logger.Logger;
+import Utils.PasswordEncrypt;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.*;
@@ -19,15 +20,11 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
-import java.util.regex.Pattern;
 
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024, // 1 MB
@@ -36,8 +33,6 @@ import java.util.regex.Pattern;
 )
 
 public class UtenteServlet extends HttpServlet {
-
-    private static final Pattern pattern = Pattern.compile("^(?=.*\\d)(?=.*[!@#$%^&*])[a-zA-Z\\d!@#$%^&*]{8,16}$");
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
@@ -199,33 +194,21 @@ public class UtenteServlet extends HttpServlet {
 
         if (password != null && !password.equals("")) {
 
-            if (!pattern.matcher(password).matches()) {
+            if (!password.matches("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}")) {
                 session.setAttribute("msg-error", "La password non rispetta i requisti");
                 response.sendRedirect(request.getContextPath() + "/utente?part=settings");
                 return;
             }
 
-            // Crittazione
-            try {
-                MessageDigest digest =
-                        MessageDigest.getInstance("SHA-1");
-                digest.reset();
-                digest.update(password.getBytes(StandardCharsets.UTF_8));
-                password = String.format("%040x", new
-                        BigInteger(1, digest.digest()));
-            } catch (NoSuchAlgorithmException e) {
-                e.printStackTrace();
-            }
-
             utente.setPassword_utente(password);
         }
-
         try {
 
             HashMap<String, String> map = new HashMap<>();
             map.put("profile_pic", utente.getProfile_pic());
             map.put("username", utente.getUsername());
             map.put("email", utente.getEmail());
+            System.out.println("PASSWORD: " + utente.getPassword_utente());
             map.put("password_utente", utente.getPassword_utente());
             utenteDAO.doUpdate(map, "email = '" + currentEmail + "'");
 

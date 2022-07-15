@@ -63,8 +63,7 @@ if (login_registration_section !== null) {
     const match_password_regex = (elem) => {
         if (elem.value.length === 0) return false;
 
-        const pattern =
-            /^(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,16}$/;
+        const pattern = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
 
         if (!(pattern.test(elem.value))) {
             elem.setCustomValidity(
