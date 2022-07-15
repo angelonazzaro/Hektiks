@@ -82,28 +82,22 @@ if (login_registration_section !== null) {
         if (first.value.length === 0 || second.value.length === 0) return false;
 
         let matches;
-
-        console.log(first.value);
-        console.log(second.value);
-
-        console.log(first.value === second.value);
-
+        
         if ((matches = first.value !== second.value))
             second.setCustomValidity("Le password non corrispondono.");
         else second.setCustomValidity("");
 
         second.reportValidity();
-        console.log(matches + " value");
 
         return !matches;
     };
 
     const match_password_regex_debounce = debounce((elem) =>
-        match_password_regex(elem)
+        match_password_regex(elem), 500
     );
 
     const match_password_value_debounce = debounce((first, second) =>
-        match_password_value(first, second)
+        match_password_value(first, second), 500
     );
 
     password.addEventListener("input", () => {
@@ -120,9 +114,10 @@ if (login_registration_section !== null) {
         e.preventDefault();
 
         // Se ritorna vero, non inviamo la richiesta
-        if (!match_password_value(password, confirm_password)) {
-            console.log(match_password_value(password, confirm_password))
-            return;
+        if ($(this).attr("id") === "registration-form") {
+            if (!match_password_value(password, confirm_password)) {
+                return;
+            }
         }
 
         const submit_btn = $(this).find("button[type=submit]").first();
