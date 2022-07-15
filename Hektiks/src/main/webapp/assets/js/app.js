@@ -82,7 +82,7 @@ if (login_registration_section !== null) {
         if (first.value.length === 0 || second.value.length === 0) return false;
 
         let matches;
-        
+
         if ((matches = first.value !== second.value))
             second.setCustomValidity("Le password non corrispondono.");
         else second.setCustomValidity("");
