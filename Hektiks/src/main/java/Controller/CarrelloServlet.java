@@ -42,7 +42,7 @@ public class CarrelloServlet extends HttpServlet {
                 try {
                    giochi.add(giocoDAO.doRetrieveByKey(codice_gioco));
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
             }
 

@@ -27,7 +27,6 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @MultipartConfig(
@@ -38,7 +37,7 @@ import java.util.regex.Pattern;
 
 public class UtenteServlet extends HttpServlet {
 
-    private static final Pattern pattern = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,16}$");
+    private static final Pattern pattern = Pattern.compile("^(?=.*\\d)(?=.*[!@#$%^&*])[a-zA-Z\\d!@#$%^&*]{8,16}$");
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
@@ -64,7 +63,7 @@ public class UtenteServlet extends HttpServlet {
                 request.setAttribute("totaleSpeso", totaleSpeso);
 
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
         } else if (part.equals("orders")) {
             try {
@@ -74,7 +73,7 @@ public class UtenteServlet extends HttpServlet {
                 request.setAttribute("part", "parts/orders.jsp");
 
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
         } else if (part.equals("settings")) {
             request.setAttribute("part", "parts/settings.jsp");
@@ -215,7 +214,7 @@ public class UtenteServlet extends HttpServlet {
                 password = String.format("%040x", new
                         BigInteger(1, digest.digest()));
             } catch (NoSuchAlgorithmException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
 
             utente.setPassword_utente(password);
@@ -249,8 +248,9 @@ public class UtenteServlet extends HttpServlet {
 
             return utenti == null || utenti.size() == 0;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
+        return false;
     }
 
     private String salvaImmagineRidimensionata(String fileName, File userProfilePicFolder, Part filePart) throws IOException {
@@ -267,6 +267,7 @@ public class UtenteServlet extends HttpServlet {
     }
 
     private BufferedImage creaCopiaRidimensionata(BufferedImage image) {
+
         BufferedImage scaledBI = new BufferedImage(360, 360, image.getType());
         Graphics2D g = scaledBI.createGraphics();
         g.setComposite(AlphaComposite.Src);
@@ -276,6 +277,7 @@ public class UtenteServlet extends HttpServlet {
     }
 
     private boolean controllaSeLoggato(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
         HttpSession session = request.getSession(false);
 
         if (session == null || session.getAttribute("user") == null) {
