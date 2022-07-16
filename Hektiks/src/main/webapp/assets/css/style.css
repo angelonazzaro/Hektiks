@@ -5,25 +5,6 @@
 @import "./components/products/_products.css";
 @import "./components/game/_game.css";
 @import "./components/utente/_dashboard.css";
+@import "./components/utente/_settings.css";
 @import "./components/utente/_ordini.css";
 @import "./components/footer/_footer.css";
-
-.settings-wrapper {
-    color: white;
-}
-
-.settings-container {
-    margin-top: 2rem;
-    width: 100%;
-}
-
-#form-settings .form-body {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    margin-bottom: 2rem;
-}
-
-#form-settings .row {
-    gap: 2rem;
-}

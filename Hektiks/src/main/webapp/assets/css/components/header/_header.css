@@ -170,3 +170,9 @@ header #burger:hover .line {
         max-width: 50%;
     }
 }
+
+@media only screen and (max-width: 500px) {
+    #login-container > img {
+        max-width: 50%;
+    }
+}

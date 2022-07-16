@@ -37,14 +37,14 @@
             Dashboard</a>
         </li>
         <% if (user.isRuolo()) { %>
-            <li class="user-link  <%= partPath != null && partPath.contains("admin") ? "active" : "" %>"><a href="#">Admin</a></li>
+            <li class="user-link"><a href="<%= request.getContextPath() %>/admin">Admin</a></li>
         <% } %>
         <li class="user-link <%= partPath != null && partPath.contains("orders") ? "active" : "" %>"><a href="<%= request.getContextPath() %>/utente?part=orders">I miei ordini</a></li>
         <li class="user-link"><a href="<%= request.getContextPath() %>/logout">Logout</a></li>
     </ul>
     <div class="user-settings-preview">
         <a href="<%= request.getContextPath() %>/utente?part=settings" class="user-link <%= partPath != null && partPath.contains("settings") ? "active" : "" %>"><i class="fas fa-cog"></i>
-            <span>Impostazioni</span></a>
+            Impostazioni</a>
     </div>
 </div>
 
@@ -86,7 +86,7 @@
                 </div>
                 <div class="dashboard-card-body">
                     <hr>
-                    <p class="text">Saldo <span class="hs-5" style="color: var(--grey)"><%= String.format("%.2f€", user.getSaldo())%></span></p>
+                    <p class="text">Saldo <span class="hs-5" style="color: var(--grey)"><%= String.format("%.2f€", user.getSaldo()) %></span></p>
                 </div>
             </div>
             <div class="dashboard-card">

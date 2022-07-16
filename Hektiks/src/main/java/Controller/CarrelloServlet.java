@@ -27,7 +27,8 @@ import java.util.List;
 import static Model.Storage.Entities.PRODOTTI;
 
 public class CarrelloServlet extends HttpServlet {
-    protected synchronized void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Logger.consoleLog(Logger.INFO, "CARRELLO SERVLET DO GET");
 

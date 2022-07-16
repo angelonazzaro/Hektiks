@@ -9,7 +9,7 @@ import Model.Recensione.RecensioneDAO;
 import Model.Utente.Utente;
 import Model.Utente.UtenteDAO;
 import Utils.Logger.Logger;
-import Utils.PasswordEncrypt;
+import Utils.LoginChecker;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.*;
@@ -20,7 +20,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
@@ -32,13 +31,13 @@ import java.util.List;
         maxRequestSize = 1024 * 1024 * 5   // 5 MB
 )
 
-public class UtenteServlet extends HttpServlet {
+public class UtenteServlet extends HttpServlet implements LoginChecker {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         Logger.consoleLog(Logger.INFO, "UTENTE SERVLET DO GET");
 
-        if (!controllaSeLoggato(request, response)) return;
+        if (!controllaSeLoggato(request, response, "", false)) return;
 
         String part = request.getParameter("part");
         DataSource source = (DataSource) getServletContext().getAttribute("DataSource");
@@ -85,7 +84,7 @@ public class UtenteServlet extends HttpServlet {
 
         Logger.consoleLog(Logger.INFO, "UTENTE SERVLET DO POST");
 
-        if (!controllaSeLoggato(request, response)) return;
+        if (!controllaSeLoggato(request, response, "", false)) return;
 
         HttpSession session = request.getSession(false);
         Utente utente = (Utente) session.getAttribute("user");
@@ -202,13 +201,13 @@ public class UtenteServlet extends HttpServlet {
 
             utente.setPassword_utente(password);
         }
+
         try {
 
             HashMap<String, String> map = new HashMap<>();
             map.put("profile_pic", utente.getProfile_pic());
             map.put("username", utente.getUsername());
             map.put("email", utente.getEmail());
-            System.out.println("PASSWORD: " + utente.getPassword_utente());
             map.put("password_utente", utente.getPassword_utente());
             utenteDAO.doUpdate(map, "email = '" + currentEmail + "'");
 
@@ -259,15 +258,4 @@ public class UtenteServlet extends HttpServlet {
         return scaledBI;
     }
 
-    private boolean controllaSeLoggato(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-        HttpSession session = request.getSession(false);
-
-        if (session == null || session.getAttribute("user") == null) {
-            response.sendRedirect(request.getContextPath() + "/");
-            return false;
-        }
-
-        return true;
-    }
 }

@@ -29,7 +29,7 @@ import static Model.Storage.Entities.UTENTI;
 
 public class RecensioneServlet extends HttpServlet {
 
-    protected synchronized void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Logger.consoleLog(Logger.INFO, "RECENSIONE SERVLET DO GET");
 

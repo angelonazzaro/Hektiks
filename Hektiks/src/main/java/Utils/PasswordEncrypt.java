@@ -14,7 +14,6 @@ public class PasswordEncrypt {
         for (byte b : result)
             sb.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
 
-        System.out.println("Hex format : " + sb);
         return sb.toString();
     }
 }
