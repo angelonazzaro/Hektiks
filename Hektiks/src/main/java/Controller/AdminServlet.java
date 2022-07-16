@@ -1,5 +1,9 @@
 package Controller;
 
+import Model.GiftCard.GiftCard;
+import Model.GiftCard.GiftCardDAO;
+import Model.Gioco.Gioco;
+import Model.Gioco.GiocoDAO;
 import Model.Utente.Utente;
 import Model.Utente.UtenteDAO;
 import Utils.Logger.Logger;
@@ -50,7 +54,7 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
                         session.setAttribute("msg-error", "Errore nella richiesta");
                         partToView = "parts/utenti.jsp";
                     } else {
-                        List<Utente> utenti =  utenteDAO.doRetrieveByCondition("username = '" + id + "'");
+                        List<Utente> utenti = utenteDAO.doRetrieveByCondition("username = '" + id + "'");
 
                         if (utenti == null || utenti.size() == 0) {
                             session.setAttribute("msg-error", "L'utente non esiste");
@@ -70,8 +74,76 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
                 throw new RuntimeException(e);
             }
 
-            request.setAttribute("part", partToView);
+        } else if (part.equals("prodotti")) {
+            GiocoDAO giocoDAO = new GiocoDAO(source);
+
+            // Se l'azione è nulla, mostro la pagina con tutti i giochi, altrimenti il form di modifica
+            try {
+
+                if (action == null) {
+                    request.setAttribute("giochi", giocoDAO.doRetrieveAll());
+                    partToView = "parts/prodotti.jsp";
+
+                } else if (action.equals("add")) {
+                    partToView = "parts/prodotto.jsp";
+                } else if (action.equals("edit")) {
+                    String id = request.getParameter("id");
+                    // Se l'id è nullo, mando un mesasggio di errore, altrimenti mostro il form di modifica,
+                    // Ragionamento analogo nel caso in cui l'utente non esista
+                    if (id == null || id.equals("")) {
+                        session.setAttribute("msg-error", "Errore nella richiesta");
+                        partToView = "parts/prodotti.jsp";
+                    } else {
+                        Gioco gioco = giocoDAO.doRetrieveByKey(id);
+
+                        if (gioco == null) {
+                            session.setAttribute("msg-error", "Il gioco non esiste");
+                            partToView = "parts/prodotti.jsp";
+                        } else {
+                            request.setAttribute("gioco", gioco);
+                            partToView = "parts/prodotto.jsp";
+                        }
+                    }
+                } else if (action.equals("delete")) {
+                    String id = request.getParameter("id");
+                    if (id == null || id.equals("")) {
+                        session.setAttribute("msg-error", "Errore nella richiesta");
+                        partToView = "parts/prodotti.jsp";
+                    } else {
+                        giocoDAO.doDelete("codice_gioco = '" + id + "'");
+                        session.setAttribute("msg-success", "Gioco eliminato");
+                        partToView = "parts/prodotto.jsp";
+                    }
+                } else {
+                    session.setAttribute("msg-error", "Errore nella richiesta");
+                    partToView = "parts/prodotti.jsp";
+                }
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+        } else if (part.equals("giftcards")) {
+            GiftCardDAO giftCardDAO = new GiftCardDAO(source);
+
+            // Se l'azione è nulla, mostro la pagina con tutti i giochi, altrimenti il form di modifica
+            try {
+
+                if (action == null) {
+                    request.setAttribute("giftCards", giftCardDAO.doRetrieveAll());
+                    partToView = "parts/giftcards.jsp";
+                } else if (action.equals("add")) {
+                    partToView = "parts/giftcard.jsp";
+                } else {
+                    session.setAttribute("msg-error", "Errore nella richiesta");
+                    partToView = "parts/giftcards.jsp";
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
+
+        request.setAttribute("part", partToView);
 
         request.setAttribute("title", "Hektiks | Admin");
         request.setAttribute("page", "admin/admin.jsp");
