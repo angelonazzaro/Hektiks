@@ -10,6 +10,7 @@ import Model.Utente.Utente;
 import Model.Utente.UtenteDAO;
 import Utils.Logger.Logger;
 import Utils.LoginChecker;
+import Utils.PasswordEncrypt;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.*;
@@ -20,6 +21,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
@@ -90,6 +92,10 @@ public class UtenteServlet extends HttpServlet implements LoginChecker {
         Utente utente = (Utente) session.getAttribute("user");
         UtenteDAO utenteDAO = new UtenteDAO((DataSource) getServletContext().getAttribute("DataSource"));
 
+        //mappa per i filed del db da aggiornare
+        HashMap<String, String> map = new HashMap<>();
+        boolean update = false;
+
         /* IMMAGINE PROFILO START */
         Part filePart = request.getPart("profile_pic");
 
@@ -128,6 +134,8 @@ public class UtenteServlet extends HttpServlet implements LoginChecker {
                 //se l'utente non aveva una propic la salvo per la prima volta
                 else {
                     salvaImmagineRidimensionata(fileName, userProfilePicFolder, filePart);
+                    map.put("profile_pic", utente.getProfile_pic());
+                    update = true;
                 }
 
             }
@@ -143,10 +151,9 @@ public class UtenteServlet extends HttpServlet implements LoginChecker {
                     oldFile = files[0];
                 }
 
-                if (oldFile != null)
-                    System.out.println(oldFile.getName());
-
                 newPicPath = salvaImmagineRidimensionata(fileName, userProfilePicFolder, filePart);
+                map.put("profile_pic", utente.getProfile_pic());
+                update = true;
 
                 //cancello il file di backup
                 if (new File(newPicPath).exists()) {
@@ -177,7 +184,13 @@ public class UtenteServlet extends HttpServlet implements LoginChecker {
                 response.sendRedirect(request.getContextPath() + "/utente?part=settings");
                 return;
             } else {
-                utente.setUsername(username);
+
+                if(!username.equals(utente.getUsername())){
+                    utente.setUsername(username);
+                    map.put("username", utente.getUsername());
+                    update = true;
+                }
+
             }
         }
 
@@ -187,7 +200,12 @@ public class UtenteServlet extends HttpServlet implements LoginChecker {
                 response.sendRedirect(request.getContextPath() + "/utente?part=settings");
                 return;
             } else {
-                utente.setEmail(email);
+
+                if(!email.equals(utente.getEmail())){
+                    utente.setEmail(email);
+                    map.put("email", utente.getEmail());
+                    update = true;
+                }
             }
         }
 
@@ -199,17 +217,25 @@ public class UtenteServlet extends HttpServlet implements LoginChecker {
                 return;
             }
 
-            utente.setPassword_utente(password);
+            try {
+
+                if(!PasswordEncrypt.sha1(password).equals(utente.getPassword_utente())){
+
+                    utente.setPassword_utente(PasswordEncrypt.sha1(password));
+                    map.put("password_utente", utente.getPassword_utente());
+                    update = true;
+                }
+
+            } catch (NoSuchAlgorithmException e) {
+
+                e.printStackTrace();
+            }
         }
 
         try {
 
-            HashMap<String, String> map = new HashMap<>();
-            map.put("profile_pic", utente.getProfile_pic());
-            map.put("username", utente.getUsername());
-            map.put("email", utente.getEmail());
-            map.put("password_utente", utente.getPassword_utente());
-            utenteDAO.doUpdate(map, "email = '" + currentEmail + "'");
+            if(update)
+                utenteDAO.doUpdate(map, "email = '" + currentEmail + "'");
 
             session.setAttribute("user", utente);
             session.setAttribute("msg-success", "Profilo aggiornato con successo!");
@@ -223,6 +249,7 @@ public class UtenteServlet extends HttpServlet implements LoginChecker {
     }
 
     private boolean controllaValiditaCampi(String campo, String parametro, String email, UtenteDAO utenteDAO) {
+
         // Controllo che lo username non sia già in uso da un altro utente
         List<Utente> utenti = null;
         try {

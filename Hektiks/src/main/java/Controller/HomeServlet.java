@@ -94,7 +94,6 @@ public class HomeServlet extends HttpServlet {
 
                     creaCarrello(session, utenti.get(0));
 
-                    Logger.consoleLog(Logger.INFO, "UTENTE LOGG");
                     out.write(gson.toJson(new JSONResponse<String>("success")));
                 }
 
