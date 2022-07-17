@@ -18,7 +18,7 @@
 <% Prodotto_OrdineDAO prodotto_ordineDAO = (Prodotto_OrdineDAO) request.getAttribute("prodottoOrdineDAO"); %>
 <% GiocoDAO giocoDAO = (GiocoDAO) request.getAttribute("giocoDAO"); %>
 
-<div class="orders-wrapper">
+<div class="orders-wrapper dashboard-container">
     <h1 class="hs-3">I miei ordini</h1>
 
     <% if (ordini.size() > 0) { %>
@@ -34,10 +34,9 @@
                     out.write(
                             "<div class='game-order'>" +
                                     "<div class='game-info'>" +
-                                    "<img src='" + gioco.getCopertina() + "' alt='" + gioco.getTitolo() + "- Copertina' />" +
+                                    "<a href='" + request.getContextPath() + "/gioco?codice_gioco=" + gioco.getCodice_gioco() + "'><img src='" + gioco.getCopertina() + "' alt='" + gioco.getTitolo() + "- Copertina' /></a>" +
                                     "<div>" +
                                     "<p class='text'>" + gioco.getTitolo() + "</p>" +
-                                    "<br>" +
                                     "<p class='text'>Quantità:" + prodottoOrdine.getQuantita() + "</p>" +
                                     "</div>" +
                                     "</div>" +
@@ -55,7 +54,7 @@
                 <p class="hs-4"><%= String.format("%.2f€", ordine.getPrezzo_totale())%></p>
             </div>
             <ul class="order-info text">
-                <li>Ordine #<%= ordine.getCodice_ordine() %></li>
+                <li style="margin-right: 2rem">Ordine #<%= ordine.getCodice_ordine() %></li>
                 <li><%= new SimpleDateFormat("dd MMMMMMMMMM yyyy HH:mm:ss").format(ordine.getData_ora_ordinazione()) %></li>
             </ul>
         </div>

@@ -22,7 +22,7 @@ import static Model.Storage.Entities.UTENTI;
 
 public class GiocoServlet extends HttpServlet {
     @Override
-    protected synchronized void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Logger.consoleLog(Logger.INFO, "GIOCO SERVLET DO GET");
 

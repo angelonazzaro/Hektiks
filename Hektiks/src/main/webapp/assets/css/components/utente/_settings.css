@@ -1,0 +1,19 @@
+.settings-wrapper {
+    color: white;
+}
+
+.settings-container {
+    margin-top: 2rem;
+    width: 100%;
+}
+
+#form-settings .form-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+#form-settings .row {
+    gap: 2rem;
+}

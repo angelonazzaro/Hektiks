@@ -5,12 +5,15 @@ import Model.Gioco.Gioco;
 import Model.Gioco.GiocoDAO;
 import Model.Ordine.Ordine;
 import Model.Ordine.OrdineDAO;
+import Model.Pagamento.Pagamento;
+import Model.Pagamento.PagamentoDAO;
 import Model.Prodotto.ProdottoDAO;
 import Model.Prodotto_Ordine.Prodotto_Ordine;
 import Model.Prodotto_Ordine.Prodotto_OrdineDAO;
 import Model.Utente.Utente;
 import Model.Utente.UtenteDAO;
 import Utils.Logger.Logger;
+import Utils.LoginChecker;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,16 +29,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-public class AcquistoServlet extends HttpServlet {
+public class AcquistoServlet extends HttpServlet implements LoginChecker {
 
     protected synchronized void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Logger.consoleLog(Logger.INFO, "ACQUISTO SERVLET DO POST");
 
-        if (!controllaSeLoggato(request, response))  {
-            response.sendRedirect(request.getContextPath() + "/");
-            return;
-        }
+        if (!controllaSeLoggato(request, response, "Per poter effettuare un acquisto devi accedere al tuo account", false)) return;
 
         String from = request.getParameter("from");
 
@@ -127,6 +127,15 @@ public class AcquistoServlet extends HttpServlet {
                 prodotto_ordine.setData_ora_creazione(date);
                 prodotto_ordine.setCodice_ordine(codice_ordine);
 
+                PagamentoDAO pagamentoDAO = new PagamentoDAO(source);
+                Pagamento pagamento = new Pagamento();
+                pagamento.setCodice_ordine(codice_ordine);
+                pagamento.setEmail_utente(utente.getEmail());
+                pagamento.setImporto(prezzoTotale);
+                pagamento.setData_ora_pagamento(date);
+
+                pagamentoDAO.doSave(pagamento);
+
                 for (Gioco giocoDaAcquistare : giochiDaAcquistare) {
                     prodotto_ordine.setCodice_gioco(giocoDaAcquistare.getCodice_gioco());
 
@@ -141,6 +150,10 @@ public class AcquistoServlet extends HttpServlet {
                         prodotto_ordine.setPrezzo(giocoDaAcquistare.getPrezzo());
 
                     prodotto_ordineDAO.doSave(prodotto_ordine);
+                    HashMap<String, Integer> map = new HashMap<>();
+                    // Aggiorno le vendite del gioco
+                    map.put("numero_vendite", giocoDaAcquistare.getNumero_vendite() + prodotto_ordine.getQuantita());
+                    giocoDAO.doUpdate(map, "codice_gioco = '" + giocoDaAcquistare.getCodice_gioco() + "'");
                 }
 
                 // Aggiorno il saldo dell'utente sia in sessione che nel db
@@ -184,19 +197,5 @@ public class AcquistoServlet extends HttpServlet {
             sb.append(alfabeto.charAt(random.nextInt(alfabeto.length())));
 
         return sb.toString();
-    }
-
-    private boolean controllaSeLoggato(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        HttpSession session = request.getSession(false);
-
-        if (session == null || session.getAttribute("user") == null) {
-            if (session == null)
-                session = request.getSession(true);
-
-            session.setAttribute("msg-error", "Per poter effettuare un acquisto devi accedere al tuo account!");
-            return false;
-        }
-
-        return true;
     }
 }

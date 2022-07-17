@@ -81,7 +81,7 @@ if (login_registration_section !== null) {
         if (first.value.length === 0 || second.value.length === 0) return false;
 
         let matches;
-        
+
         if ((matches = first.value !== second.value))
             second.setCustomValidity("Le password non corrispondono.");
         else second.setCustomValidity("");
@@ -248,8 +248,6 @@ const search = debounce((value) => {
                 content += `Gratis`;
 
             content += `</div></div></div>`;
-
-            console.log(content);
         }
 
         content += `</div></div>`;
@@ -257,6 +255,7 @@ const search = debounce((value) => {
     })
 
 }, 350);
+
 
 search_bar.addEventListener("input", () => {
     search(search_bar.value);

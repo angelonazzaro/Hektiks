@@ -102,7 +102,7 @@
 	border-radius: 25px;
 	background-color: var(--header-bg);
 	min-height: 30vh;
-	width: 35%;
+	width: 45%;
 }
 
 .dashboard-card-header,
@@ -169,4 +169,51 @@
 
 .overview-info > p:nth-child(2) {
 	color: var(--grey);
+}
+
+@media only screen and (max-width: 1300px) {
+	.overview-card > .dashboard-card-header > img, .giftcards img {
+		max-width: 15%;
+	}
+}
+
+@media only screen and (max-width: 1124px) {
+
+	.giftcards .form-control {
+		margin: 0;
+	}
+
+	.giftcards .dashboard-card-body {
+		width: 40%;
+	}
+
+	.giftcards form {
+		padding-bottom: 1rem;
+	}
+
+	.giftcards form .row {
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 2rem;
+	}
+
+	.giftcards form .btn {
+		width: 100%;
+	}
+}
+
+@media only screen and (max-width: 800px) {
+	.overview-card > .dashboard-card-header > img, .giftcards img {
+		max-width: 20%;
+	}
+
+	.dashboard-card {
+		width: 100%;
+	}
+}
+
+@media only screen and (max-width: 500px) {
+	.overview-card > .dashboard-card-header > img, .giftcards img {
+		max-width: 30%;
+	}
 }

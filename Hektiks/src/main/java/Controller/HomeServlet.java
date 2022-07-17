@@ -33,7 +33,7 @@ public class HomeServlet extends HttpServlet {
     @Serial
     private static final long serialVersionUID = 5982139499022378053L;
 
-    public synchronized void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         Logger.consoleLog(Logger.INFO, "HOME SERVLET DO GET");
 
@@ -51,7 +51,7 @@ public class HomeServlet extends HttpServlet {
         request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
     }
 
-    public synchronized void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    protected synchronized void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         Logger.consoleLog(Logger.INFO, "HOME SERVLET DO POST");
 

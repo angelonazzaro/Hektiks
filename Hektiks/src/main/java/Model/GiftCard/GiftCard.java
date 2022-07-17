@@ -36,10 +36,12 @@ public class GiftCard extends GenericBean implements Serializable, IEntity {
         return new HashMap<>() {
             {
                 put("codice_giftCard", codice_giftCard);
-                put("email_utente", email_utente);
+                if (email_utente != null) put("email_utente", email_utente);
+
                 put("importo", importo);
+
                 put("data_ora_creazione", data_ora_creazione.toString());
-                put("data_ora_utilizzo", data_ora_utilizzo.toString());
+                if (data_ora_utilizzo != null) put("data_ora_utilizzo", data_ora_utilizzo.toString());
             }
         };
     }
