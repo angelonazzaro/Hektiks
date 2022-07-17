@@ -1,14 +1,16 @@
 USE Hektiks;
 
 INSERT INTO Utenti VALUES 
-("francescog@gmail.com", "Francesco", "Granozio", "Explosion", sha1("francescobello"), "2022-04-26", TRUE, 420.69, "/Explosion/profile_pic.png"),
-("angelon@gmail.com", "Angelo", "Nazzaro",  "NGLX", sha1("bald"), "2022-04-26", TRUE, 1069.42, "/NGLX/profile_pic.png"),
-("somaxd@gmail.com", "Carmine", "Nardo", "somarello", sha1("soma"), CURDATE(), FALSE, 0, NULL),
+("francescoadmin@gmail.com", "Francesco", "Granozio", "Explosion", sha1("Admin.123"), "2022-04-26", TRUE, 1299.45, "/Explosion/profile_pic.png"),
+("francescouser@gmail.com", "Francesco", "Granozio", "//AFG", sha1("User.123"), "2022-04-26", FALSE, 1299.45, NULL),
+("angeloadmin@gmail.com", "Angelo", "Nazzaro",  "NGLX", sha1("Admin.123"), "2022-04-26", TRUE, 1069.42, "/NGLX/profile_pic.png"),
+("angelouser@gmail.com", "Angelo", "Nazzaro",  "Boxxo's Lover", sha1("User.123"), "2022-04-26", FALSE, 1069.42, NULL),
+("somaxd@gmail.com", "Carmine", "Nardo", "somarello", sha1("soma.8dnddòj32ìr_°éç"), CURDATE(), FALSE, 0, NULL),
 ("boxxerello@gmail.com", "Francesco", "Bosso", "Boxxo", sha1("~r~c*<\D8q$K5FWu"), CURDATE(), FALSE, 92.40, NULL),
 ("mickymouse@gmail.com", "Giuseppe", "La Voglia", "pippo", sha1("zZpippZz"), CURDATE(), FALSE, 7.90, NULL),
 ("giampix@gmail.com", "Giampaolo", "Joestar", "giampix", sha1("password123"), CURDATE(), FALSE, 0.90, NULL),
 ("andreachad@outlook.it", "Andrea Chad", "Vitolo", "Zindre", sha1("ML8uD+A)'d(y9]*"), "2022-04-30", FALSE, 90, NULL),
-("pepperimborsototale@hotmail.it", "Giuseppe", "D'ambrosio", "Peppe", sha1("T?vb'[E=5/GYk)n("), "2022-05-04", FALSE, 18, NULL),
+("pepperimborsototale@hotmail.it", "Giuseppe", "D'Ambrosio", "Peppe", sha1("T?vb'[E=5/GYk)n("), "2022-05-04", FALSE, 18, NULL),
 ("hicigog536@topyte.com", "Ichigo", "Kurosaki", "Hici", sha1("ML8uD+A)'d(y9]*"), "2022-05-05", FALSE, 90, NULL),
 ("trttjrbxcmq@candassociates.com", "Trixy", "Pan", "Trttj", sha1(":_~&/3#ZC[{vRgVL"), "2022-05-13", FALSE, 90, NULL),
 ("a67b166dc6@catdogmail.live", "Quentin", "Tarantino", "Lay", sha1("`eG7j;CA2c}!pHd/"), "2022-05-30", FALSE, 90, NULL),

@@ -163,7 +163,7 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
         request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         Logger.consoleLog(Logger.INFO, "ADMIN SERVLET DO POST");
 
@@ -384,7 +384,7 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
     }
     private boolean controllaValiditaCampiUtente(String campo, String parametro, String email, UtenteDAO utenteDAO) {
         // Controllo che lo username non sia già in uso da un altro utente
-        List<Utente> utenti = null;
+        List<Utente> utenti;
         try {
             utenti = utenteDAO.doRetrieveByCondition(campo + " = '" + parametro + "' AND email <> '" + email + "'");
 
