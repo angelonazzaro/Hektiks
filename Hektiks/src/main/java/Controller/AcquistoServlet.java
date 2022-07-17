@@ -5,6 +5,8 @@ import Model.Gioco.Gioco;
 import Model.Gioco.GiocoDAO;
 import Model.Ordine.Ordine;
 import Model.Ordine.OrdineDAO;
+import Model.Pagamento.Pagamento;
+import Model.Pagamento.PagamentoDAO;
 import Model.Prodotto.ProdottoDAO;
 import Model.Prodotto_Ordine.Prodotto_Ordine;
 import Model.Prodotto_Ordine.Prodotto_OrdineDAO;
@@ -124,6 +126,15 @@ public class AcquistoServlet extends HttpServlet implements LoginChecker {
                 prodotto_ordine.setEmail_utente(utente.getEmail());
                 prodotto_ordine.setData_ora_creazione(date);
                 prodotto_ordine.setCodice_ordine(codice_ordine);
+
+                PagamentoDAO pagamentoDAO = new PagamentoDAO(source);
+                Pagamento pagamento = new Pagamento();
+                pagamento.setCodice_ordine(codice_ordine);
+                pagamento.setEmail_utente(utente.getEmail());
+                pagamento.setImporto(prezzoTotale);
+                pagamento.setData_ora_pagamento(date);
+
+                pagamentoDAO.doSave(pagamento);
 
                 for (Gioco giocoDaAcquistare : giochiDaAcquistare) {
                     prodotto_ordine.setCodice_gioco(giocoDaAcquistare.getCodice_gioco());
