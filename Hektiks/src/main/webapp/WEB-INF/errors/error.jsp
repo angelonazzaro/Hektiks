@@ -26,7 +26,24 @@
 </style>
 
 
-<p>Whoopies! Si è verificato il seguente errore: <br>
-    <%= request.getAttribute("jakarta.servlet.error.status_code") %>
-    : <%= request.getAttribute("jakarta.servlet.error.message") %>
-</p>
+<%--<p>Whoopies! Si è verificato il seguente errore: <br>--%>
+<%--    <%= request.getAttribute("jakarta.servlet.error.status_code") %>--%>
+<%--    : <%= request.getAttribute("jakarta.servlet.error.message") %>--%>
+<%--</p>--%>
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+</head>
+<body>
+    <div class="wrapper">
+        <p>Whoopies! Si è verificato il seguente errore: <br>
+            <%= request.getAttribute("jakarta.servlet.error.status_code") %>
+            : <%= request.getAttribute("jakarta.servlet.error.message") %>
+        </p>
+    </div>
+</body>
+
+</html>
