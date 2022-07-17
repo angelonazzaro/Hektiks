@@ -20,7 +20,7 @@ import static Model.Storage.Entities.GIOCHI_GENERE;
 
 public class SearchServlet extends HttpServlet {
 
-    protected synchronized void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected synchronized void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         Logger.consoleLog(Logger.INFO, "SEARCH SERVLET DO GET");
 

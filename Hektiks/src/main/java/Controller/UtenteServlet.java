@@ -179,6 +179,7 @@ public class UtenteServlet extends HttpServlet implements LoginChecker {
 
         // Controllo che lo username non sia già in uso da un altro utente
         if (username != null && !username.equals("")) {
+
             if (!controllaValiditaCampi("username", username, currentEmail, utenteDAO)) {
                 session.setAttribute("msg-error", "Lo username è già in uso");
                 response.sendRedirect(request.getContextPath() + "/utente?part=settings");
@@ -195,6 +196,7 @@ public class UtenteServlet extends HttpServlet implements LoginChecker {
         }
 
         if (email != null && !email.equals("")) {
+
             if (!controllaValiditaCampi("email", email, currentEmail, utenteDAO)) {
                 session.setAttribute("msg-error", "L'email è già in uso");
                 response.sendRedirect(request.getContextPath() + "/utente?part=settings");
@@ -221,7 +223,7 @@ public class UtenteServlet extends HttpServlet implements LoginChecker {
 
                 if(!PasswordEncrypt.sha1(password).equals(utente.getPassword_utente())){
 
-                    utente.setPassword_utente(PasswordEncrypt.sha1(password));
+                    utente.setPassword_utente(password);
                     map.put("password_utente", utente.getPassword_utente());
                     update = true;
                 }
@@ -251,11 +253,11 @@ public class UtenteServlet extends HttpServlet implements LoginChecker {
     private boolean controllaValiditaCampi(String campo, String parametro, String email, UtenteDAO utenteDAO) {
 
         // Controllo che lo username non sia già in uso da un altro utente
-        List<Utente> utenti = null;
         try {
-            utenti = utenteDAO.doRetrieveByCondition(campo + " = '" + parametro + "' AND email <> '" + email + "'");
+            List<Utente> utenti = utenteDAO.doRetrieveByCondition(campo + " = '" + parametro + "' AND email <> '" + email + "'");
 
             return utenti == null || utenti.size() == 0;
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -282,6 +284,7 @@ public class UtenteServlet extends HttpServlet implements LoginChecker {
         g.setComposite(AlphaComposite.Src);
         g.drawImage(image, 0, 0, 360, 360, null);
         g.dispose();
+
         return scaledBI;
     }
 
