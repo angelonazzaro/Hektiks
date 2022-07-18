@@ -38,7 +38,8 @@
                 <input type="number" name="quantita" class="form-control" placeholder="Quantità disponibile" min="0" required step="1" value="<%= gioco == null ? "" : gioco.getQuantita_disponibile() %>">
             </div>
             <div class="row">
-                <input type="date" name="data_uscita" class="form-control" required value="<%= gioco == null ? "" : new SimpleDateFormat("y-M-d").format(gioco.getData_uscita())%>">
+
+                <input type="date" name="data_uscita" class="form-control"  required value="<%= gioco == null ? "" : new SimpleDateFormat("yyyy-MM-dd").format(gioco.getData_uscita())%>">
                 <input type="number" name="sconto" class="form-control" placeholder="Sconto" step="any" max="100" min="1">
             </div>
             <div class="row">
