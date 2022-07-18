@@ -42,7 +42,7 @@
                 <input type="number" name="sconto" class="form-control" placeholder="Sconto" step="any" max="100" min="1">
             </div>
             <div class="row">
-                <select name="generi[]" class="form-control" multiple id="select-generi">
+                <select name="generi[]" class="form-control" multiple >
                     <% if (gioco == null || gioco_generi.isEmpty()) {%>
                         <% for (Genere genere : generi) { %>
                             <option value="<%= genere.getNome_genere() %>"><%= genere.getNome_genere() %></option>
