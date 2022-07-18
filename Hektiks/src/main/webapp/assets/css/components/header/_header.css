@@ -176,3 +176,9 @@ header #burger:hover .line {
         max-width: 50%;
     }
 }
+
+@media only screen and (max-width: 470px) {
+    nav .search-bar {
+        display: none;
+    }
+}

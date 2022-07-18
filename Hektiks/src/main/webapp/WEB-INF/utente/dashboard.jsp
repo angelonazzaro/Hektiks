@@ -44,7 +44,7 @@
     </ul>
     <div class="user-settings-preview">
         <a href="<%= request.getContextPath() %>/utente?part=settings" class="user-link <%= partPath != null && partPath.contains("settings") ? "active" : "" %>"><i class="fas fa-cog"></i>
-            Impostazioni</a>
+            <span>Impostazioni</span></a>
     </div>
 </div>
 

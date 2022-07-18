@@ -8,3 +8,8 @@
 @import "./components/utente/_settings.css";
 @import "./components/utente/_ordini.css";
 @import "./components/footer/_footer.css";
+
+/* Admin */
+#multi-select-container span {
+    width: 100% !important;
+}

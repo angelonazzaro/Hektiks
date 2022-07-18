@@ -10,7 +10,7 @@
 <% List<Utente> utenti = (List<Utente>) request.getAttribute("utenti"); %>
 
 <div class="dashboard-container">
-    <table id="basic-table" class="display dataTable cell-border text" style="color: white; text-align: center">
+    <table id="basic-table" class="display dataTable cell-border text" style="color: white; text-align: center; word-wrap: break-word; word-break: break-all">
         <thead>
         <tr>
             <th>Username</th>

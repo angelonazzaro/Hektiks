@@ -187,9 +187,9 @@ const base_url = () => {
 
 /* SEARCH BAR */
 
-const current_page = $(".main-content");
-const current_page_content = current_page.html();
-const search_bar = document.querySelector(".search-bar > input");
+let current_page = $(".main-content");
+let current_page_content = current_page.html();
+const search_bars = document.querySelectorAll(".search-bar > input");
 
 const search = debounce((value) => {
     // Rimetto la pagina come stava prima
@@ -213,7 +213,12 @@ const search = debounce((value) => {
             return false;
         });
 
-        current_page.empty();
+        // Serve per evitare che la search bar venga rimossa nel responsive siccome la rimuoviamo dall'header
+        if (window.innerWidth <= 470) {
+            current_page = $(".products-container");
+            current_page_content = current_page.html();
+        } else
+            current_page.empty();
 
         if (giochi.length === 0) {
             current_page.html(`<p class="hs-3" style="color: white; text-align: center">Nessun risultato per la ricerca "${value}"</p>`);
@@ -257,9 +262,11 @@ const search = debounce((value) => {
 }, 350);
 
 
-search_bar.addEventListener("input", () => {
-    search(search_bar.value);
-});
+search_bars.forEach(search_bar =>
+    search_bar.addEventListener("input", () => {
+        search(search_bar.value);
+    })
+);
 
 /* MODAL */
 

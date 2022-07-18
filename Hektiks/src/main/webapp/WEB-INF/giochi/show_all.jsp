@@ -9,6 +9,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% List<Gioco> giochi = (List<Gioco>) request.getAttribute("giochi"); %>
 
+<div class="search-bar">
+    <input type="text" class="form-control" placeholder="Cerca..."/>
+    <span><i class="fas fa-search"></i></span>
+</div>
+
 <div class="products-container">
     <div class="products-content">
         <% for (Gioco gioco : giochi) { %>

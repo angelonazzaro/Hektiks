@@ -212,6 +212,24 @@
 	}
 }
 
+@media only screen and (max-width: 630px) {
+
+	.wrapper {
+		overflow-x: auto;
+	}
+
+	.breadcrumb {
+		flex-wrap: wrap;
+	}
+
+	.user-settings-preview {
+		position: relative;
+		margin-top: 2rem;
+		transform: translateX(-50%);
+		left: 50%;
+	}
+}
+
 @media only screen and (max-width: 500px) {
 	.overview-card > .dashboard-card-header > img, .giftcards img {
 		max-width: 30%;

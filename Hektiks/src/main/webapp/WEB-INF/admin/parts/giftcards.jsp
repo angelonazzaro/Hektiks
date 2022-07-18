@@ -15,7 +15,7 @@
         <a href="<%= request.getContextPath() %>/admin?part=giftcards&action=add" style="margin-bottom: 2rem;"
            class="btn">Aggiungi GiftCard</a>
     </div>
-    <table id="basic-table" class="display dataTable cell-border text" style="color: white; text-align: center">
+    <table id="basic-table" class="display dataTable cell-border text" style="color: white; text-align: center; word-wrap: break-word; word-break: break-all">
         <thead>
         <tr>
             <th>Codice</th>

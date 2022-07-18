@@ -24,6 +24,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -70,7 +71,8 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
 
                         if (utenti == null || utenti.size() == 0) {
                             session.setAttribute("msg-error", "L'utente non esiste");
-                            partToView = "parts/utenti.jsp";
+                            response.sendRedirect(request.getContextPath() + "/admin?part=utenti");
+                            return;
 
                         } else {
 
@@ -147,7 +149,8 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
 
                         giocoDAO.doDelete("codice_gioco = '" + id + "'");
                         session.setAttribute("msg-success", "Gioco eliminato");
-                        partToView = "parts/prodotto.jsp";
+                        response.sendRedirect(request.getContextPath() + "/admin?part=prodotti");
+                        return;
                     }
 
                 } else {
@@ -200,8 +203,6 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
 
         if (!controllaSeLoggato(request, response, "", true)) return;
 
-
-
         String action = request.getParameter("action"), componente = request.getParameter("componente");
         HttpSession session = request.getSession(false);
 
@@ -238,36 +239,6 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
         String newData_uscita = request.getParameter("data_uscita");
         double newSconto = Double.parseDouble(request.getParameter("sconto"));
 
-        String currentCode = request.getParameter("current-code");
-        String currentTitolo = request.getParameter("current-titolo");
-        String currentDescrizione = request.getParameter("current-descrizione");
-        String currentTrailer = request.getParameter("current-trailer");
-        String currentCopertina = request.getParameter("current-copertina");
-        double currentPrezzo = Double.parseDouble(request.getParameter("current-prezzo"));
-        int currentQuantita = Integer.parseInt(request.getParameter("current-quantita"));
-        String currentData_uscita = request.getParameter("current-data");
-        double currentSconto = Double.parseDouble(request.getParameter("current-sconto"));
-
-        System.out.println("codice: " + newCodice);
-        System.out.println("titolo: " + newTitolo);
-        System.out.println("descrizione: " + newDescrizione);
-        System.out.println("trailer: " + newTrailer);
-        System.out.println("copertina: " + newCopertina);
-        System.out.println("prezzo: " + newPrezzo);
-        System.out.println("quantita: " + newQuantita);
-        System.out.println("data_uscita: " + newData_uscita);
-        System.out.println("sconto: " + newSconto);
-
-        System.out.println("currentCodice: " + currentCode);
-        System.out.println("currentTitolo: " + currentTitolo);
-        System.out.println("currentDescrizione: " + currentDescrizione);
-        System.out.println("currentTrailer: " + currentTrailer);
-        System.out.println("currentCopertina: " + currentCopertina);
-        System.out.println("currentPrezzo: " + currentPrezzo);
-        System.out.println("currentQuantita: " + currentQuantita);
-        System.out.println("currentData: " + currentData_uscita);
-        System.out.println("currentSconto: " + currentSconto);
-
         GiocoDAO giocoDAO = new GiocoDAO(source);
         HttpSession session = request.getSession(false);
 
@@ -297,6 +268,16 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
                 e.printStackTrace();
             }
         } else if (action.equals("edit")) {
+
+            String currentCode = request.getParameter("current-code");
+            String currentTitolo = request.getParameter("current-titolo");
+            String currentDescrizione = request.getParameter("current-descrizione");
+            String currentTrailer = request.getParameter("current-trailer");
+            String currentCopertina = request.getParameter("current-copertina");
+            double currentPrezzo = Double.parseDouble(request.getParameter("current-prezzo"));
+            int currentQuantita = Integer.parseInt(request.getParameter("current-quantita"));
+            String currentData_uscita = request.getParameter("current-data");
+            double currentSconto = Double.parseDouble(request.getParameter("current-sconto"));
 
             HashMap<String, Object> map = new HashMap<>();
             map.put("codice_gioco", newCodice);
@@ -345,22 +326,19 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
             return;
         }
 
-        String newUsername = request.getParameter("username"), newEmail = request.getParameter("email"), newPassword = null;
+        String newUsername = request.getParameter("username"), newEmail = request.getParameter("email"), newPassword = request.getParameter("password");
 
-        try {
+        // Encrypta solo se la password non è nulla, altrimenti dopo risulta valida
+        if (newPassword != null && !newPassword.equals("")) {
+            try {
 
-            newPassword = PasswordEncrypt.sha1(request.getParameter("password"));
+                newPassword = PasswordEncrypt.sha1(request.getParameter("password"));
+            }
+            catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
+
         }
-        catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println("currentEmail: " + currentEmail);
-        System.out.println("currentUsername: " + currentUsername);
-        System.out.println("currentPassword: " + currentPassword);
-        System.out.println("username: " + newUsername);
-        System.out.println("email: " + newEmail);
-        System.out.println("password: " + newPassword);
 
         UtenteDAO utenteDAO = new UtenteDAO(source);
         HashMap<String, String> map = new HashMap<>();
@@ -371,7 +349,7 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
             if (!controllaValiditaCampiUtente("username", newUsername, currentEmail, utenteDAO)) {
 
                 session.setAttribute("msg-error", "Lo username è già in uso");
-                response.sendRedirect(request.getContextPath() + "/admin?part=utenti&action=edit&id=" + currentEmail);
+                response.sendRedirect(request.getContextPath() + "/admin?part=utenti&action=edit&id=" + currentUsername);
                 return;
 
             } else {
@@ -388,7 +366,7 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
             if (!controllaValiditaCampiUtente("email", newEmail, currentEmail, utenteDAO)) {
 
                 session.setAttribute("msg-error", "L'email è già in uso");
-                response.sendRedirect(request.getContextPath() + "/admin?part=utenti&action=edit&id=" + currentEmail);
+                response.sendRedirect(request.getContextPath() + "/admin?part=utenti&action=edit&id=" + currentUsername);
                 return;
             } else {
 
@@ -404,7 +382,7 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
             if (!newPassword.matches("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}")) {
 
                 session.setAttribute("msg-error", "La password non rispetta i requisti");
-                response.sendRedirect(request.getContextPath() + "/admin?part=utenti&action=edit&id=" + currentEmail);
+                response.sendRedirect(request.getContextPath() + "/admin?part=utenti&action=edit&id=" + currentUsername);
                 return;
             }
 
@@ -477,7 +455,7 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
         if (isEdit)
             gioco_genereDAO.doDelete("codice_gioco = '" + codice + "'");
 
-        String[] generi = request.getParameterValues("generi");
+        String[] generi = request.getParameterValues("generi[]");
 
         for (String genere : generi) {
 
