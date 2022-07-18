@@ -100,6 +100,18 @@ a {
     transition: border-color 200ms ease;
 }
 
+.no-border{
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    padding-block-start: 0;
+    padding-block-end: 0;
+    padding-inline-start: 0;
+    padding-inline-end: 0;
+    border: none;
+    min-inline-size: min-content;
+    width: 100%;
+}
+
 .form-control:focus, .form-control:hover {
     border-color: var(--orange);
 }

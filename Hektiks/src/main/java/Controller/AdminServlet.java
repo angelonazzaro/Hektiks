@@ -200,6 +200,8 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
 
         if (!controllaSeLoggato(request, response, "", true)) return;
 
+
+
         String action = request.getParameter("action"), componente = request.getParameter("componente");
         HttpSession session = request.getSession(false);
 
@@ -226,12 +228,45 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
 
         if (!controllaValiditaCampiGioco(request, action, source)) return;
 
-        String codice = request.getParameter("codice"), titolo = request.getParameter("titolo");
-        String data_uscita = request.getParameter("data_uscita");
-        String descrizione = request.getParameter("descrizione"), trailer = request.getParameter("trailer");
-        String copertina = request.getParameter("copertina");
-        double prezzo = Double.parseDouble(request.getParameter("prezzo")), sconto = Double.parseDouble(request.getParameter("sconto"));
-        int quantita = Integer.parseInt(request.getParameter("quantita"));
+        String newCodice = request.getParameter("codice");
+        String newTitolo = request.getParameter("titolo");
+        String newDescrizione = request.getParameter("descrizione");
+        String newTrailer = request.getParameter("trailer");
+        String newCopertina = request.getParameter("copertina");
+        double newPrezzo = Double.parseDouble(request.getParameter("prezzo"));
+        int newQuantita = Integer.parseInt(request.getParameter("quantita"));
+        String newData_uscita = request.getParameter("data_uscita");
+        double newSconto = Double.parseDouble(request.getParameter("sconto"));
+
+        String currentCode = request.getParameter("current-code");
+        String currentTitolo = request.getParameter("current-titolo");
+        String currentDescrizione = request.getParameter("current-descrizione");
+        String currentTrailer = request.getParameter("current-trailer");
+        String currentCopertina = request.getParameter("current-copertina");
+        double currentPrezzo = Double.parseDouble(request.getParameter("current-prezzo"));
+        int currentQuantita = Integer.parseInt(request.getParameter("current-quantita"));
+        String currentData_uscita = request.getParameter("current-data");
+        double currentSconto = Double.parseDouble(request.getParameter("current-sconto"));
+
+        System.out.println("codice: " + newCodice);
+        System.out.println("titolo: " + newTitolo);
+        System.out.println("descrizione: " + newDescrizione);
+        System.out.println("trailer: " + newTrailer);
+        System.out.println("copertina: " + newCopertina);
+        System.out.println("prezzo: " + newPrezzo);
+        System.out.println("quantita: " + newQuantita);
+        System.out.println("data_uscita: " + newData_uscita);
+        System.out.println("sconto: " + newSconto);
+
+        System.out.println("currentCodice: " + currentCode);
+        System.out.println("currentTitolo: " + currentTitolo);
+        System.out.println("currentDescrizione: " + currentDescrizione);
+        System.out.println("currentTrailer: " + currentTrailer);
+        System.out.println("currentCopertina: " + currentCopertina);
+        System.out.println("currentPrezzo: " + currentPrezzo);
+        System.out.println("currentQuantita: " + currentQuantita);
+        System.out.println("currentData: " + currentData_uscita);
+        System.out.println("currentSconto: " + currentSconto);
 
         GiocoDAO giocoDAO = new GiocoDAO(source);
         HttpSession session = request.getSession(false);
@@ -239,20 +274,21 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
         if (action.equals("add")) {
             Gioco gioco = new Gioco();
 
-            gioco.setCodice_gioco(codice);
-            gioco.setTitolo(titolo);
-            gioco.setDescrizione(descrizione);
-            gioco.setTrailer(trailer);
-            gioco.setCopertina(copertina);
-            gioco.setPrezzo(prezzo);
-            gioco.setQuantita_disponibile(quantita);
-            gioco.setData_uscita(Date.valueOf(data_uscita));
-            gioco.setPercentuale_sconto(sconto);
+            gioco.setCodice_gioco(newCodice);
+            gioco.setTitolo(newTitolo);
+            gioco.setDescrizione(newDescrizione);
+            gioco.setTrailer(newTrailer);
+            gioco.setCopertina(newCopertina);
+            gioco.setPrezzo(newPrezzo);
+            gioco.setQuantita_disponibile(newQuantita);
+            gioco.setData_uscita(Date.valueOf(newData_uscita));
+            gioco.setPercentuale_sconto(newSconto);
+
 
             try {
                 if (giocoDAO.doSave(gioco)) {
 
-                    salvaGeneri(request, codice, source, false);
+                    salvaGeneri(request, newCodice, source, false);
 
                     session.setAttribute("msg-success", "Gioco aggiunto correttamente!");
                 } else
@@ -262,23 +298,21 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
             }
         } else if (action.equals("edit")) {
 
-            String currentCode = request.getParameter("current-code");
-
             HashMap<String, Object> map = new HashMap<>();
-            map.put("codice_gioco", codice);
-            map.put("titolo", titolo);
-            map.put("descrizione", descrizione);
-            map.put("trailer", trailer);
-            map.put("copertina", copertina);
-            map.put("prezzo", prezzo);
-            map.put("quantita_disponibile", quantita);
-            map.put("data_uscita", data_uscita);
-            map.put("percentuale_sconto", sconto);
+            map.put("codice_gioco", newCodice);
+            map.put("titolo", newTitolo);
+            map.put("descrizione", newDescrizione);
+            map.put("trailer", newTrailer);
+            map.put("copertina", newCopertina);
+            map.put("prezzo", newPrezzo);
+            map.put("quantita_disponibile", newQuantita);
+            map.put("data_uscita", newData_uscita);
+            map.put("percentuale_sconto", newSconto);
 
             try {
                 if (giocoDAO.doUpdate(map, "codice_gioco = '" + currentCode + "'")) {
 
-                    salvaGeneri(request, codice, source, true);
+                    salvaGeneri(request, newCodice, source, true);
 
                     session.setAttribute("msg-success", "Gioco modificato correttamente!");
                 }else
@@ -454,6 +488,7 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
             gioco_genereDAO.doSave(gioco_genere);
         }
     }
+
     private boolean controllaValiditaCampiUtente(String campo, String parametro, String email, UtenteDAO utenteDAO) {
         // Controllo che lo username non sia già in uso da un altro utente
         List<Utente> utenti;
@@ -469,12 +504,15 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
 
     private boolean controllaValiditaCampiGioco(HttpServletRequest request, String action, DataSource source) {
 
-        String codice = request.getParameter("codice"), titolo = request.getParameter("titolo");
-        String data_uscita = request.getParameter("data_uscita");
-        String descrizione = request.getParameter("descrizione"), trailer = request.getParameter("trailer");
+        String codice = request.getParameter("codice");
+        String titolo = request.getParameter("titolo");
+        String descrizione = request.getParameter("descrizione");
+        String trailer = request.getParameter("trailer");
         String copertina = request.getParameter("copertina");
-        double prezzo = Double.parseDouble(request.getParameter("prezzo")), sconto = Double.parseDouble(request.getParameter("sconto"));
+        double prezzo = Double.parseDouble(request.getParameter("prezzo"));
         int quantita = Integer.parseInt(request.getParameter("quantita"));
+        String data_uscita = request.getParameter("data_uscita");
+        double sconto = Double.parseDouble(request.getParameter("sconto"));
 
         HttpSession session = request.getSession(false);
 
