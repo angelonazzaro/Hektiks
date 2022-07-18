@@ -28,7 +28,9 @@
         <div class="form-body">
             <input type="hidden" name="action" value="edit">
             <input type="hidden" name="componente" value="utente">
-            <input type="hidden" name="current-username" value="<%= utente.getUsername() %>">
+            <input type="hidden" name="current-username" value="<%= utente.getUsername() %>" />
+            <input type="hidden" name="current-email" value="<%= utente.getEmail() %>" />
+            <input type="hidden" name="current-password" value="<%= utente.getPassword_utente() %>" />
 
             <div class="row">
                 <input type="text" class="form-control"  name="username" value="<%= utente.getUsername() %>" placeholder="Username">

@@ -19,40 +19,92 @@
     <form action="<%= request.getContextPath() %>/admin" method="POST" id="form-settings" class="settings-container">
         <div class="form-body">
             <input type="hidden" name="action" value="<%= gioco == null ? "add" : "edit" %>">
-            <input type="hidden" name="current-code" value="<%= gioco == null ? "" : gioco.getCodice_gioco() %>">
             <input type="hidden" name="componente" value="prodotto">
 
+            <%-- Input type hidden per passare i vecchi valori alla servlet--%>
+            <input type="hidden" name="current-code" value="<%= gioco == null ? "" : gioco.getCodice_gioco() %>">
+            <input type="hidden" name="current-titolo" value="<%= gioco == null ? "" : gioco.getTitolo() %>">
+            <input type="hidden" name="current-descrizione" value="<%= gioco == null ? "" : gioco.getDescrizione() %>">
+            <input type="hidden" name="current-trailer" value="<%= gioco == null ? "" : gioco.getTrailer() %>">
+            <input type="hidden" name="current-data" value="<%= gioco == null ? "" : gioco.getData_uscita() %>">
+            <input type="hidden" name="current-copertina" value="<%= gioco == null ? "" : gioco.getCopertina() %>">
+            <input type="hidden" name="current-prezzo" value="<%= gioco == null ? "" : gioco.getPrezzo() %>">
+            <input type="hidden" name="current-quantita" value="<%= gioco == null ? "" : gioco.getQuantita_disponibile() %>">
+            <input type="hidden" name="current-sconto" value="<%= gioco == null ? "" : gioco.getPercentuale_sconto() %>">
+
             <div class="row">
-                <input type="text" class="form-control" name="codice" value="<%= gioco == null ? "" : gioco.getCodice_gioco() %>" placeholder="Codice" required minlength="6" maxlength="6">
-                <input type="text" class="form-control" name="titolo" value="<%= gioco == null ? "" : gioco.getTitolo() %>" placeholder="Titolo" required>
+                <fieldset class="no-border">
+                    <legend>Codice Gioco</legend>
+                    <input type="text" class="form-control" name="codice" value="<%= gioco == null ? "" : gioco.getCodice_gioco() %>" placeholder="Codice" required minlength="6" maxlength="6">
+                </fieldset>
+                <fieldset class="no-border">
+                    <legend>Titolo</legend>
+                    <input type="text" class="form-control" name="titolo" value="<%= gioco == null ? "" : gioco.getTitolo() %>" placeholder="Titolo" required>
+                </fieldset>
             </div>
+
             <div class="row">
-                <textarea name="descrizione" required placeholder="Descrizione..." cols="30" rows="10" class="form-control"><%= gioco == null ? "" : gioco.getDescrizione() %></textarea>
+                <fieldset class="no-border">
+                    <legend>Descrizione</legend>
+                    <textarea name="descrizione" required placeholder="Descrizione..." cols="30" rows="10" class="form-control"><%= gioco == null ? "" : gioco.getDescrizione() %></textarea>
+                </fieldset>
             </div>
+
             <div class="row">
-                <input type="text" name="trailer" placeholder="Trailer: Inserisci Link" required maxlength="2048" class="form-control" value="<%= gioco == null ? "" : gioco.getTrailer() %>">
-                <input type="text" name="copertina" placeholder="Copertina: Inserisci Link" required maxlength="2048" class="form-control" value="<%= gioco == null ? "" : gioco.getCopertina() %>">
+                <fieldset class="no-border">
+                    <legend>Trailer</legend>
+                    <input type="text" name="trailer" placeholder="Trailer: Inserisci Link" required maxlength="2048" class="form-control" value="<%= gioco == null ? "" : gioco.getTrailer() %>">
+                </fieldset>
+                <fieldset class="no-border">
+                    <legend>Copertina</legend>
+                    <input type="text" name="copertina" placeholder="Copertina: Inserisci Link" required maxlength="2048" class="form-control" value="<%= gioco == null ? "" : gioco.getCopertina() %>">
+                </fieldset>
             </div>
+
             <div class="row">
-                <input type="number" name="prezzo" class="form-control" placeholder="Prezzo" min="0.01" step="any" required value="<%= gioco == null ? "" : gioco.getPrezzo() %>">
-                <input type="number" name="quantita" class="form-control" placeholder="Quantità disponibile" min="0" required step="1" value="<%= gioco == null ? "" : gioco.getQuantita_disponibile() %>">
+                <fieldset class="no-border">
+                    <legend>Prezzo</legend>
+                    <input type="number" name="prezzo" class="form-control" placeholder="Prezzo" min="0.01" step="any" required value="<%= gioco == null ? "" : gioco.getPrezzo() %>">
+                </fieldset>
+                <fieldset class="no-border">
+                    <legend>Quantità disponibile</legend>
+                    <input type="number" name="quantita" class="form-control" placeholder="Quantità disponibile" min="0" required step="1" value="<%= gioco == null ? "" : gioco.getQuantita_disponibile() %>">
+                </fieldset>
             </div>
+
             <div class="row">
-                <input type="date" name="data_uscita" class="form-control" required value="<%= gioco == null ? "" : new SimpleDateFormat("y-M-d").format(gioco.getData_uscita())%>">
-                <input type="number" name="sconto" class="form-control" placeholder="Sconto" step="any" max="100" min="1">
+                <fieldset class="no-border">
+                    <legend>Data di uscita</legend>
+                    <input type="date" name="data_uscita" class="form-control"  required value="<%= gioco == null ? "" : new SimpleDateFormat("yyyy-MM-dd").format(gioco.getData_uscita())%>">
+                </fieldset>
+                <fieldset class="no-border">
+                    <legend>Percentuale sconto</legend>
+                    <input type="number" name="sconto" class="form-control" placeholder="Sconto" step="any" max="100" min="1" value="<%= gioco == null ? "" : gioco.getPercentuale_sconto() %>">
+                </fieldset>
             </div>
+
             <div class="row">
+<<<<<<< HEAD
                 <select name="generi[]" class="form-control" multiple >
                     <% if (gioco == null || gioco_generi.isEmpty()) {%>
                         <% for (Genere genere : generi) { %>
                             <option value="<%= genere.getNome_genere() %>"><%= genere.getNome_genere() %></option>
+=======
+                <fieldset class="no-border">
+                    <legend>Generi</legend>
+                    <select name="generi[]" class="form-control" multiple id="select-generi">
+                        <% if (gioco == null || gioco_generi.isEmpty()) {%>
+                            <% for (Genere genere : generi) { %>
+                                <option value="<%= genere.getNome_genere() %>"><%= genere.getNome_genere() %></option>
+                            <% } %>
+                        <% } else { %>
+                            <% for (Genere genere : generi) { %>
+                                <option value="<%= genere.getNome_genere() %>" <%= gioco_generi.stream().anyMatch(g -> g.getNome_genere().equals(genere.getNome_genere())) ? "selected" : "" %>><%= genere.getNome_genere() %></option>
+                            <% } %>
+>>>>>>> 535e01ff4bfd8893125e2491c043d5d2257ee14b
                         <% } %>
-                    <% } else { %>
-                        <% for (Genere genere : generi) { %>
-                            <option value="<%= genere.getNome_genere() %>" <%= gioco_generi.stream().anyMatch(g -> g.getNome_genere().equals(genere.getNome_genere())) ? "selected" : "" %>><%= genere.getNome_genere() %></option>
-                        <% } %>
-                    <% } %>
-                </select>
+                    </select>
+                </fieldset>
             </div>
         </div>
         <div class="form-footer">
