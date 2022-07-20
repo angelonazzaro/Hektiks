@@ -79,7 +79,7 @@
                 </fieldset>
                 <fieldset class="no-border">
                     <legend class="text">Percentuale sconto</legend>
-                    <input type="number" name="sconto" class="form-control" placeholder="Sconto" step="any" max="100" min="1" value="<%= gioco == null ? "" : gioco.getPercentuale_sconto() %>">
+                    <input type="number" name="sconto" class="form-control" placeholder="Sconto" step="any" max="100" min="0" value="<%= gioco == null ? "" : gioco.getPercentuale_sconto() %>">
                 </fieldset>
             </div>
 

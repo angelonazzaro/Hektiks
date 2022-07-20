@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Genere.Genere;
 import Model.Genere.GenereDAO;
 import Model.GiftCard.GiftCard;
 import Model.GiftCard.GiftCardDAO;
@@ -269,6 +270,8 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
             }
         } else if (action.equals("edit")) {
 
+            boolean update = false;
+
             String currentCode = request.getParameter("current-code");
             String currentTitolo = request.getParameter("current-titolo");
             String currentDescrizione = request.getParameter("current-descrizione");
@@ -280,24 +283,109 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
             double currentSconto = Double.parseDouble(request.getParameter("current-sconto"));
 
             HashMap<String, Object> map = new HashMap<>();
-            map.put("codice_gioco", newCodice);
-            map.put("titolo", newTitolo);
-            map.put("descrizione", newDescrizione);
-            map.put("trailer", newTrailer);
-            map.put("copertina", newCopertina);
-            map.put("prezzo", newPrezzo);
-            map.put("quantita_disponibile", newQuantita);
-            map.put("data_uscita", newData_uscita);
-            map.put("percentuale_sconto", newSconto);
+
+            if (newCodice != null && !newCodice.equals("")) {
+                if (!newCodice.equals(currentCode)) {
+                    map.put("codice_gioco", newCodice);
+                    update = true;
+                }
+            }
+
+            if (newTitolo != null && !newTitolo.equals("")) {
+                if (!newTitolo.equals(currentTitolo)) {
+                    map.put("titolo", newTitolo);
+                    update = true;
+                }
+            }
+
+            if (newDescrizione != null && !newDescrizione.equals("")) {
+                if (!newDescrizione.equals(currentDescrizione)) {
+                    map.put("descrizione", newDescrizione);
+                    update = true;
+                }
+            }
+
+            if (newTrailer != null && !newTrailer.equals("")) {
+                if (!newTrailer.equals(currentTrailer)) {
+                    map.put("trailer", newTrailer);
+                    update = true;
+                }
+            }
+
+            if (newCopertina != null && !newCopertina.equals("")) {
+                if (!newCopertina.equals(currentCopertina)) {
+                    map.put("copertina", newCopertina);
+                    update = true;
+                }
+            }
+
+            if (newPrezzo >= 0) {
+                if (newPrezzo != currentPrezzo) {
+                    map.put("prezzo", newPrezzo);
+                    update = true;
+                }
+            }
+
+            if (newQuantita >= 0) {
+                if (newQuantita != currentQuantita) {
+                    map.put("quantita_disponibile", newQuantita);
+                    update = true;
+                }
+            }
+
+            if (newData_uscita != null && !newData_uscita.equals("")) {
+                if (!newData_uscita.equals(currentData_uscita)) {
+                    map.put("data_uscita", Date.valueOf(newData_uscita));
+                    update = true;
+                }
+            }
+
+            if (newSconto >= 0) {
+                if (newSconto != currentSconto) {
+                    map.put("percentuale_sconto", newSconto);
+                    update = true;
+                }
+            }
+
+            Gioco_GenereDAO gioco_genereDAO = new Gioco_GenereDAO(source);
 
             try {
-                if (giocoDAO.doUpdate(map, "codice_gioco = '" + currentCode + "'")) {
 
-                    salvaGeneri(request, newCodice, source, true);
+                List<Gioco_Genere> generi = gioco_genereDAO.doRetrieveByCondition("codice_gioco = '" + currentCode + "'");
+                String[] newGeneri = request.getParameterValues("generi[]");
 
-                    session.setAttribute("msg-success", "Gioco modificato correttamente!");
-                }else
-                    session.setAttribute("msg-error", "Qualcosa è andato storto!");
+                if (generi.size() != newGeneri.length)
+                    update = true;
+                else {
+                    // Controllo se i generi sono effettivamente diversi
+                    // L'ordine potrebbe essere cambiato o ci potrebbero essere dei generi che potrebbero interferire con l'ordinameto normale
+                    // Per questo motivo il ciclo for annidato
+                    for (Gioco_Genere gioco_genere : generi) {
+                        boolean found = false;
+                        for (String genere : newGeneri) {
+                            if (!gioco_genere.getNome_genere().equals(genere)) {
+                                found = true;
+                                break;
+                            }
+                        }
+
+                        if (found) {
+                            update = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (update) {
+                    if (giocoDAO.doUpdate(map, "codice_gioco = '" + currentCode + "'")) {
+
+                        salvaGeneri(request, newCodice, source, true);
+
+                        session.setAttribute("msg-success", "Gioco modificato correttamente!");
+                    } else
+                        session.setAttribute("msg-error", "Qualcosa è andato storto!");
+                }
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -333,8 +421,7 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
             try {
 
                 newPassword = PasswordEncrypt.sha1(request.getParameter("password"));
-            }
-            catch (NoSuchAlgorithmException e) {
+            } catch (NoSuchAlgorithmException e) {
                 e.printStackTrace();
             }
 
@@ -354,7 +441,7 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
 
             } else {
 
-                if(!currentUsername.equals(newUsername)){
+                if (!currentUsername.equals(newUsername)) {
                     map.put("username", newUsername);
                     update = true;
                 }
@@ -370,7 +457,7 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
                 return;
             } else {
 
-                if(!currentEmail.equals(newEmail)){
+                if (!currentEmail.equals(newEmail)) {
                     map.put("email", newEmail);
                     update = true;
                 }
@@ -386,7 +473,7 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
                 return;
             }
 
-            if(!currentPassword.equals(newPassword)){
+            if (!currentPassword.equals(newPassword)) {
                 map.put("password_utente", newPassword);
                 update = true;
             }
@@ -394,7 +481,7 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
 
         try {
 
-            if(update)
+            if (update)
                 utenteDAO.doUpdate(map, "email = '" + currentEmail + "'");
             session.setAttribute("msg-success", "Profilo aggiornato con successo!");
 
