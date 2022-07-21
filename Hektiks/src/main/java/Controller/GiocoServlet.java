@@ -39,8 +39,10 @@ public class GiocoServlet extends HttpServlet {
                 Gioco gioco = giocoDAO.doRetrieveByKey(codiceGioco);
 
                 if (gioco == null) {
+
                     response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                     request.getRequestDispatcher("/ErrorHandlerServlet").forward(request, response);
+                    //return;
                 }
 
                 RecensioneDAO recensioneDAO = new RecensioneDAO(source);

@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.Carrello.Carrello;
+import Model.Carrello.CarrelloDAO;
 import Model.Gioco.Gioco;
 import Model.Gioco.GiocoDAO;
 import Model.Prodotto.Prodotto;
@@ -85,9 +87,11 @@ public class CarrelloServlet extends HttpServlet {
             // La sessione esiste e l'utente è loggato
 
             Utente utente = (Utente) session.getAttribute("user");
+            CarrelloDAO carrelloDAO = new CarrelloDAO(source);
             ProdottoDAO prodottoDAO = new ProdottoDAO(source);
 
             try {
+                Carrello carrello = carrelloDAO.doRetrieveByKey(utente.getEmail());
 
                 // Ci sono due scenari: 1) è un nuovo prodotto 2) è un prodotto già presente nel carrello
                 // Nello scenario 1 bisogna salvare in db il nuovo prodotto e aggiungerlo al carrello

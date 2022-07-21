@@ -26,4 +26,3 @@ public class Gioco_GenereExtractor implements ResultSetExtractor<Gioco_Genere> {
         return gioco_genere;
     }
 }
-

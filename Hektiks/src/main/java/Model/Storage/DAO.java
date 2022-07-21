@@ -40,7 +40,7 @@ public interface DAO<T> {
 
     default <E extends ResultSetExtractor<T>> List<T> genericDoRetrieveByCondition(String table, String condition, E extractor, DataSource source) throws SQLException {
 
-        final List<T> entity = new ArrayList<T>();
+        final List<T> entity = new ArrayList<>();
 
         try (Connection conn = source.getConnection()) {
 
@@ -61,7 +61,7 @@ public interface DAO<T> {
 
     default <E extends ResultSetExtractor<T>> List<T> genericDoRetrieveByJoin(String table, String joinType, String joinCondition, String condition, E extractor, DataSource source, String... tables) throws SQLException {
 
-        final List<T> entity = new ArrayList<T>();
+        final List<T> entity = new ArrayList<>();
 
         try (Connection conn = source.getConnection()) {
 

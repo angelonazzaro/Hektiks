@@ -62,7 +62,7 @@ public class RecensioneServlet extends HttpServlet {
 
     }
 
-    protected synchronized void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected synchronized void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         Logger.consoleLog(Logger.INFO, "RECENSIONE SERVLET DO POST");
 
@@ -94,7 +94,7 @@ public class RecensioneServlet extends HttpServlet {
         Prodotto_OrdineDAO prodotto_ordineDAO = new Prodotto_OrdineDAO(source);
 
         try {
-            List<Prodotto_Ordine> prodotto_ordine = (List<Prodotto_Ordine>) prodotto_ordineDAO.doRetrieveByCondition("email_utente = '" + utente.getEmail() + "' AND codice_gioco = '" + codiceGioco + "'");
+            List<Prodotto_Ordine> prodotto_ordine = prodotto_ordineDAO.doRetrieveByCondition("email_utente = '" + utente.getEmail() + "' AND codice_gioco = '" + codiceGioco + "'");
 
             if (prodotto_ordine == null || prodotto_ordine.size() == 0) {
                 out.write(gson.toJson(new JSONResponse<String>("error", "Devi acquistare il gioco per poter lasciare una recensione")));
