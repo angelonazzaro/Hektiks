@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import static Model.Storage.Entities.*;
+import static Model.Storage.Entities.GIOCHI_GENERE;
 
 public class Gioco_GenereDAO extends SQLDAO implements DAO<Gioco_Genere> {
 
@@ -37,7 +37,7 @@ public class Gioco_GenereDAO extends SQLDAO implements DAO<Gioco_Genere> {
 
         List<Gioco_Genere> gioco_Genere = doRetrieveByCondition(
                 String.format("%s.codice_gioco = '%s' AND %s.nome_genere = '%s'", GIOCHI_GENERE, key[0], GIOCHI_GENERE,
-                    key[1]));
+                        key[1]));
         return gioco_Genere.isEmpty() ? null : gioco_Genere.get(0);
     }
 

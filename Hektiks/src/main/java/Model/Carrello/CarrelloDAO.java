@@ -32,14 +32,14 @@ public class CarrelloDAO extends SQLDAO implements DAO<Carrello> {
     @Override
     public Carrello doRetrieveByKey(String... key) throws SQLException, InvalidPrimaryKeyException {
 
-        if(key == null || key.length == 0 || key.length > 2)
+        if (key == null || key.length == 0 || key.length > 2)
             throw new InvalidPrimaryKeyException();
 
         List<Carrello> carrello;
 
         if (key.length == 2)
             carrello = doRetrieveByCondition(
-                String.format("%s.email_utente = '%s' AND %s.data_creazione = '%s'", CARRELLI, key[0], CARRELLI, key[1]));
+                    String.format("%s.email_utente = '%s' AND %s.data_creazione = '%s'", CARRELLI, key[0], CARRELLI, key[1]));
         else carrello = doRetrieveByCondition(
                 String.format("%s.email_utente = '%s'", CARRELLI, key[0]));
 

@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-
 import static Model.Storage.Entities.GIOCHI;
 
 public class GiocoDAO extends SQLDAO implements DAO<Gioco> {
@@ -24,7 +23,7 @@ public class GiocoDAO extends SQLDAO implements DAO<Gioco> {
         return genericDoRetrieveByCondition(GIOCHI, condition, new GiocoExtractor(), this.source);
     }
 
-    @Override 
+    @Override
     public List<Gioco> doRetrieveByJoin(String joinType, String joinCondition, String condition, String... tables) throws SQLException {
 
         return genericDoRetrieveByJoin(GIOCHI, joinType, joinCondition, condition, new GiocoExtractor(), this.source, tables);
@@ -33,7 +32,7 @@ public class GiocoDAO extends SQLDAO implements DAO<Gioco> {
     @Override
     public Gioco doRetrieveByKey(String... key) throws SQLException {
 
-        if(key == null || key.length != 1)
+        if (key == null || key.length != 1)
             throw new InvalidPrimaryKeyException();
 
         List<Gioco> gioco = doRetrieveByCondition(

@@ -1,11 +1,5 @@
 <%@ page import="java.util.List" %>
-<%@ page import="Model.Utente.Utente" %><%--
-  Created by IntelliJ IDEA.
-  User: Panin
-  Date: 16/07/2022
-  Time: 09:05
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="Model.Utente.Utente" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% List<Utente> utenti = (List<Utente>) request.getAttribute("utenti"); %>
 

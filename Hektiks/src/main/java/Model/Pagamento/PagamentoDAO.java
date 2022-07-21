@@ -80,7 +80,7 @@ public class PagamentoDAO extends SQLDAO implements DAO<Pagamento> {
 
         return doUpdate(obj.toHashMap(),
                 String.format("%s.email_utente = '%s' AND %s.codice_ordine = '%s' AND %s.data_ora_pagamento = '%s'",
-                    PAGAMENTI, obj.getEmail_utente(), PAGAMENTI, obj.getCodice_ordine(), PAGAMENTI,  obj.getData_ora_pagamento().toString()));
+                        PAGAMENTI, obj.getEmail_utente(), PAGAMENTI, obj.getCodice_ordine(), PAGAMENTI, obj.getData_ora_pagamento().toString()));
     }
 
     @Override

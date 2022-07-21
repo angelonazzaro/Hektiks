@@ -4,13 +4,7 @@
 <%@ page import="Model.Gioco_Genere.Gioco_Genere" %>
 <%@ page import="Model.Recensione.Recensione" %>
 <%@ page import="Model.Utente.Utente" %>
-<%@ page import="java.util.stream.Collectors" %><%--
-  Created by IntelliJ IDEA.
-  User: Panin
-  Date: 12/06/2022
-  Time: 11:21
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.util.stream.Collectors" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% Gioco gioco = (Gioco) request.getAttribute("gioco"); %>
 <% List<Gioco_Genere> generi = (List<Gioco_Genere>) request.getAttribute("generi"); %>

@@ -1,12 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="Model.GiftCard.GiftCard" %>
-<%@ page import="java.text.SimpleDateFormat" %><%--
-  Created by IntelliJ IDEA.
-  User: Panin
-  Date: 16/07/2022
-  Time: 13:52
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% List<GiftCard> giftCards = (List<GiftCard>) request.getAttribute("giftCards"); %>
 

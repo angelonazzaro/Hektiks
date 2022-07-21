@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.HashMap;
 import java.util.List;
 
 import static Model.Storage.Entities.RECENSIONI;
@@ -45,7 +44,8 @@ public class RecensioneServlet extends HttpServlet {
                 return;
             }
 
-            List<Recensione> recensioni = new RecensioneDAO(source).doRetrieveByJoin("inner", String.format("%s ON %s.email = %s.email_utente", UTENTI, UTENTI, RECENSIONI), String.format("%s.codice_gioco = '%s' ORDER BY voto ASC", RECENSIONI, codice_gioco), UTENTI);;
+            List<Recensione> recensioni = new RecensioneDAO(source).doRetrieveByJoin("inner", String.format("%s ON %s.email = %s.email_utente", UTENTI, UTENTI, RECENSIONI), String.format("%s.codice_gioco = '%s' ORDER BY voto ASC", RECENSIONI, codice_gioco), UTENTI);
+
 
             request.setAttribute("title", gioco.getTitolo() + " | Recensioni");
             request.setAttribute("page", "giochi/recensioni.jsp");
@@ -75,8 +75,8 @@ public class RecensioneServlet extends HttpServlet {
         Gson gson = new Gson();
 
         if (session == null || session.getAttribute("user") == null) {
-           out.write(gson.toJson(new JSONResponse<String>("error", "Devi accedere per poter lasciare una recensione")));
-           return;
+            out.write(gson.toJson(new JSONResponse<String>("error", "Devi accedere per poter lasciare una recensione")));
+            return;
         }
 
         Utente utente = (Utente) session.getAttribute("user");
@@ -113,7 +113,7 @@ public class RecensioneServlet extends HttpServlet {
 
             recensioneDAO.doDelete("email_utente = '" + utente.getEmail() + "' AND codice_gioco = '" + codiceGioco + "'");
 
-            Recensione recensione =  new Recensione();
+            Recensione recensione = new Recensione();
             recensione.setEmail_utente(utente.getEmail());
             recensione.setCodice_gioco(codiceGioco);
             recensione.setData_ora_pubblicazione(date);

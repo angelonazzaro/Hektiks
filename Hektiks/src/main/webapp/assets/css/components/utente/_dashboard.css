@@ -1,237 +1,237 @@
 /* USER OVERVIEW HEADER */
 .user-general-info {
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin: 2rem 0 4rem 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 0 4rem 0;
 }
 
 .user-card-header {
-	text-align: center;
-	margin-bottom: 1rem;
+    text-align: center;
+    margin-bottom: 1rem;
 }
 
 .user-card-header > img {
-	max-width: 22.5%;
-	border-radius: 25px;
-	object-fit: contain;
+    max-width: 22.5%;
+    border-radius: 25px;
+    object-fit: contain;
 }
 
 .user-card-body {
-	text-align: center;
+    text-align: center;
 }
 
 .user-overview {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
 }
 
 /* DASHBOARD */
 .breadcrumb {
-	display: flex;
-	list-style: none;
-	position: relative;
-	width: 100%;
-	align-items: center;
-	justify-content: space-between;
-	color: white;
+    display: flex;
+    list-style: none;
+    position: relative;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
 }
 
 .breadcrumb::after {
-	content: "";
-	position: absolute;
-	bottom: -1rem;
-	width: 100%;
-	height: 2px;
-	background-color: white;
+    content: "";
+    position: absolute;
+    bottom: -1rem;
+    width: 100%;
+    height: 2px;
+    background-color: white;
 }
 
 .user-links {
-	list-style: none;
-	display: flex;
-	align-items: center;
-	gap: 6rem;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 6rem;
 }
 
 .user-link {
-	transition: color 200ms ease;
+    transition: color 200ms ease;
 }
 
 .user-link:hover {
-	color: var(--orange);
+    color: var(--orange);
 }
 
 .user-link.active {
-	color: var(--orange);
+    color: var(--orange);
 }
 
 .user-settings-preview {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .user-settings-preview i {
-	color: var(--orange);
-	margin-right: 1rem;
+    color: var(--orange);
+    margin-right: 1rem;
 }
 
 .dashboard-container {
-	margin-top: 7.5rem;
-	min-height: inherit;
-	width: 100%;
+    margin-top: 7.5rem;
+    min-height: inherit;
+    width: 100%;
 }
 
 .dashboard-content {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	justify-content: space-between;
-	gap: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
 }
 
 .dashboard-card {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	border-radius: 25px;
-	background-color: var(--header-bg);
-	min-height: 30vh;
-	width: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 25px;
+    background-color: var(--header-bg);
+    min-height: 30vh;
+    width: 45%;
 }
 
 .dashboard-card-header,
 .dashboard-card-body {
-	width: 30%;
+    width: 30%;
 }
 
 .dashboard-card-header {
-	text-align: center;
+    text-align: center;
 }
 
 .dashboard-card-header > img {
-	object-fit: contain;
-	max-width: 25%;
-	margin-bottom: 1rem;
+    object-fit: contain;
+    max-width: 25%;
+    margin-bottom: 1rem;
 }
 
 .dashboard-card-body > hr {
-	margin: 1rem 0;
+    margin: 1rem 0;
 }
 
 .overview-card {
-	background-color: black;
-	width: 100%;
-	min-height: 35vh;
+    background-color: black;
+    width: 100%;
+    min-height: 35vh;
 }
 
 .overview-card > .dashboard-card-header > img {
-	max-width: 10%;
+    max-width: 10%;
 }
 
 .overview-card-content {
-	display: flex;
-	width: 100%;
-	align-items: center;
-	justify-content: center;
-	gap: 5rem;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 5rem;
 }
 
 .overview-info {
-	text-align: center;
+    text-align: center;
 }
 
 .dashboard-card-body {
-	text-align: center;
+    text-align: center;
 }
 
 .giftcards {
-	width: 100%;
+    width: 100%;
 }
 
 .giftcards img {
-	max-width: 10%;
+    max-width: 10%;
 }
 
 .giftcards form {
-	margin-top: 2rem;
-	width: 100%;
+    margin-top: 2rem;
+    width: 100%;
 }
 
 .giftcards .form-control {
-	margin-right: 2rem;
+    margin-right: 2rem;
 }
 
 .overview-info > p:nth-child(2) {
-	color: var(--grey);
+    color: var(--grey);
 }
 
 @media only screen and (max-width: 1300px) {
-	.overview-card > .dashboard-card-header > img, .giftcards img {
-		max-width: 15%;
-	}
+    .overview-card > .dashboard-card-header > img, .giftcards img {
+        max-width: 15%;
+    }
 }
 
 @media only screen and (max-width: 1124px) {
 
-	.giftcards .form-control {
-		margin: 0;
-	}
+    .giftcards .form-control {
+        margin: 0;
+    }
 
-	.giftcards .dashboard-card-body {
-		width: 40%;
-	}
+    .giftcards .dashboard-card-body {
+        width: 40%;
+    }
 
-	.giftcards form {
-		padding-bottom: 1rem;
-	}
+    .giftcards form {
+        padding-bottom: 1rem;
+    }
 
-	.giftcards form .row {
-		flex-wrap: wrap;
-		justify-content: center;
-		gap: 2rem;
-	}
+    .giftcards form .row {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+    }
 
-	.giftcards form .btn {
-		width: 100%;
-	}
+    .giftcards form .btn {
+        width: 100%;
+    }
 }
 
 @media only screen and (max-width: 800px) {
-	.overview-card > .dashboard-card-header > img, .giftcards img {
-		max-width: 20%;
-	}
+    .overview-card > .dashboard-card-header > img, .giftcards img {
+        max-width: 20%;
+    }
 
-	.dashboard-card {
-		width: 100%;
-	}
+    .dashboard-card {
+        width: 100%;
+    }
 }
 
 @media only screen and (max-width: 630px) {
 
-	.wrapper {
-		overflow-x: auto;
-	}
+    .wrapper {
+        overflow-x: auto;
+    }
 
-	.breadcrumb {
-		flex-wrap: wrap;
-	}
+    .breadcrumb {
+        flex-wrap: wrap;
+    }
 
-	.user-settings-preview {
-		position: relative;
-		margin-top: 2rem;
-		transform: translateX(-50%);
-		left: 50%;
-	}
+    .user-settings-preview {
+        position: relative;
+        margin-top: 2rem;
+        transform: translateX(-50%);
+        left: 50%;
+    }
 }
 
 @media only screen and (max-width: 500px) {
-	.overview-card > .dashboard-card-header > img, .giftcards img {
-		max-width: 30%;
-	}
+    .overview-card > .dashboard-card-header > img, .giftcards img {
+        max-width: 30%;
+    }
 }

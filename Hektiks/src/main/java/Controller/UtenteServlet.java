@@ -186,7 +186,7 @@ public class UtenteServlet extends HttpServlet implements LoginChecker {
                 return;
             } else {
 
-                if(!username.equals(utente.getUsername())){
+                if (!username.equals(utente.getUsername())) {
                     utente.setUsername(username);
                     map.put("username", utente.getUsername());
                     update = true;
@@ -203,7 +203,7 @@ public class UtenteServlet extends HttpServlet implements LoginChecker {
                 return;
             } else {
 
-                if(!email.equals(utente.getEmail())){
+                if (!email.equals(utente.getEmail())) {
                     utente.setEmail(email);
                     map.put("email", utente.getEmail());
                     update = true;
@@ -221,7 +221,7 @@ public class UtenteServlet extends HttpServlet implements LoginChecker {
 
             try {
 
-                if(!PasswordEncrypt.sha1(password).equals(utente.getPassword_utente())){
+                if (!PasswordEncrypt.sha1(password).equals(utente.getPassword_utente())) {
 
                     utente.setPassword_utente(password);
                     map.put("password_utente", utente.getPassword_utente());
@@ -236,7 +236,7 @@ public class UtenteServlet extends HttpServlet implements LoginChecker {
 
         try {
 
-            if(update)
+            if (update)
                 utenteDAO.doUpdate(map, "email = '" + currentEmail + "'");
 
             session.setAttribute("user", utente);

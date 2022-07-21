@@ -2,13 +2,7 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="Model.Genere.Genere" %>
 <%@ page import="java.util.List" %>
-<%@ page import="Model.Gioco_Genere.Gioco_Genere" %><%--
-  Created by IntelliJ IDEA.
-  User: Panin
-  Date: 16/07/2022
-  Time: 13:52
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="Model.Gioco_Genere.Gioco_Genere" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% Gioco gioco = (Gioco) request.getAttribute("gioco"); %>
 <% List<Gioco_Genere> gioco_generi = (List<Gioco_Genere>) request.getAttribute("gioco_generi"); %>

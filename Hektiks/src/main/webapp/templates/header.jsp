@@ -1,12 +1,6 @@
 <%@ page import="Model.Utente.Utente" %>
 <%@ page import="Model.Carrello.Carrello" %>
-<%@ page import="java.io.File" %><%--
-  Created by IntelliJ IDEA.
-  User: Panin
-  Date: 26/04/2022
-  Time: 22:54
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.io.File" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% Utente user = (Utente) session.getAttribute("user"); %>
 <!DOCTYPE html>
@@ -22,7 +16,7 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
 
     <title><%= request.getAttribute("title") %>
     </title>

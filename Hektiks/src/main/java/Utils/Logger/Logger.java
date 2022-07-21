@@ -8,7 +8,7 @@ public class Logger {
 
     public static void consoleLog(String logType, String message) {
 
-        if(log)
-            System.out.println("[" + logType +  "] " + "[" + message +"]");
+        if (log)
+            System.out.println("[" + logType + "] " + "[" + message + "]");
     }
 }

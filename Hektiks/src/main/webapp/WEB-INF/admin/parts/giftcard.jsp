@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Panin
-  Date: 16/07/2022
-  Time: 14:11
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="settings-wrapper dashboard-container">
     <h1 class="hs-3">Form di aggiunta: GiftCard</h1>
@@ -14,7 +8,8 @@
             <input type="hidden" name="componente" value="giftcard">
 
             <div class="row">
-                <input type="text" class="form-control" name="codice" placeholder="Codice" required minlength="6" maxlength="6">
+                <input type="text" class="form-control" name="codice" placeholder="Codice" required minlength="6"
+                       maxlength="6">
             </div>
             <div class="row">
                 <input type="number" name="importo" class="form-control" placeholder="Importo" step="any" min="0.01">

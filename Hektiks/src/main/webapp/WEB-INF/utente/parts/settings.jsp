@@ -1,10 +1,4 @@
-<%@ page import="Model.Utente.Utente" %><%--
-  Created by IntelliJ IDEA.
-  User: Panin
-  Date: 14/07/2022
-  Time: 10:03
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="Model.Utente.Utente" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <% Utente utente = (Utente) session.getAttribute("user"); %>

@@ -6,7 +6,6 @@ import Model.Storage.IEntity;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.List;
 
 public class Genere extends GenericBean implements Serializable, IEntity {
 

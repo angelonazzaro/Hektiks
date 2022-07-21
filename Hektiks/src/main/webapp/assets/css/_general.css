@@ -100,7 +100,7 @@ a {
     transition: border-color 200ms ease;
 }
 
-.no-border{
+.no-border {
     margin-inline-start: 0;
     margin-inline-end: 0;
     padding-block-start: 0;

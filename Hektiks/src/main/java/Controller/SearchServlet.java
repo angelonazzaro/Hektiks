@@ -4,7 +4,6 @@ import Model.Gioco.Gioco;
 import Model.Gioco.GiocoDAO;
 import Utils.Logger.Logger;
 import com.google.gson.Gson;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

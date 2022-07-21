@@ -14,7 +14,6 @@ import Model.Utente.Utente;
 import Model.Utente.UtenteDAO;
 import Utils.Logger.Logger;
 import Utils.LoginChecker;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -31,11 +30,12 @@ import java.util.Random;
 
 public class AcquistoServlet extends HttpServlet implements LoginChecker {
 
-    protected synchronized void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected synchronized void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         Logger.consoleLog(Logger.INFO, "ACQUISTO SERVLET DO POST");
 
-        if (!controllaSeLoggato(request, response, "Per poter effettuare un acquisto devi accedere al tuo account", false)) return;
+        if (!controllaSeLoggato(request, response, "Per poter effettuare un acquisto devi accedere al tuo account", false))
+            return;
 
         String from = request.getParameter("from");
 
@@ -48,7 +48,7 @@ public class AcquistoServlet extends HttpServlet implements LoginChecker {
         List<Gioco> giochiDaAcquistare = new ArrayList<>();
         DataSource source = (DataSource) getServletContext().getAttribute("DataSource");
         GiocoDAO giocoDAO = new GiocoDAO(source);
-        double prezzoTotale = 0, prezzoGioco = 0;
+        double prezzoTotale = 0, prezzoGioco;
         Gioco gioco = null;
         HttpSession session = request.getSession();
         HashMap<String, Integer> carrello = (HashMap<String, Integer>) session.getAttribute("carrello");

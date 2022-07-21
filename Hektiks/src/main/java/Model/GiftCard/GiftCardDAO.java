@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import static Model.Storage.Entities.*;
+import static Model.Storage.Entities.GIFTCARDS;
 
 public class GiftCardDAO extends SQLDAO implements DAO<GiftCard> {
 
@@ -32,7 +32,7 @@ public class GiftCardDAO extends SQLDAO implements DAO<GiftCard> {
     @Override
     public GiftCard doRetrieveByKey(String... key) throws SQLException {
 
-        if(key == null || key.length != 1)
+        if (key == null || key.length != 1)
             throw new InvalidPrimaryKeyException();
 
         List<GiftCard> giftCard = doRetrieveByCondition(

@@ -79,7 +79,7 @@ public class RecensioneDAO extends SQLDAO implements DAO<Recensione> {
 
         return doUpdate(obj.toHashMap(),
                 String.format("%s.email_utente = '%s' AND %s.data_creazione = '%s' AND %s.data_ora_pubblicazione = '%s'",
-                    RECENSIONI, obj.getEmail_utente(), RECENSIONI, obj.getCodice_gioco(), RECENSIONI, obj.getData_ora_pubblicazione().toString()));
+                        RECENSIONI, obj.getEmail_utente(), RECENSIONI, obj.getCodice_gioco(), RECENSIONI, obj.getData_ora_pubblicazione().toString()));
     }
 
     @Override

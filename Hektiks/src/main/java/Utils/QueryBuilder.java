@@ -201,8 +201,8 @@ public class QueryBuilder {
     /**
      * Appends a "limit" clause to a query.
      *
-     * @param offset Starting offset
-     * @param row_count   Ending offset
+     * @param offset    Starting offset
+     * @param row_count Ending offset
      * @return The {@link QueryBuilder} instance.
      */
     public QueryBuilder LIMIT(int offset, int row_count) {

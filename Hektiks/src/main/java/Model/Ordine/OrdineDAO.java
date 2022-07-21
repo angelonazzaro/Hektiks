@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import static Model.Storage.Entities.*;
+import static Model.Storage.Entities.ORDINI;
 
 public class OrdineDAO extends SQLDAO implements DAO<Ordine> {
 
@@ -79,7 +79,7 @@ public class OrdineDAO extends SQLDAO implements DAO<Ordine> {
 
         return doUpdate(obj.toHashMap(),
                 String.format("%s.email_utente = '%s' AND %s.codice_ordine = '%s'",
-                    ORDINI, obj.getEmail_utente(), ORDINI, obj.getCodice_ordine()));
+                        ORDINI, obj.getEmail_utente(), ORDINI, obj.getCodice_ordine()));
     }
 
     @Override

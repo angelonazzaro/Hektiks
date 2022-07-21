@@ -7,13 +7,7 @@
 <%@ page import="Model.Prodotto_Ordine.Prodotto_Ordine" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="Model.Gioco.Gioco" %>
-<%@ page import="java.io.PrintWriter" %><%--
-  Created by IntelliJ IDEA.
-  User: Panin
-  Date: 01/07/2022
-  Time: 09:25
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.io.PrintWriter" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% String partPath = (String) request.getAttribute("part"); %>
 <% Utente user = (Utente) session.getAttribute("user"); %>

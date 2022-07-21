@@ -2,12 +2,12 @@ package Utils;
 
 public class InvalidPrimaryKeyException extends RuntimeException {
 
-    public InvalidPrimaryKeyException(){
+    public InvalidPrimaryKeyException() {
 
         super("Chiave primaria invalida");
     }
 
-    public InvalidPrimaryKeyException(String message){
+    public InvalidPrimaryKeyException(String message) {
 
         super(message);
     }

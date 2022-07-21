@@ -41,13 +41,13 @@ public class CarrelloServlet extends HttpServlet {
 
             for (String codice_gioco : carrello.keySet()) {
                 try {
-                   giochi.add(giocoDAO.doRetrieveByKey(codice_gioco));
+                    giochi.add(giocoDAO.doRetrieveByKey(codice_gioco));
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
             }
 
-            request.setAttribute("giochiCarrello" , giochi);
+            request.setAttribute("giochiCarrello", giochi);
         }
 
         request.setAttribute("title", "Hektiks | Carrello");
@@ -58,7 +58,7 @@ public class CarrelloServlet extends HttpServlet {
         request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
     }
 
-    protected synchronized void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected synchronized void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         Logger.consoleLog(Logger.INFO, "CARRELLO SERVLET DO POST");
 
@@ -140,8 +140,7 @@ public class CarrelloServlet extends HttpServlet {
                 if (action.equals("update")) {
                     vecchia_quantita = giochiCarrello.get(codice_gioco);
                     giochiCarrello.replace(codice_gioco, quantita);
-                }
-                else
+                } else
                     giochiCarrello.replace(codice_gioco, giochiCarrello.get(codice_gioco) + quantita);
 
             } else

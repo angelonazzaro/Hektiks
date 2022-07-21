@@ -33,7 +33,7 @@
     font-size: calc(0.9em + 1vmin);
     width: 10%;
     height: 35px;
-    background-color: rgba(37,222,87,.1);
+    background-color: rgba(37, 222, 87, .1);
     color: #25de57;
     top: 0;
     right: 0;
@@ -41,7 +41,7 @@
     border-bottom-left-radius: 20px;
 }
 
-.game-order, .order-total, .game-order-separator, .order-info  {
+.game-order, .order-total, .game-order-separator, .order-info {
     width: 95%;
     margin: auto;
 }
@@ -99,9 +99,9 @@
 }
 
 @media only screen and (max-width: 700px) {
-   .game-info > div > p:nth-child(1) {
-       display: none;
-   }
+    .game-info > div > p:nth-child(1) {
+        display: none;
+    }
 }
 
 @media only screen and (max-width: 460px) {

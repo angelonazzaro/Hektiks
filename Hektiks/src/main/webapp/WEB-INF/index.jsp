@@ -1,12 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="Model.Gioco.Gioco" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Panin
-  Date: 26/04/2022
-  Time: 22:57
-  To change this template use File | Settings | File Templates.
---%>
+
 <% String pagePath = (String) request.getAttribute("page"); %>
 <% String[] scripts = (String[]) request.getAttribute("scripts"); %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>

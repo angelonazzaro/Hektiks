@@ -7,7 +7,6 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.HashMap;
-import java.util.List;
 
 public class Carrello extends GenericBean implements Serializable, IEntity {
 

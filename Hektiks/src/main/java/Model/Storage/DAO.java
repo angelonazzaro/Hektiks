@@ -5,7 +5,10 @@ import Utils.Logger.Logger;
 import Utils.QueryBuilder;
 
 import javax.sql.DataSource;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 
 
@@ -56,7 +59,7 @@ public interface DAO<T> {
         return entity;
     }
 
-    default <E extends ResultSetExtractor<T>> List<T> genericDoRetrieveByJoin(String table, String joinType, String joinCondition, String condition, E extractor, DataSource source, String...tables) throws SQLException {
+    default <E extends ResultSetExtractor<T>> List<T> genericDoRetrieveByJoin(String table, String joinType, String joinCondition, String condition, E extractor, DataSource source, String... tables) throws SQLException {
 
         final List<T> entity = new ArrayList<T>();
 

@@ -6,13 +6,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="Model.Prodotto_Ordine.Prodotto_Ordine" %><%--
-  Created by IntelliJ IDEA.
-  User: Panin
-  Date: 14/07/2022
-  Time: 09:34
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="Model.Prodotto_Ordine.Prodotto_Ordine" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% List<Ordine> ordini = (List<Ordine>) request.getAttribute("ordini"); %>
 <% Prodotto_OrdineDAO prodotto_ordineDAO = (Prodotto_OrdineDAO) request.getAttribute("prodottoOrdineDAO"); %>

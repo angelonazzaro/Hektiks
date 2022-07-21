@@ -1,11 +1,5 @@
 <%@ page import="Model.Gioco.Gioco" %>
-<%@ page import="java.util.List" %><%--
-  Created by IntelliJ IDEA.
-  User: Panin
-  Date: 16/06/2022
-  Time: 09:08
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% List<Gioco> giochi = (List<Gioco>) request.getAttribute("giochi"); %>
 

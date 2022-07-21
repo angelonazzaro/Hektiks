@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import static Model.Storage.Entities.*;
+import static Model.Storage.Entities.PRODOTTI;
 
 public class ProdottoDAO extends SQLDAO implements DAO<Prodotto> {
 
@@ -24,9 +24,9 @@ public class ProdottoDAO extends SQLDAO implements DAO<Prodotto> {
     }
 
     @Override
-    public  List<Prodotto> doRetrieveByJoin(String joinType, String joinCondition, String condition, String... tables) throws SQLException {
+    public List<Prodotto> doRetrieveByJoin(String joinType, String joinCondition, String condition, String... tables) throws SQLException {
 
-        return genericDoRetrieveByJoin(PRODOTTI, joinType, joinCondition,  condition, new ProdottoExtractor(), this.source, tables);
+        return genericDoRetrieveByJoin(PRODOTTI, joinType, joinCondition, condition, new ProdottoExtractor(), this.source, tables);
     }
 
     @Override
@@ -79,7 +79,7 @@ public class ProdottoDAO extends SQLDAO implements DAO<Prodotto> {
 
         return doUpdate(obj.toHashMap(),
                 String.format("%s.email_utente = '%s' AND %s.codice_gioco = '%s'",
-                    PRODOTTI, obj.getEmail_utente(), PRODOTTI, obj.getCodice_gioco()));
+                        PRODOTTI, obj.getEmail_utente(), PRODOTTI, obj.getCodice_gioco()));
     }
 
     @Override

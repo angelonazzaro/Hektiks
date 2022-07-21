@@ -2,13 +2,7 @@
 <%@ page import="Model.Recensione.Recensione" %>
 <%@ page import="java.util.List" %>
 <%@ page import="Model.Utente.Utente" %>
-<%@ page import="java.text.SimpleDateFormat" %><%--
-  Created by IntelliJ IDEA.
-  User: Panin
-  Date: 26/06/2022
-  Time: 14:28
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% Gioco gioco = (Gioco) request.getAttribute("gioco"); %>
 <% List<Recensione> recensioni = (List<Recensione>) request.getAttribute("recensioni"); %>
