@@ -24,6 +24,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -352,24 +353,26 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
                 List<Gioco_Genere> generi = gioco_genereDAO.doRetrieveByCondition("codice_gioco = '" + currentCode + "'");
                 String[] newGeneri = request.getParameterValues("generi[]");
 
-                if (generi.size() != newGeneri.length)
-                    update = true;
-                else {
-                    // Controllo se i generi sono effettivamente diversi
-                    // L'ordine potrebbe essere cambiato o ci potrebbero essere dei generi che potrebbero interferire con l'ordinameto normale
-                    // Per questo motivo il ciclo for annidato
-                    for (Gioco_Genere gioco_genere : generi) {
-                        boolean found = false;
-                        for (String genere : newGeneri) {
-                            if (!gioco_genere.getNome_genere().equals(genere)) {
-                                found = true;
+                if (newGeneri != null && generi != null) {
+                    if (generi.size() != newGeneri.length)
+                        update = true;
+                    else {
+                        // Controllo se i generi sono effettivamente diversi
+                        // L'ordine potrebbe essere cambiato o ci potrebbero essere dei generi che potrebbero interferire con l'ordinameto normale
+                        // Per questo motivo il ciclo for annidato
+                        for (Gioco_Genere gioco_genere : generi) {
+                            boolean found = false;
+                            for (String genere : newGeneri) {
+                                if (!gioco_genere.getNome_genere().equals(genere)) {
+                                    found = true;
+                                    break;
+                                }
+                            }
+
+                            if (found) {
+                                update = true;
                                 break;
                             }
-                        }
-
-                        if (found) {
-                            update = true;
-                            break;
                         }
                     }
                 }
@@ -378,7 +381,6 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
                     if (giocoDAO.doUpdate(map, "codice_gioco = '" + currentCode + "'")) {
 
                         salvaGeneri(request, newCodice, source, true);
-
                         session.setAttribute("msg-success", "Gioco modificato correttamente!");
                     } else
                         session.setAttribute("msg-error", "Qualcosa è andato storto!");
@@ -542,13 +544,15 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
 
         String[] generi = request.getParameterValues("generi[]");
 
-        for (String genere : generi) {
+        if (generi != null) {
+            for (String genere : generi) {
 
-            Gioco_Genere gioco_genere = new Gioco_Genere();
-            gioco_genere.setCodice_gioco(codice);
-            gioco_genere.setNome_genere(genere);
+                Gioco_Genere gioco_genere = new Gioco_Genere();
+                gioco_genere.setCodice_gioco(codice);
+                gioco_genere.setNome_genere(genere);
 
-            gioco_genereDAO.doSave(gioco_genere);
+                gioco_genereDAO.doSave(gioco_genere);
+            }
         }
     }
 

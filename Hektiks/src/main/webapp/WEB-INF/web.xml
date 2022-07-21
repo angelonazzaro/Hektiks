@@ -105,14 +105,14 @@
 
 <!--     Errori -->
 
-    <error-page>
-        <error-code>404</error-code>
-        <location>/ErrorHandlerServlet</location>
-    </error-page>
-    <error-page>
-        <error-code>500</error-code>
-        <location>/ErrorHandlerServlet</location>
-    </error-page>
+<!--    <error-page>-->
+<!--        <error-code>404</error-code>-->
+<!--        <location>/ErrorHandlerServlet</location>-->
+<!--    </error-page>-->
+<!--    <error-page>-->
+<!--        <error-code>500</error-code>-->
+<!--        <location>/ErrorHandlerServlet</location>-->
+<!--    </error-page>-->
 
 
     <!-- File statici: css, js, immagini -->
