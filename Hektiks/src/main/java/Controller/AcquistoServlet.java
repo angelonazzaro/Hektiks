@@ -153,8 +153,10 @@ public class AcquistoServlet extends HttpServlet implements LoginChecker {
                     HashMap<String, Integer> map = new HashMap<>();
                     // Aggiorno le vendite del gioco
                     map.put("numero_vendite", giocoDaAcquistare.getNumero_vendite() + prodotto_ordine.getQuantita());
+                    map.put("quantita_disponibile", giocoDaAcquistare.getQuantita_disponibile() - prodotto_ordine.getQuantita());
                     giocoDAO.doUpdate(map, "codice_gioco = '" + giocoDaAcquistare.getCodice_gioco() + "'");
                 }
+
 
                 // Aggiorno il saldo dell'utente sia in sessione che nel db
                 utente.setSaldo(utente.getSaldo() - prezzoTotale);
