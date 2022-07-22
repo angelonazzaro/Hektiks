@@ -378,12 +378,17 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
                 }
 
                 if (update) {
-                    if (giocoDAO.doUpdate(map, "codice_gioco = '" + currentCode + "'")) {
+                    if (!map.isEmpty()) {
+                        if (giocoDAO.doUpdate(map, "codice_gioco = '" + currentCode + "'")) {
 
+                            salvaGeneri(request, newCodice, source, true);
+                            session.setAttribute("msg-success", "Gioco modificato correttamente!");
+                        } else
+                            session.setAttribute("msg-error", "Qualcosa è andato storto!");
+                    } else {
                         salvaGeneri(request, newCodice, source, true);
                         session.setAttribute("msg-success", "Gioco modificato correttamente!");
-                    } else
-                        session.setAttribute("msg-error", "Qualcosa è andato storto!");
+                    }
                 }
 
             } catch (SQLException e) {
