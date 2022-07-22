@@ -125,8 +125,10 @@ public interface DAO<T> {
 
         int rows;
         try (Connection conn = source.getConnection()) {
-
-            String query = QueryBuilder.DELETE_FROM(table).WHERE(condition).toString();
+            
+            String query = "SET FOREIGN_KEY_CHECKS=0;";
+            query += QueryBuilder.DELETE_FROM(table).WHERE(condition).toString();
+            query += "SET FOREIGN_KEY_CHECKS=1;";
 
             Logger.consoleLog(Logger.INFO, "[GENERIC-DO-DELETE] " + query);
 
