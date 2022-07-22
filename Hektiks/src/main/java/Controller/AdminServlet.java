@@ -37,7 +37,8 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
 
         Logger.consoleLog(Logger.INFO, "ADMIN SERVLET DO GET");
 
-        if (!controllaSeLoggato(request, response, "", true)) return;
+        if (!controllaSeLoggato(request, response, "", true))
+            return;
 
         String part = request.getParameter("part"), partToView = "";
         String action = request.getParameter("action");
@@ -48,6 +49,7 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
 
         // Se parts è nullo o uguale ad utenti mostro la parte degli utenti
         if (part == null || part.equals("utenti")) {
+
             UtenteDAO utenteDAO = new UtenteDAO(source);
 
             // Se l'azione è nulla, mostro la pagina con tutti gli utenti, altrimenti il form di modifica
@@ -69,6 +71,7 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
                         partToView = "parts/utenti.jsp";
 
                     } else {
+
                         List<Utente> utenti = utenteDAO.doRetrieveByCondition("username = '" + id + "'");
 
                         if (utenti == null || utenti.size() == 0) {
@@ -90,6 +93,7 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
                 }
 
             } catch (SQLException e) {
+
                 e.printStackTrace();
             }
 
@@ -103,6 +107,7 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
             try {
 
                 if (action == null) {
+
                     request.setAttribute("giochi", giocoDAO.doRetrieveAll());
                     partToView = "parts/prodotti.jsp";
 
@@ -110,6 +115,7 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
 
                     request.setAttribute("generi", genereDAO.doRetrieveAll());
                     partToView = "parts/prodotto.jsp";
+
                 } else if (action.equals("edit")) {
 
                     String id = request.getParameter("id");
@@ -119,6 +125,7 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
 
                         session.setAttribute("msg-error", "Errore nella richiesta");
                         partToView = "parts/prodotti.jsp";
+
                     } else {
 
                         // Mi prendo tutti i generi del gioco
@@ -173,6 +180,7 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
                 }
 
             } catch (SQLException e) {
+
                 e.printStackTrace();
             }
 
@@ -184,6 +192,7 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
             try {
 
                 if (action == null) {
+
                     request.setAttribute("giftCards", giftCardDAO.doRetrieveAll());
                     partToView = "parts/giftcards.jsp";
 
@@ -197,6 +206,7 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
                     partToView = "parts/giftcards.jsp";
                 }
             } catch (SQLException e) {
+
                 e.printStackTrace();
             }
         }
@@ -214,12 +224,14 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
 
         Logger.consoleLog(Logger.INFO, "ADMIN SERVLET DO POST");
 
-        if (!controllaSeLoggato(request, response, "", true)) return;
+        if (!controllaSeLoggato(request, response, "", true))
+            return;
 
         String action = request.getParameter("action"), componente = request.getParameter("componente");
         HttpSession session = request.getSession(false);
 
         if (action == null || componente == null) {
+
             session.setAttribute("msg-error", "Errore nella richiesta");
             response.sendRedirect(request.getContextPath() + "/admin");
             return;
@@ -228,10 +240,12 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
         DataSource source = (DataSource) getServletContext().getAttribute("DataSource");
 
         switch (componente) {
+
             case "utente" -> gestisciUtente(request, response, action, source);
             case "prodotto" -> gestisciProdotto(request, response, action, source);
             case "giftcard" -> gestisciGiftCard(request, response, action, source);
             default -> {
+
                 session.setAttribute("msg-error", "Errore nella richiesta");
                 response.sendRedirect(request.getContextPath() + "/admin");
             }
@@ -240,7 +254,8 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
 
     private void gestisciProdotto(HttpServletRequest request, HttpServletResponse response, String action, DataSource source) throws IOException {
 
-        if (!controllaValiditaCampiGioco(request, action, source)) return;
+        if (!controllaValiditaCampiGioco(request, action, source))
+            return;
 
         String newCodice = request.getParameter("codice");
         String newTitolo = request.getParameter("titolo");
@@ -256,6 +271,7 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
         HttpSession session = request.getSession(false);
 
         if (action.equals("add")) {
+
             Gioco gioco = new Gioco();
 
             gioco.setCodice_gioco(newCodice);
@@ -270,14 +286,17 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
 
 
             try {
+
                 if (giocoDAO.doSave(gioco)) {
 
                     salvaGeneri(request, newCodice, source, false);
-
                     session.setAttribute("msg-success", "Gioco aggiunto correttamente!");
-                } else
+                }
+                else
                     session.setAttribute("msg-error", "Qualcosa è andato storto!");
+
             } catch (SQLException e) {
+
                 e.printStackTrace();
             }
         } else if (action.equals("edit")) {
@@ -297,63 +316,81 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
             HashMap<String, Object> map = new HashMap<>();
 
             if (newCodice != null && !newCodice.equals("")) {
+
                 if (!newCodice.equals(currentCode)) {
+
                     map.put("codice_gioco", newCodice);
                     update = true;
                 }
             }
 
             if (newTitolo != null && !newTitolo.equals("")) {
+
                 if (!newTitolo.equals(currentTitolo)) {
+
                     map.put("titolo", newTitolo);
                     update = true;
                 }
             }
 
             if (newDescrizione != null && !newDescrizione.equals("")) {
+
                 if (!newDescrizione.equals(currentDescrizione)) {
+
                     map.put("descrizione", newDescrizione);
                     update = true;
                 }
             }
 
             if (newTrailer != null && !newTrailer.equals("")) {
+
                 if (!newTrailer.equals(currentTrailer)) {
+
                     map.put("trailer", newTrailer);
                     update = true;
                 }
             }
 
             if (newCopertina != null && !newCopertina.equals("")) {
+
                 if (!newCopertina.equals(currentCopertina)) {
+
                     map.put("copertina", newCopertina);
                     update = true;
                 }
             }
 
             if (newPrezzo >= 0) {
+
                 if (newPrezzo != currentPrezzo) {
+
                     map.put("prezzo", newPrezzo);
                     update = true;
                 }
             }
 
             if (newQuantita >= 0) {
+
                 if (newQuantita != currentQuantita) {
+
                     map.put("quantita_disponibile", newQuantita);
                     update = true;
                 }
             }
 
             if (newData_uscita != null && !newData_uscita.equals("")) {
+
                 if (!newData_uscita.equals(currentData_uscita)) {
+
                     map.put("data_uscita", Date.valueOf(newData_uscita));
                     update = true;
                 }
             }
 
             if (newSconto >= 0) {
+
                 if (newSconto != currentSconto) {
+
                     map.put("percentuale_sconto", newSconto);
                     update = true;
                 }
@@ -367,22 +404,28 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
                 String[] newGeneri = request.getParameterValues("generi[]");
 
                 if (newGeneri != null && generi != null) {
+
                     if (generi.size() != newGeneri.length)
                         update = true;
+
                     else {
                         // Controllo se i generi sono effettivamente diversi
                         // L'ordine potrebbe essere cambiato o ci potrebbero essere dei generi che potrebbero interferire con l'ordinameto normale
                         // Per questo motivo il ciclo for annidato
                         for (Gioco_Genere gioco_genere : generi) {
+
                             boolean found = false;
                             for (String genere : newGeneri) {
+
                                 if (!gioco_genere.getNome_genere().equals(genere)) {
+
                                     found = true;
                                     break;
                                 }
                             }
 
                             if (found) {
+
                                 update = true;
                                 break;
                             }
@@ -391,24 +434,30 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
                 }
 
                 if (update) {
+
                     if (!map.isEmpty()) {
+
                         if (giocoDAO.doUpdate(map, "codice_gioco = '" + currentCode + "'")) {
 
                             salvaGeneri(request, newCodice, source, true);
                             session.setAttribute("msg-success", "Gioco modificato correttamente!");
-                        } else
+
+                        }
+                        else
                             session.setAttribute("msg-error", "Qualcosa è andato storto!");
+
                     } else {
+
                         salvaGeneri(request, newCodice, source, true);
                         session.setAttribute("msg-success", "Gioco modificato correttamente!");
                     }
                 }
 
             } catch (SQLException e) {
+
                 e.printStackTrace();
             }
         }
-
         response.sendRedirect(request.getContextPath() + "/admin?part=prodotti");
     }
 
@@ -436,13 +485,15 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
 
         // Encrypta solo se la password non è nulla, altrimenti dopo risulta valida
         if (newPassword != null && !newPassword.equals("")) {
+
             try {
 
                 newPassword = PasswordEncrypt.sha1(request.getParameter("password"));
+
             } catch (NoSuchAlgorithmException e) {
+
                 e.printStackTrace();
             }
-
         }
 
         UtenteDAO utenteDAO = new UtenteDAO(source);
@@ -455,11 +506,12 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
 
                 session.setAttribute("msg-error", "Lo username è già in uso");
                 response.sendRedirect(request.getContextPath() + "/admin?part=utenti&action=edit&id=" + currentUsername);
-                return;
 
+                return;
             } else {
 
                 if (!currentUsername.equals(newUsername)) {
+
                     map.put("username", newUsername);
                     update = true;
                 }
@@ -472,10 +524,12 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
 
                 session.setAttribute("msg-error", "L'email è già in uso");
                 response.sendRedirect(request.getContextPath() + "/admin?part=utenti&action=edit&id=" + currentUsername);
+
                 return;
             } else {
 
                 if (!currentEmail.equals(newEmail)) {
+
                     map.put("email", newEmail);
                     update = true;
                 }
@@ -488,10 +542,12 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
 
                 session.setAttribute("msg-error", "La password non rispetta i requisti");
                 response.sendRedirect(request.getContextPath() + "/admin?part=utenti&action=edit&id=" + currentUsername);
+
                 return;
             }
 
             if (!currentPassword.equals(newPassword)) {
+
                 map.put("password_utente", newPassword);
                 update = true;
             }
@@ -501,12 +557,13 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
 
             if (update)
                 utenteDAO.doUpdate(map, "email = '" + currentEmail + "'");
+
             session.setAttribute("msg-success", "Profilo aggiornato con successo!");
 
         } catch (SQLException e) {
+
             e.printStackTrace();
         }
-
         response.sendRedirect(request.getContextPath() + "/admin?part=utenti");
     }
 
@@ -515,8 +572,10 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
         HttpSession session = request.getSession(false);
 
         if (!action.equals("add")) {
+
             session.setAttribute("msg-error", "Errore nella richiesta");
             response.sendRedirect(request.getContextPath() + "/admin?part=giftcards");
+
             return;
         }
 
@@ -524,17 +583,21 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
         double importo = Double.parseDouble(request.getParameter("importo"));
 
         if (codice == null || codice.length() != 6 || importo <= 0) {
+
             session.setAttribute("msg-error", "Errore nella richiesta");
             response.sendRedirect(request.getContextPath() + "/admin?part=giftcards");
+
             return;
         }
 
         GiftCardDAO giftCardDAO = new GiftCardDAO(source);
 
         try {
+
             if (giftCardDAO.doRetrieveByKey(codice) != null) {
                 session.setAttribute("msg-error", "Il codice è già in uso");
                 response.sendRedirect(request.getContextPath() + "/admin?part=giftcards");
+
                 return;
             }
 
@@ -547,9 +610,9 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
             session.setAttribute("msg-success", "GiftCard aggiunta con successo!");
 
         } catch (SQLException e) {
+
             e.printStackTrace();
         }
-
         response.sendRedirect(request.getContextPath() + "/admin?part=giftcards");
     }
 
@@ -563,6 +626,7 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
         String[] generi = request.getParameterValues("generi[]");
 
         if (generi != null) {
+
             for (String genere : generi) {
 
                 Gioco_Genere gioco_genere = new Gioco_Genere();
@@ -577,11 +641,15 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
     private boolean controllaValiditaCampiUtente(String campo, String parametro, String email, UtenteDAO utenteDAO) {
         // Controllo che lo username non sia già in uso da un altro utente
         List<Utente> utenti;
+
         try {
+
             utenti = utenteDAO.doRetrieveByCondition(campo + " = '" + parametro + "' AND email <> '" + email + "'");
 
             return utenti == null || utenti.size() == 0;
+
         } catch (SQLException e) {
+
             e.printStackTrace();
         }
         return false;
@@ -602,30 +670,39 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
         HttpSession session = request.getSession(false);
 
         if (codice == null || codice.equals("") || titolo == null || titolo.equals("") || descrizione == null || descrizione.equals("") || data_uscita == null || data_uscita.equals("") || trailer == null || trailer.equals("") || copertina == null || copertina.equals("") || prezzo <= 0 || sconto < 0 || quantita < 0) {
+
             session.setAttribute("msg-error", "Compila tutti i campi richiesti");
+
             return false;
         }
 
         if (action.equals("edit")) {
+
             String currentCode = request.getParameter("current-code");
 
-            if (currentCode == null || currentCode.equals("")) return false;
+            if (currentCode == null || currentCode.equals(""))
+                return false;
 
             GiocoDAO giocoDAO = new GiocoDAO(source);
             List<Gioco> giochi = null;
+
             try {
+
                 giochi = giocoDAO.doRetrieveByCondition("codice_gioco = '" + codice + "' AND codice_gioco <> '" + currentCode + "'");
+
             } catch (SQLException e) {
+
                 e.printStackTrace();
             }
 
             return giochi == null || giochi.size() <= 0;
 
         } else if (!action.equals("add")) {
+
             session.setAttribute("msg-error", "Errore nella richiesta");
+
             return false;
         }
-
         return true;
     }
 }

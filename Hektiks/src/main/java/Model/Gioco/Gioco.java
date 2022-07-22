@@ -8,6 +8,11 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.HashMap;
 
+/**
+ * Classe che rappresenta il Bean del gioco
+ * fornisce metodi getter, setter, toString e toHashMap
+ **/
+
 public class Gioco extends GenericBean implements Serializable, IEntity {
 
     @Serial

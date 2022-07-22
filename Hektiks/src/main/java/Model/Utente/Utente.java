@@ -10,6 +10,11 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.util.HashMap;
 
+/**
+ * Classe che rappresenta il Bean dell'utente
+ * fornisce metodi getter, setter, toString e toHashMap
+ **/
+
 public class Utente extends GenericBean implements Serializable, IEntity {
 
     @Serial
@@ -23,7 +28,6 @@ public class Utente extends GenericBean implements Serializable, IEntity {
     private Date data_registrazione;
     private boolean ruolo = false;
     private double saldo = 0;
-
     private String profile_pic = "";
 
     @Override

@@ -7,6 +7,11 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashMap;
 
+/**
+ * Classe che rappresenta il Bean dei giochi_genere
+ * fornisce metodi getter, setter, toString e toHashMap
+ **/
+
 public class Gioco_Genere extends GenericBean implements Serializable, IEntity {
 
     @Serial

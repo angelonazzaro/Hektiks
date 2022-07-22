@@ -8,6 +8,11 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.HashMap;
 
+/**
+ * Classe che rappresenta il Bean del carrello
+ * fornisce metodi getter, setter, toString e toHashMap
+ **/
+
 public class Carrello extends GenericBean implements Serializable, IEntity {
 
     @Serial

@@ -40,8 +40,10 @@ public class AcquistoServlet extends HttpServlet implements LoginChecker {
         String from = request.getParameter("from");
 
         if (!from.equals("carrello") && !from.equals("gioco")) {
+
             request.getSession().setAttribute("msg-error", "Qualcosa è andato storto!");
             response.sendRedirect(request.getRequestURI());
+
             return;
         }
 
@@ -57,34 +59,45 @@ public class AcquistoServlet extends HttpServlet implements LoginChecker {
         // from -> "gioco", la richiesta proviene da carrello.jsp quindi l'utente vuole acquistare solo quello specifico gioco
 
         if (from.equals("carrello")) {
+
             for (String key : carrello.keySet()) {
+
                 try {
+
                     gioco = giocoDAO.doRetrieveByKey(key);
 
                     if (gioco.getPercentuale_sconto() > 0)
                         prezzoGioco = gioco.getPrezzo() - ((gioco.getPrezzo() * gioco.getPercentuale_sconto()) / 100);
+
                     else
                         prezzoGioco = gioco.getPrezzo();
 
                     prezzoTotale += prezzoGioco * carrello.get(key);
                     giochiDaAcquistare.add(gioco);
+
                 } catch (SQLException e) {
+
                     e.printStackTrace();
                 }
             }
         } else {
+
             String codice_gioco = request.getParameter("codice_gioco");
 
             try {
+
                 gioco = giocoDAO.doRetrieveByKey(codice_gioco);
 
                 if (gioco.getPercentuale_sconto() > 0)
                     prezzoTotale = gioco.getPrezzo() - ((gioco.getPrezzo() * gioco.getPercentuale_sconto()) / 100);
+
                 else
                     prezzoTotale = gioco.getPrezzo();
 
                 giochiDaAcquistare.add(gioco);
+
             } catch (SQLException e) {
+
                 e.printStackTrace();
             }
         }
@@ -92,8 +105,10 @@ public class AcquistoServlet extends HttpServlet implements LoginChecker {
         Utente utente = (Utente) session.getAttribute("user");
 
         if (utente.getSaldo() < prezzoTotale) {
+
             session.setAttribute("msg-error", "Il tuo saldo non è sufficiente ad effettuare l'acquisto");
             response.sendRedirect(request.getContextPath() + "/");
+
             return;
         }
 
@@ -105,10 +120,15 @@ public class AcquistoServlet extends HttpServlet implements LoginChecker {
 
         // Mi assicuro che il codice ordine sia unico
         try {
+
             do {
+
                 codice_ordine = generaCodiceOrdine();
+
             } while (ordineDAO.doRetrieveByKey(utente.getEmail(), codice_ordine) != null);
+
         } catch (SQLException e) {
+
             e.printStackTrace();
         }
 
@@ -119,9 +139,11 @@ public class AcquistoServlet extends HttpServlet implements LoginChecker {
         ordine.setPrezzo_totale(prezzoTotale);
 
         try {
+
             // Se l'ordine è andato a buon fine, inserisco i prodotti in db
             // Il procedimento è uguale per entrambe i valori di "from"
             if (ordineDAO.doSave(ordine)) {
+
                 Prodotto_Ordine prodotto_ordine = new Prodotto_Ordine();
                 prodotto_ordine.setEmail_utente(utente.getEmail());
                 prodotto_ordine.setData_ora_creazione(date);
@@ -137,15 +159,18 @@ public class AcquistoServlet extends HttpServlet implements LoginChecker {
                 pagamentoDAO.doSave(pagamento);
 
                 for (Gioco giocoDaAcquistare : giochiDaAcquistare) {
+
                     prodotto_ordine.setCodice_gioco(giocoDaAcquistare.getCodice_gioco());
 
                     if (from.equals("carrello"))
                         prodotto_ordine.setQuantita(carrello.get(gioco.getCodice_gioco()));
+
                     else
                         prodotto_ordine.setQuantita(1);
 
                     if (giocoDaAcquistare.getPercentuale_sconto() > 0)
                         prodotto_ordine.setPrezzo(giocoDaAcquistare.getPrezzo() - ((giocoDaAcquistare.getPrezzo() * giocoDaAcquistare.getPercentuale_sconto()) / 100));
+
                     else
                         prodotto_ordine.setPrezzo(giocoDaAcquistare.getPrezzo());
 
@@ -168,6 +193,7 @@ public class AcquistoServlet extends HttpServlet implements LoginChecker {
 
                 // Svuoto il carrello in sessione e quello nel db <=> from == "carrello"
                 if (from.equals("carrello")) {
+
                     session.setAttribute("carrello", new HashMap<String, Integer>());
                     session.setAttribute("quantita_carrello", 0);
 
@@ -180,16 +206,21 @@ public class AcquistoServlet extends HttpServlet implements LoginChecker {
 
                 session.setAttribute("msg-success", "Ordine <b>#" + ordine.getCodice_ordine() + "</b> effettutato con successo!");
                 response.sendRedirect(request.getContextPath() + "/");
+
             } else {
+
                 session.setAttribute("msg-error", "Qualcosa è andato storto");
                 response.sendRedirect(request.getRequestURI());
             }
+
         } catch (SQLException e) {
+
             e.printStackTrace();
         }
     }
 
     private String generaCodiceOrdine() {
+
         String alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
         StringBuilder sb = new StringBuilder();
         Random random = new Random();

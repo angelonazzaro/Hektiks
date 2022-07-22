@@ -1,5 +1,11 @@
 package Model.Storage;
 
+/**
+ * Record per utilizzare delle costanti letterali di ogni tabella
+ * del database per evitare
+ * di scrivere più volte la stessa tabella rischiando di sbagliare.
+*/
+
 public record Entities() {
 
     public static final String UTENTI = "Utenti";

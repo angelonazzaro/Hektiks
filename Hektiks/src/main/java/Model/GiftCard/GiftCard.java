@@ -8,6 +8,11 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.HashMap;
 
+/**
+ * Classe che rappresenta il Bean delle giftcard
+ * fornisce metodi getter, setter, toString e toHashMap
+ **/
+
 public class GiftCard extends GenericBean implements Serializable, IEntity {
 
     @Serial
@@ -36,12 +41,14 @@ public class GiftCard extends GenericBean implements Serializable, IEntity {
         return new HashMap<>() {
             {
                 put("codice_giftCard", codice_giftCard);
-                if (email_utente != null) put("email_utente", email_utente);
+                if (email_utente != null)
+                    put("email_utente", email_utente);
 
                 put("importo", importo);
 
                 put("data_ora_creazione", data_ora_creazione.toString());
-                if (data_ora_utilizzo != null) put("data_ora_utilizzo", data_ora_utilizzo.toString());
+                if (data_ora_utilizzo != null)
+                    put("data_ora_utilizzo", data_ora_utilizzo.toString());
             }
         };
     }

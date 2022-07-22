@@ -8,6 +8,11 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.HashMap;
 
+/**
+ * Classe che rappresenta il Bean dell'ordine
+ * fornisce metodi getter, setter, toString e toHashMap
+ **/
+
 public class Ordine extends GenericBean implements Serializable, IEntity {
 
     @Serial

@@ -3,8 +3,12 @@ package Utils;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/*
+* Classe per l'ecryptazione della password
+*/
 public class PasswordEncrypt {
 
+    //Implementazione stardard dell'algoritmo SHA1
     public static String sha1(String password) throws NoSuchAlgorithmException {
 
         MessageDigest mDigest = MessageDigest.getInstance("SHA1");

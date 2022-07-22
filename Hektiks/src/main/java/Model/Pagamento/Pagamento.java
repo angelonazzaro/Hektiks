@@ -8,6 +8,11 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.HashMap;
 
+/**
+ * Classe che rappresenta il Bean del pagamento
+ * fornisce metodi getter, setter, toString e toHashMap
+ **/
+
 public class Pagamento extends GenericBean implements Serializable, IEntity {
 
     @Serial

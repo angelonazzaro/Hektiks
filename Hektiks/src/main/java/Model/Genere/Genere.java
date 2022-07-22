@@ -7,6 +7,11 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashMap;
 
+/**
+ * Classe che rappresenta il Bean del genere
+ * fornisce metodi getter, setter, toString e toHashMap
+ **/
+
 public class Genere extends GenericBean implements Serializable, IEntity {
 
     @Serial
