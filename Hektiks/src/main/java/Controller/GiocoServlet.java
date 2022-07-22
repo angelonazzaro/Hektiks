@@ -36,6 +36,7 @@ public class GiocoServlet extends HttpServlet {
         if (action == null && codiceGioco != null) {
 
             try {
+
                 Gioco gioco = giocoDAO.doRetrieveByKey(codiceGioco);
 
                 if (gioco == null) {
@@ -60,10 +61,14 @@ public class GiocoServlet extends HttpServlet {
                 request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
 
             } catch (SQLException e) {
+
                 e.printStackTrace();
             }
+
         } else if (action != null && action.equals("show-all")) {
+
             try {
+
                 List<Gioco> giochi = giocoDAO.doRetrieveAll();
 
                 request.setAttribute("giochi", giochi);
@@ -71,12 +76,14 @@ public class GiocoServlet extends HttpServlet {
                 request.setAttribute("page", "giochi/show_all.jsp");
 
                 request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
+
             } catch (SQLException e) {
+
                 e.printStackTrace();
             }
         } else {
+
             response.sendRedirect(request.getContextPath() + "/");
         }
-
     }
 }

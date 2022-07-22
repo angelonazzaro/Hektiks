@@ -33,25 +33,27 @@ public class CarrelloServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
 
         if (session != null && session.getAttribute("carrello") != null) {
+
             GiocoDAO giocoDAO = new GiocoDAO((DataSource) getServletContext().getAttribute("DataSource"));
             HashMap<String, Integer> carrello = (HashMap<String, Integer>) session.getAttribute("carrello");
             List<Gioco> giochi = new ArrayList<>();
 
             for (String codice_gioco : carrello.keySet()) {
+
                 try {
+
                     giochi.add(giocoDAO.doRetrieveByKey(codice_gioco));
+
                 } catch (SQLException e) {
+
                     e.printStackTrace();
                 }
             }
-
             request.setAttribute("giochiCarrello", giochi);
         }
-
         request.setAttribute("title", "Hektiks | Carrello");
         request.setAttribute("page", "carrello/carrello.jsp");
         request.setAttribute("scripts", new String[]{"cart.js"});
-
 
         request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
     }
@@ -82,8 +84,8 @@ public class CarrelloServlet extends HttpServlet {
         // Action = remove -> proviene da CarrelloServlet -> tolgo il gioco dal carrello
 
         if (session.getAttribute("user") != null) {
-            // La sessione esiste e l'utente è loggato
 
+            // La sessione esiste e l'utente è loggato
             Utente utente = (Utente) session.getAttribute("user");
             ProdottoDAO prodottoDAO = new ProdottoDAO(source);
 
@@ -96,19 +98,24 @@ public class CarrelloServlet extends HttpServlet {
 
                 // Scenario 1 (comprende sia add che update ma non remove)
                 if (prodotto == null) {
+
                     prodotto = new Prodotto();
                     prodotto.setEmail_utente(utente.getEmail());
                     prodotto.setCodice_gioco(codice_gioco);
                     prodotto.setQuantita_disponibile(quantita);
-
                     prodottoDAO.doSave(prodotto);
+
                 } else {
+
                     // Scenario 2
                     int quantita_disponibile = prodotto.getQuantita_disponibile();
 
                     switch (action) {
+
                         case "remove" ->
-                                prodottoDAO.doDelete(String.format("%s.email_utente = '%s' AND %s.codice_gioco = '%s'", PRODOTTI, utente.getEmail(), PRODOTTI, codice_gioco));
+                                prodottoDAO.doDelete(
+                                        String.format("%s.email_utente = '%s' AND %s.codice_gioco = '%s'",
+                                                PRODOTTI, utente.getEmail(), PRODOTTI, codice_gioco));
                         case "update" -> quantita_disponibile = quantita;
                         case "add" -> quantita_disponibile += quantita;
                     }
@@ -121,6 +128,7 @@ public class CarrelloServlet extends HttpServlet {
                 }
 
             } catch (SQLException e) {
+
                 e.printStackTrace();
             }
 
@@ -128,13 +136,19 @@ public class CarrelloServlet extends HttpServlet {
 
         int quantita_rimossa = 0, vecchia_quantita = 0;
         if (action.equals("remove")) {
+
             // Rimuovo il gioco dal carrello
             quantita_rimossa = giochiCarrello.remove(codice_gioco);
+
         } else if (action.equals("update") || action.equals("add")) {
+
             if (giochiCarrello.containsKey(codice_gioco)) {
+
                 if (action.equals("update")) {
+
                     vecchia_quantita = giochiCarrello.get(codice_gioco);
                     giochiCarrello.replace(codice_gioco, quantita);
+
                 } else
                     giochiCarrello.replace(codice_gioco, giochiCarrello.get(codice_gioco) + quantita);
 
@@ -143,9 +157,11 @@ public class CarrelloServlet extends HttpServlet {
         }
 
         int nuova_quantita = 0;
+
         if (session.getAttribute("quantita_carrello") != null) {
 
             switch (action) {
+
                 case "remove" ->
                         nuova_quantita = Integer.parseInt(session.getAttribute("quantita_carrello").toString()) - quantita_rimossa;
                 case "add" ->
@@ -155,12 +171,12 @@ public class CarrelloServlet extends HttpServlet {
             }
 
         } else {
+
             nuova_quantita = quantita;
         }
 
         session.setAttribute("carrello", giochiCarrello);
         session.setAttribute("quantita_carrello", nuova_quantita);
         out.write(gson.toJson(new JSONResponse<String>("numero_giochi", String.valueOf(nuova_quantita))));
-
     }
 }

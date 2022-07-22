@@ -47,6 +47,7 @@ public class GiftCardServlet extends HttpServlet {
 
                 response_type = "error";
                 response_value = "Giftcard non esistente";
+
             } else {
 
                 //seconda query, se la giftcard esiste controllo se è stata già riscattata
@@ -83,12 +84,10 @@ public class GiftCardServlet extends HttpServlet {
                     response_value = "Giftcard riscattata con successo";
                 }
             }
-
         } catch (SQLException e) {
 
             response_type = "error";
             response_value = "Qualcosa è andato storto :(";
-
             e.printStackTrace();
         }
         out.write(gson.toJson(new JSONResponse<String>(response_type, response_value)));
