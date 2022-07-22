@@ -7,6 +7,9 @@ import Model.Gioco.Gioco;
 import Model.Gioco.GiocoDAO;
 import Model.Gioco_Genere.Gioco_Genere;
 import Model.Gioco_Genere.Gioco_GenereDAO;
+import Model.Ordine.OrdineDAO;
+import Model.Prodotto_Ordine.Prodotto_Ordine;
+import Model.Prodotto_Ordine.Prodotto_OrdineDAO;
 import Model.Utente.Utente;
 import Model.Utente.UtenteDAO;
 import Utils.Logger.Logger;
@@ -145,6 +148,17 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
                         partToView = "parts/prodotti.jsp";
 
                     } else {
+
+                        Prodotto_OrdineDAO prodotto_ordineDAO = new Prodotto_OrdineDAO(source);
+                        List<Prodotto_Ordine> prodotti_ordini = prodotto_ordineDAO.doRetrieveByCondition("codice_gioco = '" + id + "'");
+                        OrdineDAO ordineDAO = new OrdineDAO(source);
+
+                        //calcello gli ordini in cui il gioco è presente
+                        for (Prodotto_Ordine prodotto_ordine : prodotti_ordini)
+                            ordineDAO.doDelete("codice_ordine = '" + prodotto_ordine.getCodice_ordine() + "'");
+
+                        prodotto_ordineDAO.doDelete("codice_gioco = '" + id + "'");
+
 
                         giocoDAO.doDelete("codice_gioco = '" + id + "'");
                         session.setAttribute("msg-success", "Gioco eliminato");

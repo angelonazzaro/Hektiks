@@ -125,16 +125,16 @@ public interface DAO<T> {
 
         int rows;
         try (Connection conn = source.getConnection()) {
-            
-            String query = "SET FOREIGN_KEY_CHECKS=0;";
-            query += QueryBuilder.DELETE_FROM(table).WHERE(condition).toString();
-            query += "SET FOREIGN_KEY_CHECKS=1;";
+
+            String query = QueryBuilder.DELETE_FROM(table).WHERE(condition).toString();
 
             Logger.consoleLog(Logger.INFO, "[GENERIC-DO-DELETE] " + query);
 
             try (PreparedStatement ps = conn.prepareStatement(query)) {
 
+                ps.execute("SET FOREIGN_KEY_CHECKS = 0;");
                 rows = ps.executeUpdate();
+                ps.execute("SET FOREIGN_KEY_CHECKS = 1;");
             }
         }
         return rows > 0;
