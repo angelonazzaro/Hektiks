@@ -26,7 +26,6 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
-
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024, // 1 MB
         maxFileSize = 1024 * 1024,      // 1 MB
@@ -39,7 +38,8 @@ public class UtenteServlet extends HttpServlet implements LoginChecker {
 
         Logger.consoleLog(Logger.INFO, "UTENTE SERVLET DO GET");
 
-        if (!controllaSeLoggato(request, response, "", false)) return;
+        if (!controllaSeLoggato(request, response, "", false))
+            return;
 
         String part = request.getParameter("part");
         DataSource source = (DataSource) getServletContext().getAttribute("DataSource");
@@ -49,6 +49,7 @@ public class UtenteServlet extends HttpServlet implements LoginChecker {
         if (part == null) {
 
             try {
+
                 List<Recensione> recensioni = new RecensioneDAO(source).doRetrieveByCondition("email_utente = '" + user.getEmail() + "'");
                 List<Ordine> ordini = new OrdineDAO(source).doRetrieveByCondition("email_utente = '" + user.getEmail() + "'");
 
@@ -59,19 +60,24 @@ public class UtenteServlet extends HttpServlet implements LoginChecker {
                 request.setAttribute("totaleSpeso", totaleSpeso);
 
             } catch (SQLException e) {
+
                 e.printStackTrace();
             }
         } else if (part.equals("orders")) {
+
             try {
+
                 request.setAttribute("ordini", new OrdineDAO(source).doRetrieveByCondition("email_utente = '" + user.getEmail() + "'"));
                 request.setAttribute("prodottoOrdineDAO", new Prodotto_OrdineDAO(source));
                 request.setAttribute("giocoDAO", new GiocoDAO(source));
                 request.setAttribute("part", "parts/orders.jsp");
 
             } catch (SQLException e) {
+
                 e.printStackTrace();
             }
         } else if (part.equals("settings")) {
+
             request.setAttribute("part", "parts/settings.jsp");
         }
 
@@ -86,7 +92,8 @@ public class UtenteServlet extends HttpServlet implements LoginChecker {
 
         Logger.consoleLog(Logger.INFO, "UTENTE SERVLET DO POST");
 
-        if (!controllaSeLoggato(request, response, "", false)) return;
+        if (!controllaSeLoggato(request, response, "", false))
+            return;
 
         HttpSession session = request.getSession(false);
         Utente utente = (Utente) session.getAttribute("user");
@@ -101,24 +108,28 @@ public class UtenteServlet extends HttpServlet implements LoginChecker {
 
         // L'utente ha effettivamente caricato un'file
         if (filePart != null && filePart.getSize() > 0) {
+
             String fileName = filePart.getSubmittedFileName();
 
             // Controllo che il file sia un'immagine
             if (!fileName.endsWith(".jpeg") && !fileName.endsWith(".jpg") && !fileName.endsWith(".png")) {
+
                 session.setAttribute("msg-error", "Il file caricato non è un'immagine");
                 response.sendRedirect(request.getContextPath() + "/utente?part=settings");
+
                 return;
             }
 
             if (filePart.getSize() > 1048576) {
+
                 session.setAttribute("msg-error", "La dimensione dell'immagine è troppo grande");
                 response.sendRedirect(request.getContextPath() + "/utente?part=settings");
+
                 return;
             }
 
             String appPath = request.getServletContext().getRealPath("/");
             String newPicPath;
-
             File userProfilePicFolder = new File(appPath + "/assets/uploads/users/" + utente.getUsername());
 
             //se non ha un folder per l'utente, lo creo
@@ -133,11 +144,11 @@ public class UtenteServlet extends HttpServlet implements LoginChecker {
                 }
                 //se l'utente non aveva una propic la salvo per la prima volta
                 else {
+
                     salvaImmagineRidimensionata(fileName, userProfilePicFolder, filePart);
                     map.put("profile_pic", utente.getProfile_pic());
                     update = true;
                 }
-
             }
             // se l'utente aveva già un'immagine
             else {
@@ -147,9 +158,8 @@ public class UtenteServlet extends HttpServlet implements LoginChecker {
                 File oldFile = null;
 
                 // La directory conterrà sempre e solo un file
-                if (files != null && files.length > 0) {
+                if (files != null && files.length > 0)
                     oldFile = files[0];
-                }
 
                 newPicPath = salvaImmagineRidimensionata(fileName, userProfilePicFolder, filePart);
                 map.put("profile_pic", utente.getProfile_pic());
@@ -157,16 +167,18 @@ public class UtenteServlet extends HttpServlet implements LoginChecker {
 
                 //cancello il file di backup
                 if (new File(newPicPath).exists()) {
+
                     if (oldFile != null)
                         oldFile.delete();
+
                 } else {
 
                     session.setAttribute("msg-error", "Errore durante l'aggiornamento del profilo!");
                     response.sendRedirect(request.getContextPath() + "/utente?part=settings");
+
                     return;
                 }
             }
-
             utente.setProfile_pic("/" + utente.getUsername() + "/" + fileName);
         }
         /*IMMAGINE PROFILO END */
@@ -181,12 +193,16 @@ public class UtenteServlet extends HttpServlet implements LoginChecker {
         if (username != null && !username.equals("")) {
 
             if (!controllaValiditaCampi("username", username, currentEmail, utenteDAO)) {
+
                 session.setAttribute("msg-error", "Lo username è già in uso");
                 response.sendRedirect(request.getContextPath() + "/utente?part=settings");
+
                 return;
+
             } else {
 
                 if (!username.equals(utente.getUsername())) {
+
                     utente.setUsername(username);
                     map.put("username", utente.getUsername());
                     update = true;
@@ -198,12 +214,15 @@ public class UtenteServlet extends HttpServlet implements LoginChecker {
         if (email != null && !email.equals("")) {
 
             if (!controllaValiditaCampi("email", email, currentEmail, utenteDAO)) {
+
                 session.setAttribute("msg-error", "L'email è già in uso");
                 response.sendRedirect(request.getContextPath() + "/utente?part=settings");
+
                 return;
             } else {
 
                 if (!email.equals(utente.getEmail())) {
+
                     utente.setEmail(email);
                     map.put("email", utente.getEmail());
                     update = true;
@@ -213,9 +232,22 @@ public class UtenteServlet extends HttpServlet implements LoginChecker {
 
         if (password != null && !password.equals("")) {
 
-            if (!password.matches("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}")) {
+            /*
+            * "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}"
+            * '(?=' matcha un gruppo dopo l'espressione principale senza includerlo nel risultato.
+            * '.' matcha un carattere qualsiasi
+            * '*' matcha il token precedente da 0 a infinite volte
+            * '\d' corrisponde a una cifra (equivalente a [0-9])
+            * '[a-z]' a-z matcha un singolo carattere nell'intervallo compreso tra a (indice 97) e z (indice 122) (case sensitive)
+            * '[A-Z]' A-Z matcha un singolo carattere nell'intervallo compreso tra A (indice 65) e Z (indice 90) (case sensitive)
+            * '{8,16}' indica che la stringa deve avere almeno 8 caratteri e massimo 16.
+            */
+
+            if (!password.matches("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}")) {
+
                 session.setAttribute("msg-error", "La password non rispetta i requisti");
                 response.sendRedirect(request.getContextPath() + "/utente?part=settings");
+
                 return;
             }
 
@@ -243,10 +275,10 @@ public class UtenteServlet extends HttpServlet implements LoginChecker {
             session.setAttribute("msg-success", "Profilo aggiornato con successo!");
 
         } catch (SQLException e) {
+
             session.setAttribute("msg-error", "Errore durante l'aggiornamento del profilo!");
             e.printStackTrace();
         }
-
         response.sendRedirect(request.getContextPath() + "/utente?part=settings");
     }
 
@@ -254,13 +286,16 @@ public class UtenteServlet extends HttpServlet implements LoginChecker {
 
         // Controllo che lo username non sia già in uso da un altro utente
         try {
+
             List<Utente> utenti = utenteDAO.doRetrieveByCondition(campo + " = '" + parametro + "' AND email <> '" + email + "'");
 
             return utenti == null || utenti.size() == 0;
 
         } catch (SQLException e) {
+
             e.printStackTrace();
         }
+
         return false;
     }
 

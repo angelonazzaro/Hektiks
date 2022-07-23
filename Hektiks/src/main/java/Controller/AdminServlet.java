@@ -538,7 +538,18 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
 
         if (newPassword != null && !newPassword.equals("")) {
 
-            if (!newPassword.matches("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}")) {
+            /*
+             * "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}"
+             * '(?=' matcha un gruppo dopo l'espressione principale senza includerlo nel risultato.
+             * '.' matcha un carattere qualsiasi
+             * '*' matcha il token precedente da 0 a infinite volte
+             * '\d' corrisponde a una cifra (equivalente a [0-9])
+             * '[a-z]' a-z matcha un singolo carattere nell'intervallo compreso tra a (indice 97) e z (indice 122) (case sensitive)
+             * '[A-Z]' A-Z matcha un singolo carattere nell'intervallo compreso tra A (indice 65) e Z (indice 90) (case sensitive)
+             * '{8,16}' indica che la stringa deve avere almeno 8 caratteri e massimo 16.
+             */
+
+            if (!newPassword.matches("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}")) {
 
                 session.setAttribute("msg-error", "La password non rispetta i requisti");
                 response.sendRedirect(request.getContextPath() + "/admin?part=utenti&action=edit&id=" + currentUsername);
