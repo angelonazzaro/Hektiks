@@ -44,7 +44,12 @@ public class RecensioneServlet extends HttpServlet {
                 return;
             }
 
-            List<Recensione> recensioni = new RecensioneDAO(source).doRetrieveByJoin("inner", String.format("%s ON %s.email = %s.email_utente", UTENTI, UTENTI, RECENSIONI), String.format("%s.codice_gioco = '%s' ORDER BY voto ASC", RECENSIONI, codice_gioco), UTENTI);
+            List<Recensione> recensioni = new RecensioneDAO(source).doRetrieveByJoin("inner",
+                    String.format("%s ON %s.email = %s.email_utente",
+                            UTENTI, UTENTI, RECENSIONI),
+                    String.format("%s.codice_gioco = '%s' ORDER BY voto ASC",
+                            RECENSIONI, codice_gioco),
+                    UTENTI);
 
 
             request.setAttribute("title", gioco.getTitolo() + " | Recensioni");

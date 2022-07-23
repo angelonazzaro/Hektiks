@@ -20,9 +20,15 @@ public class OrdineExtractor implements ResultSetExtractor<Ordine> {
         ordine.setData_ora_ordinazione(resultSet.getTimestamp(ORDINI + ".data_ora_ordinazione"));
         ordine.setPrezzo_totale(resultSet.getDouble(ORDINI + ".prezzo_totale"));
 
+        /*
+         * Se ci sono altre tabelle (oltre a quella "implicita")
+         * si aggiunge alla lista di oggetti della join i field estratti tremite l'Extractor
+         */
+
         if (tables.length > 0) {
             ordine.setJoin(new ArrayList<>());
-            for (String table : tables) ordine.addToJoin(findExtractor(table).extract(resultSet));
+            for (String table : tables)
+                ordine.addToJoin(findExtractor(table).extract(resultSet));
         }
 
         return ordine;

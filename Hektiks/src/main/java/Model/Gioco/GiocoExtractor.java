@@ -26,9 +26,15 @@ public class GiocoExtractor implements ResultSetExtractor<Gioco> {
         gioco.setNumero_vendite(resultSet.getInt(GIOCHI + ".numero_vendite"));
         gioco.setPercentuale_sconto(resultSet.getInt(GIOCHI + ".percentuale_sconto"));
 
+        /*
+         * Se ci sono altre tabelle (oltre a quella "implicita")
+         * si aggiunge alla lista di oggetti della join i field estratti tremite l'Extractor
+         */
+
         if (tables.length > 0) {
             gioco.setJoin(new ArrayList<>());
-            for (String table : tables) gioco.addToJoin(findExtractor(table).extract(resultSet));
+            for (String table : tables)
+                gioco.addToJoin(findExtractor(table).extract(resultSet));
         }
 
         return gioco;

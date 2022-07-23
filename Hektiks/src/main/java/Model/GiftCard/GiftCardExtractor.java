@@ -21,9 +21,15 @@ public class GiftCardExtractor implements ResultSetExtractor<GiftCard> {
         giftCard.setData_ora_creazione(resultSet.getTimestamp(GIFTCARDS + ".data_ora_creazione"));
         giftCard.setData_ora_utilizzo(resultSet.getTimestamp(GIFTCARDS + ".data_ora_utilizzo"));
 
+        /*
+         * Se ci sono altre tabelle (oltre a quella "implicita")
+         * si aggiunge alla lista di oggetti della join i field estratti tremite l'Extractor
+         */
+
         if (tables.length > 0) {
             giftCard.setJoin(new ArrayList<>());
-            for (String table : tables) giftCard.addToJoin(findExtractor(table).extract(resultSet));
+            for (String table : tables)
+                giftCard.addToJoin(findExtractor(table).extract(resultSet));
         }
 
         return giftCard;
