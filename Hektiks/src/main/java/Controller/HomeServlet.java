@@ -20,7 +20,6 @@ import jakarta.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Serial;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -29,9 +28,6 @@ import java.util.List;
 import static Model.Storage.Entities.*;
 
 public class HomeServlet extends HttpServlet {
-
-    @Serial
-    private static final long serialVersionUID = 5982139499022378053L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
@@ -117,7 +113,7 @@ public class HomeServlet extends HttpServlet {
             }
         } else {
 
-            // Se l'utente sta provando a fare il registrazione, cerco nel database se esiste un utente con la stessa email
+            // Se l'utente sta provando a fare la registrazione, cerco nel database se esiste un utente con la stessa email
             // Se non esiste, creo l'utente e invio un messaggio di successo altrimenti gli invio un messaggio di errore
 
             try {
@@ -149,6 +145,12 @@ public class HomeServlet extends HttpServlet {
 
                     int digits = 0;
 
+                    // generazine username con offset
+                    // esempio: nome = "mario" e cognome = "rossi"
+                    // username = "mariorossi" se non è presente nessun altro utente con username "mariorossi"
+                    // altrimenti username = "mariorossi1" se non è presente nessun altro utente con username "mariorossi1"
+                    // il processo si ripete fino a quando non trovo un username disponibile
+
                     for (int i = 0; i < lastUsername.length(); i++)
 
                         if (Character.isDigit(lastUsername.charAt(i)))
@@ -159,6 +161,8 @@ public class HomeServlet extends HttpServlet {
 
                     username = nome.toLowerCase() + "" + cognome.toLowerCase() + "" + offset;
                 }
+
+                // salvo l'utente nel database
 
                 Utente utente = new Utente();
                 utente.setEmail(email);
@@ -195,7 +199,7 @@ public class HomeServlet extends HttpServlet {
                 UTENTI + ".email = '" + utente.getEmail() + "'",
                 UTENTI);
 
-        // se è vuoto creo il carrello
+        // se è vuoto creo il carrello e lo salvo nel database
         if (carrelli.isEmpty()) {
 
             Carrello carrello = new Carrello();
@@ -215,14 +219,14 @@ public class HomeServlet extends HttpServlet {
                 CARRELLI + ".email_utente = '" + utente.getEmail() + "'",
                 PRODOTTI);
 
-        //per informazioni dei CARRELLI aggiungere CARRELLI come parametro oltre al parametro PRODOTTO
-
         int quantita_carrello = 0, quantita_prodotto;
         HashMap<String, Integer> carrello_utente = new HashMap<>();
 
         for (Gioco gioco : giochiCarrello) {
 
             quantita_prodotto = 0;
+
+            // scorro tutti i giochi dell'utente e vedo quante volte il gioco è presente nel carrello
 
             List<Object> appoggio = gioco.getJoin();
 
@@ -249,9 +253,11 @@ public class HomeServlet extends HttpServlet {
             for (String key : carrello_sessione.keySet()) {
 
                 Prodotto prodotto = prodottoDAO.doRetrieveByKey(utente.getEmail(), key);
+
                 // Se il carrello_utente, cioè quello già presente in database, contiene lo stesso gioco del carrello della sessione
                 // allora aggiungo la quantità del carrello della sessione al carrello_utente e aggiorno il database
                 // altrimenti aggiungo il nuovo gioco al carrello_utente e lo inserisco nel database
+
                 if (carrello_utente.containsKey(key)) {
 
                     quantita_carrello += carrello_sessione.get(key);

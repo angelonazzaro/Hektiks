@@ -7,12 +7,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.io.Serial;
 
 public class ErrorHandlerServlet extends HttpServlet {
-
-    @Serial
-    private static final long serialVersionUID = 5982139399022378053L;
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 

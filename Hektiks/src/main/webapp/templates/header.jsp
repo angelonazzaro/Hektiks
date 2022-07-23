@@ -25,6 +25,7 @@
 <!-- header start -->
 <header>
     <nav>
+        <%--method="GET" -> HomeServlet--%>
         <a href="<%= request.getContextPath() %>/" id="logo" class="hs-1">HEKTIKS</a>
         <div class="search-bar">
             <input type="text" class="form-control" placeholder="Cerca..."/>
@@ -80,6 +81,7 @@
 <div id="login-registration-section">
     <div class="login-registration-child" id="child-1">
         <div id="forms-container">
+            <%--method="POST" -> HomeServlet--%>
             <form action="<%= request.getContextPath() %>/" method="POST" class="login-registration-form hide"
                   id="registration-form">
                 <div class="form-header">
@@ -115,6 +117,7 @@
                     >Accedi.</a></p>
                 </div>
             </form>
+            <%--method="POST" -> HomeServlet--%>
             <form action="<%= request.getContextPath() %>/" method="POST" class="login-registration-form active"
                   id="login-form">
                 <div class="form-header">

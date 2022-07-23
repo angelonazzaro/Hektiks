@@ -111,7 +111,7 @@ CREATE TABLE Pagamenti (
 	email_utente VARCHAR(320), 
 	codice_ordine CHAR(6),
 	data_ora_pagamento DATETIME NOT NULL,
-    importo DECIMAL (10, 2) NOT NULL CHECK (importo > 0), 
+    importo DECIMAL (10, 2) NOT NULL CHECK (importo >= 0), 
     
 	FOREIGN KEY (email_utente, codice_ordine) REFERENCES Ordini (email_utente, codice_ordine) ON UPDATE CASCADE ON DELETE NO ACTION,
     PRIMARY KEY (email_utente, codice_ordine, data_ora_pagamento)

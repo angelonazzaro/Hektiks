@@ -15,7 +15,7 @@
 <footer>
     <div class="footer-container">
         <div class="footer-main-content">
-            <h1 class="hs-4">Seguici su Github</h1>
+            <h1 class="hs-4">Seguici su GitHub</h1>
             <br>
             <a title="Angelo Nazzaro" href="https://github.com/sl1mSha4dey" target="_blank" class="github">
                 <img src="<%= request.getContextPath() %>/assets/images/angelo_nazzaro_github.jpg"
