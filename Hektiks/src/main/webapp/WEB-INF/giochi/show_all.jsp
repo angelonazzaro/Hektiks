@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% List<Gioco> giochi = (List<Gioco>) request.getAttribute("giochi"); %>
 
-<div class="search-bar">
+<div class="search-bar" id="mobile-search-bar">
     <input type="text" class="form-control" placeholder="Cerca..."/>
     <span><i class="fas fa-search"></i></span>
 </div>

@@ -177,8 +177,18 @@ header #burger:hover .line {
     }
 }
 
+@media only screen and (min-width: 471px) {
+    #mobile-search-bar {
+        display: none;
+    }
+}
+
 @media only screen and (max-width: 470px) {
     nav .search-bar {
         display: none;
+    }
+
+    #mobile-search-bar {
+        display: block;
     }
 }
