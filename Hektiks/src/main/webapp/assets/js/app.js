@@ -17,9 +17,13 @@ const login_registration_section = document.getElementById(
     "login-registration-section"
 );
 
+// non restituisce il valore della proprietà, ti permette solo di settarlo
+// header.style.position
+
 // Esegui tutto questo blocco di codice solo se l'utente non è loggato
 if (login_registration_section !== null) {
     burger.addEventListener("click", () => {
+        // Se la classe "active" è presente, rimuovo la classe "active" altrimenti l'aggiungo
         burger.classList.toggle("active");
         document.body.classList.toggle("no-scroll");
         login_registration_section.classList.toggle("active");
@@ -91,6 +95,7 @@ if (login_registration_section !== null) {
         return !matches;
     };
 
+    // Ritardano l'esecuzione delle due funzioni immediatamente sopra
     const match_password_regex_debounce = debounce((elem) =>
         match_password_regex(elem), 500
     );
@@ -125,7 +130,7 @@ if (login_registration_section !== null) {
         $.ajax({
             url: $(this).attr("action"),
             method: $(this).attr("method"),
-            data: $(this).serializeArray(),
+            data: $(this).serializeArray(), // processa i dati del form,
         })
             .done((response) => {
                 if (response.type === "success") {
@@ -204,7 +209,7 @@ const search = debounce((value) => {
         data: {"q": value}
     }).done((response) => {
         // Elimino i possibili duplicati dovuti alla join
-        const codici = []
+        const codici = [];
         const giochi = response.filter(function (item) {
             if (!codici.includes(item.codice_gioco)) {
                 codici.push(item.codice_gioco);

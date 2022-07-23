@@ -24,6 +24,7 @@
     overflow: hidden;
 }
 
+/* Notifica in alto a destra dello stato dell'ordine */
 .order::after {
     content: "Completato";
     position: absolute;

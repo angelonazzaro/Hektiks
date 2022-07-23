@@ -4,17 +4,19 @@
     flex-direction: column;
     margin-top: 2rem;
 }
-
+/* L'immagine di copertina del gioco */
 .banner > img {
     border-radius: 10px;
     max-width: 100%;
     object-fit: contain;
 }
 
+/* Dove sta il titolo, prezzo, sconto, quantità e bottoni del gioco*/
 form {
     width: 65%;
 }
 
+/* Contenuto del form */
 .game-card {
     width: 100%;
     color: white;
@@ -33,6 +35,7 @@ form {
     padding: 0 2rem;
 }
 
+/* Informazioni sulla quantità del gioco */
 .subinfos {
     width: 40%;
     margin: auto;
@@ -48,11 +51,13 @@ form {
     padding: 0 1rem;
 }
 
+/* Se il gioco è disponibile, mostra un tick */
 .tick::before {
     content: "\2713";
     color: #25de57;
 }
 
+/* Se il gioco non è disponibile, mostra una croce */
 .cross::before {
     content: "\00D7";
     color: #e51f3d;
@@ -101,6 +106,7 @@ form {
     flex-basis: 85%;
 }
 
+/* Spazio che intercorre tra una sezione e l'altra */
 .game-separator {
     height: 60px;
 }
@@ -112,6 +118,7 @@ form {
     min-height: inherit;
 }
 
+/* Intestazione della sezioen */
 .headline {
     margin-bottom: 2rem;
 }
@@ -128,6 +135,7 @@ form {
 }
 
 /* RECENSIONI */
+
 .no-review-container, .game-rating {
     width: 100%;
     background-color: var(--header-bg);

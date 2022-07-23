@@ -111,8 +111,7 @@
                 <div class="form-footer">
                     <button type="submit" class="btn form-control-submit-btn">Registrati</button>
                     <br>
-                    <p data-next-form="login" data-prev-form="registration">Sei già registrato? <a href="#"
-                                                                                                   class="next-form-btn"
+                    <p data-next-form="login" data-prev-form="registration">Sei già registrato? <a href="#" class="next-form-btn"
                     >Accedi.</a></p>
                 </div>
             </form>

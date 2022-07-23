@@ -1,7 +1,7 @@
 /* FONTS: Roboto, Lato, Poppins, Water Brush, Source Sans Pro, Lobster*/
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Lobster&family=Poppins&family=Roboto&family=Source+Sans+Pro&family=Water+Brush&display=swap');
 
-
+/* Variabili colori */
 :root {
     --orange: #ff5400;
     --yellow: #ffa700;
@@ -14,6 +14,7 @@
     --footer-bg: #1d1d1d;
     --dark-blue: #1b2838;
 }
+
 
 * {
     margin: 0;
@@ -46,6 +47,7 @@ body {
     overflow: hidden;
 }
 
+/* 92.5vh perchè l'header ne occupa almeno 7.5 */
 .wrapper {
     min-height: 92.5vh;
     width: 100%;
@@ -88,6 +90,7 @@ a {
     transform: translate(-150%, -50%);
 }
 
+/* Dedicata agli input */
 .form-control {
     width: 100%;
     padding: 1.8rem 1.5rem;
@@ -185,6 +188,7 @@ a {
     width: 100%;
 }
 
+/* Viene usata per nascondere il modal */
 .fade {
     opacity: 0;
     user-select: none;

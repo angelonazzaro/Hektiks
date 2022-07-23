@@ -1,4 +1,5 @@
 // Inizializzo la dataTable
+// $(document).ready() - window.onload
 $(() => {
     $("#basic-table").DataTable({
         "autoWidth": false,

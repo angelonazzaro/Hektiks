@@ -23,6 +23,7 @@
     clip-path: circle(200% at 100% -10%);
 }
 
+/* Si riferisce alla parte dove stanno i form */
 #child-1 {
     position: relative;
     top: 5%;
@@ -59,7 +60,7 @@
     font-size: calc(1.4em + 1vmin);
     color: white;
 }
-
+/* Intestazione del form, in particolare la linea bianca */
 .login-registration-form .form-header h2::after {
     content: "";
     display: block;
@@ -105,7 +106,7 @@
     content: "";
     display: block;
     height: 1px;
-    width: 0%;
+    width: 0;
     background-color: white;
     margin: 0.2em 0;
     transition: width 200ms ease;
@@ -136,6 +137,7 @@
     height: 100%;
 }
 
+/* Animazione */
 @keyframes show {
     0% {
         opacity: 0;
@@ -145,6 +147,7 @@
     }
 }
 
+/* Animazione */
 @keyframes hide {
     0% {
         opacity: 1;
@@ -154,6 +157,7 @@
     }
 }
 
+/* Toglie l'immagine affianco */
 @media only screen and (max-width: 768px) {
     #child-2 {
         display: none;

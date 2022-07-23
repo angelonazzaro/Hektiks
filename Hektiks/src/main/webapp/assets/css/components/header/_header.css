@@ -100,6 +100,7 @@ header #burger:hover .line {
     position: relative;
 }
 
+/* Username e saldo utente */
 #user-info {
     display: flex;
     flex-direction: column;
@@ -114,6 +115,7 @@ header #burger:hover .line {
     color: var(--orange);
 }
 
+/* immagine profilo utente */
 #login-container > img {
     max-width: 22%;
     border-radius: 50%;
@@ -183,6 +185,7 @@ header #burger:hover .line {
     }
 }
 
+/* ricerca mobile. Nascondi la searchbar nell'header e mostra la searchbar in 'mostra tutti'*/
 @media only screen and (max-width: 470px) {
     nav .search-bar {
         display: none;
