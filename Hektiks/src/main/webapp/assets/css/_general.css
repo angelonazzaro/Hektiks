@@ -31,6 +31,7 @@ body {
     font-family: "Source Code Pro", sans-serif;
 }
 
+/* Stile Scrollbar */
 ::-webkit-scrollbar {
     width: 7.5px;
 }
@@ -43,6 +44,8 @@ body {
     background: rgb(95, 95, 95);
 }
 
+/* Impedisce che l'utenti scrolli nella pagina, usato sul body quando si mostra il modal delle recensioni
+   e il form di login/registrazione*/
 .no-scroll {
     overflow: hidden;
 }
@@ -103,6 +106,7 @@ a {
     transition: border-color 200ms ease;
 }
 
+/* Fieldset */
 .no-border {
     margin-inline-start: 0;
     margin-inline-end: 0;
@@ -139,6 +143,7 @@ a {
     width: 100%;
 }
 
+/* Modal delle recensioni in gioco.jsp */
 .modal {
     z-index: 2;
     position: fixed;

@@ -45,6 +45,7 @@ header #burger:hover .line {
     background-color: var(--orange);
 }
 
+/* Animazione/Transizione quando clicchi sul burger, diventa una X */
 #burger.active .line:nth-child(1) {
     transform: rotate(45deg) translateY(300%);
 }
@@ -74,7 +75,7 @@ header #burger:hover .line {
 .cart:hover {
     color: var(--orange);
 }
-
+/* Icona che mostra la quantità di giochi nel carrello */
 .caret {
     position: absolute;
     top: -20%;
@@ -125,6 +126,7 @@ header #burger:hover .line {
 }
 
 /* SEARCH BAR */
+/* search bar nell'header e nella pagina di mostra tutti nel mobile */
 .search-bar {
     position: relative;
     flex-basis: 40%;

@@ -89,7 +89,7 @@ form {
     padding: 1rem 2rem;
     border-radius: 10px;
 }
-
+/* Bottoni di acquisto e aggiunta al carrello */
 .actions {
     width: 80%;
     display: flex;
@@ -165,6 +165,7 @@ form {
     text-align: center;
 }
 
+/* Card della review */
 .review {
     width: 100%;
     height: fit-content;
@@ -185,10 +186,9 @@ form {
 }
 
 .user-banner {
-    cursor: pointer;
     margin-right: 2rem;
 }
-
+/* Immagine profilo dell'utente nella recensione*/
 .user-banner > img {
     max-width: 10%;
     object-fit: contain;
@@ -196,11 +196,13 @@ form {
     border-radius: 5px;
 }
 
+/* Colore delle icone */
 .fa-star::before,
 .fa-star-half::before {
     color: #f8b024;
 }
 
+/* Stelle della recensione */
 .review-stars {
     font-size: calc(0.6rem + 1vmin);
     display: inline;
@@ -210,6 +212,7 @@ form {
     transform: translateY(-50%);
 }
 
+/* Testo della recensione */
 .review-body {
     margin: 2rem 0;
     overflow: hidden;
@@ -233,7 +236,7 @@ form {
     align-items: center;
     gap: 2rem;
 }
-
+/* Colore per il voto medio delle recensioni sul gioco */
 .good-rating {
     color: #6dd432;
     border-color: #6dd432;
@@ -259,6 +262,7 @@ form {
     border: 3px solid;
 }
 
+/* Card dove mostra: "Vuoi recensire il gioco?" */
 .review-card-actions {
     width: 100%;
     display: flex;

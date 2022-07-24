@@ -1,3 +1,4 @@
+/* Intestazione del carrello */
 .cart-heading {
     display: flex;
     justify-content: space-between;
@@ -9,6 +10,7 @@
     align-self: flex-end;
 }
 
+/* Contenuto del carrello */
 .cart-container {
     color: white;
     display: flex;
@@ -17,6 +19,7 @@
     align-items: center;
 }
 
+/* Singolo gioco nel carrello */
 .cart-item {
     width: 100%;
     display: flex;
@@ -24,6 +27,7 @@
     justify-content: space-between;
 }
 
+/* Linea che separa i singoli item */
 .cart-item-separator {
     display: block;
     width: 100%;
@@ -32,6 +36,7 @@
     margin: 1rem 0;
 }
 
+/* Contenitored della copertina dell'item */
 .cart-item-preview {
     display: flex;
     flex-basis: 70%;
@@ -44,6 +49,7 @@
     margin-right: 0.5em;
 }
 
+/* Titolo, quantità */
 .cart-item-info {
     width: 100%;
     flex-basis: 50%;
@@ -54,6 +60,7 @@
     justify-self: center;
 }
 
+/* Seleziona quantità e rimuovi */
 .cart-item-tools {
     margin-top: 0.5rem;
     display: flex;
@@ -61,6 +68,7 @@
     justify-content: space-between;
 }
 
+/* Prezzo totale carrello */
 #cart-total-price {
     width: 100%;
     display: flex;

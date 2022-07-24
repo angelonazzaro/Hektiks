@@ -42,6 +42,7 @@
     position: relative;
 }
 
+/* Form di registrazione/login */
 .login-registration-form {
     width: 100%;
     height: 100%;
@@ -129,6 +130,7 @@
     animation: hide 300ms ease forwards;
 }
 
+/* Immagine affianco */
 #child-2 {
     background-image: url("../../../images/wallpaper.jpg");
     background-size: cover;
