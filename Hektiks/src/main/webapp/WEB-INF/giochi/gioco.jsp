@@ -123,7 +123,7 @@
 
                         <div class="review">
                                 <div class="review-header">
-                                    <a class="user-banner" href="<%= request.getContextPath() + "/utente?username=" + utente.getUsername() %>" title="<%= utente.getUsername() %>">
+                                    <a class="user-banner" title="<%= utente.getUsername() %>">
                                         <img
                                             src="<%= profile_pic %>"
                                             alt="<%= utente.getUsername() %> immagine profilo"
