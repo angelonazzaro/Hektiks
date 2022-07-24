@@ -36,15 +36,23 @@ public class RecensioneServlet extends HttpServlet {
         DataSource source = (DataSource) getServletContext().getAttribute("DataSource");
 
         try {
+
             Gioco gioco = new GiocoDAO(source).doRetrieveByKey(codice_gioco);
 
             if (gioco == null) {
+
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 response.sendRedirect(request.getContextPath() + "/ErrorHandlerServlet");
+
                 return;
             }
 
-            List<Recensione> recensioni = new RecensioneDAO(source).doRetrieveByJoin("inner", String.format("%s ON %s.email = %s.email_utente", UTENTI, UTENTI, RECENSIONI), String.format("%s.codice_gioco = '%s' ORDER BY voto ASC", RECENSIONI, codice_gioco), UTENTI);
+            List<Recensione> recensioni = new RecensioneDAO(source).doRetrieveByJoin("inner",
+                    String.format("%s ON %s.email = %s.email_utente",
+                            UTENTI, UTENTI, RECENSIONI),
+                    String.format("%s.codice_gioco = '%s' ORDER BY voto ASC",
+                            RECENSIONI, codice_gioco),
+                    UTENTI);
 
 
             request.setAttribute("title", gioco.getTitolo() + " | Recensioni");
@@ -57,6 +65,7 @@ public class RecensioneServlet extends HttpServlet {
             request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
 
         } catch (SQLException e) {
+
             e.printStackTrace();
         }
 
@@ -75,7 +84,9 @@ public class RecensioneServlet extends HttpServlet {
         Gson gson = new Gson();
 
         if (session == null || session.getAttribute("user") == null) {
+
             out.write(gson.toJson(new JSONResponse<String>("error", "Devi accedere per poter lasciare una recensione")));
+
             return;
         }
 
@@ -85,8 +96,10 @@ public class RecensioneServlet extends HttpServlet {
         String descrizione = request.getParameter("descrizione");
 
         if (codiceGioco == null || voto < 0 || voto > 5) {
+
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.sendRedirect(request.getContextPath() + "/ErrorHandlerServlet");
+
             return;
         }
 
@@ -94,15 +107,19 @@ public class RecensioneServlet extends HttpServlet {
         Prodotto_OrdineDAO prodotto_ordineDAO = new Prodotto_OrdineDAO(source);
 
         try {
+
             List<Prodotto_Ordine> prodotto_ordine = prodotto_ordineDAO.doRetrieveByCondition("email_utente = '" + utente.getEmail() + "' AND codice_gioco = '" + codiceGioco + "'");
 
             if (prodotto_ordine == null || prodotto_ordine.size() == 0) {
+
                 out.write(gson.toJson(new JSONResponse<String>("error", "Devi acquistare il gioco per poter lasciare una recensione")));
+
                 return;
             }
 
 
         } catch (SQLException e) {
+
             e.printStackTrace();
         }
 
@@ -118,13 +135,16 @@ public class RecensioneServlet extends HttpServlet {
             recensione.setCodice_gioco(codiceGioco);
             recensione.setData_ora_pubblicazione(date);
             recensione.setVoto(voto);
+
             if (descrizione != null)
                 recensione.setDescrizione(descrizione);
 
             recensioneDAO.doSave(recensione);
 
             out.write(gson.toJson(new JSONResponse<String>("success", "Recensione lasciata!")));
+
         } catch (SQLException e) {
+
             e.printStackTrace();
         }
     }

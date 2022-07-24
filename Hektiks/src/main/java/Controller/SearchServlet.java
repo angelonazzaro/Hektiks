@@ -34,13 +34,18 @@ public class SearchServlet extends HttpServlet {
         // Cerco un qualsiasi gioco che contenga la stringa di ricerca
         // o che appartenga a un genere che contenga la stringa di ricerca
         try {
-            List<Gioco> giochi = giocoDAO.doRetrieveByJoin(
-                    "left", String.format("%s ON %s.codice_gioco = %s.codice_gioco", GIOCHI_GENERE, GIOCHI_GENERE, GIOCHI),
-                    String.format("%s.titolo LIKE '%%%s%%' OR %s.codice_gioco LIKE '%%%s%%' OR %s.nome_genere LIKE '%%%s%%'", GIOCHI, search, GIOCHI, search, GIOCHI_GENERE, search));
+
+            List<Gioco> giochi = giocoDAO.doRetrieveByJoin("left",
+                    String.format("%s ON %s.codice_gioco = %s.codice_gioco",
+                            GIOCHI_GENERE, GIOCHI_GENERE, GIOCHI),
+                    String.format("%s.titolo LIKE '%%%s%%' OR %s.codice_gioco LIKE '%%%s%%' OR %s.nome_genere LIKE '%%%s%%'",
+                            GIOCHI, search, GIOCHI, search, GIOCHI_GENERE,
+                            search));
 
             out.write(gson.toJson(giochi));
 
         } catch (SQLException e) {
+
             e.printStackTrace();
         }
     }

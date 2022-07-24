@@ -20,9 +20,15 @@ public class PagamentoExtractor implements ResultSetExtractor<Pagamento> {
         pagamento.setData_ora_pagamento(resultSet.getTimestamp(PAGAMENTI + ".data_ora_pagamento"));
         pagamento.setImporto(resultSet.getDouble(PAGAMENTI + ".importo"));
 
+        /*
+         * Se ci sono altre tabelle (oltre a quella "implicita")
+         * si aggiunge alla lista di oggetti della join i field estratti tremite l'Extractor
+         */
+
         if (tables.length > 0) {
             pagamento.setJoin(new ArrayList<>());
-            for (String table : tables) pagamento.addToJoin(findExtractor(table).extract(resultSet));
+            for (String table : tables)
+                pagamento.addToJoin(findExtractor(table).extract(resultSet));
         }
 
         return pagamento;

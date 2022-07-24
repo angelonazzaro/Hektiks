@@ -19,9 +19,14 @@ public class CarrelloExtractor implements ResultSetExtractor<Carrello> {
         carrello.setData_creazione(resultSet.getDate(CARRELLI + ".data_creazione"));
         carrello.setData_modifica(resultSet.getDate(CARRELLI + ".data_modifica"));
 
+        /*
+         * Se ci sono altre tabelle (oltre a quella "implicita")
+         * si aggiunge alla lista di oggetti della join i field estratti tremite l'Extractor
+         */
         if (tables.length > 0) {
             carrello.setJoin(new ArrayList<>());
-            for (String table : tables) carrello.addToJoin(findExtractor(table).extract(resultSet));
+            for (String table : tables)
+                carrello.addToJoin(findExtractor(table).extract(resultSet));
         }
 
         return carrello;

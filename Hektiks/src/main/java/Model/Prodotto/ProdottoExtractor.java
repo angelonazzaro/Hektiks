@@ -19,9 +19,15 @@ public class ProdottoExtractor implements ResultSetExtractor<Prodotto> {
         prodotto.setCodice_gioco(resultSet.getString(PRODOTTI + ".codice_gioco"));
         prodotto.setQuantita_disponibile(resultSet.getInt(PRODOTTI + ".quantita_disponibile"));
 
+        /*
+         * Se ci sono altre tabelle (oltre a quella "implicita")
+         * si aggiunge alla lista di oggetti della join i field estratti tremite l'Extractor
+         */
+
         if (tables.length > 0) {
             prodotto.setJoin(new ArrayList<>());
-            for (String table : tables) prodotto.addToJoin(findExtractor(table).extract(resultSet));
+            for (String table : tables)
+                prodotto.addToJoin(findExtractor(table).extract(resultSet));
         }
 
         return prodotto;

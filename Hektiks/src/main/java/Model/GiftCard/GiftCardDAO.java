@@ -1,5 +1,6 @@
 package Model.GiftCard;
 
+import Model.Genere.GenereExtractor;
 import Model.Storage.DAO;
 import Model.Storage.SQLDAO;
 import Utils.InvalidPrimaryKeyException;
@@ -9,6 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import static Model.Storage.Entities.GENERI;
 import static Model.Storage.Entities.GIFTCARDS;
 
 public class GiftCardDAO extends SQLDAO implements DAO<GiftCard> {
@@ -25,7 +27,8 @@ public class GiftCardDAO extends SQLDAO implements DAO<GiftCard> {
 
     @Override
     public List<GiftCard> doRetrieveByJoin(String joinType, String joinCondition, String condition, String... tables) throws SQLException {
-        return null;
+
+        return genericDoRetrieveByJoin(GIFTCARDS, joinType, joinCondition, condition, new GiftCardExtractor(), this.source);
     }
 
 

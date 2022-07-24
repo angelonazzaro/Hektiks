@@ -21,9 +21,15 @@ public class RecensioneExtractor implements ResultSetExtractor<Recensione> {
         recensione.setVoto(resultSet.getDouble(RECENSIONI + ".voto"));
         recensione.setDescrizione(resultSet.getString(RECENSIONI + ".descrizione"));
 
+        /*
+         * Se ci sono altre tabelle (oltre a quella "implicita")
+         * si aggiunge alla lista di oggetti della join i field estratti tremite l'Extractor
+         */
+
         if (tables.length > 0) {
             recensione.setJoin(new ArrayList<>());
-            for (String table : tables) recensione.addToJoin(findExtractor(table).extract(resultSet));
+            for (String table : tables)
+                recensione.addToJoin(findExtractor(table).extract(resultSet));
         }
 
         return recensione;

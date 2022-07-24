@@ -170,10 +170,8 @@ public class CarrelloServlet extends HttpServlet {
                         nuova_quantita = Integer.parseInt(session.getAttribute("quantita_carrello").toString()) + (quantita - vecchia_quantita);
             }
 
-        } else {
-
+        } else
             nuova_quantita = quantita;
-        }
 
         session.setAttribute("carrello", giochiCarrello);
         session.setAttribute("quantita_carrello", nuova_quantita);

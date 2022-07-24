@@ -22,9 +22,15 @@ public class Prodotto_OrdineExtractor implements ResultSetExtractor<Prodotto_Ord
         prodotto_ordine.setPrezzo(resultSet.getDouble(PRODOTTI_ORDINI + ".prezzo"));
         prodotto_ordine.setQuantita(resultSet.getInt(PRODOTTI_ORDINI + ".quantita"));
 
+        /*
+         * Se ci sono altre tabelle (oltre a quella "implicita")
+         * si aggiunge alla lista di oggetti della join i field estratti tremite l'Extractor
+         */
+
         if (tables.length > 0) {
             prodotto_ordine.setJoin(new ArrayList<>());
-            for (String table : tables) prodotto_ordine.addToJoin(findExtractor(table).extract(resultSet));
+            for (String table : tables)
+                prodotto_ordine.addToJoin(findExtractor(table).extract(resultSet));
         }
 
         return prodotto_ordine;

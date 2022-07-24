@@ -26,9 +26,15 @@ public class UtenteExtractor implements ResultSetExtractor<Utente> {
         utente.setSaldo(resultSet.getDouble(UTENTI + ".saldo"));
         utente.setProfile_pic(resultSet.getString(UTENTI + ".profile_pic"));
 
+        /*
+         * Se ci sono altre tabelle (oltre a quella "implicita")
+         * si aggiunge alla lista di oggetti della join i field estratti tremite l'Extractor
+         */
+
         if (tables.length > 0) {
             utente.setJoin(new ArrayList<>());
-            for (String table : tables) utente.addToJoin(findExtractor(table).extract(resultSet));
+            for (String table : tables)
+                utente.addToJoin(findExtractor(table).extract(resultSet));
         }
 
         return utente;

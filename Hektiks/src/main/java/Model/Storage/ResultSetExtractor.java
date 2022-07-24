@@ -17,9 +17,22 @@ import java.sql.SQLException;
 
 import static Model.Storage.Entities.*;
 
+/**
+ * Interfaccia che definisce il prototipo di un metodo generico che ogni
+ * Bean deve implementare per la gestione dei risultati di una query.
+ **/
+
 public interface ResultSetExtractor<B> {
 
+    /**
+     * Estrae i field di un ResultSet e restituisce un bean corrsipondente.
+     **/
+
     B extract(ResultSet resultSet, String... tables) throws SQLException;
+
+    /**
+     * Restituisce un Extractor corrispondente alla tabella passata come parametro.
+     **/
 
     default ResultSetExtractor<?> findExtractor(String table) {
         return switch (table) {
