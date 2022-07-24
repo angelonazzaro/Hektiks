@@ -2,6 +2,8 @@ const selects = document.querySelectorAll("select[name='quantita']");
 const cart_total = document.querySelector("#cart-total");
 const remove_cart_btns = document.querySelectorAll(".remove-cart-btn");
 
+//per ogni elemento della select aggiungo un evento
+
 selects.forEach(select => {
     select.addEventListener("change", function () {
         const parent = select.parentElement;
@@ -9,12 +11,14 @@ selects.forEach(select => {
             url: base_url() + "/carrello",
             method: "POST",
             data: {
-                "codice_gioco": parent.dataset.code,
+                "codice_gioco": parent.dataset.code, //richiesta ajax per aggiornare il carrello
                 "quantita": select.value,
                 "action": "update"
             }
         }).done((response) => {
             update_cart_caret(response.value);
+
+            //recupero il prezzo del singolo gioco, prezzo totale e quantità
 
             let cart_total_price = parseFloat(cart_total.textContent);
             const game_price = parseFloat(parent.dataset.price).toFixed(2);
@@ -30,6 +34,8 @@ selects.forEach(select => {
     });
 });
 
+//aggiungo un evento per il bottone di rimozione
+
 remove_cart_btns.forEach(btn => {
     btn.addEventListener("click", function () {
         const parent = btn.parentElement;
@@ -38,7 +44,7 @@ remove_cart_btns.forEach(btn => {
             url: base_url() + "/carrello",
             method: "POST",
             data: {
-                "codice_gioco": parent.dataset.code,
+                "codice_gioco": parent.dataset.code, //richiesta ajax per aggiornare il carrello
                 "quantita": 0,
                 "action": "remove"
             }
@@ -46,8 +52,12 @@ remove_cart_btns.forEach(btn => {
 
             update_cart_caret(response.value);
 
+            //recupero quantità e prezzo
+
             const quantity = parseInt(parent.dataset.quantity);
             const game_price = parseFloat(parent.dataset.price);
+
+            //calcolo il totale
 
             cart_total.textContent = (parseFloat(cart_total.textContent) - (game_price * quantity)).toFixed(2).replace(".", ",");
             $(`.${parent.dataset.code}`).remove();
@@ -55,6 +65,8 @@ remove_cart_btns.forEach(btn => {
             const cart_items = $(".cart-item");
             const main_content = $('.main-content');
 
+            // se rimuovo tutti gli elementi dal carrello, modifico la pagina e mostro
+            // "Il tuo carrello è vuoto."
 
             if (cart_items.length === 0) {
 

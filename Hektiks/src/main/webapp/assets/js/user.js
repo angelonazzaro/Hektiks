@@ -1,4 +1,4 @@
-// Riscatto la giftcard,  si potrebbe anche togliere perchè le notifiche le gestiamo tramite la sessione adesso
+// Riscatto la giftcard, si potrebbe anche togliere perchè le notifiche le gestiamo tramite la sessione adesso
 $("#giftcard-form").submit(function (e) {
     e.preventDefault();
 
@@ -8,6 +8,8 @@ $("#giftcard-form").submit(function (e) {
         data: $(this).serializeArray()
     }).done((response) => {
         response = JSON.parse(response);
+
+        //notifico se l'operazione è andata a buon fine o no
 
         if (response.type === 'error') notifier.alert(response.value);
         else if (response.type === 'success') {

@@ -1,13 +1,5 @@
 <%@ page import="Model.Utente.Utente" %>
 <%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="Model.Ordine.Ordine" %>
-<%@ page import="java.util.List" %>
-<%@ page import="Model.Prodotto_Ordine.Prodotto_OrdineDAO" %>
-<%@ page import="Model.Gioco.GiocoDAO" %>
-<%@ page import="Model.Prodotto_Ordine.Prodotto_Ordine" %>
-<%@ page import="java.sql.SQLException" %>
-<%@ page import="Model.Gioco.Gioco" %>
-<%@ page import="java.io.PrintWriter" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% String partPath = (String) request.getAttribute("part"); %>
 <% Utente user = (Utente) session.getAttribute("user"); %>

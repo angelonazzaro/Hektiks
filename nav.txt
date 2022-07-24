@@ -1,0 +1,7 @@
+header.jsp POST: HomeServlet registration/login GET: HomePage
+gioco.jsp POST: AcquistoServlet GET: RecensioneServlet INCLUDE: recensioni_modal.jsp
+recensioni_modal.jsp POST: RecensioneServlet
+carrello.jsp POST: AcquistoServlet
+dashboard.jsp GET: AdminServlet, LogoutServlet, UtenteServlet POST: GiftCardServlet INCLUDE: orders.jsp/settings.jsp
+orders.jsp GET: GiocoServlet
+settings.jsp POST: UtenteServlet

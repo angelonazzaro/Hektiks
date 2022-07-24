@@ -31,7 +31,9 @@ public class GiftCardServlet extends HttpServlet {
         //recupero il codice giftcard
         String codice_giftCard = request.getParameter("codice_giftcard");
 
-        GiftCardDAO giftCardDAO = new GiftCardDAO((DataSource) getServletContext().getAttribute("DataSource"));
+        DataSource source = (DataSource) getServletContext().getAttribute("DataSource");
+
+        GiftCardDAO giftCardDAO = new GiftCardDAO(source);
         List<GiftCard> giftCards;
 
         Gson gson = new Gson();
@@ -61,9 +63,11 @@ public class GiftCardServlet extends HttpServlet {
 
                 } else {
 
+                    //giftcard non utilizzata, riscatto la giftcard
+
                     HttpSession session = request.getSession();
                     Utente utente = (Utente) session.getAttribute("user");
-                    UtenteDAO utenteDAO = new UtenteDAO((DataSource) getServletContext().getAttribute("DataSource"));
+                    UtenteDAO utenteDAO = new UtenteDAO(source);
 
                     //aggiorno il saldo dell'utente
                     utente.setSaldo(utente.getSaldo() + giftCards.get(0).getImporto());

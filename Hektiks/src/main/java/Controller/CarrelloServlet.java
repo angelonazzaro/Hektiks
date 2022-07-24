@@ -32,6 +32,9 @@ public class CarrelloServlet extends HttpServlet {
 
         HttpSession session = request.getSession(false);
 
+        //se la sessione è presente recupero i giochi nel carrello
+        //che saranno mostrati in carrello.jsp
+
         if (session != null && session.getAttribute("carrello") != null) {
 
             GiocoDAO giocoDAO = new GiocoDAO((DataSource) getServletContext().getAttribute("DataSource"));
@@ -91,9 +94,12 @@ public class CarrelloServlet extends HttpServlet {
 
             try {
 
-                // Ci sono due scenari: 1) è un nuovo prodotto 2) è un prodotto già presente nel carrello
+                // Ci sono due scenari:
+                // 1) è un nuovo prodotto
+                // 2) è un prodotto già presente nel carrello
                 // Nello scenario 1 bisogna salvare in db il nuovo prodotto e aggiungerlo al carrello
                 // Nello scenario 2 bisogna aggiornare la quantità del prodotto nel carrello e nel db
+
                 Prodotto prodotto = prodottoDAO.doRetrieveByKey(utente.getEmail(), codice_gioco);
 
                 // Scenario 1 (comprende sia add che update ma non remove)
@@ -118,7 +124,10 @@ public class CarrelloServlet extends HttpServlet {
                                                 PRODOTTI, utente.getEmail(), PRODOTTI, codice_gioco));
                         case "update" -> quantita_disponibile = quantita;
                         case "add" -> quantita_disponibile += quantita;
+
                     }
+
+                    //agiorno la quantita disponibile nel db
 
                     prodotto.setQuantita_disponibile(quantita_disponibile);
                     HashMap<String, Integer> map = new HashMap<>();
@@ -146,13 +155,18 @@ public class CarrelloServlet extends HttpServlet {
 
                 if (action.equals("update")) {
 
+                    //recupero la vecchia quantità prima di aggiornare
+
                     vecchia_quantita = giochiCarrello.get(codice_gioco);
                     giochiCarrello.replace(codice_gioco, quantita);
 
                 } else
+                    //aggiorno con la nuova quantità
                     giochiCarrello.replace(codice_gioco, giochiCarrello.get(codice_gioco) + quantita);
 
             } else
+
+                //se il gioco non è presente lo aggiungo
                 giochiCarrello.put(codice_gioco, quantita);
         }
 

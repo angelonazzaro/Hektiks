@@ -13,6 +13,8 @@ public class LogoutServlet extends HttpServlet {
 
         Logger.consoleLog(Logger.INFO, "LOGOUT SERVLET DO GET");
 
+        // invalido la sessione ed effettuo il redirect alla home page
+
         request.getSession().invalidate();
         response.sendRedirect(request.getContextPath() + "/");
     }

@@ -50,8 +50,12 @@ public class UtenteServlet extends HttpServlet {
 
             try {
 
+                //recupero il numero di ordini e recensioni lasciati dall'utente
+
                 List<Recensione> recensioni = new RecensioneDAO(source).doRetrieveByCondition("email_utente = '" + user.getEmail() + "'");
                 List<Ordine> ordini = new OrdineDAO(source).doRetrieveByCondition("email_utente = '" + user.getEmail() + "'");
+
+                //calcolo il totale speso dall'utente
 
                 double totaleSpeso = ordini.stream().map(Ordine::getPrezzo_totale).reduce(0.0D, Double::sum);
 
@@ -66,6 +70,8 @@ public class UtenteServlet extends HttpServlet {
         } else if (part.equals("orders")) {
 
             try {
+
+                //recupero tutti gli ordini dell'utente
 
                 request.setAttribute("ordini", new OrdineDAO(source).doRetrieveByCondition("email_utente = '" + user.getEmail() + "'"));
                 request.setAttribute("prodottoOrdineDAO", new Prodotto_OrdineDAO(source));
@@ -99,7 +105,7 @@ public class UtenteServlet extends HttpServlet {
         Utente utente = (Utente) session.getAttribute("user");
         UtenteDAO utenteDAO = new UtenteDAO((DataSource) getServletContext().getAttribute("DataSource"));
 
-        //mappa per i filed del db da aggiornare
+        //mappa per i file del db da aggiornare
         HashMap<String, String> map = new HashMap<>();
         boolean update = false;
 
@@ -119,6 +125,8 @@ public class UtenteServlet extends HttpServlet {
 
                 return;
             }
+
+            // Controllo che il file non sia troppo grande (1,4 MB)
 
             if (filePart.getSize() > 1048576) {
 
@@ -153,13 +161,15 @@ public class UtenteServlet extends HttpServlet {
             // se l'utente aveva già un'immagine
             else {
 
-                //salvo file di backup
+                //salvo file di backup dell'immagine precedente
                 File[] files = userProfilePicFolder.listFiles();
                 File oldFile = null;
 
-                // La directory conterrà sempre e solo un file
+                // La directory conterrà sempre solo un file
                 if (files != null && files.length > 0)
                     oldFile = files[0];
+
+                //salvo l'immagine ridimensionata
 
                 newPicPath = salvaImmagineRidimensionata(fileName, userProfilePicFolder, filePart);
                 map.put("profile_pic", utente.getProfile_pic());
@@ -186,7 +196,7 @@ public class UtenteServlet extends HttpServlet {
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        // Serve per aggiornare l'utente nel db
+
         String currentEmail = utente.getEmail();
 
         // Controllo che lo username non sia già in uso da un altro utente
@@ -268,6 +278,8 @@ public class UtenteServlet extends HttpServlet {
 
         try {
 
+            //eseguo la query di update solo se cambia almeno un field
+
             if (update)
                 utenteDAO.doUpdate(map, "email = '" + currentEmail + "'");
 
@@ -300,6 +312,8 @@ public class UtenteServlet extends HttpServlet {
     }
 
     private String salvaImmagineRidimensionata(String fileName, File userProfilePicFolder, Part filePart) throws IOException {
+
+        //recupero l'estensione del file
 
         String[] splitted = fileName.split("\\.");
         String ext = splitted[splitted.length - 1];
