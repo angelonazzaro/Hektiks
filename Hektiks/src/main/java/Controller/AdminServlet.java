@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.Carrello.Carrello;
+import Model.Carrello.CarrelloDAO;
 import Model.Genere.GenereDAO;
 import Model.GiftCard.GiftCard;
 import Model.GiftCard.GiftCardDAO;
@@ -8,6 +10,7 @@ import Model.Gioco.GiocoDAO;
 import Model.Gioco_Genere.Gioco_Genere;
 import Model.Gioco_Genere.Gioco_GenereDAO;
 import Model.Ordine.OrdineDAO;
+import Model.Prodotto.ProdottoDAO;
 import Model.Prodotto_Ordine.Prodotto_Ordine;
 import Model.Prodotto_Ordine.Prodotto_OrdineDAO;
 import Model.Utente.Utente;
@@ -29,6 +32,8 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
+
+import static Model.Storage.Entities.*;
 
 public class AdminServlet extends HttpServlet {
 
@@ -166,6 +171,21 @@ public class AdminServlet extends HttpServlet {
 
                         prodotto_ordineDAO.doDelete("codice_gioco = '" + id + "'");
 
+                        ProdottoDAO prodottoDAO = new ProdottoDAO(source);
+                        prodottoDAO.doDelete("codice_gioco = '" + id + "'");
+
+                        HashMap<String, Integer> carrello = (HashMap<String, Integer>) session.getAttribute("carrello");
+
+                        if (carrello.containsKey(id)) {
+
+                            int quantita_carrello = (Integer) session.getAttribute("quantita_carrello");
+                            quantita_carrello -= carrello.get(id);
+
+                            carrello.remove(id);
+                            session.setAttribute("carrello", carrello);
+                            session.setAttribute("quantita_carrello", quantita_carrello);
+
+                        }
 
                         giocoDAO.doDelete("codice_gioco = '" + id + "'");
                         session.setAttribute("msg-success", "Gioco eliminato");
@@ -291,8 +311,7 @@ public class AdminServlet extends HttpServlet {
 
                     salvaGeneri(request, newCodice, source, false);
                     session.setAttribute("msg-success", "Gioco aggiunto correttamente!");
-                }
-                else
+                } else
                     session.setAttribute("msg-error", "Qualcosa è andato storto!");
 
             } catch (SQLException e) {
@@ -442,8 +461,7 @@ public class AdminServlet extends HttpServlet {
                             salvaGeneri(request, newCodice, source, true);
                             session.setAttribute("msg-success", "Gioco modificato correttamente!");
 
-                        }
-                        else
+                        } else
                             session.setAttribute("msg-error", "Qualcosa è andato storto!");
 
                     } else {

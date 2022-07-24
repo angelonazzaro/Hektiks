@@ -60,14 +60,11 @@ public class AcquistoServlet extends HttpServlet {
         HashMap<String, Integer> carrello = (HashMap<String, Integer>) session.getAttribute("carrello");
 
         // from -> "carrello", la richiesta proviene da carrello.jsp quindi l'utente vuole acquistare tutto quello che sta nel carrello
-        // from -> "gioco", la richiesta proviene da gioco.jsp quindi l'utente vuole acquistare solo quello specifico gioco
+        // from -> "gioco", la richiesta proviene da carrello.jsp quindi l'utente vuole acquistare solo quello specifico gioco
 
         if (from.equals("carrello")) {
 
             for (String key : carrello.keySet()) {
-
-                //per ogni item nel carrello calcolo il prezzo e lo aggiungo al prezzo totale
-                //e lo aggiungo alla lista dei giochi da acquistare
 
                 try {
 
@@ -88,8 +85,6 @@ public class AcquistoServlet extends HttpServlet {
                 }
             }
         } else {
-
-            // la richiesta proviene da gioco.jsp quindi l'utente vuole acquistare solo quello specifico gioco
 
             String codice_gioco = request.getParameter("codice_gioco");
 
@@ -112,8 +107,6 @@ public class AcquistoServlet extends HttpServlet {
         }
 
         Utente utente = (Utente) session.getAttribute("user");
-
-        //controllo che il saldo dell'utente sia sufficiente, altrimenti non può acquistare
 
         if (utente.getSaldo() < prezzoTotale) {
 
@@ -152,8 +145,7 @@ public class AcquistoServlet extends HttpServlet {
         try {
 
             // Se l'ordine è andato a buon fine, inserisco i prodotti in db
-            // Il procedimento è uguale per entrambi i valori di "from"
-
+            // Il procedimento è uguale per entrambe i valori di "from"
             if (ordineDAO.doSave(ordine)) {
 
                 Prodotto_Ordine prodotto_ordine = new Prodotto_Ordine();
@@ -174,15 +166,11 @@ public class AcquistoServlet extends HttpServlet {
 
                     prodotto_ordine.setCodice_gioco(giocoDaAcquistare.getCodice_gioco());
 
-                    //aggiorno quantità
-
                     if (from.equals("carrello"))
                         prodotto_ordine.setQuantita(carrello.get(gioco.getCodice_gioco()));
 
                     else
                         prodotto_ordine.setQuantita(1);
-
-                    //calcolo sconto
 
                     if (giocoDaAcquistare.getPercentuale_sconto() > 0)
                         prodotto_ordine.setPrezzo(giocoDaAcquistare.getPrezzo() - ((giocoDaAcquistare.getPrezzo() * giocoDaAcquistare.getPercentuale_sconto()) / 100));
@@ -192,7 +180,6 @@ public class AcquistoServlet extends HttpServlet {
 
                     prodotto_ordineDAO.doSave(prodotto_ordine);
                     HashMap<String, Integer> map = new HashMap<>();
-
                     // Aggiorno le vendite del gioco
                     map.put("numero_vendite", giocoDaAcquistare.getNumero_vendite() + prodotto_ordine.getQuantita());
                     map.put("quantita_disponibile", giocoDaAcquistare.getQuantita_disponibile() - prodotto_ordine.getQuantita());

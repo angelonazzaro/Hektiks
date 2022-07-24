@@ -51,6 +51,19 @@ remove_cart_btns.forEach(btn => {
 
             cart_total.textContent = (parseFloat(cart_total.textContent) - (game_price * quantity)).toFixed(2).replace(".", ",");
             $(`.${parent.dataset.code}`).remove();
+
+            const cart_items = $(".cart-item");
+            const main_content = $('.main-content');
+
+
+            if (cart_items.length === 0) {
+
+                main_content.empty();
+                main_content.append(`<div style="width: 100%; text-align: center; color: white;">
+                                                <h1 class="hs-3">Il tuo carrello è vuoto.</h1>
+                                           </div>`);
+            }
+
         }).fail(() => {
             notifier.alert("Qualcosa è andato storto");
         });
