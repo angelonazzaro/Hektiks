@@ -26,7 +26,7 @@
 <!-- header start -->
 <header>
     <nav>
-        <%--method="GET" -> HomeServlet--%>
+        <%--method: GET HomeServlet--%>
         <a href="<%= request.getContextPath() %>/" id="logo" class="hs-1">HEKTIKS</a>
         <div class="search-bar">
             <input type="text" class="form-control" placeholder="Cerca..."/>
@@ -43,6 +43,7 @@
             </div>
             <img src="<%= profile_pic %>" alt="profile pic" id="profile-pic">
             <div class="cart">
+                <%--method: GET CarrelloServlet--%>
                 <a href="<%= request.getContextPath() %>/carrello">
                     <span class="caret">
                         <% if (session.getAttribute("quantita_carrello") != null) { %>
@@ -58,6 +59,7 @@
         <% } else { %>
         <div style="display: flex; align-items: center">
             <div class="cart">
+                <%--method: GET CarrelloServlet--%>
                 <a href="<%= request.getContextPath() %>/carrello">
                     <span class="caret">
                         <% if (session.getAttribute("quantita_carrello") != null) { %>
@@ -118,7 +120,7 @@
                     >Accedi.</a></p>
                 </div>
             </form>
-            <%--method="POST" -> HomeServlet--%>
+            <%--method: POST -> HomeServlet--%>
             <form action="<%= request.getContextPath() %>/" method="POST" class="login-registration-form active"
                   id="login-form">
                 <div class="form-header">

@@ -15,7 +15,7 @@
     <div class="banner">
         <img src="<%= gioco.getCopertina() %>" alt="<%= gioco.getTitolo() %> - Copertina">
     </div>
-    <%--method="POST" -> AcquistoServlet--%>
+    <%--method: POST AcquistoServlet--%>
     <form action="<%= request.getContextPath() %>/acquisto" method="POST">
         <div class="game-card" data-code="<%= gioco.getCodice_gioco() %>" data-title="<%= gioco.getTitolo() %>" data-price="<%= gioco.getPrezzo() %>" data-discount="<%= gioco.getPercentuale_sconto() %>">
             <div class="title">
@@ -155,7 +155,7 @@
                     <% } %>
                 </div>
                 <div class="btn-container">
-                    <%--method="GET" -> RecensioneServlet--%>
+                    <%--method: GET -> RecensioneServlet--%>
                     <a href="<%= request.getContextPath() %>/recensione?codice_gioco=<%= gioco.getCodice_gioco() %>" class="btn">Visualizza più recensioni</a>
                 </div>
             <% } %>

@@ -27,6 +27,7 @@
                 List<Prodotto_Ordine> prodottoOrdini = prodotto_ordineDAO.doRetrieveByCondition("codice_ordine = '" + ordine.getCodice_ordine() + "'");
                 for (Prodotto_Ordine prodottoOrdine : prodottoOrdini) {
                     gioco = giocoDAO.doRetrieveByKey(prodottoOrdine.getCodice_gioco());
+                    //method: GET  GiocoServlet
                     out.write(
                             "<div class='game-order'>" +
                                     "<div class='game-info'>" +

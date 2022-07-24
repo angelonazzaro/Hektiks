@@ -24,6 +24,7 @@
 <div class="settings-wrapper dashboard-container">
     <h1 class="hs-3">Form di modifica: <%= utente.getUsername() %>
     </h1>
+    <%--method: POST  AdminServlet --%>
     <form action="<%= request.getContextPath() %>/admin" method="POST" id="form-settings" class="settings-container">
         <div class="form-body">
             <input type="hidden" name="action" value="edit">

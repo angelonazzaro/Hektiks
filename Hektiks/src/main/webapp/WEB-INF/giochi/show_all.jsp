@@ -16,6 +16,7 @@
             <% double percentuale_sconto = gioco.getPercentuale_sconto(); %>
             <div class="card">
                 <div class="card-header">
+                    <%--method: GET  GiocoServlet--%>
                     <a href="gioco?codice_gioco=<%= gioco.getCodice_gioco() %>"><img class="card-img" src="<%= gioco.getCopertina() %>" alt="<%= gioco.getTitolo() %> - Copertina"></a>
                     <% if (percentuale_sconto > 0) {%>
                     <div class="discount text">-<%= String.format("%.2f", percentuale_sconto).replace(",", ".") %>%</div>

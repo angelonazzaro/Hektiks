@@ -56,6 +56,7 @@
         <div id="cart-total-price" class="hs-4">
             <p>Totale: <span id="cart-total"><%= String.format("%.2f", totalPrice).replace(",", ".") %></span>€</p>
         </div>
+        <%--method: POST  AcquistoServlet--%>
         <form style="width: 100%" action="<%= request.getContextPath() %>/acquisto" method="POST">
             <input type="hidden" name="from" value="carrello">
             <button type="submit" class="btn" style="width: 100%; text-align: center; margin-top: 2rem;">Procedi all'acquisto</button>

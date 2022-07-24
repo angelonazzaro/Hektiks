@@ -6,4 +6,9 @@ dashboard.jsp GET: AdminServlet, LogoutServlet, UtenteServlet POST: GiftCardServ
 orders.jsp GET: GiocoServlet
 settings.jsp POST: UtenteServlet
 admin.jsp GET: AdminServlet INCLUDE: utenti.jsp/utente_edit.jsp/prodotto.jsp/prodotti.jsp/giftcards.jsp/giftcard.jsp
-app.jsp GET: SearchServlet
+utenti.jsp GET: AdminServlet
+utente_edit.jsp POST: AdminServlet
+prodotto.jsp POST: AdminServlet
+prodotti.jsp GET: AdminServlet
+giftcards.jsp GET: AdminServlet
+giftcard.jsp POST: AdminServlet

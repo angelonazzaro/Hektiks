@@ -7,6 +7,7 @@
 
 <div class="dashboard-container">
     <div style="margin-bottom: 5rem; text-align: right">
+        <%--method: GET  AdminServlet part: prodotti, action: add--%>
         <a href="<%= request.getContextPath() %>/admin?part=prodotti&action=add" style="margin-bottom: 2rem;" class="btn">Aggiungi gioco</a>
     </div>
     <table id="basic-table" class="display dataTable cell-border text" style="color: white; text-align: center; word-wrap: break-word; word-break: break-all">
@@ -27,7 +28,9 @@
             <td><%= gioco.getQuantita_disponibile() %></td>
             <td><%= String.format("%.2f€", gioco.getPrezzo()) %></td>
             <td>
+                <%--method: GET  AdminServlet part: prodotti, action: edit--%>
                 <a href="<%= request.getContextPath() %>/admin?part=prodotti&action=edit&id=<%= gioco.getCodice_gioco() %>"><i class="fas fa-edit"></i></a>
+                <%--method: GET  AdminServlet part: prodotti, delete: add--%>
                 <a href="<%= request.getContextPath() %>/admin?part=prodotti&action=delete&id=<%= gioco.getCodice_gioco() %>"><i class="fas fa-trash-alt"></i></a>
             </td>
         </tr>

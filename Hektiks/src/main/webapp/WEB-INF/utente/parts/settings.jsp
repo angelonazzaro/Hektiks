@@ -7,6 +7,7 @@
 
 <div class="settings-wrapper dashboard-container">
     <h1 class="hs-3">Le mie impostazioni</h1>
+    <%--method: POST  UtenteServlet --%>
     <form action="<%= request.getContextPath() %>/utente" method="POST" enctype="multipart/form-data" id="form-settings" class="settings-container">
         <div class="form-body">
             <div class="row">

@@ -22,13 +22,17 @@
 </div>
 <div class="breadcrumb text">
     <ul class="user-links">
+        <%--method: GET  UtenteServlet --%>
         <li class="user-link <%= partPath == null ? "active" : "" %>"><a href="<%= request.getContextPath() %>/utente">
             Dashboard</a>
         </li>
         <% if (user.isRuolo()) { %>
+            <%--method: GET  AdminServlet --%>
             <li class="user-link"><a href="<%= request.getContextPath() %>/admin">Admin</a></li>
         <% } %>
+            <%--method: GET  UtenteServlet part: orders--%>
         <li class="user-link <%= partPath != null && partPath.contains("orders") ? "active" : "" %>"><a href="<%= request.getContextPath() %>/utente?part=orders">I miei ordini</a></li>
+            <%--method: GET  LogoutServlet--%>
         <li class="user-link"><a href="<%= request.getContextPath() %>/logout">Logout</a></li>
     </ul>
     <div class="user-settings-preview">
@@ -99,6 +103,7 @@
                 </div>
                 <div class="dashboard-card-body">
                     <hr>
+                    <%--method: POST  GiftCardServlet--%>
                     <form action="<%= request.getContextPath() %>/giftcard" method="POST" id="giftcard-form">
                         <div class="row">
                             <input type="text" placeholder="Codice Gift Card" class="form-control" name="codice_giftcard">
@@ -110,5 +115,6 @@
         </div>
     </div>
 <% } else { %>
+    <%--include una tra orders.jsp/settings.jsp--%>
     <jsp:include page="<%= partPath %>" />
 <% } %>

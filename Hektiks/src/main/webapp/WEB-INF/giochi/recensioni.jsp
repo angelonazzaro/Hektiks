@@ -16,6 +16,7 @@
             <img src="<%= gioco.getCopertina() %>" alt="<%= gioco.getTitolo() %> - Copertina">
         </div>
         <div class="card-body">
+            <%--method: GET  GiocoServlet--%>
             <a href="<%= request.getContextPath() %>/gioco?codice_gioco=<%= gioco.getCodice_gioco() %>" class="btn review-btn"><i class="fas fa-angle-left"></i> Torna indietro</a>
             <a class="btn review-btn" data-toggle="modal" data-target="#recensioni-modal">Valuta questo gioco! <i class="fas fa-pen-alt"></i></a>
         </div>

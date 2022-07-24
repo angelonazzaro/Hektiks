@@ -8,6 +8,7 @@
 
 <div class="dashboard-container">
     <div style="margin-bottom: 5rem; text-align: right">
+        <%--method: GET  AdminServlet part: giftcards, action: add--%>
         <a href="<%= request.getContextPath() %>/admin?part=giftcards&action=add" style="margin-bottom: 2rem;"
            class="btn">Aggiungi GiftCard</a>
     </div>

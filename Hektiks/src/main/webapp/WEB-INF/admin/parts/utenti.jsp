@@ -23,6 +23,7 @@
             <td><%= utente.getEmail() %></td>
             <td><%= utente.getNome() %></td>
             <td><%= utente.getCognome() %></td>
+            <%--method: GET  AdminServlet part: utenti action: edit--%>
             <td><a href="<%= request.getContextPath() %>/admin?part=utenti&action=edit&id=<%= utente.getUsername() %>"><i class="fas fa-edit"></i></a></td>
         </tr>
         <% } %>
