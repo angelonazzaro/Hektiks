@@ -10,6 +10,8 @@
 @import "./components/footer/_footer.css";
 
 /* Admin */
+
+/* Fix select2 nella selezione dei generi nell'admin */
 #multi-select-container span {
     width: 100% !important;
 }

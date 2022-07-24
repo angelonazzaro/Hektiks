@@ -7,6 +7,8 @@
 
 <%@ include file="../templates/header.jsp" %>
 
+<!-- pageParth = pagina che deve essere inclusa e visualizzata. Se è nulla, mostriamo il contenuto dell'homepage -->
+
 <!-- page content start -->
 <div class="wrapper">
     <div class="main-content">
@@ -119,6 +121,7 @@
 
 <%@ include file="../templates/footer.jsp" %>
 
+<!-- Mostriamo le toast notification quando necessario -->
 <% if (session != null && session.getAttribute("msg-error") != null) { %>
 <script>
     notifier.alert("<%= session.getAttribute("msg-error") %>");
@@ -133,6 +136,7 @@
 </script>
 <% } %>
 
+<!-- Carichiamo gli scripts caratteristici di pagePath dopo aver caricato il footer siccome contiente tutti gli script delle librerie e puglin -->
 <% if (scripts != null && scripts.length > 0) { %>
     <% for (String script : scripts) { %>
         <script src="<%= request.getContextPath() %>/assets/js/<%= script %>"></script>

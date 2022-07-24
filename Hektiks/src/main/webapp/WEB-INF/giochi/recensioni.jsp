@@ -4,6 +4,7 @@
 <%@ page import="Model.Utente.Utente" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <% Gioco gioco = (Gioco) request.getAttribute("gioco"); %>
 <% List<Recensione> recensioni = (List<Recensione>) request.getAttribute("recensioni"); %>
 
@@ -20,6 +21,10 @@
     <div class="game-separator"></div>
     <div class="details">
         <div class="headline">
+            <!-- è il voto medio delle recensioni. se il voto è un intero, non mostro cifre decimali  -->
+            <!-- se è un decimale, mostro solo la prima cifra decimale. Es. se il voto medio è 4.75 mostro solo 4.7  -->
+
+            <!--  Bad rating, mid-rating e good-rating servono per stabilire il colore del cerchio intorno al voto -->
             <div class="rating-info">
                 <% double votoGenerale = recensioni.stream().mapToDouble(Recensione::getVoto).average().orElse(0); %>
                 <% String rating = ""; %>

@@ -48,6 +48,7 @@ footer {
     padding: 0 2rem;
 }
 
+/* Il separator sopra il footer che contiene il link a telegram */
 #telegram-separator {
     margin: 0;
     background-color: var(--header-bg);
