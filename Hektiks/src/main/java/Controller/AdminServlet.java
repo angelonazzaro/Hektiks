@@ -1,7 +1,5 @@
 package Controller;
 
-import Model.Carrello.Carrello;
-import Model.Carrello.CarrelloDAO;
 import Model.Genere.GenereDAO;
 import Model.GiftCard.GiftCard;
 import Model.GiftCard.GiftCardDAO;
@@ -32,8 +30,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
-
-import static Model.Storage.Entities.*;
 
 public class AdminServlet extends HttpServlet {
 
@@ -501,19 +497,6 @@ public class AdminServlet extends HttpServlet {
 
         String newUsername = request.getParameter("username"), newEmail = request.getParameter("email"), newPassword = request.getParameter("password");
 
-        // Encrypta solo se la password non è nulla, altrimenti dopo risulta valida
-        if (newPassword != null && !newPassword.equals("")) {
-
-            try {
-
-                newPassword = PasswordEncrypt.sha1(request.getParameter("password"));
-
-            } catch (NoSuchAlgorithmException e) {
-
-                e.printStackTrace();
-            }
-        }
-
         UtenteDAO utenteDAO = new UtenteDAO(source);
         HashMap<String, String> map = new HashMap<>();
         boolean update = false;
@@ -567,12 +550,22 @@ public class AdminServlet extends HttpServlet {
              * '{8,16}' indica che la stringa deve avere almeno 8 caratteri e massimo 16.
              */
 
+
             if (!newPassword.matches("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}")) {
 
                 session.setAttribute("msg-error", "La password non rispetta i requisti");
                 response.sendRedirect(request.getContextPath() + "/admin?part=utenti&action=edit&id=" + currentUsername);
 
                 return;
+            }
+
+            try {
+
+                newPassword = PasswordEncrypt.sha1(request.getParameter("password"));
+
+            } catch (NoSuchAlgorithmException e) {
+
+                e.printStackTrace();
             }
 
             if (!currentPassword.equals(newPassword)) {

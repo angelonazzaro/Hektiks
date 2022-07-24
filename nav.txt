@@ -5,3 +5,5 @@ carrello.jsp POST: AcquistoServlet
 dashboard.jsp GET: AdminServlet, LogoutServlet, UtenteServlet POST: GiftCardServlet INCLUDE: orders.jsp/settings.jsp
 orders.jsp GET: GiocoServlet
 settings.jsp POST: UtenteServlet
+admin.jsp GET: AdminServlet INCLUDE: utenti.jsp/utente_edit.jsp/prodotto.jsp/prodotti.jsp/giftcards.jsp/giftcard.jsp
+app.jsp GET: SearchServlet
