@@ -24,6 +24,7 @@
     text-align: center;
 }
 
+/*overview dell'utente*/
 .user-overview {
     display: flex;
     flex-direction: column;
@@ -43,7 +44,8 @@
     justify-content: space-between;
     color: white;
 }
-/* linea */
+
+/* linea sotto il breadcrumb*/
 .breadcrumb::after {
     content: "";
     position: absolute;

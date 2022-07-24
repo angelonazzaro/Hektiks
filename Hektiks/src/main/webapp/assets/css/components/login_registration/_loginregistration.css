@@ -23,7 +23,7 @@
     clip-path: circle(200% at 100% -10%);
 }
 
-/* Si riferisce alla parte dove stanno i form */
+/* Si riferisce ai form */
 #child-1 {
     position: relative;
     top: 5%;

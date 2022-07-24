@@ -19,7 +19,7 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box; /*includo padding e border nell'altezza e larghezza totali*/
 }
 
 html {
@@ -44,7 +44,7 @@ body {
     background: rgb(95, 95, 95);
 }
 
-/* Impedisce che l'utenti scrolli nella pagina, usato sul body quando si mostra il modal delle recensioni
+/* Impedisce che l'utente scrolli nella pagina, usato sul body quando si mostra il modal delle recensioni
    e il form di login/registrazione*/
 .no-scroll {
     overflow: hidden;
@@ -64,6 +64,7 @@ body {
     margin: auto;
 }
 
+/*per gli inputbox*/
 .row {
     width: 100%;
     display: flex;
@@ -83,6 +84,7 @@ a {
     width: 100%;
 }
 
+/*icona mostra password*/
 .input-group-append span {
     color: white;
     font-size: calc(0.9em + 1vmin);
@@ -158,6 +160,7 @@ a {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    /* box-shadow: offset-x | offset-y | blur-radius | spread-radius | color */
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -225,6 +228,7 @@ a {
     font-size: calc(0.9em + 1vmin);
 }
 
+/* colore white per le datatables */
 .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter,
 .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing,
 .dataTables_wrapper .dataTables_paginate {

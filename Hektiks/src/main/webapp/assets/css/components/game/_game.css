@@ -99,7 +99,7 @@ form {
 }
 
 .actions > a {
-    flex-basis: 10%;
+    flex-basis: 10%; /* size iniziale del flex item */
 }
 
 .actions > button {
@@ -262,7 +262,7 @@ form {
     border: 3px solid;
 }
 
-/* Card dove mostra: "Vuoi recensire il gioco?" */
+/* Card dove mostra: "Valuta questo gioco?" */
 .review-card-actions {
     width: 100%;
     display: flex;

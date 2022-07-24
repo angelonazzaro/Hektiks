@@ -73,7 +73,7 @@ header #burger:hover .line {
 }
 
 .cart:hover {
-    color: var(--orange);
+    color: var(--yellow);
 }
 /* Icona che mostra la quantità di giochi nel carrello */
 .caret {

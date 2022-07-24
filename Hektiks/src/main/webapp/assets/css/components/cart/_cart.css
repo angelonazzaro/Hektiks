@@ -36,7 +36,7 @@
     margin: 1rem 0;
 }
 
-/* Contenitored della copertina dell'item */
+/* Contenitore della copertina dell'item */
 .cart-item-preview {
     display: flex;
     flex-basis: 70%;
