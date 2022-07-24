@@ -14,6 +14,7 @@
     <div class="banner">
         <img src="<%= gioco.getCopertina() %>" alt="<%= gioco.getTitolo() %> - Copertina">
     </div>
+    <%--method="POST" -> AcquistoServlet--%>
     <form action="<%= request.getContextPath() %>/acquisto" method="POST">
         <div class="game-card" data-code="<%= gioco.getCodice_gioco() %>" data-title="<%= gioco.getTitolo() %>" data-price="<%= gioco.getPrezzo() %>" data-discount="<%= gioco.getPercentuale_sconto() %>">
             <div class="title">

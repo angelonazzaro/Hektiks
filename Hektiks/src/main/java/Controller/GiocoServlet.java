@@ -53,8 +53,8 @@ public class GiocoServlet extends HttpServlet {
                 List<Recensione> recensioni = recensioneDAO.doRetrieveByJoin("inner",
                         String.format("%s ON %s.email = %s.email_utente",
                                 UTENTI, UTENTI, RECENSIONI),
-                        String.format("%s.codice_gioco = '%s' ORDER BY voto",
-                                RECENSIONI, codiceGioco),
+                        String.format("%s.codice_gioco = '%s' ORDER BY %s.voto",
+                                RECENSIONI, codiceGioco, RECENSIONI),
                         UTENTI);
 
                 request.setAttribute("gioco", gioco);
