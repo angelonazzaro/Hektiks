@@ -32,13 +32,13 @@ import java.util.List;
         maxRequestSize = 1024 * 1024 * 5   // 5 MB
 )
 
-public class UtenteServlet extends HttpServlet implements LoginChecker {
+public class UtenteServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         Logger.consoleLog(Logger.INFO, "UTENTE SERVLET DO GET");
 
-        if (!controllaSeLoggato(request, response, "", false))
+        if (!LoginChecker.controllaSeLoggato(request, response, "", false))
             return;
 
         String part = request.getParameter("part");
@@ -92,7 +92,7 @@ public class UtenteServlet extends HttpServlet implements LoginChecker {
 
         Logger.consoleLog(Logger.INFO, "UTENTE SERVLET DO POST");
 
-        if (!controllaSeLoggato(request, response, "", false))
+        if (!LoginChecker.controllaSeLoggato(request, response, "", false))
             return;
 
         HttpSession session = request.getSession(false);

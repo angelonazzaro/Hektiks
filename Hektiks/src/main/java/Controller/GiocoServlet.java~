@@ -45,7 +45,7 @@ public class GiocoServlet extends HttpServlet {
 
                     response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                     request.getRequestDispatcher("/ErrorHandlerServlet").forward(request, response);
-                    return;
+                    //return;
                 }
 
                 //recupero le recensioni e i generi relativi al gioco

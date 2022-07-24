@@ -24,7 +24,11 @@ public class ErrorHandlerServlet extends HttpServlet {
 
     private void processError(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        request.setAttribute("title", "Errore " + request.getAttribute("jakarta.servlet.error.status_code"));
+        if (request.getAttribute("jakarta.servlet.error.status_code") != null)
+            request.setAttribute("title", "Errore " + request.getAttribute("jakarta.servlet.error.status_code"));
+        else
+            request.setAttribute("title", "Errore");
+
         request.setAttribute("page", "errors/error.jsp");
         request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
     }

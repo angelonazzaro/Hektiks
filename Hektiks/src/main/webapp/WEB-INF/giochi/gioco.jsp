@@ -154,6 +154,7 @@
                     <% } %>
                 </div>
                 <div class="btn-container">
+                    <%--method="GET" -> RecensioneServlet--%>
                     <a href="<%= request.getContextPath() %>/recensione?codice_gioco=<%= gioco.getCodice_gioco() %>" class="btn">Visualizza più recensioni</a>
                 </div>
             <% } %>

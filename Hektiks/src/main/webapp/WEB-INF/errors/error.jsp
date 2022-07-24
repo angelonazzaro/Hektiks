@@ -26,8 +26,12 @@
 <body>
     <div class="wrapper">
         <p>Whoopies! Si è verificato il seguente errore: <br>
+            <% if (request.getAttribute("jakarta.servlet.error.status_code") == null) { %>
+                <%= "Risorsa non disponibile" %>
+            <% } else { %>
             <%= request.getAttribute("jakarta.servlet.error.status_code") %>
             : <%= request.getAttribute("jakarta.servlet.error.message") %>
+            <% } %>
         </p>
     </div>
 </body>

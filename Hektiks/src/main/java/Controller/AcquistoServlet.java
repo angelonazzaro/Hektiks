@@ -28,15 +28,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-public class AcquistoServlet extends HttpServlet implements LoginChecker {
-
-
+public class AcquistoServlet extends HttpServlet {
 
     protected synchronized void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         Logger.consoleLog(Logger.INFO, "ACQUISTO SERVLET DO POST");
 
-        if (!controllaSeLoggato(request, response, "Per poter effettuare un acquisto devi accedere al tuo account", false))
+        if (!LoginChecker.controllaSeLoggato(request, response, "Per poter effettuare un acquisto devi accedere al tuo account", false))
             return;
 
         String from = request.getParameter("from");
@@ -220,6 +218,10 @@ public class AcquistoServlet extends HttpServlet implements LoginChecker {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Genera un codice ordine univoco
+     **/
 
     private String generaCodiceOrdine() {
 

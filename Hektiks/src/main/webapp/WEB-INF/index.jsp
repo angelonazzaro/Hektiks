@@ -21,6 +21,7 @@
         <div class="products-container">
             <div class="products-heading">
                 <h1 class="hs-1">Giochi del Momento</h1>
+                <%--method="GET" -> GiocoServlet --%>
                 <a class="show-all-btn hs-5" href="<%= request.getContextPath() %>/gioco?action=show-all">Mostra tutti</a>
             </div>
             <div class="products-content">

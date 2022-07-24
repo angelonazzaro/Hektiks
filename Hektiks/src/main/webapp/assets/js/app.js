@@ -140,7 +140,7 @@ if (login_registration_section !== null) {
 
         $.ajax({
             url: $(this).attr("action"),
-            method: $(this).attr("method"),
+            method: $(this).attr("method"), //post
             data: $(this).serializeArray(), // processa i dati del form,
         })
             .done((response) => {

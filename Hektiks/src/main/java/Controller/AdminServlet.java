@@ -30,14 +30,14 @@ import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 
-public class AdminServlet extends HttpServlet implements LoginChecker {
+public class AdminServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Logger.consoleLog(Logger.INFO, "ADMIN SERVLET DO GET");
 
-        if (!controllaSeLoggato(request, response, "", true))
+        if (!LoginChecker.controllaSeLoggato(request, response, "", true))
             return;
 
         String part = request.getParameter("part"), partToView = "";
@@ -224,7 +224,7 @@ public class AdminServlet extends HttpServlet implements LoginChecker {
 
         Logger.consoleLog(Logger.INFO, "ADMIN SERVLET DO POST");
 
-        if (!controllaSeLoggato(request, response, "", true))
+        if (!LoginChecker.controllaSeLoggato(request, response, "", true))
             return;
 
         String action = request.getParameter("action"), componente = request.getParameter("componente");

@@ -39,6 +39,8 @@ public class RecensioneServlet extends HttpServlet {
 
             Gioco gioco = new GiocoDAO(source).doRetrieveByKey(codice_gioco);
 
+            //se il gioco non è presente mostra pagina di errore
+
             if (gioco == null) {
 
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
@@ -46,6 +48,8 @@ public class RecensioneServlet extends HttpServlet {
 
                 return;
             }
+
+            //recupero gli utenti che hanno recensito il gioco
 
             List<Recensione> recensioni = new RecensioneDAO(source).doRetrieveByJoin("inner",
                     String.format("%s ON %s.email = %s.email_utente",
@@ -83,6 +87,8 @@ public class RecensioneServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         Gson gson = new Gson();
 
+        //controllo se l'utente è loggato verificando se session != null
+
         if (session == null || session.getAttribute("user") == null) {
 
             out.write(gson.toJson(new JSONResponse<String>("error", "Devi accedere per poter lasciare una recensione")));
@@ -94,6 +100,8 @@ public class RecensioneServlet extends HttpServlet {
         String codiceGioco = request.getParameter("codiceGioco");
         double voto = Double.parseDouble(request.getParameter("voto"));
         String descrizione = request.getParameter("descrizione");
+
+        //controllo se il voto è valido
 
         if (codiceGioco == null || voto < 0 || voto > 5) {
 
@@ -107,6 +115,8 @@ public class RecensioneServlet extends HttpServlet {
         Prodotto_OrdineDAO prodotto_ordineDAO = new Prodotto_OrdineDAO(source);
 
         try {
+
+            //se l'utente ha acquistato il gioco può lasciare una recensione
 
             List<Prodotto_Ordine> prodotto_ordine = prodotto_ordineDAO.doRetrieveByCondition("email_utente = '" + utente.getEmail() + "' AND codice_gioco = '" + codiceGioco + "'");
 
@@ -128,6 +138,8 @@ public class RecensioneServlet extends HttpServlet {
 
         try {
 
+            //elimino la recensone relativa al gioco se l'utente ha già lasciato una recensione in passato
+
             recensioneDAO.doDelete("email_utente = '" + utente.getEmail() + "' AND codice_gioco = '" + codiceGioco + "'");
 
             Recensione recensione = new Recensione();
@@ -139,9 +151,13 @@ public class RecensioneServlet extends HttpServlet {
             if (descrizione != null)
                 recensione.setDescrizione(descrizione);
 
-            recensioneDAO.doSave(recensione);
+            //salvo la recensione nel database
 
-            out.write(gson.toJson(new JSONResponse<String>("success", "Recensione lasciata!")));
+            if (recensioneDAO.doSave(recensione))
+                out.write(gson.toJson(new JSONResponse<String>("success", "Recensione inserita con successo")));
+
+            else
+                out.write(gson.toJson(new JSONResponse<String>("error", "Errore nell'inserimento della recensione")));
 
         } catch (SQLException e) {
 

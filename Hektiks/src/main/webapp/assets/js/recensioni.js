@@ -2,9 +2,10 @@
 $("#recensioni-form").submit(function (e) {
     e.preventDefault();
 
+    //richiesta ajax per aggiungere la recensione
     $.ajax({
         url: $(this).attr("action"),
-        method: $(this).attr("method"),
+        method: $(this).attr("method"), //post
         data: $(this).serializeArray()
     }).done((response) => {
 

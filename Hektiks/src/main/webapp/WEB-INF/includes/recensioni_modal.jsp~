@@ -5,7 +5,6 @@
         <h4 class="modal-title hs-4">Scrivi la tua recensione</h4>
         <span class="close hs-4" data-target="#recensioni-modal">&times;</span>
     </div>
-    <%--method="POST" -> RecensioneServlet--%>
     <form action="<%= request.getContextPath() %>/recensione" style="width: 100%" id="recensioni-form" method="POST">
         <div class="modal-body">
             <textarea name="descrizione" placeholder="Facci sapere cosa pensi..." cols="30" rows="10"

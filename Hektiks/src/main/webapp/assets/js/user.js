@@ -4,7 +4,7 @@ $("#giftcard-form").submit(function (e) {
 
     $.ajax({
         url: $(this).attr('action'),
-        method: $(this).attr('method'),
+        method: $(this).attr('method'), //post
         data: $(this).serializeArray()
     }).done((response) => {
         response = JSON.parse(response);
