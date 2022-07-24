@@ -67,9 +67,9 @@ public class AdminServlet extends HttpServlet {
 
                 } else if (action.equals("edit")) {
 
-                    String id = request.getParameter("id");
+                    String id = request.getParameter("id"); //username
 
-                    // Se l'id è nullo, mando un mesasggio di errore, altrimenti mostro il form di modifica,
+                    // Se l'id è nullo o vuoto, mando un mesasggio di errore, altrimenti mostro il form di modifica,
                     // Ragionamento analogo nel caso in cui l'utente non esista
 
                     if (id == null || id.equals("")) {
@@ -127,8 +127,10 @@ public class AdminServlet extends HttpServlet {
                 } else if (action.equals("edit")) {
 
                     String id = request.getParameter("id");
+
                     // Se l'id è nullo, mando un mesasggio di errore, altrimenti mostro il form di modifica,
                     // Ragionamento analogo nel caso in cui l'utente non esista
+
                     if (id == null || id.equals("")) {
 
                         session.setAttribute("msg-error", "Errore nella richiesta");
@@ -169,6 +171,7 @@ public class AdminServlet extends HttpServlet {
                         OrdineDAO ordineDAO = new OrdineDAO(source);
 
                         //calcello gli ordini in cui il gioco è presente
+
                         for (Prodotto_Ordine prodotto_ordine : prodotti_ordini)
                             ordineDAO.doDelete("codice_ordine = '" + prodotto_ordine.getCodice_ordine() + "'");
 
@@ -176,6 +179,9 @@ public class AdminServlet extends HttpServlet {
 
                         ProdottoDAO prodottoDAO = new ProdottoDAO(source);
                         prodottoDAO.doDelete("codice_gioco = '" + id + "'");
+
+                        //se il carrello contiene il gioco eliminato devo aggiornare il suo
+                        //contenuto e la sua quantità
 
                         HashMap<String, Integer> carrello = (HashMap<String, Integer>) session.getAttribute("carrello");
 
@@ -211,7 +217,7 @@ public class AdminServlet extends HttpServlet {
 
             GiftCardDAO giftCardDAO = new GiftCardDAO(source);
 
-            // Se l'azione è nulla, mostro la pagina con tutti i giochi, altrimenti il form di modifica
+            // Se l'azione è nulla, mostro la pagina con tutte le giftcards, altrimenti il form di modifica
             try {
 
                 if (action == null) {
@@ -250,6 +256,8 @@ public class AdminServlet extends HttpServlet {
         if (!LoginChecker.controllaSeLoggato(request, response, "", true))
             return;
 
+        //recupero l'action (edit, add, delete) e il componente (utente, prodotto, giftcard)
+
         String action = request.getParameter("action"), componente = request.getParameter("componente");
         HttpSession session = request.getSession(false);
 
@@ -279,6 +287,9 @@ public class AdminServlet extends HttpServlet {
 
         if (!controllaValiditaCampiGioco(request, action, source))
             return;
+
+        // rappresentano i nuoi field inseriti negli inputbox
+        // li recupero a prescindere perchè sono nel caso edit/add
 
         String newCodice = request.getParameter("codice");
         String newTitolo = request.getParameter("titolo");
@@ -310,6 +321,8 @@ public class AdminServlet extends HttpServlet {
 
             try {
 
+                //se l'inserimento del gioco va a buon fine inserisco anche i suoi generi
+
                 if (giocoDAO.doSave(gioco)) {
 
                     salvaGeneri(request, newCodice, source, false);
@@ -325,6 +338,8 @@ public class AdminServlet extends HttpServlet {
 
             boolean update = false;
 
+            //rappresentano i field prima della modifica
+
             String currentCode = request.getParameter("current-code");
             String currentTitolo = request.getParameter("current-titolo");
             String currentDescrizione = request.getParameter("current-descrizione");
@@ -336,6 +351,8 @@ public class AdminServlet extends HttpServlet {
             double currentSconto = Double.parseDouble(request.getParameter("current-sconto"));
 
             HashMap<String, Object> map = new HashMap<>();
+
+            //aggiorno i field <==> sono diversi
 
             if (newCodice != null && !newCodice.equals("")) {
 
@@ -431,9 +448,11 @@ public class AdminServlet extends HttpServlet {
                         update = true;
 
                     else {
+
                         // Controllo se i generi sono effettivamente diversi
                         // L'ordine potrebbe essere cambiato o ci potrebbero essere dei generi che potrebbero interferire con l'ordinameto normale
                         // Per questo motivo il ciclo for annidato
+
                         for (Gioco_Genere gioco_genere : generi) {
 
                             boolean found = false;
@@ -456,6 +475,8 @@ public class AdminServlet extends HttpServlet {
                 }
 
                 if (update) {
+
+                    //aggiorno <==> almeno un field è differente
 
                     if (!map.isEmpty()) {
 
@@ -493,6 +514,8 @@ public class AdminServlet extends HttpServlet {
             return;
         }
 
+        //currentemail, currentusername, currentpassword rappresentano i valori prima della modifica
+
         String currentUsername = request.getParameter("current-username"), currentEmail = request.getParameter("current-email"), currentPassword = request.getParameter("current-password");
 
         if (currentEmail == null || currentEmail.equals("")) {
@@ -502,11 +525,15 @@ public class AdminServlet extends HttpServlet {
             return;
         }
 
+        //newemail, newusername, newpassword rappresentano i valori inserito negli inputbox
+
         String newUsername = request.getParameter("username"), newEmail = request.getParameter("email"), newPassword = request.getParameter("password");
 
         UtenteDAO utenteDAO = new UtenteDAO(source);
         HashMap<String, String> map = new HashMap<>();
         boolean update = false;
+
+        //aggiorno le variabili <==> sono state modificate
 
         if (newUsername != null && !newUsername.equals("")) {
 
@@ -584,6 +611,8 @@ public class AdminServlet extends HttpServlet {
 
         try {
 
+            //aggiorno il database con dati modificati <==> è stato modificato almeno un campo
+
             if (update)
                 utenteDAO.doUpdate(map, "email = '" + currentEmail + "'");
 
@@ -611,6 +640,8 @@ public class AdminServlet extends HttpServlet {
         String codice = request.getParameter("codice");
         double importo = Double.parseDouble(request.getParameter("importo"));
 
+        //controllo la validità della giftcard
+
         if (codice == null || codice.length() != 6 || importo <= 0) {
 
             session.setAttribute("msg-error", "Errore nella richiesta");
@@ -623,12 +654,16 @@ public class AdminServlet extends HttpServlet {
 
         try {
 
+            //controllo se la giftcard è già presente nel database
+
             if (giftCardDAO.doRetrieveByKey(codice) != null) {
                 session.setAttribute("msg-error", "Il codice è già in uso");
                 response.sendRedirect(request.getContextPath() + "/admin?part=giftcards");
 
                 return;
             }
+
+            //altrimenti la salvo nel database
 
             GiftCard giftCard = new GiftCard();
             giftCard.setCodice_giftCard(codice);
@@ -649,6 +684,8 @@ public class AdminServlet extends HttpServlet {
 
         Gioco_GenereDAO gioco_genereDAO = new Gioco_GenereDAO(source);
 
+        //se è una modifica elimino i generi precedenti e li reinserisco con i nuovi
+
         if (isEdit)
             gioco_genereDAO.doDelete("codice_gioco = '" + codice + "'");
 
@@ -668,7 +705,9 @@ public class AdminServlet extends HttpServlet {
     }
 
     private boolean controllaValiditaCampiUtente(String campo, String parametro, String email, UtenteDAO utenteDAO) {
+
         // Controllo che lo username non sia già in uso da un altro utente
+
         List<Utente> utenti;
 
         try {

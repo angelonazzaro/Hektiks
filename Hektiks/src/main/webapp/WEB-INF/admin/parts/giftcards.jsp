@@ -5,6 +5,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% List<GiftCard> giftCards = (List<GiftCard>) request.getAttribute("giftCards"); %>
 <% Logger.consoleLog(Logger.JSP, "GIFTCARDS.JSP"); %>
+
 <div class="dashboard-container">
     <div style="margin-bottom: 5rem; text-align: right">
         <a href="<%= request.getContextPath() %>/admin?part=giftcards&action=add" style="margin-bottom: 2rem;"

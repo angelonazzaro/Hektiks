@@ -3,7 +3,7 @@
 <%@ page import="java.io.File" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% Utente user = (Utente) session.getAttribute("user"); %>
-<% Logger.consoleLog(Logger.JSP, "FOOTER.JSP"); %>
+<% Logger.consoleLog(Logger.JSP, "HEADER.JSP"); %>
 <!DOCTYPE html>
 <html lang="it">
 <head>
