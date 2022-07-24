@@ -89,7 +89,7 @@ public interface DAO<T> {
 
             String query = QueryBuilder.SELECT("*").FROM(table).WHERE(condition).toString();
 
-            Logger.consoleLog(Logger.INFO, "[GENERIC-DO-RETRIEVE-BY-CONDITION] " + query);
+            Logger.consoleLog(Logger.QUERY, "[GENERIC-DO-RETRIEVE-BY-CONDITION] " + query);
 
             try (PreparedStatement ps = conn.prepareStatement(query)) {
                 ResultSet set = ps.executeQuery();
@@ -123,7 +123,7 @@ public interface DAO<T> {
             else
                 query = QueryBuilder.SELECT("*").FROM(table).JOIN(joinCondition).WHERE(condition).toString();
 
-            Logger.consoleLog(Logger.INFO, "[GENERIC-DO-RETRIEVE-BY-JOIN] " + query);
+            Logger.consoleLog(Logger.QUERY, "[GENERIC-DO-RETRIEVE-BY-JOIN] " + query);
 
             try (PreparedStatement ps = conn.prepareStatement(query)) {
                 ResultSet set = ps.executeQuery();
@@ -149,7 +149,7 @@ public interface DAO<T> {
 
             String query = QueryBuilder.INSERT_INTO(table, map).toString();
 
-            Logger.consoleLog(Logger.INFO, "[GENERIC-DO-SAVE] " + query);
+            Logger.consoleLog(Logger.QUERY, "[GENERIC-DO-SAVE] " + query);
 
             try (PreparedStatement ps = conn.prepareStatement(query)) {
 
@@ -172,7 +172,7 @@ public interface DAO<T> {
 
             String query = QueryBuilder.UPDATE(table).SET(values).WHERE(condition).toString();
 
-            Logger.consoleLog(Logger.INFO, "[GENERIC-DO-UPDATE] " + query);
+            Logger.consoleLog(Logger.QUERY, "[GENERIC-DO-UPDATE] " + query);
 
             try (PreparedStatement ps = conn.prepareStatement(query)) {
 
@@ -198,7 +198,7 @@ public interface DAO<T> {
 
             String query = QueryBuilder.DELETE_FROM(table).WHERE(condition).toString();
 
-            Logger.consoleLog(Logger.INFO, "[GENERIC-DO-DELETE] " + query);
+            Logger.consoleLog(Logger.QUERY, "[GENERIC-DO-DELETE] " + query);
 
             try (PreparedStatement ps = conn.prepareStatement(query)) {
 

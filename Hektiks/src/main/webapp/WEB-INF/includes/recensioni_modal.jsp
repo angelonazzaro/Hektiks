@@ -1,5 +1,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% Logger.consoleLog(Logger.JSP, "RECENSIONI_MODAL.JSP"); %>
+
 <div class="modal" id="recensioni-modal" style="display: none">
     <div class="modal-header">
         <h4 class="modal-title hs-4">Scrivi la tua recensione</h4>

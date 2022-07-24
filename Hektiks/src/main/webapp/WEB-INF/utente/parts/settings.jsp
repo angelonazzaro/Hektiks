@@ -1,7 +1,9 @@
 <%@ page import="Model.Utente.Utente" %>
+<%@ page import="Utils.Logger.Logger" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <% Utente utente = (Utente) session.getAttribute("user"); %>
+<% Logger.consoleLog(Logger.JSP, "SETTINGS.JSP"); %>
 
 <div class="settings-wrapper dashboard-container">
     <h1 class="hs-3">Le mie impostazioni</h1>

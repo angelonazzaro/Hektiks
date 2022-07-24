@@ -1,5 +1,6 @@
-
+<%@ page import="Utils.Logger.Logger" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isErrorPage="true" %>
+<% Logger.consoleLog(Logger.JSP, "ERROR.JSP"); %>
 
 <style>
     .wrapper {

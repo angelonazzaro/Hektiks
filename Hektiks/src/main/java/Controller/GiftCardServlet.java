@@ -26,7 +26,7 @@ public class GiftCardServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        Logger.consoleLog(Logger.INFO, "GIFTCARD SERVLET DO POST");
+        Logger.consoleLog(Logger.SERVLET, "GIFTCARD SERVLET DO POST");
 
         //recupero il codice giftcard
         String codice_giftCard = request.getParameter("codice_giftcard");

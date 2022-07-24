@@ -1,7 +1,9 @@
 <%@ page import="Model.Gioco.Gioco" %>
 <%@ page import="java.util.List" %>
+<%@ page import="Utils.Logger.Logger" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% List<Gioco> giochi = (List<Gioco>) request.getAttribute("giochi"); %>
+<% Logger.consoleLog(Logger.JSP, "SHOW_ALL.JSP"); %>
 
 <div class="search-bar" id="mobile-search-bar">
     <input type="text" class="form-control" placeholder="Cerca..."/>

@@ -28,7 +28,7 @@ public class CarrelloServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Logger.consoleLog(Logger.INFO, "CARRELLO SERVLET DO GET");
+        Logger.consoleLog(Logger.SERVLET, "CARRELLO SERVLET DO GET");
 
         HttpSession session = request.getSession(false);
 
@@ -63,7 +63,7 @@ public class CarrelloServlet extends HttpServlet {
 
     protected synchronized void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        Logger.consoleLog(Logger.INFO, "CARRELLO SERVLET DO POST");
+        Logger.consoleLog(Logger.SERVLET, "CARRELLO SERVLET DO POST");
 
         HttpSession session = request.getSession(true);
         DataSource source = (DataSource) getServletContext().getAttribute("DataSource");

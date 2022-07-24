@@ -1,5 +1,6 @@
-
+<%@ page import="Utils.Logger.Logger" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% Logger.consoleLog(Logger.JSP, "FOOTER.JSP"); %>
 <!-- footer start -->
 <div class="separator" id="telegram-separator">
     <div class="separator-content" \>

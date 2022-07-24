@@ -32,7 +32,7 @@ public class AcquistoServlet extends HttpServlet {
 
     protected synchronized void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        Logger.consoleLog(Logger.INFO, "ACQUISTO SERVLET DO POST");
+        Logger.consoleLog(Logger.SERVLET, "ACQUISTO SERVLET DO POST");
 
         //controllo se l'utente è loggato, altrimenti non può fare l'acquisto
 

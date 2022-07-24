@@ -7,10 +7,12 @@
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="Model.Prodotto_Ordine.Prodotto_Ordine" %>
+<%@ page import="Utils.Logger.Logger" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% List<Ordine> ordini = (List<Ordine>) request.getAttribute("ordini"); %>
 <% Prodotto_OrdineDAO prodotto_ordineDAO = (Prodotto_OrdineDAO) request.getAttribute("prodottoOrdineDAO"); %>
 <% GiocoDAO giocoDAO = (GiocoDAO) request.getAttribute("giocoDAO"); %>
+<% Logger.consoleLog(Logger.JSP, "ORDERS.JSP"); %>
 
 <div class="orders-wrapper dashboard-container">
     <h1 class="hs-3">I miei ordini</h1>

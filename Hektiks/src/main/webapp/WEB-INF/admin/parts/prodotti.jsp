@@ -1,7 +1,9 @@
 <%@ page import="Model.Gioco.Gioco" %>
 <%@ page import="java.util.List" %>
+<%@ page import="Utils.Logger.Logger" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% List<Gioco> giochi = (List<Gioco>) request.getAttribute("giochi"); %>
+<% Logger.consoleLog(Logger.JSP, "PRODOTTI.JSP"); %>
 
 <div class="dashboard-container">
     <div style="margin-bottom: 5rem; text-align: right">

@@ -1,6 +1,8 @@
-
+<%@ page import="Utils.Logger.Logger" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% String partPath = (String) request.getAttribute("part"); %>
+
+<% Logger.consoleLog(Logger.JSP, "ADMIN.JSP" + " - " + "partPath: " + partPath); %>
 
 <div class="breadcrumb text">
     <ul class="user-links">

@@ -31,7 +31,7 @@ public class HomeServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-        Logger.consoleLog(Logger.INFO, "HOME SERVLET DO GET");
+        Logger.consoleLog(Logger.SERVLET, "HOME SERVLET DO GET");
 
         request.setAttribute("title", "Hektiks | Home Page");
         GiocoDAO giocoDAO = new GiocoDAO((DataSource) getServletContext().getAttribute("DataSource"));
@@ -51,7 +51,7 @@ public class HomeServlet extends HttpServlet {
 
     protected synchronized void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-        Logger.consoleLog(Logger.INFO, "HOME SERVLET DO POST");
+        Logger.consoleLog(Logger.SERVLET, "HOME SERVLET DO POST");
 
         HttpSession session = request.getSession(false);
 

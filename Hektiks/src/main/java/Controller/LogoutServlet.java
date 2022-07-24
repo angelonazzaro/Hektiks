@@ -11,7 +11,7 @@ public class LogoutServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        Logger.consoleLog(Logger.INFO, "LOGOUT SERVLET DO GET");
+        Logger.consoleLog(Logger.SERVLET, "LOGOUT SERVLET DO GET");
 
         // invalido la sessione ed effettuo il redirect alla home page
 

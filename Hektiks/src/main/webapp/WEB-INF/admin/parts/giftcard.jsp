@@ -1,5 +1,6 @@
-
+<%@ page import="Utils.Logger.Logger" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% Logger.consoleLog(Logger.JSP, "GIFTCARD.JSP"); %>
 <div class="settings-wrapper dashboard-container">
     <h1 class="hs-3">Form di aggiunta: GiftCard</h1>
     <form action="<%= request.getContextPath() %>/admin" method="POST" id="form-settings" class="settings-container">

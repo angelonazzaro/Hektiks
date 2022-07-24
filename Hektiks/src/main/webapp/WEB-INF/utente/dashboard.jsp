@@ -1,8 +1,11 @@
 <%@ page import="Model.Utente.Utente" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="Utils.Logger.Logger" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% String partPath = (String) request.getAttribute("part"); %>
 <% Utente user = (Utente) session.getAttribute("user"); %>
+
+<% Logger.consoleLog(Logger.JSP, "DASHBOARD.JSP" + " - " + "partPath: " + partPath); %>
 
 <% String profile_pic = user.getProfile_pic() != null ? request.getContextPath() + "/assets/uploads/users" + user.getProfile_pic() : request.getContextPath() + "/assets/uploads/users/avatar_placeholder.png"; %>
 

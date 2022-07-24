@@ -4,11 +4,12 @@
 <%@ page import="Model.Gioco_Genere.Gioco_Genere" %>
 <%@ page import="Model.Recensione.Recensione" %>
 <%@ page import="Model.Utente.Utente" %>
-<%@ page import="java.util.stream.Collectors" %>
+<%@ page import="Utils.Logger.Logger" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% Gioco gioco = (Gioco) request.getAttribute("gioco"); %>
 <% List<Gioco_Genere> generi = (List<Gioco_Genere>) request.getAttribute("generi"); %>
 <% List<Recensione> recensioni = (List<Recensione>) request.getAttribute("recensioni"); %>
+<% Logger.consoleLog(Logger.JSP, "GIOCO.JSP"); %>
 
 <div class="game-presentation">
     <div class="banner">

@@ -1,9 +1,10 @@
 <%@ page import="Model.Utente.Utente" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="Utils.Logger.Logger" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% Utente utente = (Utente) request.getAttribute("utente"); %>
-
 <% String profile_pic = utente.getProfile_pic() != null ? request.getContextPath() + "/assets/uploads/users" + utente.getProfile_pic() : request.getContextPath() + "/assets/uploads/users/avatar_placeholder.png"; %>
+<% Logger.consoleLog(Logger.JSP, "UTENTE_EDIT.JSP"); %>
 
 <div class="user-general-info">
     <div class="user-card">

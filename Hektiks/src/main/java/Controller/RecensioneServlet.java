@@ -30,7 +30,7 @@ public class RecensioneServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Logger.consoleLog(Logger.INFO, "RECENSIONE SERVLET DO GET");
+        Logger.consoleLog(Logger.SERVLET, "RECENSIONE SERVLET DO GET");
 
         String codice_gioco = request.getParameter("codice_gioco");
         DataSource source = (DataSource) getServletContext().getAttribute("DataSource");
@@ -77,7 +77,7 @@ public class RecensioneServlet extends HttpServlet {
 
     protected synchronized void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        Logger.consoleLog(Logger.INFO, "RECENSIONE SERVLET DO POST");
+        Logger.consoleLog(Logger.SERVLET, "RECENSIONE SERVLET DO POST");
 
         HttpSession session = request.getSession(false);
 

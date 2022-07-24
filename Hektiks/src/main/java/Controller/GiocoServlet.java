@@ -24,7 +24,7 @@ public class GiocoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Logger.consoleLog(Logger.INFO, "GIOCO SERVLET DO GET");
+        Logger.consoleLog(Logger.SERVLET, "GIOCO SERVLET DO GET");
 
         String codiceGioco = request.getParameter("codice_gioco");
         String action = request.getParameter("action");

@@ -1,9 +1,11 @@
 <%@ page import="java.util.List" %>
 <%@ page import="Model.Gioco.Gioco" %>
+<%@ page import="java.util.Arrays" %>
 
 <% String pagePath = (String) request.getAttribute("page"); %>
 <% String[] scripts = (String[]) request.getAttribute("scripts"); %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% Logger.consoleLog(Logger.JSP, "INDEX.JSP" + " - " + "pagePath: " + pagePath + " - " + "scripts: " + Arrays.toString(scripts)); %>
 
 <%@ include file="../templates/header.jsp" %>
 

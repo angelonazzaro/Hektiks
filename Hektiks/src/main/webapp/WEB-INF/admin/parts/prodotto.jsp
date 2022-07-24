@@ -3,10 +3,12 @@
 <%@ page import="Model.Genere.Genere" %>
 <%@ page import="java.util.List" %>
 <%@ page import="Model.Gioco_Genere.Gioco_Genere" %>
+<%@ page import="Utils.Logger.Logger" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% Gioco gioco = (Gioco) request.getAttribute("gioco"); %>
 <% List<Gioco_Genere> gioco_generi = (List<Gioco_Genere>) request.getAttribute("gioco_generi"); %>
 <% List<Genere> generi = (List<Genere>) request.getAttribute("generi"); %>
+<% Logger.consoleLog(Logger.JSP, "PRODOTTO.JSP"); %>
 
 <div class="settings-wrapper dashboard-container">
     <h1 class="hs-3">Form di <%= gioco == null ? "aggiunta: Gioco" : "modifica: " + gioco.getTitolo() %></h1>

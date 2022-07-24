@@ -36,7 +36,7 @@ public class UtenteServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-        Logger.consoleLog(Logger.INFO, "UTENTE SERVLET DO GET");
+        Logger.consoleLog(Logger.SERVLET, "UTENTE SERVLET DO GET");
 
         if (!LoginChecker.controllaSeLoggato(request, response, "", false))
             return;
@@ -96,7 +96,7 @@ public class UtenteServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-        Logger.consoleLog(Logger.INFO, "UTENTE SERVLET DO POST");
+        Logger.consoleLog(Logger.SERVLET, "UTENTE SERVLET DO POST");
 
         if (!LoginChecker.controllaSeLoggato(request, response, "", false))
             return;

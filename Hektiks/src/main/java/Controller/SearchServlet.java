@@ -21,7 +21,7 @@ public class SearchServlet extends HttpServlet {
 
     protected synchronized void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        Logger.consoleLog(Logger.INFO, "SEARCH SERVLET DO GET");
+        Logger.consoleLog(Logger.SERVLET, "SEARCH SERVLET DO GET");
 
         String search = request.getParameter("q");
         GiocoDAO giocoDAO = new GiocoDAO((DataSource) getServletContext().getAttribute("DataSource"));

@@ -1,10 +1,12 @@
 <%@ page import="java.util.List" %>
 <%@ page import="Model.Gioco.Gioco" %>
 <%@ page import="java.util.HashMap" %>
+<%@ page import="Utils.Logger.Logger" %>
 
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% List<Gioco> giochiCarrello = request.getAttribute("giochiCarrello") != null ? (List<Gioco>) request.getAttribute("giochiCarrello") : null; %>
+<% Logger.consoleLog(Logger.JSP, "CARRELLO.JSP"); %>
 
 <% if (giochiCarrello == null || giochiCarrello.isEmpty()) { %>
     <div style="width: 100%; text-align: center; color: white;">

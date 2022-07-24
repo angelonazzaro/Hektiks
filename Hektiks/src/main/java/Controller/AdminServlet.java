@@ -36,10 +36,12 @@ public class AdminServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Logger.consoleLog(Logger.INFO, "ADMIN SERVLET DO GET");
+        Logger.consoleLog(Logger.SERVLET, "ADMIN SERVLET DO GET");
 
         if (!LoginChecker.controllaSeLoggato(request, response, "", true))
             return;
+
+        //recupero la sezione da mostrare (utenti, giochi, giftcards)
 
         String part = request.getParameter("part"), partToView = "";
         String action = request.getParameter("action");
@@ -49,11 +51,13 @@ public class AdminServlet extends HttpServlet {
         Utente utente = (Utente) session.getAttribute("user");
 
         // Se parts è nullo o uguale ad utenti mostro la parte degli utenti
+
         if (part == null || part.equals("utenti")) {
 
             UtenteDAO utenteDAO = new UtenteDAO(source);
 
             // Se l'azione è nulla, mostro la pagina con tutti gli utenti, altrimenti il form di modifica
+
             try {
 
                 if (action == null) {
@@ -64,8 +68,10 @@ public class AdminServlet extends HttpServlet {
                 } else if (action.equals("edit")) {
 
                     String id = request.getParameter("id");
+
                     // Se l'id è nullo, mando un mesasggio di errore, altrimenti mostro il form di modifica,
                     // Ragionamento analogo nel caso in cui l'utente non esista
+
                     if (id == null || id.equals("")) {
 
                         session.setAttribute("msg-error", "Errore nella richiesta");
@@ -76,10 +82,11 @@ public class AdminServlet extends HttpServlet {
                         List<Utente> utenti = utenteDAO.doRetrieveByCondition("username = '" + id + "'");
 
                         if (utenti == null || utenti.size() == 0) {
+
                             session.setAttribute("msg-error", "L'utente non esiste");
                             response.sendRedirect(request.getContextPath() + "/admin?part=utenti");
-                            return;
 
+                            return;
                         } else {
 
                             request.setAttribute("utente", utenti.get(0));
@@ -238,7 +245,7 @@ public class AdminServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        Logger.consoleLog(Logger.INFO, "ADMIN SERVLET DO POST");
+        Logger.consoleLog(Logger.SERVLET, "ADMIN SERVLET DO POST");
 
         if (!LoginChecker.controllaSeLoggato(request, response, "", true))
             return;

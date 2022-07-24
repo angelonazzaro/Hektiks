@@ -3,10 +3,12 @@
 <%@ page import="java.util.List" %>
 <%@ page import="Model.Utente.Utente" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="Utils.Logger.Logger" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <% Gioco gioco = (Gioco) request.getAttribute("gioco"); %>
 <% List<Recensione> recensioni = (List<Recensione>) request.getAttribute("recensioni"); %>
+<% Logger.consoleLog(Logger.JSP, "RECENSIONI.JSP"); %>
 
 <div class="game-presentation">
     <div class="card" style="cursor: default !important;">

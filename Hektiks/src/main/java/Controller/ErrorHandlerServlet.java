@@ -12,13 +12,13 @@ public class ErrorHandlerServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-        Logger.consoleLog(Logger.INFO, "ERROR HANDLER SERVLET DO GET");
+        Logger.consoleLog(Logger.SERVLET, "ERROR HANDLER SERVLET DO GET");
         processError(request, response);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-        Logger.consoleLog(Logger.INFO, "ERROR HANDLER SERVLET DO POST");
+        Logger.consoleLog(Logger.SERVLET, "ERROR HANDLER SERVLET DO POST");
         processError(request, response);
     }
 
