@@ -148,7 +148,7 @@ header #burger:hover .line {
 }
 
 @media only screen and (max-width: 1300px) {
-    #user-info {
+    #user-info { /*saldo e username*/
         display: none;
     }
 
@@ -157,6 +157,7 @@ header #burger:hover .line {
     }
 }
 
+/*immagine profilo*/
 @media only screen and (max-width: 1000px) {
     #login-container > img {
         max-width: 40%;
@@ -182,7 +183,7 @@ header #burger:hover .line {
 }
 
 @media only screen and (min-width: 471px) {
-    #mobile-search-bar {
+    #mobile-search-bar { /*nasconde la search bar da mobile */
         display: none;
     }
 }

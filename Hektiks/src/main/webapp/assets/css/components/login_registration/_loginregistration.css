@@ -139,7 +139,7 @@
     height: 100%;
 }
 
-/* Animazione */
+/* Animazione form*/
 @keyframes show {
     0% {
         opacity: 0;
@@ -149,7 +149,7 @@
     }
 }
 
-/* Animazione */
+/* Animazione form*/
 @keyframes hide {
     0% {
         opacity: 1;

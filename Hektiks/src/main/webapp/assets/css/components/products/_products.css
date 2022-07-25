@@ -157,44 +157,43 @@
 
 @media only screen and (max-width: 1200px) {
     #telegram-separator .separator-content > img {
-        max-width: 6%;
+        max-width: 6%; /* icona telegram */
     }
 }
 
 @media only screen and (max-width: 1000px) {
     .products-content {
-        grid-template-columns: repeat(2, calc(50%));
+        grid-template-columns: repeat(2, calc(50%)); /*da 3 a 2 colonne*/
     }
 
     .feature-card {
-        padding-left: 2rem;
+        padding-left: 2rem; /*super veloce, ecc...*/
     }
 
     .card-body {
         width: 100%;
         position: relative;
-
     }
 
     .price {
         position: absolute;
         right: 0;
         top: 85%;
-        transform: translateY(-110%);
+        transform: translateY(-110%); /* ^ prezzo sulla copertina*/
     }
 
     .name {
-        display: none;
+        display: none; /*titolo*/
     }
 }
 
 @media only screen and (max-width: 800px) {
-    .feature-card:nth-child(1) {
+    .feature-card:nth-child(1) { /*prima feature card*/
         display: none;
     }
 
     .feature-card {
-        flex-basis: 50%;
+        flex-basis: 50%; /*da 33.33 - 33.33 - 33.33 a 50 - 50*/
     }
 
     .feature-card > img {
@@ -204,16 +203,16 @@
 
 @media only screen and (max-width: 600px) {
 
-    .products-content {
+    .products-content {  /*1 colonna*/
         grid-template-columns: 1fr;
     }
 
-    .feature-card:nth-child(2) {
+    .feature-card:nth-child(2) { /*seconda feature card*/
         display: none;
     }
 
     .feature-card {
-        flex-basis: 100%;
+        flex-basis: 100%; /*da 50 - 50 a 100%*/
     }
 
     .feature-card > img {
