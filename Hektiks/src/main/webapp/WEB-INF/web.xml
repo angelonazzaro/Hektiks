@@ -103,7 +103,7 @@
         <url-pattern>/ErrorHandlerServlet</url-pattern>
     </servlet-mapping>
 
-<!--     Errori -->
+<!--  Errori -->
 
     <error-page>
         <error-code>404</error-code>

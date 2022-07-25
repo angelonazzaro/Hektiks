@@ -28,6 +28,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -421,7 +422,7 @@ public class AdminServlet extends HttpServlet {
 
                 if (!newData_uscita.equals(currentData_uscita)) {
 
-                    map.put("data_uscita", Date.valueOf(newData_uscita));
+                    map.put("data_uscita", Date.valueOf(newData_uscita).toString());
                     update = true;
                 }
             }
@@ -439,38 +440,28 @@ public class AdminServlet extends HttpServlet {
 
             try {
 
-                List<Gioco_Genere> generi = gioco_genereDAO.doRetrieveByCondition("codice_gioco = '" + currentCode + "'");
+                List<Gioco_Genere> generi = gioco_genereDAO.doRetrieveByCondition("codice_gioco = '" + currentCode + "' ORDER BY nome_genere ASC");
                 String[] newGeneri = request.getParameterValues("generi[]");
 
-                if (newGeneri != null && generi != null) {
+                if (newGeneri == null || generi == null)
+                    update = true;
+                else {
 
                     if (generi.size() != newGeneri.length)
                         update = true;
 
                     else {
 
-                        // Controllo se i generi sono effettivamente diversi
-                        // L'ordine potrebbe essere cambiato o ci potrebbero essere dei generi che potrebbero interferire con l'ordinameto normale
-                        // Per questo motivo il ciclo for annidato
+                        Arrays.sort(newGeneri);
 
-                        for (Gioco_Genere gioco_genere : generi) {
+                        for (int i = 0; i < generi.size(); i++) {
 
-                            boolean found = false;
-                            for (String genere : newGeneri) {
-
-                                if (!gioco_genere.getNome_genere().equals(genere)) {
-
-                                    found = true;
-                                    break;
-                                }
-                            }
-
-                            if (found) {
-
+                            if (!generi.get(i).getNome_genere().equals(newGeneri[i])) {
                                 update = true;
                                 break;
                             }
                         }
+
                     }
                 }
 
