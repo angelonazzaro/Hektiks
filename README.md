@@ -12,4 +12,4 @@ Here is a little preview of the homepage of the website. (A live demo is on his 
 </div>
 
 ## Tecnologies Used
-Hektiks has been built with: ```Java```, ```MySQL``` following the [MVC](https://developer.mozilla.org/en-US/docs/Glossary/MVC) pattern. 
+Hektiks has been built with: ```Java```, ```JSTL``` and ```MySQL``` following the [MVC](https://developer.mozilla.org/en-US/docs/Glossary/MVC) pattern. 
