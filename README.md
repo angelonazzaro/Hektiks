@@ -1,5 +1,5 @@
 # Hektiks
-Hektiks is an e-commerce based on [Instant Gaming](https://www.instant-gaming.com/en/). 
+Hektiks is an e-commerce based on [Instant Gaming](https://www.instant-gaming.com/en/). <br>
 It has been realized for the Web Programming Exam along with [@Francesco Granozio](https://github.com/Francesco-Granozio).
 
 ## Tecnologies Used
