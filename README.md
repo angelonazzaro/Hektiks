@@ -5,7 +5,7 @@ It has been realized for the Web Programming Exam along with [@Francesco Granozi
 # Preview
 Here is a little preview of the homepage of the website. (A live demo is on his way).
 <div text-align="center">
-  <img src="https://github.com/sl1mSha4dey/hektiks/blob/previwq/homepage.png" alt="hektiks preview"/>
+  <img src="https://github.com/sl1mSha4dey/hektiks/blob/preview/homepage.png" alt="hektiks preview"/>
 </div>
 
 ## Tecnologies Used
